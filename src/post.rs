@@ -14,6 +14,4 @@ pub async fn post(data: String) {
 
     let mut file = fs::File::create(&path).unwrap();
     file.write_all(data.as_bytes()).unwrap();
-
-    println!("Saved to {}", path);
 }

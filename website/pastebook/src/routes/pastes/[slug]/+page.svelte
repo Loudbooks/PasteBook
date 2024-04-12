@@ -99,7 +99,7 @@
       font-weight: 750;
       text-align: left;
       word-break: break-all;
-      align-content: end;
+      align-self: end;
       flex: 75%;
       padding-left: 30px;
 
@@ -109,14 +109,13 @@
     }
 
     created {
-      display: inline-block;
       font-size: 18px;
       font-family: Gabarito, sans-serif;
       text-align: right;
       font-weight: 200;
       opacity: 0;
       color: grey;
-      align-content: end;
+      align-self: end;
       padding-right: 30px;
 
       flex: 25%;

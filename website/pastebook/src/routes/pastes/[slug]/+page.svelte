@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Content from "../../../components/Content.svelte";
+
     export let data
 
     const { created, content, title } = data
@@ -46,89 +48,54 @@
 </script>
 
 <main>
-    <name>
-        {title}
-    </name>
-    <created>
-        {timeSinceStr}
-    </created>
-<!--    <break></break>-->
-    <contentcontainer>
-        <p>
-            {content}
-        </p>
-    </contentcontainer>
+    <topcontainer>
+        <name>
+            {title}
+        </name>
+        <created>
+            {timeSinceStr}
+        </created>
+    </topcontainer>
+    <Content content="{content}"></Content>
 </main>
 
 <style lang="scss">
+  topcontainer {
+    display: flex;
+
     name {
-      display: block;
-      font-size: max(5vw, 30px);
+      display: inline-block;
+      font-size: 30px;
       font-family: Gabarito, sans-serif;
-      font-weight: 900;
-      text-align: center;
-      width: 100vw;
-      white-space: wrap;
+      font-weight: 750;
+      text-align: left;
+      word-break: break-all;
+      align-content: end;
+      flex: 75%;
+      padding-left: 30px;
 
       animation: fadeIn ease 0.7s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-    }
-
-    break {
-      display: block;
-      color: black;
-      background-color: grey;
-      height: 3px;
-      border-radius: 10px;
-      width: 90%;
-      align-content: center;
-      margin: 15px auto auto;
-      opacity: 0;
-
-      animation: fadeIn ease 0.7s;
-      animation-delay: 0.2s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
     }
 
     created {
-      display: block;
-      font-size: max(1.5vw, 15px);
+      display: inline-block;
+      font-size: 18px;
       font-family: Gabarito, sans-serif;
-      text-align: center;
+      text-align: right;
       font-weight: 200;
       opacity: 0;
       color: grey;
+      align-content: end;
+      padding-right: 30px;
+
+      flex: 25%;
 
       animation: fadeIn ease 0.7s;
       animation-delay: 0.1s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
-    }
-
-    contentcontainer {
-      display: block;
-      background-color: lightgray;
-
-      margin: 10px;
-      border-radius: 20px;
-
-      animation: fadeIn ease 0.7s;
-      animation-delay: 0.3s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-
-      opacity: 0;
-      overflow: auto;
-    }
-
-    p {
-      font-size: 15 px;
-      white-space: pre;
-      font-family: "JetBrains Mono", monospace;
-      margin: 20px;
-      padding: 10px;
     }
 
     @keyframes fadeIn {
@@ -139,4 +106,17 @@
         opacity: 1;
       }
     }
+
+    @media only screen and (max-width: 600px) {
+      name {
+        font-size: 24px;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      created {
+        font-size: 15px;
+      }
+    }
+  }
 </style>

@@ -48,6 +48,7 @@
 </script>
 
 <main>
+    <a class="beta" target="_blank" href="https://github.com/Loudbooks/PasteBook">BETA</a>
     <topcontainer>
         <name>
             {title}
@@ -60,12 +61,40 @@
 </main>
 
 <style lang="scss">
+  .beta {
+    position: fixed;
+    margin: 0;
+    right: 30px;
+    bottom: 0;
+    background: linear-gradient(90deg, #f05a48, #f4518d);
+    color: #fff;
+    padding: 3px 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 9999;
+    font-family: Gabarito, sans-serif;
+    text-decoration: none;
+
+    animation: flyIn ease 0.7s;
+    animation-iteration-count: 1;
+
+    transition: transform 0.3s ease;
+  }
+
+  .beta:hover {
+    cursor: pointer;
+    transform: translateY(10%);
+  }
+
   topcontainer {
+    padding-top: 7px;
     display: flex;
 
     name {
       display: inline-block;
-      font-size: 30px;
+      font-size: 35px;
       font-family: Gabarito, sans-serif;
       font-weight: 750;
       text-align: left;
@@ -107,6 +136,15 @@
       }
     }
 
+    @keyframes flyIn {
+        0% {
+            transform: translateY(90%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
     @media only screen and (max-width: 600px) {
       name {
         font-size: 24px;
@@ -119,4 +157,5 @@
       }
     }
   }
+
 </style>

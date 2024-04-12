@@ -1,30 +1,19 @@
 use std::fs;
-use std::time::SystemTime;
 use axum::extract::Path;
 use axum::response::Html;
-use chrono::DateTime;
 use serde_json::{json, Value};
 
 pub async fn get(Path(path): Path<String>) -> Html<String> {
     let dir = format!("./pastes/{}", path);
-    let file = format!("{}.txt", dir);
+    let file = format!("{}.json", dir);
 
-    let content = fs::read_to_string(&file).unwrap();
-    let creation = fs::metadata(file).unwrap().created();
-
-    let system_time = SystemTime::now();
-
-    let creation_str = if creation.is_ok() {
-        let date_time: DateTime<chrono::Utc> = creation.unwrap_or(SystemTime::now()).into();
-        date_time.format("%Y-%m-%d %H:%M:%S").to_string()
-    } else {
-        "Unknown".to_string()
-    };
+    let content: Value = serde_json::from_str(fs::read_to_string(&file).unwrap().as_str()).unwrap();
 
     Html(json!(
         {
-            "content": content,
-            "creation": creation_str
+            "content": content.get("content").unwrap().as_str().unwrap(),
+            "title": content.get("title").unwrap().as_str().unwrap(),
+            "created": content.get("created").unwrap().as_str().unwrap(),
         }
     ).to_string())
 }

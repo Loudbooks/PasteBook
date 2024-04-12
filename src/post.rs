@@ -7,7 +7,9 @@ use random_word::Lang;
 use serde_json::json;
 
 pub async fn post(headers: HeaderMap, content: String) -> String {
-    let data_dir = "./pastes/".to_string();
+    const PATH: &str = "/home/loudbook/pastebook/pastebook";
+
+    let data_dir = format!("{}/pastes/", PATH);
     let filename = format!("{}-{}-{}", random_word::gen(Lang::En), random_word::gen(Lang::En), random_word::gen(Lang::En));
     let path = format!("{}{}.json", data_dir, filename);
     println!("{:?}", headers);

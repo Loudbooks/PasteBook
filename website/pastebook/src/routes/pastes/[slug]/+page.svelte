@@ -147,13 +147,13 @@
 
     @media only screen and (max-width: 600px) {
       name {
-        font-size: 24px;
+        font-size: 22px;
       }
     }
 
     @media only screen and (max-width: 600px) {
       created {
-        font-size: 15px;
+        font-size: 13px;
       }
     }
   }

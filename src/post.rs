@@ -30,5 +30,5 @@ pub async fn post(headers: HeaderMap, content: String) -> String {
     let mut file = fs::File::create(&path).unwrap();
     file.write_all(value.to_string().as_bytes()).unwrap();
 
-    format!("http://localhost:5173/pastes/{}", filename)
+    format!("https://paste.loudbook.dev/pastes/{}", filename)
 }

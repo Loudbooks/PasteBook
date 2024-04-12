@@ -52,10 +52,12 @@
     <created>
         {timeSinceStr}
     </created>
-    <break></break>
-    <p>
-        {content}
-    </p>
+<!--    <break></break>-->
+    <contentcontainer>
+        <p>
+            {content}
+        </p>
+    </contentcontainer>
 </main>
 
 <style lang="scss">
@@ -96,8 +98,8 @@
       font-family: Gabarito, sans-serif;
       text-align: center;
       font-weight: 200;
-      color:gray;
       opacity: 0;
+      color: grey;
 
       animation: fadeIn ease 0.7s;
       animation-delay: 0.1s;
@@ -105,18 +107,28 @@
       animation-fill-mode: forwards;
     }
 
-    p {
-      font-size: 15 px;
-      white-space: pre;
-      font-family: "JetBrains Mono", monospace;
-      padding: 20px;
-      margin: 0;
-      opacity: 0;
+    contentcontainer {
+      display: block;
+      background-color: lightgray;
+
+      margin: 10px;
+      border-radius: 20px;
 
       animation: fadeIn ease 0.7s;
       animation-delay: 0.3s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
+
+      opacity: 0;
+      overflow: auto;
+    }
+
+    p {
+      font-size: 15 px;
+      white-space: pre;
+      font-family: "JetBrains Mono", monospace;
+      margin: 20px;
+      padding: 10px;
     }
 
     @keyframes fadeIn {

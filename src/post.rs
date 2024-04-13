@@ -24,7 +24,7 @@ pub async fn post(headers: HeaderMap, content: String) -> String {
         .duration_since(UNIX_EPOCH)
         .expect("Time went backwards");
 
-    let url = format!("https://paste.loudbook.dev/pastes/{}", filename);
+    let url = format!("https://pastebook.dev/pastes/{}", filename);
     let title = headers.get("title").unwrap().to_str().unwrap();
 
     let id = discord::send(&url, title).await;

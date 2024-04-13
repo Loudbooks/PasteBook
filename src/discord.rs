@@ -2,11 +2,11 @@ use std::env;
 use reqwest::Client;
 use serde_json::{json, Value};
 
-pub(crate) async fn send(paste_url: &str) -> String {
+pub(crate) async fn send(paste_url: &str, name: &str) -> String {
     let url = env::var("URL").unwrap();
     let client = Client::new();
     
-    let content = format!("New paste created: {}", paste_url);
+    let content = format!("New paste created: [{}]({})", name, paste_url);
     
     let json = json!({
         "content": content,

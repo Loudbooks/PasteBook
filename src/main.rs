@@ -1,4 +1,5 @@
 use std::fs::DirEntry;
+use std::future::IntoFuture;
 use std::time::Duration;
 
 use axum::Router;
@@ -15,11 +16,14 @@ async fn main() {
     let app = Router::new()
         .route("/upload", post(post::post))
         .route("/get/:data", get(get::get));
+    let delete = delete_loop();
 
-    delete_loop().await;
-    
     let listener = tokio::net::TcpListener::bind("0.0.0.0:25658").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    let server = axum::serve(listener, app).into_future();
+
+    match futures::join!(delete, server) { (_, _) => {
+        println!("Server started on port 25658");
+    } }
 }
 
 
@@ -33,7 +37,7 @@ async fn delete_loop() {
         }
     });
 
-    forever.await.expect("Failed to loop");
+    forever.await.unwrap();
 }
 
 const PATH: &str = "/home/loudbook/pastebook/pastebook";
@@ -43,9 +47,9 @@ async fn delete_files() {
     let paths = std::fs::read_dir(format!("{}/pastes", PATH)).unwrap();
 
     println!("Beginning deletion...");
-    
+
     let mut amount_deleted = 0;
-    
+
     for path in paths {
         if path.is_err() {
             continue;
@@ -83,7 +87,7 @@ async fn delete_files() {
             amount_deleted += 1;
         }
     }
-    
+
     println!("Deleted {} files", amount_deleted);
 }
 
@@ -92,11 +96,11 @@ async fn get_creation(path: &DirEntry) -> Option<String> {
     let file_name = file_name.to_str().unwrap_or("");
 
     let content = fs::read_to_string(format!("{}/pastes/{}", PATH, file_name.to_string())).await;
-    
+
     if content.is_err() {
         return None
     }
-    
+
     let json: Value = serde_json::from_str(&*content.unwrap().to_string()).unwrap_or(Value::Null);
 
     if json.is_null() {

@@ -16,7 +16,6 @@ async fn main() {
         .route("/upload", post(post::post))
         .route("/get/:data", get(get::get));
 
-    delete_files().await;
     delete_loop().await;
     
     let listener = tokio::net::TcpListener::bind("0.0.0.0:25658").await.unwrap();

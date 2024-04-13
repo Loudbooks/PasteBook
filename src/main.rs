@@ -55,6 +55,7 @@ async fn delete_files() {
 
     for path in paths {
         if path.is_err() {
+            println!("Failed to read path");
             continue;
         }
 
@@ -66,12 +67,14 @@ async fn delete_files() {
         let content = fs::read_to_string(format!("{}/pastes/{}", PATH, file_name.to_string()));
 
         if content.await.is_err() {
+            println!("Failed to read file");
             continue;
         }
 
         let created = get_value(&path, "created").await;
 
         if created.is_none() {
+            println!("Failed to get created");
             continue;
         }
 
@@ -79,6 +82,7 @@ async fn delete_files() {
         let created = created.parse::<u128>();
 
         if created.is_err() {
+            println!("Failed to parse created");
             continue;
         }
 

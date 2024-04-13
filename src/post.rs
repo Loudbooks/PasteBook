@@ -5,6 +5,7 @@ use axum::http::HeaderMap;
 
 use random_word::Lang;
 use serde_json::json;
+use crate::discord;
 
 pub async fn post(headers: HeaderMap, content: String) -> String {
     const PATH: &str = "/home/loudbook/pastebook/pastebook";
@@ -23,14 +24,19 @@ pub async fn post(headers: HeaderMap, content: String) -> String {
         .duration_since(UNIX_EPOCH)
         .expect("Time went backwards");
 
+    let url = format!("https://paste.loudbook.dev/pastes/{}", filename);
+
+    let id = discord::send(&url).await;
+    
     let value = json!({
         "created": since_the_epoch.as_millis().to_string(),
         "content": content,
-        "title": headers.get("title").unwrap().to_str().unwrap()
+        "title": headers.get("title").unwrap().to_str().unwrap(),
+        "id": id
     });
 
     let mut file = fs::File::create(&path).unwrap();
     file.write_all(value.to_string().as_bytes()).unwrap();
-
-    format!("https://paste.loudbook.dev/pastes/{}", filename)
+    
+    url
 }

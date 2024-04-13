@@ -10,9 +10,12 @@ use tokio::task;
 
 mod post;
 mod get;
+mod discord;
 
 #[tokio::main]
 async fn main() {
+    dotenv::dotenv().ok();
+    
     let app = Router::new()
         .route("/upload", post(post::post))
         .route("/get/:data", get(get::get));
@@ -66,7 +69,7 @@ async fn delete_files() {
             continue;
         }
 
-        let created = get_creation(&path).await;
+        let created = get_value(&path, "created").await;
 
         if created.is_none() {
             continue;
@@ -83,15 +86,24 @@ async fn delete_files() {
         let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_millis();
 
         if now.checked_sub(created).unwrap_or(u128::MAX) > DELETION {
-            fs::remove_file(format!("{}/pastes/{}", PATH, file_name.to_string())).await.expect("Failed to delete file");
             amount_deleted += 1;
+            
+            fs::remove_file(format!("{}/pastes/{}", PATH, file_name.to_string())).await.expect("Failed to delete file");
+            
+            let id = get_value(&path, "id").await.unwrap_or("".to_string());
+            
+            if id.is_empty() {
+                continue;
+            }
+            
+            discord::delete(&id).await;
         }
     }
 
     println!("Deleted {} files", amount_deleted);
 }
 
-async fn get_creation(path: &DirEntry) -> Option<String> {
+async fn get_value(path: &DirEntry, key: &str) -> Option<String> {
     let file_name = path.file_name();
     let file_name = file_name.to_str().unwrap_or("");
 
@@ -107,14 +119,11 @@ async fn get_creation(path: &DirEntry) -> Option<String> {
         return None
     }
 
-    let created = json.get("created").unwrap_or(&Value::Null);
+    let created = json.get(key).unwrap_or(&Value::Null);
 
     if created.is_null() {
         return None
     }
-
-    let max = i64::MAX.to_string();
-    let created = created.as_str().unwrap_or(max.as_str());
 
     Some(created.to_string())
 }

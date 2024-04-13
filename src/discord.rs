@@ -16,6 +16,7 @@ pub(crate) async fn send(paste_url: &str, name: &str) -> String {
     
     let result = client.post(url)
         .body(json_str)
+        .header("content-type", "application/json")
         .send()
         .await.unwrap();
     

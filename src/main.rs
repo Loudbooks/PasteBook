@@ -82,7 +82,7 @@ async fn delete_files() {
         let created = created.parse::<u128>();
 
         if created.is_err() {
-            println!("Failed to parse created");
+            println!("Failed to parse created: {:?}", created);
             continue;
         }
 

@@ -11,7 +11,7 @@ import java.util.*
 import java.util.function.Supplier
 import kotlin.concurrent.fixedRateTimer
 
-const val PATH: String = "/home/loudbook/pastebook/pastebook"
+const val PATH: String = "/home/loudbook/pastebook/PasteBook"
 const val PASTE_PATH: String = "$PATH/pastes"
 
 

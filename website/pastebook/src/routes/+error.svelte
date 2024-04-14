@@ -10,6 +10,7 @@
 <style lang="scss">
     error {
       overflow: hidden;
+      overscroll-behavior: none;
       display: flex;
       flex-direction: column;
       height: 100vh;

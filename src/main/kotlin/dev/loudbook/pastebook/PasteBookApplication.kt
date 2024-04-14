@@ -15,38 +15,38 @@ import kotlin.concurrent.fixedRateTimer
 
 @SpringBootApplication
 @EnableMongoRepositories
-class PasteBookApplication
+class PasteBookApplication {
+    @Autowired
+    lateinit var pasteRepository: PasteRepository
 
-@Autowired
-lateinit var pasteRepository: PasteRepository
-
-val discord = Discord(Properties().apply {
-    load(Files.newBufferedReader(Paths.get("./config.properties")))
-})
-
-fun main(args: Array<String>) {
-    val application = SpringApplication(PasteBookApplication::class.java)
-
-    application.addInitializers(ApplicationContextInitializer { ctx: GenericApplicationContext ->
-        ctx.registerBean(
-            Discord::class.java,
-            Supplier { discord })
+    val discord = Discord(Properties().apply {
+        load(Files.newBufferedReader(Paths.get("./config.properties")))
     })
 
-    application.run(*args)
+    fun main(args: Array<String>) {
+        val application = SpringApplication(PasteBookApplication::class.java)
 
-    fixedRateTimer("timer", true, 1000, 1000 * 60 * 30) {
-        deleteFiles()
+        application.addInitializers(ApplicationContextInitializer { ctx: GenericApplicationContext ->
+            ctx.registerBean(
+                Discord::class.java,
+                Supplier { discord })
+        })
+
+        application.run(*args)
+
+        fixedRateTimer("timer", true, 1000, 1000 * 60 * 30) {
+            deleteFiles()
+        }
     }
-}
 
-fun deleteFiles() {
-    val now = System.currentTimeMillis()
-    val minimum = now - 1000 * 60 * 60 * 24 * 7
+    fun deleteFiles() {
+        val now = System.currentTimeMillis()
+        val minimum = now - 1000 * 60 * 60 * 24 * 7
 
-    val pastes = pasteRepository.findAfterTime(minimum)
+        val pastes = pasteRepository.findAfterTime(minimum)
 
-    for (paste in pastes) {
-        discord.delete(paste.discordID.toString())
+        for (paste in pastes) {
+            discord.delete(paste.discordID.toString())
+        }
     }
 }

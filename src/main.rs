@@ -129,5 +129,5 @@ async fn get_value(path: &DirEntry, key: &str) -> Option<String> {
         return None
     }
 
-    Some(created.to_string())
+    Some(created.as_str().unwrap().to_string())
 }

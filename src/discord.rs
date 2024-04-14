@@ -30,7 +30,7 @@ pub(crate) async fn delete(id: &str) {
     let url = env::var("URL").unwrap();
     let client = Client::new();
     
-    let result = client.delete(format!("{}/{}", url, id))
+    let result = client.delete(format!("{}/messages/{}", url, id))
         .send()
         .await.unwrap();
     

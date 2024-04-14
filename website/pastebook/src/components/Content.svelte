@@ -27,7 +27,7 @@
         display: inline-block;
         font-size: 13px;
         white-space: pre;
-        font-family: "JetBrains Mono", monospace;
+        font-family: "JetBrains Mono NL", monospace;
         margin: 20px;
         padding: 10px;
     }

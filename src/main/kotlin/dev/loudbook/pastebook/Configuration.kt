@@ -11,6 +11,9 @@ class Configuration {
     @Bean
     fun discord() = Discord(properties())
 
+    @Bean
+    fun deleteHandler() = DeleteHandler()
+
     fun properties(): Properties {
         val properties = Properties()
         properties.load(Files.newBufferedReader(Paths.get("./config.properties")))

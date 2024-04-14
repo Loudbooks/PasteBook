@@ -1,6 +1,7 @@
 package dev.loudbook.pastebook
 
 import dev.loudbook.pastebook.mongo.PasteRepository
+import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -33,7 +34,10 @@ class PasteBookApplication {
         })
 
         application.run(*args)
+    }
 
+    @PostConstruct
+    fun init() {
         fixedRateTimer("timer", true, 1000, 1000 * 60 * 30) {
             deleteFiles()
         }

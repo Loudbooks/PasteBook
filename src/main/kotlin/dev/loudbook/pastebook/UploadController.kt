@@ -20,8 +20,8 @@ class UploadController {
     @PostMapping("/upload")
     fun upload(request: HttpServletRequest, @RequestBody body: String): String? {
         val dataDir = "$PATH/pastes/"
-        val filename = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.music().instrument().lowercase()}-${faker.food().ingredient().lowercase()}"
-        filename.replace(" ", "")
+        var filename = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.music().instrument().lowercase()}-${faker.food().ingredient().lowercase()}"
+        filename = filename.replace(" ", "")
         val path = "${dataDir}/${filename}.json"
 
         if (!Files.exists(Paths.get(dataDir))) {

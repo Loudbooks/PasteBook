@@ -1,22 +1,24 @@
 package dev.loudbook.pastebook
 
-import com.google.gson.JsonParser
+import dev.loudbook.pastebook.mongo.PasteRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.support.GenericApplicationContext
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
 import java.util.function.Supplier
 import kotlin.concurrent.fixedRateTimer
 
-const val PATH: String = "/home/loudbook/pastebook/PasteBook"
-const val PASTE_PATH: String = "$PATH/pastes"
-
-
 @SpringBootApplication
+@EnableMongoRepositories
 class PasteBookApplication
+
+@Autowired
+lateinit var pasteRepository: PasteRepository
 
 val discord = Discord(Properties().apply {
     load(Files.newBufferedReader(Paths.get("./config.properties")))
@@ -39,23 +41,12 @@ fun main(args: Array<String>) {
 }
 
 fun deleteFiles() {
-    val path = Paths.get(PASTE_PATH)
-    val files = Files.list(path).toList()
+    val now = System.currentTimeMillis()
+    val minimum = now - 1000 * 60 * 60 * 24 * 7
 
-    for (file in files) {
-        val content = Files.readString(file)
-        if (content.isEmpty()) continue
-        val json = JsonParser.parseString(content)?.asJsonObject ?: continue
+    val pastes = pasteRepository.findAfterTime(minimum)
 
-        val created = json.get("created")?.asLong ?: continue
-        val now = System.currentTimeMillis()
-        val diff = now - created
-
-        if (diff < 1000 * 60 * 60 * 9) continue
-
-        val id = json.get("id")?.asString ?: continue
-
-        discord.delete(id)
-        Files.delete(file)
+    for (paste in pastes) {
+        discord.delete(paste.discordID.toString())
     }
 }

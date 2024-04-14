@@ -8,7 +8,7 @@
 </error>
 
 <style lang="scss">
-    error {
+  error {
       overflow: hidden;
       overscroll-behavior: none;
       display: flex;

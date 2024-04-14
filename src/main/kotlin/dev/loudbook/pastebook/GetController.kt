@@ -1,29 +1,21 @@
 package dev.loudbook.pastebook
 
 import com.google.gson.Gson
-import com.google.gson.JsonParser
+import dev.loudbook.pastebook.mongo.PasteRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
-import java.nio.file.Files
-import java.nio.file.Paths
 
 @RestController
 class GetController {
+    @Autowired
+    lateinit var pasteRepository: PasteRepository
+
     @GetMapping("/get/{id}")
     fun get(@PathVariable id: String): String {
-        val path = "${PASTE_PATH}/${id}.json"
-        val stringContent = Files.readString(Paths.get(path))
-        val jsonObject = JsonParser.parseString(stringContent)?.asJsonObject ?: return ""
+        val paste = pasteRepository.findById(id).orElse(null) ?: return ""
 
-        val responseJson = Gson().toJson(
-            mapOf(
-                "content" to jsonObject.get("content")?.asString,
-                "title" to jsonObject.get("title")?.asString,
-                "created" to jsonObject.get("created")?.asString
-            )
-        ) ?: return ""
-
-        return responseJson
+        return Gson().toJson(paste)
     }
 }

@@ -98,9 +98,9 @@
       font-family: Gabarito, sans-serif;
       font-weight: 750;
       text-align: left;
-      word-break: break-all;
+      word-break: break-word;
       align-self: end;
-      flex: 75%;
+      flex: 70%;
       padding-left: 30px;
 
       animation: fadeIn ease 0.7s;
@@ -118,7 +118,7 @@
       align-self: end;
       padding-right: 30px;
 
-      flex: 25%;
+      flex: 30%;
 
       animation: fadeIn ease 0.7s;
       animation-delay: 0.1s;

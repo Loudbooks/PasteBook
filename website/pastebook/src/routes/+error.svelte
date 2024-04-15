@@ -23,6 +23,10 @@
         font-weight: 800;
         line-height: 25vw;
         margin: 0;
+
+        :global(body.dark-mode) & {
+          color: white;
+        }
       }
 
       p {

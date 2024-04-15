@@ -23,12 +23,6 @@
             document.body.classList.remove('dark-mode');
             localStorage.setItem('dark-mode', 'false');
         }
-
-        document.querySelector("container").classList.add('down');
-
-        setTimeout(() => {
-            document.querySelector("container").classList.remove('down');
-        }, 1000);
     }
 </script>
 
@@ -82,10 +76,6 @@
         cursor: pointer;
         transform: translateY(10%);
       }
-    }
-
-    container.down {
-      left: 10%;
     }
   }
 </style>

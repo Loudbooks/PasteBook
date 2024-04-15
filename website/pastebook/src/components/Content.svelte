@@ -1,30 +1,30 @@
 <script lang="ts">
-    import {detections} from "./detections.json";
+    import {detections} from "$lib/detections.json";
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
 
     let contentLines = content.split("\n")
 
-    function scanContent(content: String) {
+    function scanContent(content: String): number {
         if (reportBook === false) {
-            return false;
+            return 0;
         }
 
-        for (let string of detections) {
-            if (content.toLowerCase().includes(string.toLocaleLowerCase())) {
-                return true;
+        for (const key in detections) {
+            if (content.toLowerCase().includes(key.toLocaleLowerCase())) {
+                return detections[key];
             }
         }
 
-        return false;
+        return 0;
     }
 </script>
 
 <contentcontainer>
     <p>
         {#each contentLines as line}
-            <linecontainer class="flagged-{scanContent(line)}">
+            <linecontainer class="severity-{scanContent(line)}">
                 {line}
             </linecontainer>
             <br>
@@ -55,7 +55,11 @@
     margin: 20px;
     padding: 10px;
 
-    .flagged-true {
+    .severity-1 {
+      color: orange;
+    }
+
+    .severity-2 {
       color: red;
     }
   }

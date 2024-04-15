@@ -7,6 +7,7 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.util.*
+import kotlin.concurrent.schedule
 
 @Component
 class Discord(private val properties: Properties) {
@@ -45,6 +46,16 @@ class Discord(private val properties: Properties) {
             .DELETE()
             .build()
         val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+        val jsonResponse = JsonParser.parseString(response.body()).asJsonObject
+        val message = jsonResponse.get("message").asString
+
+        if (message != null && message.contains("rate limited")) {
+            println("Rate limited, retrying in 3 seconds")
+            Timer().schedule(3500) {
+                println("Retrying delete of $id")
+                delete(id)
+            }
+        }
 
         println(response.body())
     }

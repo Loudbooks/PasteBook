@@ -25,10 +25,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.github.javafaker:javafaker:1.0.2") {
-        exclude(group = "org.yaml", module = "snakeyaml")
-    }
-    implementation("org.yaml:snakeyaml:2.2")
+    implementation("net.datafaker:datafaker:2.1.0")
     implementation("me.paulschwarz:spring-dotenv:4.0.0")
 }
 

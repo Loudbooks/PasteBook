@@ -1,9 +1,9 @@
 package dev.loudbook.pastebook
 
-import com.github.javafaker.Faker
 import dev.loudbook.pastebook.mongo.Paste
 import dev.loudbook.pastebook.mongo.PasteRepository
 import jakarta.servlet.http.HttpServletRequest
+import net.datafaker.Faker
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -22,7 +22,7 @@ class UploadController {
 
     @PostMapping("/upload")
     fun upload(request: HttpServletRequest, @RequestBody body: String): String? {
-        var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.music().instrument().lowercase()}-${faker.food().ingredient().lowercase()}"
+        var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.horse().name().lowercase()}-${faker.food().ingredient().lowercase()}"
         fileID = fileID.replace(" ", "")
 
         val start = Instant.now()

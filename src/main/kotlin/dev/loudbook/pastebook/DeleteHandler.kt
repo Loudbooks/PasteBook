@@ -24,7 +24,7 @@ class DeleteHandler {
 
     private fun deleteFiles() {
         val now = System.currentTimeMillis()
-        val minimum = now - 1000 * 60 * 60 * 24 * 7
+        val minimum = now - 1000 * 60 * 60 * 7
 
         val pastes = pasteRepository!!.findAfterTime(minimum)
         println("Deleting ${pastes.size} pastes")

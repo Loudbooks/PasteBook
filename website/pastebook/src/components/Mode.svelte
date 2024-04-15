@@ -8,8 +8,10 @@
 
         if (darkMode) {
             document.body.classList.add('dark-mode');
+            document.body.style.background = '#000000';
         } else {
             document.body.classList.remove('dark-mode');
+            document.body.style.backgroundColor = '#ffffff';
         }
     });
 
@@ -19,9 +21,11 @@
         if (darkMode) {
             document.body.classList.add('dark-mode');
             localStorage.setItem('dark-mode', 'true');
+            document.body.style.background = '#000000';
         } else {
             document.body.classList.remove('dark-mode');
             localStorage.setItem('dark-mode', 'false');
+            document.body.style.backgroundColor = '#ffffff';
         }
     }
 </script>

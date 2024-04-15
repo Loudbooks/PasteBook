@@ -63,11 +63,11 @@
     padding: 10px;
 
     .severity-1 {
-      color: darkorange;
+      background-color: rgb(255, 165, 0, 0.7);
     }
 
     .severity-2 {
-      color: red;
+      background-color: rgb(255, 0, 0, 0.7);
     }
 
     :global(body.dark-mode) & {

@@ -1,10 +1,12 @@
 <script>
     import { page } from '$app/stores';
+    import Mode from "../components/Mode.svelte";
 </script>
 
 <error>
     <h1>{$page.status}</h1>
     <p>{$page.error.message}</p>
+    <Mode></Mode>
 </error>
 
 <style lang="scss">

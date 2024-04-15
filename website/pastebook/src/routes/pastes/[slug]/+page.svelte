@@ -1,5 +1,6 @@
 <script lang="ts">
     import Content from "../../../components/Content.svelte";
+    import Mode from "../../../components/Mode.svelte";
 
     export let data
 
@@ -44,11 +45,10 @@
         clearInterval(clear)
         clear = setInterval(reloadTime, 1000)
     }
-
 </script>
 
 <main>
-    <a class="beta" target="_blank" href="https://github.com/Loudbooks/PasteBook">BETA</a>
+    <Mode></Mode>
     <topcontainer>
         <name>
             {title}
@@ -61,33 +61,6 @@
 </main>
 
 <style lang="scss">
-  .beta {
-    position: fixed;
-    margin: 0;
-    right: 30px;
-    bottom: 0;
-    background: linear-gradient(90deg, #f05a48, #f4518d);
-    color: #fff;
-    padding: 3px 8px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    z-index: 9999;
-    font-family: Gabarito, sans-serif;
-    text-decoration: none;
-
-    animation: flyIn ease 0.7s;
-    animation-iteration-count: 1;
-
-    transition: transform 0.3s ease;
-  }
-
-  .beta:hover {
-    cursor: pointer;
-    transform: translateY(10%);
-  }
-
   topcontainer {
     padding-top: 7px;
     display: flex;
@@ -106,6 +79,12 @@
       animation: fadeIn ease 0.7s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
+
+      :global(.dark-mode) & {
+        color: white;
+      }
+
+      transition: color 1s ease;
     }
 
     created {
@@ -124,6 +103,12 @@
       animation-delay: 0.1s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
+
+      :global(.dark-mode) & {
+        color: lightgray;
+      }
+
+      transition: color 1s ease;
     }
 
     @keyframes fadeIn {

@@ -7,6 +7,7 @@
     let contentLines = content.split("\n")
 
     function scanContent(content: String): number {
+
         if (reportBook === false) {
             return 0;
         }
@@ -45,9 +46,15 @@
     animation-fill-mode: forwards;
     opacity: 0;
     overflow: auto;
+
+    :global(.dark-mode) & {
+      background-color: #333333;
+    }
   }
 
   p {
+    transition: color 0.2s ease;
+
     display: inline-block;
     font-size: 13px;
     white-space: pre;
@@ -61,6 +68,10 @@
 
     .severity-2 {
       color: red;
+    }
+
+    :global(body.dark-mode) & {
+      color: white;
     }
   }
 

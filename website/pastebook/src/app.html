@@ -11,14 +11,22 @@
 		<title>PasteBook</title>
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover">
+	<body data-sveltekit-preload-data="hover" class="dark-mode">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
 
-<style>
+<style lang="scss">
 	body {
 		margin: 0;
 		overscroll-behavior-x: none;
+
+		background: white;
+
+		&.dark-mode {
+			background: black;
+		}
+
+		transition: all 0.5s ease
 	}
 </style>

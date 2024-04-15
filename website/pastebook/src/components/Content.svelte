@@ -56,7 +56,7 @@
     padding: 10px;
 
     .severity-1 {
-      color: orange;
+      color: darkorange;
     }
 
     .severity-2 {

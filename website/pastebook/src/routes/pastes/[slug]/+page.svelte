@@ -3,7 +3,7 @@
 
     export let data
 
-    const { created, content, title } = data
+    const { created, content, title, reportBook } = data
 
     const reloadTime = () => {
         let timeSince = Date.now() - created;
@@ -57,7 +57,7 @@
             {timeSinceStr}
         </created>
     </topcontainer>
-    <Content content="{content}"></Content>
+    <Content content="{content}" reportBook="{reportBook}"></Content>
 </main>
 
 <style lang="scss">

@@ -3,7 +3,7 @@ import {error} from "@sveltejs/kit";
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
     let path = params.slug
-    let { created, content, title} = await fetch("https://pastebook.dev/get/" + path).then(res => res.json()).catch(() => "");
+    let { created, content, title, reportBook} = await fetch("https://pastebook.dev/get/" + path).then(res => res.json()).catch(() => "");
 
     if (content === undefined) {
         error(404, {
@@ -14,6 +14,7 @@ export async function load({ params }) {
     return {
         created: created,
         content: content,
-        title: title
+        title: title,
+        reportBook: reportBook
     }
 }

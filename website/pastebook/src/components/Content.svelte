@@ -1,14 +1,41 @@
-<script>
-    export let content = undefined
+<script lang="ts">
+    export let content: string = "No content provided"
+    export let reportBook: boolean = false
+
+    let flaggedText = [
+        "Mail",
+        "Google"
+    ]
+
+    let contentLines = content.split("\n")
+
+    function scanContent(content: String) {
+        if (reportBook === false) {
+            return false;
+        }
+
+        for (let string of flaggedText) {
+            if (content.includes(string)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 </script>
 
 <contentcontainer>
     <p>
-        {content}
+        {#each contentLines as line}
+            <linecontainer class="flagged-{scanContent(line)}">
+                {line}
+            </linecontainer>
+            <br>
+        {/each}
     </p>
 </contentcontainer>
 
-<style>
+<style lang="scss">
     contentcontainer {
         display: inline-block;
         background-color: #eeeeee;
@@ -30,6 +57,10 @@
         font-family: "JetBrains Mono NL", monospace;
         margin: 20px;
         padding: 10px;
+
+        .flagged-true {
+            color: red;
+        }
     }
 
     @keyframes fadeIn {

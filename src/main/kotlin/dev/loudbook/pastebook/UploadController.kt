@@ -30,10 +30,11 @@ class UploadController {
 
         val url = "https://pastebook.dev/pastes/${fileID}"
         val title = request.getHeader("title") ?: return null
+        val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
 
         val discordID = discord.send(title, url)
 
-        val paste = Paste(fileID, title, body, sinceTheEpoch, discordID.toLong())
+        val paste = Paste(fileID, title, body, sinceTheEpoch, discordID.toLong(), reportBook)
         pasteRepository.save(paste)
 
         return url

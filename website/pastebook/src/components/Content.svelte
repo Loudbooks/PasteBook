@@ -38,7 +38,7 @@
     <p>
         {#if !newReport}
             {#each contentLines as line, index}
-                <linecontainer class="severity-{scanContent(line)}">
+                <linecontainer class="severity-{scanContent(line)}, linecontainer">
                     <number class="number">
                         {getIndex(index + 1)}
                     </number>
@@ -86,6 +86,7 @@
     resize: none;
     white-space: nowrap;
     overflow: auto;
+    padding-left: 30px;
   }
 
   linecontainer {

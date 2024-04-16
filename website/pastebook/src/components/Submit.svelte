@@ -75,13 +75,13 @@
       font-family: Gabarito, sans-serif;
       font-size: 20px;
       font-weight: 800;
-      transition: all 0.3s;
+      transition: all 0.5s;
       background-color: #eeeeee;
       color: black;
       text-decoration: none;
 
       :global(.dark-mode) & {
-        background-color: #333333;
+        background-color: #1a1a1a;
         color: white;
       }
 

@@ -59,7 +59,7 @@
     overflow: scroll;
 
     :global(.dark-mode) & {
-      background-color: #333333;
+      background-color: #1a1a1a;
     }
 
     transition: all 0.5s ease;

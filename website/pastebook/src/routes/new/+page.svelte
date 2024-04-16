@@ -11,6 +11,3 @@
     <Content newReport="true"></Content>
     <Submit></Submit>
 </main>
-
-<style lang="scss">
-</style>

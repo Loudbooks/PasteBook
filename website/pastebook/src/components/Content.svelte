@@ -88,6 +88,7 @@
 
   p {
     transition: color 0.2s ease;
+    width: 100%;
 
     display: inline-block;
     font-size: 13px;

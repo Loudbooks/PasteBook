@@ -55,7 +55,11 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
-    height: 84vh;
+    height: 100%;
+
+    &.new-true {
+        height: 83vh;
+    }
 
     :global(.dark-mode) & {
       background-color: #333333;
@@ -66,7 +70,6 @@
     &:active {
       transform: scale(0.99);
     }
-
   }
 
   .input {
@@ -85,7 +88,6 @@
   p {
     transition: color 0.2s ease;
     width: 100%;
-    height: 80vh;
 
     display: inline-block;
     font-size: 13px;
@@ -93,6 +95,8 @@
     font-family: "JetBrains Mono NL", monospace;
     margin: 20px;
     padding: 10px;
+
+    height: 95%;
 
     .severity-1 {
       background-color: rgb(255, 165, 0, 0.7);

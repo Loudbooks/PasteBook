@@ -56,9 +56,10 @@
     animation-fill-mode: forwards;
     opacity: 0;
     height: 100%;
+    overflow: scroll;
 
     &.new-true {
-        height: 83vh;
+      height: 83vh;
     }
 
     :global(.dark-mode) & {
@@ -87,7 +88,6 @@
 
   p {
     transition: color 0.2s ease;
-    width: 100%;
 
     display: inline-block;
     font-size: 13px;

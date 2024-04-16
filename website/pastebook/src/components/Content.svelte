@@ -1,5 +1,6 @@
 <script lang="ts">
-    import {detections} from "$lib/detections.json";
+    import { detections } from "$lib/detections.json";
+    import { writableContent } from "$lib/stores.js"
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
@@ -21,6 +22,10 @@
 
         return 0;
     }
+
+    function onInput(event: InputEvent) {
+        writableContent.set((event.target as HTMLInputElement).value)
+    }
 </script>
 
 <contentcontainer class="new-{newReport}">
@@ -33,7 +38,7 @@
                 <br>
             {/each}
         {:else}
-            <textarea class="input"/>
+            <textarea class="input" on:input="{onInput}" />
         {/if}
     </p>
 </contentcontainer>
@@ -50,22 +55,23 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
-    resize: both;
-    height: 100vh;
+    height: 84vh;
 
     :global(.dark-mode) & {
       background-color: #333333;
     }
 
-    &.new-true {
-      height: 100vh;
-      resize: both;
+    transition: all 0.5s ease;
+
+    &:active {
+      transform: scale(0.99);
     }
+
   }
 
   .input {
     width: 100%;
-    height: auto;
+    height: 93%;
     border: none;
     background-color: transparent;
     color: inherit;
@@ -79,7 +85,7 @@
   p {
     transition: color 0.2s ease;
     width: 100%;
-    height: 100%;
+    height: 80vh;
 
     display: inline-block;
     font-size: 13px;

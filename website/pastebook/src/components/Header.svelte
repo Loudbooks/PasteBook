@@ -3,7 +3,7 @@
 
     export let title = ""
     export let created = ""
-    export let newReport;
+    export let newReport: boolean = false
 
     function onType(event: InputEvent) {
         writableTitle.set((event.target as HTMLInputElement).value)

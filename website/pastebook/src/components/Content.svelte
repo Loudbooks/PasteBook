@@ -92,18 +92,22 @@
     display: inline-block;
     text-align: right;
     padding-right: 10px;
-    color: #666;
+    color: #9999;
     font-family: "JetBrains Mono NL", monospace;
     font-size: 13px;
     margin: 0;
-    opacity: 0;
+    opacity: 1;
 
     .dark-mode & {
       color: #999;
     }
 
     &:hover {
-      opacity: 1;
+      color: #999;
+
+      .dark-mode & {
+        color: #fff;
+      }
     }
 
     transition: all 0.2s ease;

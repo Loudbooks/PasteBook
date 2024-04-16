@@ -80,6 +80,8 @@
       color: black;
       text-decoration: none;
 
+      animation: appear 1s;
+
       :global(.dark-mode) & {
         background-color: #1a1a1a;
         color: white;
@@ -104,5 +106,17 @@
     :global(.dark-mode) & {
       color: white;
     }
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 50px, 0) scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+
   }
 </style>

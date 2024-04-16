@@ -30,6 +30,7 @@ class DeleteHandler {
         println("Deleting ${pastes.size} pastes")
 
         for (paste in pastes) {
+            println("Deleting paste ${paste.id}")
             discord.delete(paste.discordID.toString())
             pasteRepository!!.delete(paste)
         }

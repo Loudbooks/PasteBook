@@ -49,8 +49,8 @@
 </script>
 
 <main>
-    <Mode></Mode>
-    <Header title="{title}", created="{timeSinceStr}"></Header>
+    <Mode/>
+    <Header title="{title}" created="{timeSinceStr}" newReport="false"></Header>
     <Content content="{content}" reportBook="{reportBook}"></Content>
 </main>
 

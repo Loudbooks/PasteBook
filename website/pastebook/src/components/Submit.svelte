@@ -1,8 +1,24 @@
 <script>
-    import { writableTitle } from "$lib/stores.js";
-    import { writableContent } from "$lib/stores.js";
+    import {writableTitle} from "$lib/stores.js";
+    import {writableContent} from "$lib/stores.js";
+    import {onMount} from "svelte";
+
+    onMount(() => {
+        writableTitle.subscribe(() => {
+            allFieldsFilled()
+        });
+
+        writableContent.subscribe(() => {
+            allFieldsFilled()
+        });
+    });
 
     function onClick() {
+        if (!allFieldsFilled()) {
+            window.scroll(0, 0);
+            return
+        }
+
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://pastebook.dev/upload");
         xhr.setRequestHeader("Content-Type", "plain/text");
@@ -11,13 +27,28 @@
         xhr.setRequestHeader("title", $writableTitle);
         xhr.send($writableContent);
         xhr.responseType = "text";
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (xhr.status !== 200) {
                 alert(`Error ${xhr.status}: ${xhr.statusText}`);
             }
 
             window.location.replace(xhr.response)
         }
+    }
+
+    function allFieldsFilled() {
+        let ready = $writableTitle !== "" && $writableContent !== "";
+        if (ready) {
+            console.log("ready");
+            document.querySelector(".submit").classList.add("ready");
+            document.querySelector(".submit").classList.remove("not-ready");
+        } else {
+            console.log("not ready");
+            document.querySelector(".submit").classList.remove("ready");
+            document.querySelector(".submit").classList.add("not-ready");
+        }
+
+        return ready;
     }
 </script>
 
@@ -49,6 +80,7 @@
 
       :global(.dark-mode) & {
         background-color: #333333;
+        color: white;
       }
 
       &:hover {
@@ -60,16 +92,15 @@
 
         cursor: pointer;
         transform: scale(1.05);
-        color: #000;
       }
 
       &:active {
         transform: scale(0.95);
       }
+    }
 
-      :global(.dark-mode) & {
-        color: lightgray;
-      }
+    :global(.dark-mode) & {
+      color: white;
     }
   }
 </style>

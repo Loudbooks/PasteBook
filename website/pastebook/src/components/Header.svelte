@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Mode from "./Mode.svelte";
     import {writableTitle} from "$lib/stores.js";
 
     export let title = ""
@@ -12,7 +11,6 @@
 </script>
 
 <topcontainer class="new-{newReport}">
-    <Mode></Mode>
     {#if newReport}
         <input placeholder="Title" on:input="{onType}">
     {:else}
@@ -23,9 +21,6 @@
             {created}
         </created>
     {/if}
-    <created>
-        {created}
-    </created>
 </topcontainer>
 
 <style lang="scss">
@@ -61,7 +56,6 @@
       &:hover {
         cursor: pointer;
         transform: scale(1.01);
-        color: #000;
       }
 
       &:active {

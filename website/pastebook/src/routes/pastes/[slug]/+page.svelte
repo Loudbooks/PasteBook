@@ -50,7 +50,7 @@
 
 <main>
     <Mode/>
-    <Header title="{title}" created="{timeSinceStr}" newReport="false"></Header>
+    <Header title="{title}" created="{timeSinceStr}"></Header>
     <Content content="{content}" reportBook="{reportBook}"></Content>
 </main>
 

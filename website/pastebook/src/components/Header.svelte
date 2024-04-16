@@ -1,9 +1,10 @@
 <script lang="ts">
-    import {writableTitle} from "$lib/stores.js";
+    import { writableTitle } from "$lib/stores.js";
 
     export let title = ""
     export let created = ""
     export let newReport: boolean = false
+
 
     function onType(event: InputEvent) {
         writableTitle.set((event.target as HTMLInputElement).value)

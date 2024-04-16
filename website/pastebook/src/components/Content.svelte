@@ -92,11 +92,7 @@
   linecontainer {
     &:hover {
       .number {
-        color: #999;
-
-        .dark-mode & {
-          color: #fff;
-        }
+        color: #919191;
       }
     }
   }

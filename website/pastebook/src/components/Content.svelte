@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { detections } from "$lib/detections.json";
-    import { writableContent } from "$lib/stores.js"
+    import {detections} from "$lib/detections.json";
+    import {writableContent} from "$lib/stores.js"
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
@@ -26,13 +26,22 @@
     function onInput(event: InputEvent) {
         writableContent.set((event.target as HTMLInputElement).value)
     }
+
+    function getIndex(index: number): string {
+        let max = contentLines.length
+        let maxStringLength = max.toString().length
+        return index.toString().padStart(maxStringLength, " ")
+    }
 </script>
 
 <contentcontainer class="new-{newReport}">
     <p>
         {#if !newReport}
-            {#each contentLines as line}
+            {#each contentLines as line, index}
                 <linecontainer class="severity-{scanContent(line)}">
+                    <number class="number">
+                        {getIndex(index + 1)}
+                    </number>
                     {line}
                 </linecontainer>
                 <br>
@@ -79,6 +88,27 @@
     overflow: auto;
   }
 
+  .number {
+    display: inline-block;
+    text-align: right;
+    padding-right: 10px;
+    color: #666;
+    font-family: "JetBrains Mono NL", monospace;
+    font-size: 13px;
+    margin: 0;
+    opacity: 0;
+
+    .dark-mode & {
+      color: #999;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    transition: all 0.2s ease;
+  }
+
   p {
     display: block;
     transition: color 0.2s ease;
@@ -86,7 +116,7 @@
     font-size: 13px;
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
-    padding: 30px;
+    padding: 30px 30px 30px 10px;
     margin: 0;
 
     height: 92%;

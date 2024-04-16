@@ -1,8 +1,10 @@
 <script lang="ts">
-    import {detections} from "$lib/detections.json";
+    import { detections } from "$lib/detections.json";
+    import { writableContent } from "$lib/stores.js"
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
+    export let newReport: boolean = false;
 
     let contentLines = content.split("\n")
 
@@ -20,16 +22,24 @@
 
         return 0;
     }
+
+    function onInput(event: InputEvent) {
+        writableContent.set((event.target as HTMLInputElement).value)
+    }
 </script>
 
-<contentcontainer>
+<contentcontainer class="new-{newReport}">
     <p>
-        {#each contentLines as line}
-            <linecontainer class="severity-{scanContent(line)}">
-                {line}
-            </linecontainer>
-            <br>
-        {/each}
+        {#if !newReport}
+            {#each contentLines as line}
+                <linecontainer class="severity-{scanContent(line)}">
+                    {line}
+                </linecontainer>
+                <br>
+            {/each}
+        {:else}
+            <textarea class="input" on:input="{onInput}" />
+        {/if}
     </p>
 </contentcontainer>
 
@@ -45,15 +55,37 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
-    overflow: auto;
+    height: 84vh;
 
     :global(.dark-mode) & {
       background-color: #333333;
     }
+
+    transition: all 0.5s ease;
+
+    &:active {
+      transform: scale(0.99);
+    }
+
+  }
+
+  .input {
+    width: 100%;
+    height: 93%;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font-size: 13px;
+    font-family: "JetBrains Mono NL", monospace;
+    padding: 10px;
+    outline: none;
+    resize: none;
   }
 
   p {
     transition: color 0.2s ease;
+    width: 100%;
+    height: 80vh;
 
     display: inline-block;
     font-size: 13px;

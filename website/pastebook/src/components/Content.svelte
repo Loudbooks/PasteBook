@@ -58,10 +58,6 @@
     height: 100%;
     overflow: scroll;
 
-    &.new-true {
-      height: 83vh;
-    }
-
     :global(.dark-mode) & {
       background-color: #333333;
     }
@@ -70,30 +66,29 @@
   }
 
   .input {
+    height: 98%;
     width: 100%;
-    height: 93%;
     border: none;
     background-color: transparent;
     color: inherit;
     font-size: 13px;
     font-family: "JetBrains Mono NL", monospace;
-    padding: 10px;
     outline: none;
     resize: none;
+    white-space: nowrap;
+    overflow: auto;
   }
 
   p {
     display: block;
     transition: color 0.2s ease;
-    width: 100%;
 
     font-size: 13px;
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
-    margin: 20px;
-    padding: 10px;
+    padding: 30px;
 
-    height: 95%;
+    height: 92%;
 
     .severity-1 {
       background-color: rgb(255, 165, 0, 0.7);

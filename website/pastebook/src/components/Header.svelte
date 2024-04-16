@@ -55,13 +55,8 @@
       resize: none;
       overflow: scroll;
 
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.01);
-      }
-
       &:active {
-        transform: scale(0.98);
+        transform: scale(0.99);
       }
     }
 

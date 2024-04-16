@@ -7,7 +7,16 @@
 
 <main>
     <Mode/>
-    <Header newReport="true"></Header>
+    <Header newReport="true" class="header"></Header>
     <Content newReport="true"></Content>
     <Submit></Submit>
 </main>
+
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+    }
+</style>

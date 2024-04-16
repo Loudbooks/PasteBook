@@ -88,6 +88,18 @@
     overflow: auto;
   }
 
+  linecontainer {
+    &:hover {
+      .number {
+        color: #999;
+
+        .dark-mode & {
+          color: #fff;
+        }
+      }
+    }
+  }
+
   .number {
     display: inline-block;
     text-align: right;
@@ -100,14 +112,6 @@
 
     .dark-mode & {
       color: #999;
-    }
-
-    &:hover {
-      color: #999;
-
-      .dark-mode & {
-        color: #fff;
-      }
     }
 
     transition: all 0.2s ease;

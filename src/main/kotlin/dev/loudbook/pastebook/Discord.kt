@@ -13,8 +13,12 @@ import kotlin.concurrent.schedule
 
 @Component
 class Discord(private val properties: Properties) {
-    fun send(name: String, pastebookURL: String, pasteGGURL: String): String {
-        val content = "New paste created (${name}): [PasteBook](${pastebookURL}) | [PasteGG](${pasteGGURL})"
+    fun send(name: String, pastebookURL: String, pasteGGURL: String?): String {
+        val content = if (pasteGGURL != null) {
+            "New paste created (${name}): [PasteBook](${pastebookURL}) | [PasteGG](${pasteGGURL})"
+        } else {
+             "New paste created: [${name}](${pastebookURL})"
+        }
 
         val jsonStr = """
         {

@@ -36,9 +36,19 @@ class UploadController {
 
         val title = request.getHeader("title") ?: return null
         val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
+        val onlyPastebook = request.getHeader("onlyPastebook")?.toBoolean() ?: false
 
         val paste = Paste(fileID, title, body, sinceTheEpoch, null, reportBook)
         val pastebookURL = uploadPastebook(paste) ?: return null
+
+        if (onlyPastebook) {
+            val discordID = discord.send(title, pastebookURL, null)
+            paste.discordID = discordID.toLong()
+
+            pasteRepository.save(paste)
+            return pastebookURL
+        }
+
         val pasteGGURL = uploadPasteGG(paste) ?: return null
         val discordID = discord.send(title, pastebookURL, pasteGGURL)
 

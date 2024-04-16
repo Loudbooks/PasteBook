@@ -87,6 +87,7 @@
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
     padding: 30px;
+    margin: 0;
 
     height: 92%;
 

@@ -3,6 +3,7 @@
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
+    export let newReport: boolean = false;
 
     let contentLines = content.split("\n")
 
@@ -22,14 +23,18 @@
     }
 </script>
 
-<contentcontainer>
+<contentcontainer class="new-{newReport}">
     <p>
-        {#each contentLines as line}
-            <linecontainer class="severity-{scanContent(line)}">
-                {line}
-            </linecontainer>
-            <br>
-        {/each}
+        {#if !newReport}
+            {#each contentLines as line}
+                <linecontainer class="severity-{scanContent(line)}">
+                    {line}
+                </linecontainer>
+                <br>
+            {/each}
+        {:else}
+            <textarea class="input"/>
+        {/if}
     </p>
 </contentcontainer>
 
@@ -45,15 +50,36 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
-    overflow: auto;
+    resize: both;
+    height: 100vh;
 
     :global(.dark-mode) & {
       background-color: #333333;
     }
+
+    &.new-true {
+      height: 100vh;
+      resize: both;
+    }
+  }
+
+  .input {
+    width: 100%;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font-size: 13px;
+    font-family: "JetBrains Mono NL", monospace;
+    padding: 10px;
+    outline: none;
+    resize: none;
   }
 
   p {
     transition: color 0.2s ease;
+    width: 100%;
+    height: 100%;
 
     display: inline-block;
     font-size: 13px;

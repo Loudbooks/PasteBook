@@ -82,4 +82,13 @@
       }
     }
   }
+
+  @keyframes flyIn {
+    0% {
+      transform: translateY(90%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
 </style>

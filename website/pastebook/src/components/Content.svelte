@@ -45,7 +45,7 @@
 
 <style lang="scss">
   contentcontainer {
-    display: inline-block;
+    display: block;
     background-color: #eeeeee;
     width: calc(100% - 20px);
     margin: 10px;
@@ -67,10 +67,6 @@
     }
 
     transition: all 0.5s ease;
-
-    &:active {
-      transform: scale(0.99);
-    }
   }
 
   .input {
@@ -87,10 +83,10 @@
   }
 
   p {
+    display: block;
     transition: color 0.2s ease;
     width: 100%;
 
-    display: inline-block;
     font-size: 13px;
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;

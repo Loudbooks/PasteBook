@@ -77,6 +77,8 @@
       font-weight: 800;
       transition: all 0.3s;
       background-color: #eeeeee;
+      color: black;
+      text-decoration: none;
 
       :global(.dark-mode) & {
         background-color: #333333;

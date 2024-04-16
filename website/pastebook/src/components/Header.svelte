@@ -53,6 +53,7 @@
       background-color: transparent;
       border: none;
       resize: none;
+      overflow: scroll;
 
       &:hover {
         cursor: pointer;

@@ -2,6 +2,8 @@ package dev.loudbook.pastebook
 
 import com.google.gson.JsonParser
 import org.springframework.stereotype.Component
+import java.lang.IllegalStateException
+import java.lang.NullPointerException
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -46,15 +48,22 @@ class Discord(private val properties: Properties) {
             .DELETE()
             .build()
         val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-        val jsonResponse = JsonParser.parseString(response.body()).asJsonObject
-        val message = jsonResponse.get("message").asString
 
-        if (message != null && message.contains("rate limited")) {
-            println("Rate limited, retrying in 3 seconds")
-            Timer().schedule(3500) {
-                println("Retrying delete of $id")
-                delete(id)
+        try {
+            val jsonResponse = JsonParser.parseString(response.body()).asJsonObject
+            val message = jsonResponse.get("message").asString
+
+            if (message != null && message.contains("rate limited")) {
+                println("Rate limited, retrying in 3 seconds")
+                Timer().schedule(3500) {
+                    println("Retrying delete of $id")
+                    delete(id)
+                }
             }
+        } catch (e: IllegalStateException) {
+            println("Failed to delete $id")
+        } catch (e: NullPointerException) {
+            println("Failed to delete $id")
         }
 
         println(response.body())

@@ -35,8 +35,8 @@
 </script>
 
 <contentcontainer class="new-{newReport}">
-    <p>
-        {#if !newReport}
+    {#if !newReport}
+        <lines>
             {#each contentLines as line, index}
                 <linecontainer>
                     <number class="number">
@@ -46,12 +46,11 @@
                         {line}
                     </linecontentcontainer>
                 </linecontainer>
-                <br>
             {/each}
-        {:else}
-            <textarea class="input" on:input="{onInput}" />
-        {/if}
-    </p>
+        </lines>
+    {:else}
+        <textarea class="input" on:input="{onInput}" />
+    {/if}
 </contentcontainer>
 
 <style lang="scss">
@@ -67,7 +66,7 @@
     animation-fill-mode: forwards;
     opacity: 0;
     height: 100%;
-    overflow: scroll;
+    overflow-x: scroll;
 
     :global(.dark-mode) & {
       background-color: #1a1a1a;
@@ -77,9 +76,10 @@
   }
 
   .input {
-    height: 98%;
-    width: 100%;
+    display: inline-block;
     border: none;
+    width: calc(100% - 60px);
+    height: calc(100% - 65px);
     background-color: transparent;
     color: inherit;
     font-size: 13px;
@@ -87,16 +87,23 @@
     outline: none;
     resize: none;
     white-space: nowrap;
-    overflow: auto;
-    padding-left: 30px;
+    margin: 30px;
+    padding: 0;
   }
 
   linecontainer {
+    display: block;
     &:hover {
       .number {
         color: #919191;
       }
     }
+  }
+
+  lines {
+    display: block;
+    padding: 30px 30px 30px 10px;
+    height: calc(100% - 60px);
   }
 
   .number {
@@ -116,17 +123,14 @@
     transition: all 0.2s ease;
   }
 
-  p {
+  linecontainer {
     display: block;
     transition: color 0.2s ease;
 
     font-size: 13px;
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
-    padding: 30px 30px 30px 10px;
     margin: 0;
-
-    height: 92%;
 
     :global(body.dark-mode) & {
       color: white;
@@ -134,6 +138,7 @@
   }
 
   linecontentcontainer {
+    padding-right: 30px;
     &.severity-1 {
       background-color: rgb(255, 165, 0, 0.7);
     }

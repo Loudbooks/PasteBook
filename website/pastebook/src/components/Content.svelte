@@ -38,11 +38,13 @@
     <p>
         {#if !newReport}
             {#each contentLines as line, index}
-                <linecontainer class="severity-{scanContent(line)}">
+                <linecontainer>
                     <number class="number">
                         {getIndex(index + 1)}
                     </number>
-                    {line}
+                    <linecontentcontainer class="severity-{scanContent(line)}">
+                        {line}
+                    </linecontentcontainer>
                 </linecontainer>
                 <br>
             {/each}
@@ -126,16 +128,18 @@
 
     height: 92%;
 
-    .severity-1 {
+    :global(body.dark-mode) & {
+      color: white;
+    }
+  }
+
+  linecontentcontainer {
+    &.severity-1 {
       background-color: rgb(255, 165, 0, 0.7);
     }
 
-    .severity-2 {
-      background-color: rgb(255, 0, 0, 0.7);
-    }
-
-    :global(body.dark-mode) & {
-      color: white;
+    &.severity-2 {
+      background-color: rgb(255, 0, 0, 0.6);
     }
   }
 

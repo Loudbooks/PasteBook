@@ -49,12 +49,16 @@ class UploadController {
             return pastebookURL
         }
 
-        val pasteGGURL = uploadPasteGG(paste) ?: return null
+        val pasteGGURL = uploadPasteGG(paste)
         val discordID = discord.send(title, pastebookURL, pasteGGURL)
 
         paste.discordID = discordID.toLong()
 
         pasteRepository.save(paste)
+
+        if (pasteGGURL == null) {
+            return pastebookURL
+        }
 
         return "$pastebookURL or $pasteGGURL"
     }
@@ -108,7 +112,7 @@ class UploadController {
             return "https://paste.gg/p/anonymous/$id"
         } catch (e: Exception) {
             e.printStackTrace()
-            return ""
+            return null
         }
     }
 }

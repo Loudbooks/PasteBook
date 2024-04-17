@@ -75,7 +75,8 @@ class UploadController {
         val date = Instant.ofEpochMilli(expire).toString()
         val iso = date.format(DateTimeFormatter.ISO_INSTANT)
 
-        val json = """
+        try {
+            val json = """
             {
                 "name": "${paste.title}",
                 "description": "New paste created: ${paste.title}",
@@ -92,19 +93,22 @@ class UploadController {
             }
         """.trimIndent()
 
-        val client = HttpClient.newBuilder().build()
-        val outgoingRequest = HttpRequest.newBuilder()
-            .uri(URI.create("https://api.paste.gg/v1/pastes"))
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(json))
-            .build()
+            val client = HttpClient.newBuilder().build()
+            val outgoingRequest = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.paste.gg/v1/pastes"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build()
 
-        val response = client.send(outgoingRequest, HttpResponse.BodyHandlers.ofString())
-        val responseBody = response.body()
-        println(responseBody)
-        val responseJson = JsonParser.parseString(responseBody).asJsonObject
-        val id = responseJson.get("result").asJsonObject.get("id").asString
-
-        return "https://paste.gg/p/anonymous/$id"
+            val response = client.send(outgoingRequest, HttpResponse.BodyHandlers.ofString())
+            val responseBody = response.body()
+            println(responseBody)
+            val responseJson = JsonParser.parseString(responseBody).asJsonObject
+            val id = responseJson.get("result").asJsonObject.get("id").asString
+            return "https://paste.gg/p/anonymous/$id"
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ""
+        }
     }
 }

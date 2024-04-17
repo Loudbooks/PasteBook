@@ -86,8 +86,8 @@
     font-family: "JetBrains Mono NL", monospace;
     outline: none;
     resize: none;
-    white-space: nowrap;
     margin: 30px;
+    white-space: pre;
     padding: 0;
   }
 

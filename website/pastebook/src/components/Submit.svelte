@@ -13,11 +13,22 @@
         });
     });
 
+    let onCooldown = false;
+
     function onClick() {
         if (!allFieldsFilled()) {
             window.scroll(0, 0);
             return
         }
+
+        if (onCooldown) {
+            return;
+        }
+
+        onCooldown = true;
+        setTimeout(() => {
+            onCooldown = false;
+        }, 5000);
 
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://pastebook.dev/upload");

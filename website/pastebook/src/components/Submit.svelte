@@ -13,7 +13,7 @@
         });
     });
 
-    let onCooldown = false;
+    let alreadyUploading = false;
 
     function onClick() {
         if (!allFieldsFilled()) {
@@ -21,15 +21,11 @@
             return
         }
 
-        if (onCooldown) {
+        if (alreadyUploading) {
             return;
         }
 
-        onCooldown = true;
-        setTimeout(() => {
-            onCooldown = false;
-        }, 5000);
-
+        alreadyUploading = true;
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://pastebook.dev/upload");
         xhr.setRequestHeader("Content-Type", "plain/text");
@@ -45,6 +41,8 @@
             }
 
             window.location.replace(xhr.response)
+
+            alreadyUploading = false;
         }
     }
 

@@ -89,6 +89,10 @@
     margin: 30px;
     white-space: pre;
     padding: 0;
+
+    :global(.dark-mode) & {
+      color: white;
+    }
   }
 
   linecontainer {

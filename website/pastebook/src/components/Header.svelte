@@ -6,6 +6,7 @@
     export let newReport: boolean = false
 
     pasteName.set(title)
+    
     function onType(event: InputEvent) {
         writableTitle.set((event.target as HTMLInputElement).value)
     }

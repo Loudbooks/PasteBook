@@ -62,8 +62,8 @@
     <title>{title}</title>
     <meta name="description" content="Pastebook is a simplistic pastebin the supports automatic file scanning."/>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="{$pasteName}" />
+    <meta property="og:title" content="{title}" />
     <meta property="og:site_name" content="PasteBook"/>
     <meta property="og:url" content="{$pasteURL}"/>
-    <meta property="og:description" content="Pastebook is a simplistic pastebin the supports automatic file scanning."/>
+    <meta property="og:description" content="Click to view this paste on PasteBook"/>
 </svelte:head>

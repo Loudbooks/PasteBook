@@ -5,6 +5,15 @@ export async function load({ params }) {
     let path = params.slug
     let { created, content, title, reportBook} = await fetch("https://pastebook.dev/get/" + path).then(res => res.json()).catch(() => "");
 
+    let pageMetaTags = {
+        title: title,
+        description: "Simplistic pastebin that supports automated scanning of logs and reports.",
+        openGraph: {
+            title: title,
+            description: "PasteBook is a simplistic pastebin that supports automated scanning of logs and reports.",
+            url: "https://pastebook.dev/pastes/" + path,
+        }
+    }
 
     if (content === undefined) {
         error(404, {
@@ -16,6 +25,7 @@ export async function load({ params }) {
         created: created,
         content: content,
         title: title,
-        reportBook: reportBook
+        reportBook: reportBook,
+        pageMetaTags: pageMetaTags
     }
 }

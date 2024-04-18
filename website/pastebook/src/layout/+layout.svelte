@@ -1,13 +1,12 @@
 <script>
-import {MetaTags} from "svelte-meta-tags";
+    import {MetaTags} from "svelte-meta-tags";
+    import extend from 'just-extend';
+
+    export let data;
+
+    $: metaTags = extend(true, {}, data.baseMetaTags, $page.data.pageMetaTags);
 </script>
 
-<MetaTags
-    title="PasteBook"
-    description="Simplistic pastebin that supports automated scanning of logs and reports."
-    openGraph={{
-        title: "PasteBook",
-        description: "Simplistic pastebin",
-        url: "https://pastebook.dev",
-    }}
-/>
+<MetaTags {...metaTags}/>
+
+<slot />

@@ -25,6 +25,10 @@
             return;
         }
 
+        if ($writableTitle === "") {
+            $writableTitle = "Untitled";
+        }
+
         alreadyUploading = true;
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://pastebook.dev/upload");
@@ -47,13 +51,12 @@
     }
 
     function allFieldsFilled() {
-        let ready = $writableTitle !== "" && $writableContent !== "";
+        let ready = $writableContent !== "";
+
         if (ready) {
-            console.log("ready");
             document.querySelector(".submit").classList.add("ready");
             document.querySelector(".submit").classList.remove("not-ready");
         } else {
-            console.log("not ready");
             document.querySelector(".submit").classList.remove("ready");
             document.querySelector(".submit").classList.add("not-ready");
         }

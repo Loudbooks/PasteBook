@@ -4,8 +4,6 @@
     import Header from "../../../components/Header.svelte";
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
     import {severes, warnings} from "$lib/stores";
-    import {MetaTags} from "svelte-meta-tags";
-
     export let data
 
     const { created, content, title, reportBook } = data
@@ -58,14 +56,4 @@
     {#if ($warnings.length > 0 || $severes.length > 0)}
     <PotentialIssues/>
     {/if}
-
-    <MetaTags
-        title="{title}"
-        description="{content}"
-        openGraph={{
-            title: {title},
-            description: {content},
-            url: "https://pastebook.dev"
-        }}
-        />
 </main>

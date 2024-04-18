@@ -6,10 +6,10 @@ export async function load({ params }) {
     let { created, content, title, reportBook} = await fetch("https://pastebook.dev/get/" + path).then(res => res.json()).catch(() => "");
 
     let pageMetaTags = {
-        title: title,
+        title: title.toString(),
         description: "Simplistic pastebin that supports automated scanning of logs and reports.",
         openGraph: {
-            title: title,
+            title: title.toString(),
             description: "PasteBook is a simplistic pastebin that supports automated scanning of logs and reports.",
             url: "https://pastebook.dev/pastes/" + path,
         }

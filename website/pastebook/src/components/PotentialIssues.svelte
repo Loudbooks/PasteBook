@@ -36,6 +36,7 @@
     function toggleClick() {
         let issues = document.querySelector("issues") as HTMLDivElement;
         let blur = document.querySelector(".blur") as HTMLDivElement;
+        let tab = document.querySelector(".tab") as HTMLButtonElement;
 
         if (open) {
             issues.style.top = `calc(100% + ${issues.clientHeight / 2}px)`;
@@ -45,6 +46,7 @@
             cooldown = true;
             setTimeout(() => {
                 blur.style.display = "none";
+                tab.classList.add("non-active");
                 cooldown = false;
             }, 500)
 
@@ -59,13 +61,15 @@
                 blur.style.backdropFilter = "brightness(0.3)";
             }, 1)
 
+            tab.classList.remove("non-active");
+
             open = true;
         }
     }
 </script>
 <issuescontainer>
     <issues>
-        <button class="tab" on:click={toggleClick}>Potential Issues</button>
+        <button class="tab non-active" on:click={toggleClick}>Potential Issues</button>
 
         {#if !(filteredSevere.length === 0)}
             <header>
@@ -136,6 +140,18 @@
     :global(body.dark-mode) & {
       background-color: rgb(20, 20, 20, 1);
       color: white;
+    }
+
+    :hover & {
+      &.non-active {
+        background-color: rgb(200, 200, 200, 1);
+
+        top: -32px;
+
+        :global(body.dark-mode) & {
+          background-color: rgb(40, 40, 40, 1);
+        }
+      }
     }
   }
 

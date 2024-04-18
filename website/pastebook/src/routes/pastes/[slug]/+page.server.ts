@@ -1,4 +1,5 @@
 import {error} from "@sveltejs/kit";
+import {pasteURL} from "$lib/stores";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
@@ -14,6 +15,8 @@ export async function load({ params }) {
             url: "https://pastebook.dev/pastes/" + path,
         }
     }
+
+    pasteURL.set("https://pastebook.dev/pastes/" + path);
 
     if (content === undefined) {
         error(404, {

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { writableTitle } from "$lib/stores.ts";
+    import {pasteName, writableTitle} from "$lib/stores.ts";
 
     export let title = ""
     export let created = ""
     export let newReport: boolean = false
 
-
+    pasteName.set(title)
     function onType(event: InputEvent) {
         writableTitle.set((event.target as HTMLInputElement).value)
     }

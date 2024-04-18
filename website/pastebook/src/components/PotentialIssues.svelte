@@ -107,6 +107,7 @@
     background-color: transparent;
     outline: none;
     border: none;
+    display: none;
   }
 
   .tab {

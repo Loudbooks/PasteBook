@@ -54,7 +54,7 @@
     <Mode/>
     <Header title="{title}" created="{timeSinceStr}"></Header>
     <Content content="{content}" reportBook="{reportBook}"></Content>
-    {#if ($warnings.length > 0 || $severes.length > 0) && reportBook}
+    {#if ($warnings.length > 0 || $severes.length > 0)}
     <PotentialIssues/>
     {/if}
 </main>

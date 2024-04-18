@@ -27,6 +27,10 @@
     const severe: Issue[] = []
 
     for (let contentLine of contentLines) {
+        if (reportBook === false) {
+            continue;
+        }
+
         for (let result of results) {
             if (contentLine.toLowerCase().includes(result.id.toLowerCase())) {
                 if (result.severity === 1) {
@@ -43,7 +47,11 @@
 
     function scanContent(content: String): number {
         if (reportBook === false) {
-            return 0;
+            if (content.trim().toLowerCase().includes("[warn]")) {
+                return 1;
+            } else if (content.trim().toLowerCase().includes("[severe]") || content.trim().toLowerCase().includes("[error]")) {
+                return 2;
+            }
         }
 
         for (let result of results) {
@@ -174,7 +182,7 @@
   }
 
   linecontentcontainer {
-    padding-right: 30px;
+    margin-right: 30px;
     &.severity-1 {
       background-color: rgb(255, 165, 0, 0.7);
     }

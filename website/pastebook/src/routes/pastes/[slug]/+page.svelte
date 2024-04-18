@@ -3,7 +3,7 @@
     import Mode from "../../../components/Mode.svelte";
     import Header from "../../../components/Header.svelte";
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
-    import {severes, warnings} from "$lib/stores";
+    import {pasteName, severes, warnings, pasteURL} from "$lib/stores";
     export let data
 
     const { created, content, title, reportBook } = data
@@ -57,3 +57,13 @@
     <PotentialIssues/>
     {/if}
 </main>
+
+<svelte:head>
+    <title>{title}</title>
+    <meta name="description" content="Pastebook is a simplistic pastebin the supports automatic file scanning."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="{$pasteName}" />
+    <meta property="og:site_name" content="PasteBook"/>
+    <meta property="og:url" content="{$pasteURL}"/>
+    <meta property="og:description" content="Pastebook is a simplistic pastebin the supports automatic file scanning."/>
+</svelte:head>

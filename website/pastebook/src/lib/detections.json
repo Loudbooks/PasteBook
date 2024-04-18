@@ -66,6 +66,12 @@
     "description": "Can cause various issues"
   },
   {
+    "filename": "McAfee",
+    "visual": "McAfee",
+    "severity": 1,
+    "description": "Can cause various issues"
+  },
+  {
     "filename": "Norton",
     "visual": "Norton",
     "severity": 1,

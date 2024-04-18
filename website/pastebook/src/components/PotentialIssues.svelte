@@ -110,7 +110,7 @@
   }
 
   .tab {
-    transition: all 0.5s ease;
+    transition: all 0.5s ease-in-out;
 
     border: none;
     font: inherit;

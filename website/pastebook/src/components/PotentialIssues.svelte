@@ -67,9 +67,9 @@
     <issues>
         <button class="tab" on:click={toggleClick}>Potential Issues</button>
 
-        {#if !(severIssues.length === 0)}
+        {#if !(filteredSevere.length === 0)}
             <header>
-                <Header class="severeheader" title="Severe" created="{severIssues.length}"></Header>
+                <Header class="severeheader" title="Severe" created="{filteredSevere.length}"></Header>
             </header>
             <sever>
                 {#each filteredSevere as issue}
@@ -79,9 +79,9 @@
                 {/each}
             </sever>
         {/if}
-        {#if !(warningIssues.length === 0)}
+        {#if !(filteredWarning.length === 0)}
             <header>
-                <Header class="warnheader" title="Warnings" created="{warningIssues.length}"></Header>
+                <Header class="warnheader" title="Warnings" created="{filteredWarning.length}"></Header>
             </header>
             <warn>
                 {#each filteredWarning as issue}

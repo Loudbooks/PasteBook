@@ -147,6 +147,10 @@
     background-color: rgb(230, 230, 230, 1);
     transition: all 0.5s ease;
 
+    @media (max-width: 800px) {
+      width: 90vw;
+    }
+
     :global(body.dark-mode) & {
       background-color: rgb(20, 20, 20, 1);
     }
@@ -165,6 +169,10 @@
       padding-left: 10px;
       padding-right: 10px;
       font-family: JetBrains Mono NL, monospace;
+
+      @media (max-width: 800px) {
+        font-size: 1em;
+      }
     }
 
     sever, warn {
@@ -177,6 +185,10 @@
       margin: 1px 10px 10px;
       color: black;
       opacity: 0;
+
+      @media (max-width: 800px) {
+        font-size: 0.8em;
+      }
 
       animation: fadeIn 0.5s ease-in-out forwards;
       animation-delay: 0.1s;

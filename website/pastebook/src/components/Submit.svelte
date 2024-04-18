@@ -1,6 +1,6 @@
 <script>
-    import {writableTitle} from "$lib/stores.js";
-    import {writableContent} from "$lib/stores.js";
+    import {writableTitle} from "$lib/stores.ts";
+    import {writableContent} from "$lib/stores.ts";
     import {onMount} from "svelte";
 
     onMount(() => {

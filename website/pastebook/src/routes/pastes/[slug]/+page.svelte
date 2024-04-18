@@ -2,6 +2,8 @@
     import Content from "../../../components/Content.svelte";
     import Mode from "../../../components/Mode.svelte";
     import Header from "../../../components/Header.svelte";
+    import PotentialIssues from "../../../components/PotentialIssues.svelte";
+    import {severes, warnings} from "$lib/stores";
 
     export let data
 
@@ -52,8 +54,7 @@
     <Mode/>
     <Header title="{title}" created="{timeSinceStr}"></Header>
     <Content content="{content}" reportBook="{reportBook}"></Content>
+    {#if ($warnings.length > 0 || $severes.length > 0) && reportBook}
+    <PotentialIssues/>
+    {/if}
 </main>
-
-<style lang="scss">
-
-</style>

@@ -1,22 +1,54 @@
 <script lang="ts">
-    import {detections} from "$lib/detections.json";
-    import {writableContent} from "$lib/stores.js"
+    import {severes, warnings, writableContent} from "$lib/stores.ts"
+    import detection from "$lib/detections.json"
+
+    import type {Issue} from "$lib/issue";
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
     export let newReport: boolean = false;
 
+    const results: Issue[] = [];
+
+    for (const key in detection) {
+       let issue = {
+           id: detection[key].filename,
+           visual: detection[key].visual,
+           description: detection[key].description,
+           severity: detection[key].severity
+       }
+
+       results.push(issue)
+    }
+
     let contentLines = content.split("\n")
 
-    function scanContent(content: String): number {
+    const warn: Issue[] = []
+    const severe: Issue[] = []
 
+    for (let contentLine of contentLines) {
+        for (let result of results) {
+            if (contentLine.toLowerCase().includes(result.id.toLowerCase())) {
+                if (result.severity === 1) {
+                    warn.push(result)
+                } else if (result.severity === 2) {
+                    severe.push(result)
+                }
+            }
+        }
+    }
+
+    warnings.set(warn)
+    severes.set(severe)
+
+    function scanContent(content: String): number {
         if (reportBook === false) {
             return 0;
         }
 
-        for (const key in detections) {
-            if (content.toLowerCase().includes(key.toLocaleLowerCase())) {
-                return detections[key];
+        for (let result of results) {
+            if (content.toLowerCase().includes(result.id.toLowerCase())) {
+                return result.severity;
             }
         }
 

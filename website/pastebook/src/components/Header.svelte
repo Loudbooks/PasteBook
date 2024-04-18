@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { writableTitle } from "$lib/stores.js";
+    import { writableTitle } from "$lib/stores.ts";
 
     export let title = ""
     export let created = ""

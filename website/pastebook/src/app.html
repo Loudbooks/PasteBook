@@ -25,3 +25,13 @@
 		transition: all 0.5s ease;
 	}
 </style>
+
+<script>
+	if (localStorage.getItem('dark-mode') == null) {
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.querySelector("body").classList.add('dark-mode')
+		} else {
+			document.querySelector("body").classList.remove('dark-mode')
+		}
+	}
+</script>

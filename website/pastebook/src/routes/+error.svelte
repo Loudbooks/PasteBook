@@ -41,3 +41,9 @@
       }
     }
 </style>
+
+<svelte:head>
+    <title>Error</title>
+    <meta name="description" content="Paste not found.">
+    <meta name="theme-color" content="#EE4B2B">
+</svelte:head>

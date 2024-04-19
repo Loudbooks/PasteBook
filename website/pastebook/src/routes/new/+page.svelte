@@ -27,5 +27,4 @@
     <meta property="og:site_name" content="PasteBook"/>
     <meta property="og:url" content="https://pastebook.dev/new"/>
     <meta property="og:description" content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes."/>
-    <meta property="theme-color" content="#F1585E"/>
 </svelte:head>

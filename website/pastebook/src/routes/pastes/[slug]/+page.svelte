@@ -63,5 +63,5 @@
     <meta property="og:title" content="{title}" />
     <meta property="og:site_name" content="PasteBook"/>
     <meta property="og:url" content="{$pasteURL}"/>
-    <meta property="og:description" content="Click to view this paste on PasteBook"/>
+    <meta property="og:description" content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes."/>
 </svelte:head>

@@ -27,6 +27,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("net.datafaker:datafaker:2.1.0")
     implementation("me.paulschwarz:spring-dotenv:4.0.0")
+    implementation("commons-validator:commons-validator:1.8.0")
 }
 
 tasks.withType<KotlinCompile> {

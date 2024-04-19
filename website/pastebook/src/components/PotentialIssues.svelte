@@ -41,7 +41,7 @@
         if (open) {
             issues.style.top = `calc(100% + ${issues.clientHeight / 2}px)`;
 
-            blur.style.backdropFilter = "brightness(1)";
+            blur.style.backgroundColor = "rgba(0, 0, 0, 0)"
 
             cooldown = true;
             setTimeout(() => {
@@ -58,7 +58,7 @@
             blur.style.display = "block";
 
             setTimeout(() => {
-                blur.style.backdropFilter = "brightness(0.3)";
+                blur.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
             }, 1)
 
             tab.classList.remove("non-active");
@@ -101,14 +101,13 @@
 
 <style lang="scss">
   .blur {
-    transition: backdrop-filter 0.5s ease;
+    transition: background-color 0.5s ease;
     position: fixed;
     top: 0;
-    backdrop-filter: brightness(1);
+    background-color: black;
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    background-color: transparent;
     outline: none;
     border: none;
     display: none;
@@ -164,7 +163,7 @@
     background-color: rgb(230, 230, 230, 1);
     transition: all 0.5s ease;
 
-    @media (max-width: 800px) {
+    @media (max-width: 500px) {
       width: 91vw;
     }
 

@@ -1,10 +1,8 @@
 package dev.loudbook.pastebook
 
-import org.apache.commons.validator.routines.InetAddressValidator
-
 object ContentScanner {
     fun scanContent(content: String): String {
-        val lines = content.split("\n").toMutableList()
+/*        val lines = content.split("\n").toMutableList()
 
         for ((index, line) in lines.withIndex()) {
             val words = line.split(" ").toMutableList()
@@ -20,6 +18,8 @@ object ContentScanner {
             lines[index] = words.joinToString(" ")
         }
 
-        return lines.joinToString("\n")
+        return lines.joinToString("\n")*/
+
+        return content
     }
 }

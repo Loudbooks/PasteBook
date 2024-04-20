@@ -2,19 +2,41 @@
     import Header from "../../components/Header.svelte";
     import ListedPaste from "../../components/panel/ListedPaste.svelte";
     import Mode from "../../components/Mode.svelte";
+    import { onMount } from "svelte";
 
     export let data;
 
     let { pastes } = data;
+
+    onMount(() => {
+        let fades = document.getElementsByClassName("fade")
+
+        for (let i = 0; i < fades.length; i++) {
+            let fade = fades[i] as HTMLElement
+            
+            setTimeout(() => {
+                fade.style.opacity = "1"
+            }, (i) * 50)
+        }
+    })
 </script>
 
 <panel>
     <Header title="Pastes" created="{pastes.length.toString()}"/>
     {#each pastes as paste}
-        <ListedPaste paste="{paste}"/>
+        <div class="fade">
+            <ListedPaste paste="{paste}"/>
+        </div>
     {/each}
     <Mode />
 </panel>
+
+<style lang="scss">
+    div {
+        transition: opacity 1s;
+        opacity: 0;
+    }
+</style>
 
 <svelte:head>
     <meta property="og:type" content="website"/>

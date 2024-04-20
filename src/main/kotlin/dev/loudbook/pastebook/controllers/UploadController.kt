@@ -1,6 +1,8 @@
-package dev.loudbook.pastebook
+package dev.loudbook.pastebook.controllers
 
 import com.google.gson.JsonParser
+import dev.loudbook.pastebook.ContentScanner
+import dev.loudbook.pastebook.Discord
 import dev.loudbook.pastebook.mongo.Paste
 import dev.loudbook.pastebook.mongo.PasteRepository
 import jakarta.servlet.http.HttpServletRequest

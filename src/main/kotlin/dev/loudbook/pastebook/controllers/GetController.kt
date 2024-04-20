@@ -1,4 +1,4 @@
-package dev.loudbook.pastebook
+package dev.loudbook.pastebook.controllers
 
 import com.google.gson.Gson
 import dev.loudbook.pastebook.mongo.PasteRepository

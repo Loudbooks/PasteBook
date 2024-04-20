@@ -36,6 +36,10 @@
             $writableTitle = "Untitled";
         }
 
+        let submit = document.getElementsByClassName("submit")[0] as HTMLElement
+
+        submit.style.animation = "blink 0.5s infinite";
+
         alreadyUploading = true;
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://pastebook.dev/upload");
@@ -48,6 +52,7 @@
         xhr.responseType = "text";
         xhr.onload = function () {
             if (xhr.status !== 200) {
+                submit.style.animation = "none";
                 alert(`Error ${xhr.status}: ${xhr.statusText}`);
             }
 
@@ -100,6 +105,9 @@
       text-decoration: none;
       border: 1px solid #c9c9c9;
 
+      animation: blink 3s ease-in-out infinite;
+    
+
       opacity: 0;
       transform: translateY(30%);
 
@@ -128,4 +136,19 @@
       color: white;
     }
   }
+
+  @keyframes blink {
+      0% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+    }
 </style>

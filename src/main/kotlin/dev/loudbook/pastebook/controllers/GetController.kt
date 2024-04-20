@@ -1,8 +1,11 @@
 package dev.loudbook.pastebook.controllers
 
 import com.google.gson.Gson
+import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.mongo.PasteRepository
+import io.github.bucket4j.Bucket
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
@@ -12,10 +15,16 @@ class GetController {
     @Autowired
     lateinit var pasteRepository: PasteRepository
 
-    @GetMapping("/get/{id}")
-    fun get(@PathVariable id: String): String {
-        val paste = pasteRepository.findById(id).orElse(null) ?: return ""
+    private val bucket: Bucket = BucketUtils.getBucketPerSeconds(4)
 
-        return Gson().toJson(paste)
+    @GetMapping("/get/{id}")
+    fun get(@PathVariable id: String): ResponseEntity<String> {
+        if (!bucket.tryConsume(1)) {
+            return ResponseEntity.status(429).body("Rate limit exceeded")
+        }
+
+        val paste = pasteRepository.findById(id).orElse(null) ?: return ResponseEntity.notFound().build()
+
+        return ResponseEntity.ok(Gson().toJson(paste))
     }
 }

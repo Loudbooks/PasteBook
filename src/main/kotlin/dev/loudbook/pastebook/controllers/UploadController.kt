@@ -1,10 +1,12 @@
 package dev.loudbook.pastebook.controllers
 
 import com.google.gson.JsonParser
+import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.ContentScanner
 import dev.loudbook.pastebook.Discord
 import dev.loudbook.pastebook.mongo.Paste
 import dev.loudbook.pastebook.mongo.PasteRepository
+import io.github.bucket4j.Bucket
 import jakarta.servlet.http.HttpServletRequest
 import net.datafaker.Faker
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,10 +28,16 @@ class UploadController {
     @Autowired
     lateinit var pasteRepository: PasteRepository
 
-    val faker = Faker()
+    private val faker = Faker()
+
+    private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)
 
     @PostMapping("/upload")
     fun upload(request: HttpServletRequest, @RequestBody body: String): String? {
+        if (!bucket.tryConsume(1)) {
+            return "Rate limit exceeded"
+        }
+
         var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.horse().name().lowercase()}-${faker.food().ingredient().lowercase()}"
         fileID = fileID.replace(" ", "")
 

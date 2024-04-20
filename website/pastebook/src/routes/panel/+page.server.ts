@@ -3,6 +3,13 @@ import type {Paste} from "$lib/paste";
 
 export async function load({ params }) {
     const response = await fetch("https://pastebook.dev/list")
+
+    if (response.status === 429) {
+        error(429, {
+            message: 'Rate Limited'
+        });
+    }
+
     const json = await response.json()
 
     let pastes: Paste[] = []
@@ -16,11 +23,10 @@ export async function load({ params }) {
         })
     })
 
-
     let current = Date.now();
 
     pastes = pastes.filter(paste => {
-        return paste.created as unknown as  number < current;
+        return paste.created as unknown as number < current;
     })
 
     pastes.sort((a, b) => {

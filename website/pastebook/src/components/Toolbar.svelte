@@ -5,6 +5,7 @@
         const toolbar = document.querySelector('toolbar') as HTMLElement;
 
         toolbar.style.transform = 'translate(10px, 0)';
+        toolbar.style.opacity = '1';
     });
 
     function newPaste() {
@@ -28,14 +29,15 @@
   toolbar {
     position: absolute;
     width: calc(100% - 20px);
+    height: 30px;
 
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    transform: translate(10px, -200%);
+    transform: translate(10px, -100%);
     transition: all 0.5s;
 
-    height: 30px;
     background-color: #eeeeee;
+    opacity: 0;
 
     @media (max-width: 600px) {
       height: 20px;

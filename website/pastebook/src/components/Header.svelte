@@ -3,7 +3,7 @@
 
     export let title = ""
     export let created = ""
-    export let newReport: boolean = false
+    export let newReport: string = "false"
 
     pasteName.set(title)
 
@@ -13,7 +13,7 @@
 </script>
 
 <topcontainer class="new-{newReport}">
-    {#if newReport}
+    {#if newReport === "true"}
         <input placeholder="Title..." on:input="{onType}">
     {:else}
         <name>
@@ -27,8 +27,12 @@
 
 <style lang="scss">
   topcontainer {
-    padding-top: 7px;
+    padding-top: 7px + 30px;
     display: flex;
+
+    @media (max-width: 600px) {
+      padding-top: 7px + 20px;
+    }
 
     input {
       display: inline-block;

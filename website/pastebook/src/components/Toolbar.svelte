@@ -26,6 +26,7 @@
 
 <style lang="scss">
   toolbar {
+    position: absolute;
     width: calc(100% - 20px);
 
     border-bottom-left-radius: 20px;

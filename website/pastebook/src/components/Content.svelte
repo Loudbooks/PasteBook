@@ -108,9 +108,13 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
-    height: calc(100% - 180px);
+    height: calc(100% - 140px);
     overflow-x: scroll;
     border: 1px solid #c9c9c9;
+
+    @media (max-width: 600px) {
+      height: calc(100% - 130px);
+    }
 
     :global(.dark-mode) & {
       border: 1px solid #333;

@@ -9,7 +9,7 @@
 </script>
 
 <panel>
-    <Header title="Pastes" created="{pastes.length}"/>
+    <Header title="Pastes" created="{pastes.length.toString()}"/>
     {#each pastes as paste}
         <ListedPaste paste="{paste}"/>
     {/each}

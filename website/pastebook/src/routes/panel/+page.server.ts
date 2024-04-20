@@ -2,12 +2,12 @@ import {error} from "@sveltejs/kit";
 import type {Paste} from "$lib/paste";
 
 export async function load({ params }) {
-    const response = await fetch("http://localhost:25658/list")
+    const response = await fetch("https://pastebook.dev/list")
     const json = await response.json()
 
     let pastes: Paste[] = []
 
-    json.forEach(paste => {
+    json.forEach((paste: Paste) => {
         pastes.push({
             id: paste.id,
             title: paste.title,
@@ -20,11 +20,11 @@ export async function load({ params }) {
     let current = Date.now();
 
     pastes = pastes.filter(paste => {
-        return paste.created < current;
+        return paste.created as unknown as  number < current;
     })
 
     pastes.sort((a, b) => {
-        return b.created - a.created;
+        return (b.created as unknown as number) - (a.created as unknown as number);
     });
 
     if (pastes.length == 0) {

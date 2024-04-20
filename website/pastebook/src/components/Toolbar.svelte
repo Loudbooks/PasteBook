@@ -89,7 +89,10 @@
           color: darkgray;
 
           cursor: pointer;
-          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.95);
         }
       }
     }

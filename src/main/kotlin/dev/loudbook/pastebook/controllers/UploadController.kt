@@ -39,7 +39,7 @@ class UploadController {
         }
 
         var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.horse().name().lowercase()}-${faker.food().ingredient().lowercase()}"
-        fileID = fileID.replace(" ", "")
+        fileID = fileID.replace(" ", "").replace("'", "").replace(",", "").replace(".", "").replace("(", "").replace(")", "")
 
         val start = Instant.now()
         val sinceTheEpoch = start.toEpochMilli()

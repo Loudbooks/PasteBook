@@ -105,9 +105,6 @@
       text-decoration: none;
       border: 1px solid #c9c9c9;
 
-      animation: blink 3s ease-in-out infinite;
-    
-
       opacity: 0;
       transform: translateY(30%);
 

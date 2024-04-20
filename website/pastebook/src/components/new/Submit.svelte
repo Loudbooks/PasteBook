@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {writableTitle} from "$lib/stores.ts";
     import {writableContent} from "$lib/stores.ts";
     import {onMount} from "svelte";
@@ -11,6 +11,13 @@
         writableContent.subscribe(() => {
             allFieldsFilled()
         });
+
+        let submit = document.getElementsByClassName("submit")[0] as HTMLElement
+
+        setTimeout(() => {
+          submit.style.opacity = "1"
+          submit.style.transform = "translateY(0)"
+        }, 400)
     });
 
     let alreadyUploading = false;
@@ -93,7 +100,8 @@
       text-decoration: none;
       border: 1px solid #c9c9c9;
 
-      animation: appear 1s;
+      opacity: 0;
+      transform: translateY(10%);
 
       :global(.dark-mode) & {
         background-color: #1a1a1a;
@@ -119,17 +127,5 @@
     :global(.dark-mode) & {
       color: white;
     }
-  }
-
-  @keyframes appear {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 50px, 0) scale(0.5);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-
   }
 </style>

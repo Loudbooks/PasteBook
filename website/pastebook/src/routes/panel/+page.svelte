@@ -16,7 +16,8 @@
             
             setTimeout(() => {
                 fade.style.opacity = "1"
-            }, (i) * 50)
+                fade.style.transform = "translateY(0)"
+            }, (i) * 200)
         }
     })
 </script>
@@ -33,8 +34,9 @@
 
 <style lang="scss">
     div {
-        transition: opacity 1s;
+        transition: all 1s;
         opacity: 0;
+        transform: translateY(10%);
     }
 </style>
 

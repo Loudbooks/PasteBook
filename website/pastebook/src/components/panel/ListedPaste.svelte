@@ -46,20 +46,19 @@
     display: flex;
     padding: 1rem;
     border-radius: 15px;
-    margin: 1rem;
     color: black;
-    width: calc(100% - 2rem);
+    width: calc(100% - 20px);
     outline: none;
-    border: none;
     align-content: space-between;
-
     background-color: #eeeeee;
+    margin: 10px;
+    border: 1px solid #c9c9c9;
 
     &:hover {
       background-color: #cfcfcf;
 
       :global(.dark-mode) & {
-        background-color: #242323;
+        background-color: #333;
       }
 
       cursor: pointer;
@@ -71,10 +70,7 @@
     }
 
     :global(.dark-mode) & {
-      background-color: #333;
-    }
-
-    :global(.dark-mode) & {
+      background-color: #1a1a1a;
       border: 1px solid #333;
       color: white;
     }

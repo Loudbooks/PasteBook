@@ -14,10 +14,12 @@
 
 <style>
     main {
-        display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 100vh;
+        padding: 0;
+        height: calc(100vh - 30px);
+        margin: 0;
+        flex-shrink: inherit;
     }
 </style>
 

@@ -2,7 +2,6 @@
     import Header from "../../components/Header.svelte";
     import ListedPaste from "../../components/panel/ListedPaste.svelte";
     import Mode from "../../components/Mode.svelte";
-    import {pasteURL} from "$lib/stores";
 
     export let data;
 

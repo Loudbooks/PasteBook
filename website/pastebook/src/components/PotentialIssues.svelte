@@ -96,7 +96,7 @@
             </warn>
         {/if}
     </issues>
-    <button class="blur" on:click={toggleClick} ></button>
+    <button class="blur" on:click={toggleClick}></button>
 </issuescontainer>
 
 <style lang="scss">
@@ -104,7 +104,7 @@
     transition: background-color 0.5s ease;
     position: fixed;
     top: 0;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     width: 100vw;
     height: 100vh;
     z-index: 0;
@@ -116,7 +116,6 @@
   .tab {
     transition: all 0.5s ease-in-out;
 
-    border: none;
     font: inherit;
     cursor: pointer;
     outline: inherit;
@@ -134,9 +133,19 @@
     color: black;
     z-index: 1;
 
+    border-left: 1px solid #c9c9c9;
+    border-right: 1px solid #c9c9c9;
+    border-top: 1px solid #c9c9c9;
+    border-bottom: none;
+
     background-color: rgb(230, 230, 230, 1);
 
     :global(body.dark-mode) & {
+      border-top: 1px solid #333;
+      border-left: 1px solid #333;
+      border-right: 1px solid #333;
+      border-bottom: none;
+
       background-color: rgb(20, 20, 20, 1);
       color: white;
     }
@@ -167,7 +176,10 @@
       width: 91vw;
     }
 
+    border: 1px solid #c9c9c9;
+
     :global(body.dark-mode) & {
+      border: 1px solid #333;
       background-color: rgb(20, 20, 20, 1);
     }
 
@@ -220,11 +232,13 @@
     }
 
     sever {
-      background-color: rgb(255, 0, 0, 0.4)
+      background-color: rgb(255, 0, 0, 0.4);
+      border: 2px solid rgb(255, 0, 0, 0.4);
     }
 
     warn {
-      background-color: rgb(#ff8c00, 0.4)
+      background-color: rgb(#ff8c00, 0.4);
+      border: 2px solid rgb(#ff8c00, 0.4);
     }
   }
 

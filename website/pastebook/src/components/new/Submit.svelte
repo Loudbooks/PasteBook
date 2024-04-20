@@ -83,7 +83,6 @@
       margin: 0;
       width: 200px;
       height: 50px;
-      border: none;
       border-radius: 20px;
       font-family: Gabarito, sans-serif;
       font-size: 20px;
@@ -92,11 +91,13 @@
       background-color: #eeeeee;
       color: black;
       text-decoration: none;
+      border: 1px solid #c9c9c9;
 
       animation: appear 1s;
 
       :global(.dark-mode) & {
         background-color: #1a1a1a;
+        border: 1px solid #333;
         color: white;
       }
 

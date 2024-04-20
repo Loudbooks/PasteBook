@@ -4,6 +4,10 @@
     export let darkMode = false;
 
     onMount(() => {
+      if (localStorage.getItem('dark-mode') === null) {
+        localStorage.setItem('dark-mode', 'true');
+      }
+
         darkMode = localStorage.getItem('dark-mode') === 'true';
 
         if (darkMode) {

@@ -38,7 +38,7 @@
 
         let submit = document.getElementsByClassName("submit")[0] as HTMLElement
 
-        submit.style.animation = "blink 0.5s infinite";
+        submit.style.animation = "blink 3s infinite";
 
         alreadyUploading = true;
         const xhr = new XMLHttpRequest();

@@ -83,7 +83,7 @@
       margin: 0;
       width: 200px;
       height: 50px;
-      border-radius: 20px;
+      border-radius: 17px;
       font-family: Gabarito, sans-serif;
       font-size: 20px;
       font-weight: 800;
@@ -105,7 +105,7 @@
         background-color: #cfcfcf;
 
         :global(.dark-mode) & {
-          background-color: #242323;
+          background-color: #333;
         }
 
         cursor: pointer;

@@ -109,11 +109,10 @@
         }
 
         cursor: pointer;
-        transform: scale(1.05);
       }
 
       &:active {
-        transform: scale(0.95);
+        transform: scale(0.96);
       }
     }
 

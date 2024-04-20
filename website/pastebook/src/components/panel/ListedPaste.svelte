@@ -62,7 +62,6 @@
       }
 
       cursor: pointer;
-      transform: scale(1.005);
     }
 
     &:active {

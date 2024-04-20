@@ -1,7 +1,6 @@
 import {error} from "@sveltejs/kit";
 import {pasteURL} from "$lib/stores";
 
-/** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
     let path = params.slug
     let { created, content, title, reportBook} = await fetch("https://pastebook.dev/get/" + path).then(res => res.json()).catch(() => "");

@@ -15,11 +15,12 @@ class ListController {
     @GetMapping("/list")
     fun list(): String {
         val pastes = pasteRepository.findAll().toList()
-        return pastes.joinToString("\n") {
-            val json = JsonParser.parseString(Gson().toJson(it)).asJsonObject
-            json.remove("content")
+        val json = JsonParser.parseString(Gson().toJson(pastes)).asJsonArray
 
-            Gson().toJson(json)
+        json.mapIndexed { _, element ->
+            element.asJsonObject.remove("content")
         }
+
+        return json.toString()
     }
 }

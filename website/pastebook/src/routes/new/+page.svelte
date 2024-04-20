@@ -1,7 +1,7 @@
 <script>
     import Content from "../../components/Content.svelte";
     import Header from "../../components/Header.svelte";
-    import Submit from "../../components/Submit.svelte";
+    import Submit from "../../components/new/Submit.svelte";
     import Mode from "../../components/Mode.svelte";
 </script>
 

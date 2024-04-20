@@ -6,7 +6,7 @@
     export let newReport: boolean = false
 
     pasteName.set(title)
-    
+
     function onType(event: InputEvent) {
         writableTitle.set((event.target as HTMLInputElement).value)
     }
@@ -91,6 +91,7 @@
       opacity: 0;
       color: grey;
       align-self: end;
+
       padding-right: 30px;
 
       flex: 30%;

@@ -88,6 +88,7 @@
         padding-right: 10px;
         overflow: hidden;
         white-space: nowrap;
+        text-align: left;
         margin: 0;
       }
 

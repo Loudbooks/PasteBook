@@ -22,7 +22,10 @@ class Discord(private val properties: Properties) {
 
         val jsonStr = """
         {
-            "content": "$content"
+            "content": "$content",
+            "allowed_mentions": {
+                "parse": []
+            }
         }
     """.trimIndent()
 

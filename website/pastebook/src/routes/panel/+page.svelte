@@ -17,7 +17,7 @@
             setTimeout(() => {
                 fade.style.opacity = "1"
                 fade.style.transform = "translateY(0)"
-            }, i * 100)
+            }, i * 75)
         }
     })
 </script>

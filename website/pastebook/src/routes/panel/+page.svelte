@@ -23,6 +23,7 @@
 </script>
 
 <panel>
+    <div class="padding"></div>
     <Header title="Pastes" created="{pastes.length.toString()}"/>
     {#each pastes as paste}
         <div class="fade">
@@ -33,10 +34,18 @@
 </panel>
 
 <style lang="scss">
-    div {
+    .fade {
         transition: all 1s;
         opacity: 0;
         transform: translateY(30%);
+    }
+
+    .padding {
+        padding-top: 7px + 30px;
+
+        @media (max-width: 600px) {
+            padding-top: 7px + 20px;
+        }
     }
 </style>
 

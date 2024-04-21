@@ -24,6 +24,7 @@
 </script>
 
 <main>
+    <div></div>
     <Mode/>
     <Header title="{title}" created="{timeSinceStr}"></Header>
     <Content content="{content}" reportBook="{reportBook}"></Content>
@@ -31,6 +32,16 @@
     <PotentialIssues/>
     {/if}
 </main>
+
+<style lang="scss">
+    div {
+        padding-top: 7px + 30px;
+
+        @media (max-width: 600px) {
+        padding-top: 7px + 20px;
+        }
+    }
+</style>
 
 <svelte:head>
     <meta property="og:type" content="website"/>

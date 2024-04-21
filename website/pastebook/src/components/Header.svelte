@@ -27,12 +27,7 @@
 
 <style lang="scss">
   topcontainer {
-    padding-top: 7px + 30px;
     display: flex;
-
-    @media (max-width: 600px) {
-      padding-top: 7px + 20px;
-    }
 
     input {
       display: inline-block;

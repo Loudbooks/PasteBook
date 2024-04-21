@@ -6,6 +6,7 @@
 </script>
 
 <main>
+    <div></div>
     <Mode/>
     <Header newReport="true" class="header"></Header>
     <Content newReport="true"></Content>
@@ -13,6 +14,14 @@
 </main>
 
 <style>
+    div {
+        padding-top: 37px;
+
+        @media (max-width: 600px) {
+            padding-top: 27px;
+        }
+    }
+
     main {
         flex-direction: column;
         justify-content: center;

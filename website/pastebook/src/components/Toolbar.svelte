@@ -34,7 +34,7 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     transform: translate(10px, -100%);
-    transition: all 0.5s;
+    transition: all 0.7s;
 
     background-color: #eeeeee;
     opacity: 0;
@@ -59,7 +59,7 @@
     }
 
     h1, button {
-      transition: all 0.5s;
+      transition: all 0.7s;
       align-self: center;
 
       font-size: 1rem;

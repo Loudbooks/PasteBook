@@ -72,6 +72,7 @@
 
       @media (max-width: 600px) {
         font-size: 0.6rem;
+        padding: 0 0 0 20px;
       }
     }
 
@@ -84,6 +85,11 @@
         background-color: transparent;
         border: none;
         outline: none;
+
+        @media (max-width: 600px) {
+          padding-left: 5px;
+          padding-right: 20px;
+        }
 
         &:hover {
           color: darkgray;

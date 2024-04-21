@@ -10,6 +10,8 @@ import io.github.bucket4j.Bucket
 import jakarta.servlet.http.HttpServletRequest
 import net.datafaker.Faker
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -33,10 +35,13 @@ class UploadController {
     private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)
 
     @PostMapping("/upload")
-    fun upload(request: HttpServletRequest, @RequestBody body: String): String? {
+    fun upload(request: HttpServletRequest, @RequestBody body: String): ResponseEntity<String> {
         if (!bucket.tryConsume(1)) {
-            return "Rate limit exceeded"
+            return ResponseEntity.status(429).body("Rate limit exceeded")
         }
+
+        val header = HttpHeaders()
+        header.add("Access-Control-Allow-Origin", "*")
 
         var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.horse().name().lowercase()}-${faker.food().ingredient().lowercase()}"
         fileID = fileID.replace(" ", "").replace("'", "").replace(",", "").replace(".", "").replace("(", "").replace(")", "")
@@ -44,7 +49,7 @@ class UploadController {
         val start = Instant.now()
         val sinceTheEpoch = start.toEpochMilli()
 
-        val title = request.getHeader("title") ?: return null
+        val title = request.getHeader("title") ?: return ResponseEntity.badRequest().body("Title is required")
         val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
         val onlyPastebook = request.getHeader("onlyPastebook")?.toBoolean() ?: false
 
@@ -55,7 +60,7 @@ class UploadController {
         }
 
         val paste = Paste(fileID, title, filteredBody, sinceTheEpoch, null, reportBook)
-        val pastebookURL = uploadPastebook(paste) ?: return null
+        val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         if (onlyPastebook) {
             val discordID = try {
@@ -67,7 +72,7 @@ class UploadController {
             paste.discordID = discordID
 
             pasteRepository.save(paste)
-            return pastebookURL
+            return ResponseEntity.ok().headers(header).body(pastebookURL)
         }
 
         val pasteGGURL = uploadPasteGG(paste)
@@ -78,10 +83,10 @@ class UploadController {
         pasteRepository.save(paste)
 
         if (pasteGGURL == null) {
-            return pastebookURL
+            return ResponseEntity.ok().headers(header).body(pastebookURL)
         }
 
-        return "$pastebookURL or $pasteGGURL"
+        return ResponseEntity.ok().headers(header).body("$pastebookURL or $pasteGGURL")
     }
 
     fun uploadPastebook(paste: Paste): String? {

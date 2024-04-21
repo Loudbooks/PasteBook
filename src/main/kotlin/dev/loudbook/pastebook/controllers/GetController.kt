@@ -5,6 +5,7 @@ import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.mongo.PasteRepository
 import io.github.bucket4j.Bucket
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -25,6 +26,9 @@ class GetController {
 
         val paste = pasteRepository.findById(id).orElse(null) ?: return ResponseEntity.notFound().build()
 
-        return ResponseEntity.ok(Gson().toJson(paste))
+        val headers = HttpHeaders()
+        headers.add("Access-Control-Allow-Origin", "*")
+
+        return ResponseEntity.ok().headers(headers).body(Gson().toJson(paste))
     }
 }

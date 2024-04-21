@@ -2,7 +2,7 @@ import {error} from "@sveltejs/kit";
 import type {Paste} from "$lib/paste";
 
 export async function load({ params }) {
-    const response = await fetch("https://pastebook.dev/list")
+    const response = await fetch("http://localhost:25658/list")
 
     if (response.status === 429) {
         error(429, {

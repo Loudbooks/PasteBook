@@ -1,11 +1,11 @@
 package dev.loudbook.pastebook.controllers
 
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.mongo.PasteRepository
 import io.github.bucket4j.Bucket
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -23,8 +23,12 @@ class ListController {
             return ResponseEntity.status(429).body("Rate limit exceeded")
         }
 
-        val pastes = pasteRepository.findAll().toList()
-        val json = JsonParser.parseString(Gson().toJson(pastes)).asJsonArray
+        val pastes = pasteRepository.findAll(Sort.by(Sort.Direction.DESC, "created"))
+            .filter { it.created < System.currentTimeMillis() }
+            .take(40)
+            .toList()
+
+        val json = Gson().toJsonTree(pastes).asJsonArray
 
         json.mapIndexed { _, element ->
             element.asJsonObject.remove("content")

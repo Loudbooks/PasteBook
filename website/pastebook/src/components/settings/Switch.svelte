@@ -1,66 +1,93 @@
 <script lang="ts">
-  export let externalHandler = "aaaa"
+    export let externalHandler: ((value: boolean) => void);
 
-  console.log(externalHandler)
+    let isSelected = false;
 
-  let isSelected = false;
-  function toggleSelected() {
-    let circle = document.querySelector(".circle") as HTMLDivElement;
+    let circle: HTMLElement;
+    let background: HTMLElement;
 
-    isSelected = !isSelected;
+    function toggleSelected() {
+        isSelected = !isSelected;
 
-    circle.classList.remove("selected");
+        circle.classList.remove("selected");
 
-    if (isSelected) {
-      circle.classList.remove("non-active");
-      circle.classList.add("selected");
-    } else {
-      circle.classList.remove("selected");
-      circle.classList.add("non-active");
+        if (isSelected) {
+            background.style.backgroundColor = "#333";
+            circle.classList.remove("non-active");
+            circle.classList.add("selected");
+        } else {
+            background.style.backgroundColor = "#1a1a1a";
+            circle.classList.remove("selected");
+            circle.classList.add("non-active");
+        }
+
+        externalHandler(isSelected)
     }
-  }
 </script>
 
 <settings>
-  <container on:click={externalHandler}>
-    <button class="circle non-active"></button>
-  </container>
+    <button bind:this={background} class="container" on:click={toggleSelected}>
+        <circ bind:this={circle} class="circle non-active"></circ>
+    </button>
 </settings>
 
 <style lang="scss">
-  container {
+
+  .container {
+    transition: all 0.5s ease;
     display: block;
+    color: inherit;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
     height: 30px;
-    background-color: #1a1a1a;
-    width: 90px;
+    width: 60px;
     margin: 10px;
     border-radius: 30px;
     border: 1px solid #333;
+    background-color: #1a1a1a;
 
     :hover & {
       cursor: pointer;
     }
+
+    @media (max-width: 600px) {
+        width: 40px;
+      height: 25px;
+    }
   }
 
   .circle {
-    transition: all 1s ease;
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    background-color: #333;
+    transition: all 0.5s ease;
+    display: block;
+    height: 25px;
+    width: 25px;
+    margin-top: 0;
+    background-color: white;
     border-radius: 50%;
-    transform: scale(1.3);
+
+    @media (max-width: 600px) {
+      height: 20px;
+      width: 20px;
+    }
 
     padding: 0;
   }
 
   .non-active {
-    border: 5px solid red;
+    margin-left: 2px;
+
+    @media (max-width: 600px) {
+      margin-left: 2px;
+    }
   }
 
   :global(.selected) {
     position: relative;
-    margin-left: 60px;
-    border: 5px solid green;
+    margin-left: 31px;
+
+    @media (max-width: 600px) {
+      margin-left: 17px;
+    }
   }
 </style>

@@ -9,3 +9,6 @@ export const warnings: Writable<Array<Issue>> = writable([]);
 
 export const pasteName = writable("");
 export const pasteURL = writable("");
+
+export const wrap = writable(false);
+export const unlisted = writable(false);

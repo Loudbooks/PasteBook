@@ -1,8 +1,9 @@
 <script lang="ts">
-    import {severes, warnings, writableContent} from "$lib/stores.ts"
+    import {severes, warnings, writableContent, wrap} from "$lib/stores.ts"
     import detection from "$lib/detections.json"
 
     import type {Issue} from "$lib/issue";
+    import {onMount} from "svelte";
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
@@ -20,6 +21,18 @@
 
        results.push(issue)
     }
+
+    onMount(() => {
+        wrap.subscribe((value) => {
+            let textArea = document.querySelector(".input") as HTMLTextAreaElement
+
+            if (value === true) {
+                textArea.style.whiteSpace = "break-spaces"
+            } else {
+                textArea.style.whiteSpace = "pre"
+            }
+        })
+    })
 
     let contentLines = content.split("\n")
 

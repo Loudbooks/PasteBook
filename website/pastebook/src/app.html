@@ -1,19 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
-		<link href='https://fonts.googleapis.com/css?family=JetBrains Mono NL' rel='stylesheet'>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=JetBrains Mono NL"
+			rel="stylesheet"
+		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>PasteBook</title>
-		<meta name="description" content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes. "/>
-		<meta name="theme-color" content="#F4537C"/>
+		<meta
+			name="description"
+			content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes. "
+		/>
+		<meta name="theme-color" content="#F4537C" />
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover" class="dark-mode" style="background: black">
+	<body
+		data-sveltekit-preload-data="hover"
+		class="dark-mode"
+		style="background: black"
+	>
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
@@ -25,13 +38,3 @@
 		transition: all 0.5s ease;
 	}
 </style>
-
-<script>
-	if (localStorage.getItem('dark-mode') == null) {
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			document.querySelector("body").classList.add('dark-mode')
-		} else {
-			document.querySelector("body").classList.remove('dark-mode')
-		}
-	}
-</script>

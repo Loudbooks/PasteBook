@@ -3,6 +3,7 @@
     import ListedPaste from "../../components/panel/ListedPaste.svelte";
     import Mode from "../../components/Mode.svelte";
     import { onMount } from "svelte";
+	import Theme from "../../components/Theme.svelte";
 
     export let data;
 
@@ -24,13 +25,14 @@
 
 <panel>
     <div class="padding"></div>
+    <Theme/>
     <Header title="Pastes" created="{pastes.length.toString()}"/>
     {#each pastes as paste}
         <div class="fade">
             <ListedPaste paste="{paste}"/>
         </div>
     {/each}
-    <Mode />
+    <!-- <Mode /> -->
 </panel>
 
 <style lang="scss">

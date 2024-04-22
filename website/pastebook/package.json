@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"highlight.js": "^11.9.0",
 		"just-extend": "^6.2.0"
 	}
 }

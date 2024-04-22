@@ -2,12 +2,12 @@
     import Content from "../../components/Content.svelte";
     import Header from "../../components/Header.svelte";
     import Submit from "../../components/new/Submit.svelte";
-    import Mode from "../../components/Mode.svelte";
+    import Theme from "../../components/Theme.svelte";
 </script>
 
 <main>
     <div></div>
-    <Mode/>
+    <Theme />
     <Header newReport="true" class="header"></Header>
     <Content newReport="true"></Content>
     <Submit></Submit>

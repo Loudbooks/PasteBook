@@ -133,22 +133,13 @@
     color: black;
     z-index: 1;
 
-    border-left: 1px solid #c9c9c9;
-    border-right: 1px solid #c9c9c9;
-    border-top: 1px solid #c9c9c9;
+    border-left: 1px solid var(--pane-border);
+    border-right: 1px solid var(--pane-border);
+    border-top: 1px solid var(--pane-border);
     border-bottom: none;
 
-    background-color: rgb(230, 230, 230, 1);
+    background-color: var(--pane-background);
 
-    :global(body.dark-mode) & {
-      border-top: 1px solid #333;
-      border-left: 1px solid #333;
-      border-right: 1px solid #333;
-      border-bottom: none;
-
-      background-color: rgb(20, 20, 20, 1);
-      color: white;
-    }
 
     :hover & {
       &.non-active {

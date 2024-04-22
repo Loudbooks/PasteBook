@@ -5,6 +5,7 @@
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
     import {severes, warnings, pasteURL} from "$lib/stores";
     import {formatTimeSince} from "$lib/timehandler";
+    import Theme from "../../../components/Theme.svelte";
     export let data
 
     const { created, content, title, reportBook } = data
@@ -25,7 +26,8 @@
 
 <main>
     <div></div>
-    <Mode/>
+    <!-- <Mode/> -->
+    <Theme />
     <Header title="{title}" created="{timeSinceStr}"></Header>
     <Content content="{content}" reportBook="{reportBook}"></Content>
     {#if ($warnings.length > 0 || $severes.length > 0)}

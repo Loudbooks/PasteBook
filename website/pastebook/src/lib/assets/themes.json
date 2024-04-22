@@ -1,0 +1,39 @@
+{
+	"standard_dark": {
+		"name": "Standard Dark",
+		"key": "standard_dark",
+		"colors": {
+			"background": "#000000",
+			"toolbar": {
+				"background": "#1a1a1a",
+				"border": "#333",
+				"text": "#808080",
+				"text_hover": "#a9a9a9"
+			},
+			"pane": {
+				"background": "#1a1a1a",
+				"background_hover": "#333",
+				"border": "#333"
+			},
+			"header": {
+				"title": "#ffffff",
+				"subtitle": "#d3d3d3"
+			},
+			"settings": {
+				"section_title": "#d3d3d3",
+				"option_title": "#808080"
+			},
+			"content": {
+				"text": "#ffffff",
+				"line_numbers": "#999",
+				"line_numbers_hover": "#919191",
+				"severity_1": "#ffa500b2",
+				"severity_2": "#ff000099"
+			},
+			"editor": {
+				"default_title": "#d3d3d399",
+				"text": "#ffffff"
+			}
+		}
+	}
+}

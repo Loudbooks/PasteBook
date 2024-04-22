@@ -15,11 +15,16 @@
     function panel() {
         window.location.href = '/panel';
     }
+
+    function settings() {
+        window.location.href = '/settings';
+    }
 </script>
 
 <toolbar>
     <h1>PASTEBOOK</h1>
     <buttons>
+        <button on:click={settings}>SETTINGS</button>
         <button on:click={panel}>PANEL</button>
         <button on:click={newPaste}>NEW</button>
     </buttons>
@@ -36,7 +41,7 @@
     transform: translate(10px, -100%);
     transition: all 0.7s;
 
-    background-color: #eeeeee;
+    background-color: var(--toolbar-background);
     opacity: 0;
 
     @media (max-width: 600px) {
@@ -46,13 +51,7 @@
     display: flex;
     justify-content: space-between;
 
-    color: gray;
-    border: 1px solid #c9c9c9;
-
-    :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
-    }
+    border: 1px solid var(--toolbar-border);
 
     &:active {
       transform: scale(0.95);
@@ -68,7 +67,7 @@
       padding: 0 0 0 30px;
       font-family: Gabarito, sans-serif;
       border: none;
-      color: gray;
+      color: var(--toolbar-text);
 
       @media (max-width: 600px) {
         font-size: 0.6rem;
@@ -92,7 +91,7 @@
         }
 
         &:hover {
-          color: darkgray;
+          color: var(--toolbar-text-hover);
 
           cursor: pointer;
         }

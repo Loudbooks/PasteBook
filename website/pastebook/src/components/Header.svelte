@@ -44,9 +44,9 @@
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
 
-      :global(.dark-mode) & {
-        color: white;
-      }
+      // :global(.dark-mode) & {
+      //   color: white;
+      // }
 
       transition: all 0.5s ease;
       outline: none;
@@ -55,9 +55,16 @@
       resize: none;
       overflow: scroll;
 
+      color: var(--header-title);
+
       &:active {
         transform: scale(0.99);
       }
+    }
+
+    ::placeholder {
+      color: var(--editor-default-title);
+      opacity: 1; /* Firefox */
     }
 
     name {
@@ -75,9 +82,7 @@
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
 
-      :global(.dark-mode) & {
-        color: white;
-      }
+      color: var(--header-title);
 
       transition: color 1s ease;
     }
@@ -88,7 +93,6 @@
       text-align: right;
       font-weight: 200;
       opacity: 0;
-      color: grey;
       align-self: end;
 
       padding-right: 30px;
@@ -100,9 +104,7 @@
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
 
-      :global(.dark-mode) & {
-        color: lightgray;
-      }
+      color: var(--header-subtitle);
 
       transition: color 1s ease;
     }

@@ -46,32 +46,22 @@
     display: flex;
     padding: 1rem;
     border-radius: 15px;
-    color: black;
+    color: var(--header-title);
     width: calc(100% - 20px);
     outline: none;
     align-content: space-between;
-    background-color: #eeeeee;
+    background-color: var(--pane-background);
     margin: 10px;
-    border: 1px solid #c9c9c9;
+    border: 1px solid var(--pane-border);
 
     &:hover {
-      background-color: #cfcfcf;
-
-      :global(.dark-mode) & {
-        background-color: #333;
-      }
+      background-color: var(--pane-background-hover);
 
       cursor: pointer;
     }
 
     &:active {
       transform: scale(0.995);
-    }
-
-    :global(.dark-mode) & {
-      background-color: #1a1a1a;
-      border: 1px solid #333;
-      color: white;
     }
 
     name {
@@ -94,7 +84,7 @@
 
       p {
         font-size: 0.8rem;
-        color: gray;
+        color: var(--header-subtitle);
         margin: 0;
         text-align: left;
         text-overflow: ellipsis;
@@ -128,7 +118,7 @@
       color: gray;
 
       :global(.dark-mode) & {
-        color: lightgray;
+        color: var(--header-subtitle);
       }
 
       @media screen {

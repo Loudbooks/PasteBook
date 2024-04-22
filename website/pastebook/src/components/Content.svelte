@@ -3,6 +3,8 @@
     import detection from "$lib/detections.json"
 
     import type {Issue} from "$lib/issue";
+	import hljs from "highlight.js";
+  import 'highlight.js/styles/default.css';
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
@@ -75,6 +77,8 @@
         let maxStringLength = max.toString().length
         return index.toString().padStart(maxStringLength, " ")
     }
+
+
 </script>
 
 <contentcontainer class="new-{newReport}">
@@ -86,20 +90,21 @@
                         {getIndex(index + 1)}
                     </number>
                     <linecontentcontainer class="severity-{scanContent(line)}">
+                        <!-- {@html hljs.highlight(line, {language: 'js'}).value} -->
                         {line}
                     </linecontentcontainer>
                 </linecontainer>
             {/each}
         </lines>
     {:else}
-        <textarea class="input" on:input="{onInput}" />
+        <div contenteditable="true" class="input" on:input="{onInput}" />
     {/if}
 </contentcontainer>
 
 <style lang="scss">
   contentcontainer {
     display: block;
-    background-color: #eeeeee;
+    background-color: var(--pane-background);
     width: calc(100% - 20px);
     margin: 10px;
     border-radius: 20px;
@@ -110,15 +115,10 @@
     opacity: 0;
     height: calc(100% - 140px);
     overflow-x: scroll;
-    border: 1px solid #c9c9c9;
+    border: 1px solid var(--pane-border);
 
     @media (max-width: 600px) {
       height: calc(100% - 130px);
-    }
-
-    :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
     }
 
     transition: all 0.5s ease;
@@ -130,7 +130,7 @@
     width: calc(100% - 60px);
     height: calc(100% - 65px);
     background-color: transparent;
-    color: inherit;
+    color: var(--editor-text);
     font-size: 13px;
     font-family: "JetBrains Mono NL", monospace;
     outline: none;
@@ -138,17 +138,13 @@
     margin: 30px;
     white-space: pre;
     padding: 0;
-
-    :global(.dark-mode) & {
-      color: white;
-    }
   }
 
   linecontainer {
     display: block;
     &:hover {
       .number {
-        color: #919191;
+        color: var(--content-line-numbers-hover)
       }
     }
   }
@@ -163,15 +159,11 @@
     display: inline-block;
     text-align: right;
     padding-right: 10px;
-    color: #9999;
+    color: var(--content-line-numbers);
     font-family: "JetBrains Mono NL", monospace;
     font-size: 13px;
     margin: 0;
     opacity: 1;
-
-    .dark-mode & {
-      color: #999;
-    }
 
     transition: all 0.2s ease;
   }
@@ -185,19 +177,17 @@
     font-family: "JetBrains Mono NL", monospace;
     margin: 0;
 
-    :global(body.dark-mode) & {
-      color: white;
-    }
+    color: var(--content-text);
   }
 
   linecontentcontainer {
     margin-right: 30px;
     &.severity-1 {
-      background-color: rgb(255, 165, 0, 0.7);
+      background-color: var(--content-severity-1);
     }
 
     &.severity-2 {
-      background-color: rgb(255, 0, 0, 0.6);
+      background-color: var(--content-severity-2);
     }
   }
 

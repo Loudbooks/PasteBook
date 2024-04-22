@@ -142,6 +142,10 @@
     :global(.dark-mode) & {
       color: white;
     }
+
+    @media (max-width: 600px){
+      font-size: 10px;
+    }
   }
 
   linecontainer {
@@ -169,6 +173,10 @@
     margin: 0;
     opacity: 1;
 
+    @media (max-width: 600px){
+      font-size: 10px;
+    }
+
     .dark-mode & {
       color: #999;
     }
@@ -184,6 +192,10 @@
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
     margin: 0;
+
+    @media (max-width: 600px){
+      font-size: 11px;
+    }
 
     :global(body.dark-mode) & {
       color: white;

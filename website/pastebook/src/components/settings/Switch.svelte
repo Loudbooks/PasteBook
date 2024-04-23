@@ -12,11 +12,19 @@
         circle.classList.remove("selected");
 
         if (isSelected) {
-            background.style.backgroundColor = "#333";
+            if (document.body.classList.contains("dark-mode")) {
+                background.style.backgroundColor = "#333";
+            } else {
+                background.style.backgroundColor = "#cfcfcf";
+            }
             circle.classList.remove("non-active");
             circle.classList.add("selected");
         } else {
-            background.style.backgroundColor = "#1a1a1a";
+            if (document.body.classList.contains("dark-mode")) {
+                background.style.backgroundColor = "#1a1a1a";
+            } else {
+                background.style.backgroundColor = "#eeeeee";
+            }
             circle.classList.remove("selected");
             circle.classList.add("non-active");
         }
@@ -44,11 +52,16 @@
     width: 60px;
     margin: 10px;
     border-radius: 30px;
-    border: 1px solid #333;
-    background-color: #1a1a1a;
+    border: 1px solid #cfcfcf;
+    background-color: #eeeeee;
 
     :hover & {
       cursor: pointer;
+    }
+
+    :global(.dark-mode) {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
     }
 
     @media (max-width: 600px) {
@@ -63,12 +76,16 @@
     height: 25px;
     width: 25px;
     margin-top: 0;
-    background-color: white;
     border-radius: 50%;
+    background-color: grey;
 
     @media (max-width: 600px) {
       height: 20px;
       width: 20px;
+    }
+
+    :global(.dark-mode) {
+      background-color: white;
     }
 
     padding: 0;

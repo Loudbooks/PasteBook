@@ -32,12 +32,16 @@
     font-size: 1.5em;
     font-weight: bold;
     margin-right: 10px;
-    color: white;
     text-align: left;
     align-self: start;
+    color: black;
 
     @media (max-width: 768px) {
       font-size: 1em;
+    }
+
+    :global(.dark-mode) & {
+      color: white;
     }
   }
 

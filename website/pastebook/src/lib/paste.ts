@@ -3,4 +3,5 @@ export type Paste = {
     title: string;
     created: string;
     reportBook: boolean;
+    wrap: boolean;
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {writableTitle} from "$lib/stores.ts";
+    import {unlisted, wrap, writableTitle} from "$lib/stores.ts";
     import {writableContent} from "$lib/stores.ts";
     import {onMount} from "svelte";
 
@@ -48,6 +48,8 @@
         xhr.setRequestHeader("access-control-allow-origin", "*")
         xhr.setRequestHeader("access-control-allow-methods", "POST")
         xhr.setRequestHeader("title", $writableTitle);
+        xhr.setRequestHeader("wrap", String($wrap))
+        xhr.setRequestHeader("unlisted", String($unlisted))
         xhr.send($writableContent);
         xhr.responseType = "text";
         xhr.onload = function () {

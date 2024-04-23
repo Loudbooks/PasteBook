@@ -52,6 +52,8 @@ class UploadController {
         val title = request.getHeader("title") ?: return ResponseEntity.badRequest().body("Title is required")
         val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
         val onlyPastebook = request.getHeader("onlyPastebook")?.toBoolean() ?: false
+        val wrap = request.getHeader("wrap")?.toBoolean() ?: false
+        val unlisted = request.getHeader("unlisted")?.toBoolean() ?: false
 
         val filteredBody = if (onlyPastebook) {
             ContentScanner.scanContent(body)
@@ -59,7 +61,7 @@ class UploadController {
             body
         }
 
-        val paste = Paste(fileID, title, filteredBody, sinceTheEpoch, null, reportBook)
+        val paste = Paste(fileID, title, filteredBody, sinceTheEpoch, null, reportBook, unlisted, wrap)
         val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         if (onlyPastebook) {

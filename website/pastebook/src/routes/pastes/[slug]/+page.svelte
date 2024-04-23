@@ -7,7 +7,7 @@
     import {formatTimeSince} from "$lib/timehandler";
     export let data
 
-    const { created, content, title, reportBook } = data
+    const { created, content, title, reportBook, wrap } = data
 
     const reloadTime = () => {
         timeSinceStr = formatTimeSince(created)
@@ -27,7 +27,7 @@
     <div></div>
     <Mode/>
     <Header title="{title}" created="{timeSinceStr}"></Header>
-    <Content content="{content}" reportBook="{reportBook}"></Content>
+    <Content content="{content}" reportBook="{reportBook} wrapPre={wrap}"></Content>
     {#if ($warnings.length > 0 || $severes.length > 0)}
     <PotentialIssues/>
     {/if}
@@ -38,7 +38,7 @@
         padding-top: 7px + 30px;
 
         @media (max-width: 600px) {
-        padding-top: 7px + 20px;
+            padding-top: 7px + 20px;
         }
     }
 </style>

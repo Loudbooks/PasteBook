@@ -24,7 +24,7 @@ export async function load({ params }) {
         });
     }
 
-    let { created, content, title, reportBook} = await response.json();
+    let { created, content, title, reportBook, unlisted, wrap} = await response.json();
 
     pasteURL.set("https://pastebook.dev/pastes/" + path);
 
@@ -39,5 +39,6 @@ export async function load({ params }) {
         content: content,
         title: title,
         reportBook: reportBook,
+        wrap: wrap,
     }
 }

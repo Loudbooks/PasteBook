@@ -1,6 +1,4 @@
 <script lang="ts">
-    import {severes, warnings} from "$lib/stores.ts";
-    import type {Issue} from "$lib/issue";
     import {onMount} from "svelte";
 
     export let title: string;
@@ -77,7 +75,7 @@
 
     font: inherit;
     cursor: pointer;
-    outline: inherit;
+    outline: none;
 
     position: fixed;
     margin: 0;
@@ -124,7 +122,7 @@
 
   content {
     z-index: 1;
-    width: 50vw;
+    width: 65vw;
     position: fixed;
     top: 150%;
     left: 50%;

@@ -1,12 +1,14 @@
 <script lang="ts">
-    import {severes, warnings, writableContent} from "$lib/stores.ts"
+    import {severes, warnings, writableContent, wrap} from "$lib/stores.ts"
     import detection from "$lib/detections.json"
 
     import type {Issue} from "$lib/issue";
+    import {onMount} from "svelte";
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
     export let newReport: boolean = false;
+    export let wrapPre: boolean = false;
 
     const results: Issue[] = [];
 
@@ -20,6 +22,22 @@
 
        results.push(issue)
     }
+
+    onMount(() => {
+        wrap.subscribe((value) => {
+            let textArea = document.querySelector(".input") as HTMLTextAreaElement | null
+
+            if (textArea === null) {
+                return;
+            }
+
+            if (value === true) {
+                textArea.style.whiteSpace = "break-spaces"
+            } else {
+                textArea.style.whiteSpace = "pre"
+            }
+        })
+    })
 
     let contentLines = content.split("\n")
 
@@ -81,7 +99,7 @@
     {#if !newReport}
         <lines>
             {#each contentLines as line, index}
-                <linecontainer>
+                <linecontainer class="wrap-{wrapPre}">
                     <number class="number">
                         {getIndex(index + 1)}
                     </number>
@@ -121,6 +139,10 @@
       background-color: #1a1a1a;
     }
 
+    &.new-true {
+        height: calc(100% - 175px);
+    }
+
     transition: all 0.5s ease;
   }
 
@@ -128,7 +150,7 @@
     display: inline-block;
     border: none;
     width: calc(100% - 60px);
-    height: calc(100% - 65px);
+    height: calc(100% - 55px);
     background-color: transparent;
     color: inherit;
     font-size: 13px;
@@ -136,7 +158,6 @@
     outline: none;
     resize: none;
     margin: 30px;
-    white-space: pre;
     padding: 0;
 
     :global(.dark-mode) & {
@@ -192,6 +213,12 @@
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
     margin: 0;
+    padding-left: 50px;
+    text-indent: -22px;
+
+    &.wrap-true {
+      white-space: break-spaces;
+    }
 
     @media (max-width: 600px){
       font-size: 11px;

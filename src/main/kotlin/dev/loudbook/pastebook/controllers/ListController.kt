@@ -24,6 +24,7 @@ class ListController {
         }
 
         val pastes = pasteRepository.findAll(Sort.by(Sort.Direction.DESC, "created"))
+            .filter { it.unlisted.not() }
             .filter { it.created < System.currentTimeMillis() }
             .take(40)
             .toList()

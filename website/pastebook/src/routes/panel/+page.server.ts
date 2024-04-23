@@ -20,6 +20,7 @@ export async function load({ params }) {
             title: paste.title,
             created: paste.created,
             reportBook: paste.reportBook,
+            wrap: paste.wrap,
         })
     })
 

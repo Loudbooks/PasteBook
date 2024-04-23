@@ -59,7 +59,7 @@
       cursor: pointer;
     }
 
-    :global(.dark-mode) {
+    :global(.dark-mode) & {
       background-color: #1a1a1a;
       border: 1px solid #333;
     }
@@ -84,7 +84,7 @@
       width: 20px;
     }
 
-    :global(.dark-mode) {
+    :global(.dark-mode) & {
       background-color: white;
     }
 

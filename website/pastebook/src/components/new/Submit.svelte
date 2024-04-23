@@ -50,6 +50,7 @@
         xhr.setRequestHeader("title", $writableTitle);
         xhr.setRequestHeader("wrap", String($wrap))
         xhr.setRequestHeader("unlisted", String($unlisted))
+
         xhr.send($writableContent);
         xhr.responseType = "text";
         xhr.onload = function () {

@@ -36,7 +36,7 @@ export async function load({ params }) {
 
     if (pastes.length == 0) {
         error(404, {
-            message: 'No pastes found'
+            message: 'No Pastes Found'
         });
     }
 

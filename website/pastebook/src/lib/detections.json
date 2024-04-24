@@ -396,7 +396,7 @@
     "description": "Illegal launcher"
   },
   {
-    "filename": "tlauncher",
+    "filename": "tlauncher.jar",
     "visual": "TLauncher",
     "severity": 2,
     "description": "Illegal launcher"

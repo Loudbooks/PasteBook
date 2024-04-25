@@ -14,7 +14,7 @@
 
 <topcontainer class="new-{newReport}">
     {#if newReport === "true"}
-        <input placeholder="Title..." on:input="{onType}">
+        <input id="title" placeholder="Title..." on:input="{onType}">
     {:else}
         <name>
             {title}

@@ -23,8 +23,15 @@
     let alreadyUploading = false;
 
     function onClick() {
+        if ($writableTitle === "") {
+            console.log("Title is empty")
+            let title = document.getElementById("title") as HTMLInputElement
+            shakeElement(title, 500);
+
+            return
+        }
+
         if (!allFieldsFilled()) {
-            window.scroll(0, 0);
             return
         }
 
@@ -78,6 +85,31 @@
 
         return ready;
     }
+
+    const shakeElement = (element: HTMLElement, duration: number) => {
+        const startTime = Date.now();
+        const shakeInterval = 1000 / 60;
+
+        const shake = () => {
+            const elapsedTime = Date.now() - startTime;
+            const progress = elapsedTime / duration;
+            const fullShakes = Math.floor(progress / 0.25);
+
+            if (fullShakes % 2 === 0) {
+                element.style.transform = 'translateX(-15px)';
+            } else {
+                element.style.transform = 'translateX(15px)';
+            }
+
+            if (progress < 1) {
+                setTimeout(shake, shakeInterval);
+            } else {
+                element.style.transform = 'translateX(0)';
+            }
+        };
+
+        shake();
+    };
 </script>
 
 <container>

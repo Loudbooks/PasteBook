@@ -213,8 +213,8 @@
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
     margin: 0;
-    padding-left: 50px;
-    text-indent: -22px;
+    padding-left: 48px;
+    text-indent: -21px;
 
     &.wrap-true {
       white-space: break-spaces;

@@ -400,5 +400,15 @@
     "visual": "TLauncher",
     "severity": 2,
     "description": "Illegal launcher"
+  },
+  {
+      "filename": "Killer",
+      "visual": "Killer Intelligence Center",
+      "severity": 2
+  },
+  {
+    "filename": "Rivet",
+    "visual": "Rivet Networks",
+    "severity": 2
   }
 ]

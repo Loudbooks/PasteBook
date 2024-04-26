@@ -29,7 +29,7 @@
     <Header title="{title}" created="{timeSinceStr}"></Header>
     <Content content="{content}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
     {#if ($warnings.length > 0 || $severes.length > 0)}
-    <PotentialIssues/>
+        <PotentialIssues/>
     {/if}
 </main>
 

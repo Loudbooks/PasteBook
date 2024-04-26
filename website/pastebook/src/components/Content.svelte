@@ -222,6 +222,8 @@
 
     @media (max-width: 600px){
       font-size: 11px;
+      padding-left: 39px;
+      text-indent: -17px;
     }
 
     :global(body.dark-mode) & {

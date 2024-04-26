@@ -150,7 +150,7 @@
     display: inline-block;
     border: none;
     width: calc(100% - 60px);
-    height: calc(100% - 55px);
+    height: calc(100% - 64px);
     background-color: transparent;
     color: inherit;
     font-size: 13px;

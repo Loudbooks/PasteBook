@@ -288,6 +288,12 @@
     "description": "Malware"
   },
   {
+    "filename": "Web Companion",
+    "visual": "WebCompanion",
+    "severity": 2,
+    "description": "Malware"
+  },
+  {
     "filename": "KMSpico",
     "visual": "KMSpico",
     "severity": 2,

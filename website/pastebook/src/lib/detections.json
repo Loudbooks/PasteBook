@@ -402,13 +402,15 @@
     "description": "Illegal launcher"
   },
   {
-      "filename": "Killer",
-      "visual": "Killer Intelligence Center",
-      "severity": 2
+    "filename": "Killer",
+    "visual": "Killer Intelligence Center",
+    "severity": 2,
+    "description": "Can cause connection and download issues"
   },
   {
     "filename": "Rivet",
     "visual": "Rivet Networks",
-    "severity": 2
+    "severity": 2,
+    "description": "Can cause connection and download issues"
   }
 ]

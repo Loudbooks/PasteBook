@@ -41,7 +41,7 @@
     }
 
     .padding {
-        padding-top: 7px + 30px;
+        padding-top: 8px + 30px;
 
         @media (max-width: 600px) {
             padding-top: 7px + 20px;

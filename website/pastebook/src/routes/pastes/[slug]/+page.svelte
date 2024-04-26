@@ -35,7 +35,7 @@
 
 <style lang="scss">
     div {
-        padding-top: 7px + 30px;
+        padding-top: 10px + 30px;
 
         @media (max-width: 600px) {
             padding-top: 7px + 20px;

@@ -2,6 +2,12 @@ export function formatTimeSince(created: number): string {
     let timeSinceStr: string;
 
     let timeSince = Date.now() - created;
+
+    if (timeSince < 0) {
+        timeSinceStr = "";
+        return timeSinceStr;
+    }
+
     if (timeSince < 1000) {
         timeSinceStr = "Just now";
     } else if (timeSince < 60000) {

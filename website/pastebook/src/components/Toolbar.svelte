@@ -16,15 +16,15 @@
         window.location.href = '/panel';
     }
 
-    function about() {
-        window.location.href = '/about';
+    function home() {
+        window.location.href = '/';
     }
 </script>
 
 <toolbar>
     <h1>PASTEBOOK</h1>
     <buttons>
-        <button on:click={about}>ABOUT</button>
+        <button on:click={home}>HOME</button>
         <button on:click={panel}>PANEL</button>
         <button on:click={newPaste}>NEW</button>
     </buttons>

@@ -194,6 +194,10 @@
     margin: 0;
     opacity: 1;
 
+    &::selection {
+        background-color: transparent;
+    }
+
     @media (max-width: 600px){
       font-size: 10px;
     }

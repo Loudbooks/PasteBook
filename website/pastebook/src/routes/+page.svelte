@@ -121,6 +121,11 @@ import Mode from "../components/Mode.svelte";
 
       &:hover {
         margin: 0 13px;
+        cursor: default;
+      }
+
+      &::selection {
+        background-color: transparent;
       }
     }
 

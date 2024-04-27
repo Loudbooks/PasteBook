@@ -95,6 +95,8 @@
     border-top: 1px solid #c9c9c9;
     border-bottom: none;
 
+    animation: fadeIn 0.6s ease;
+
     background-color: rgb(230, 230, 230, 1);
 
     :global(body.dark-mode) & {
@@ -124,7 +126,7 @@
     z-index: 3;
     width: 65vw;
     position: fixed;
-    top: 150%;
+    top: 120%;
     left: 50%;
     background-color: rgb(230, 230, 230, 1);
     transition: all 0.5s ease;

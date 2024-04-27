@@ -15,11 +15,16 @@
     function panel() {
         window.location.href = '/panel';
     }
+
+    function about() {
+        window.location.href = '/about';
+    }
 </script>
 
 <toolbar>
     <h1>PASTEBOOK</h1>
     <buttons>
+        <button on:click={about}>ABOUT</button>
         <button on:click={panel}>PANEL</button>
         <button on:click={newPaste}>NEW</button>
     </buttons>
@@ -93,7 +98,6 @@
 
         &:hover {
           color: darkgray;
-
           cursor: pointer;
         }
 

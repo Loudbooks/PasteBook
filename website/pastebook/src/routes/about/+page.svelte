@@ -143,7 +143,7 @@
 
       @media (max-width: 768px) {
         font-size: 15px;
-        padding: 5px 10px;
+        padding: 5px 0;
       }
     }
 

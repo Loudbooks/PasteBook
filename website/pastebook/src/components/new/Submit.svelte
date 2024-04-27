@@ -134,7 +134,7 @@
       font-family: Gabarito, sans-serif;
       font-size: 20px;
       font-weight: 800;
-      transition: all 0.5s;
+      transition: opacity 0.5s, transform 0.5s;
       background-color: #eeeeee;
       color: black;
       text-decoration: none;

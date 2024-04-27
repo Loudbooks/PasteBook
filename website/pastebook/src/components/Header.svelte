@@ -48,7 +48,7 @@
         color: white;
       }
 
-      transition: all 0.5s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
       outline: none;
       background-color: transparent;
       border: none;

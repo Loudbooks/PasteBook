@@ -39,7 +39,7 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     transform: translate(10px, -100%);
-    transition: all 0.7s;
+    transition: opacity 0.5s ease, background-color 0.5s ease, border 0.5s ease;
 
     background-color: #eeeeee;
     opacity: 0;
@@ -64,7 +64,7 @@
     }
 
     h1, button {
-      transition: all 0.7s;
+      transition: opacity 0.7s;
       align-self: center;
 
       font-size: 1rem;
@@ -85,6 +85,7 @@
       display: flex;
 
       button {
+        transition: transform 0.5s;
         padding-left: 20px;
         padding-right: 30px;
         background-color: transparent;

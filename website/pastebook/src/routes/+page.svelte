@@ -130,6 +130,7 @@ import Mode from "../components/Mode.svelte";
     }
 
     button, a {
+      display: inline-block;
       appearance: none;
       border: none;
       padding: 10px 20px;
@@ -145,6 +146,10 @@ import Mode from "../components/Mode.svelte";
       &:hover {
         color: darkgray;
         cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.97);
       }
 
       @media (max-width: 768px) {

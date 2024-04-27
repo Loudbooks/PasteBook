@@ -34,6 +34,7 @@
     height: 100vh;
     background-color: #eeeeee;
     transition: all 0.5s var(--animation);
+    overflow: hidden;
 
     :global(.dark-mode) & {
       background-color: #1a1a1a;

@@ -85,7 +85,7 @@
       display: flex;
 
       button {
-        transition: transform 0.5s;
+        transition: transform 0.5s, color 0.5s;
         padding-left: 20px;
         padding-right: 30px;
         background-color: transparent;

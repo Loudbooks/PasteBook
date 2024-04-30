@@ -72,7 +72,9 @@
                 content.trim().toLowerCase().includes("[error") ||
                 content.trim().toLowerCase().includes("/error]") ||
                 content.trim().toLowerCase().startsWith("caused by:") ||
-                content.toLowerCase().startsWith("\tat")) {
+                content.toLowerCase().startsWith("\tat") ||
+                (content.toLowerCase().includes("exception") &&
+                    content.toLowerCase().includes("provided by"))) {
                 return 2;
             }
 

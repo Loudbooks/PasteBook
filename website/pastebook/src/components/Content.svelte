@@ -65,14 +65,18 @@
 
     function scanContent(content: String): number {
         if (reportBook === false) {
-            if (content.trim().toLowerCase().includes("[warn]") ||
+            if (content.trim().toLowerCase().includes("[warn") ||
                 content.trim().toLowerCase().includes("/warn]")) {
                 return 1;
             } else if (content.trim().toLowerCase().includes("[severe]") ||
-                content.trim().toLowerCase().includes("[error]") ||
-                content.trim().toLowerCase().includes("/error]")) {
+                content.trim().toLowerCase().includes("[error") ||
+                content.trim().toLowerCase().includes("/error]") ||
+                content.trim().toLowerCase().startsWith("caused by:") ||
+                content.toLowerCase().startsWith("\tat")) {
                 return 2;
             }
+
+            return 0;
         }
 
         for (let result of results) {

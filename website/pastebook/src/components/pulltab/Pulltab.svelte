@@ -6,7 +6,7 @@
     onMount(() => {
         let content = document.querySelector("content") as HTMLDivElement;
 
-        content.style.top = `calc(100% + ${content.clientHeight / 2}px)`;
+        content.style.top = `calc(100% + ${(content.clientHeight / 2) + 1}px)`;
     });
 
     let open = false;
@@ -19,7 +19,7 @@
         let tab = document.querySelector(".tab") as HTMLButtonElement;
 
         if (open) {
-            content.style.top = `calc(100% + ${content.clientHeight / 2}px)`;
+            content.style.top = `calc(100% + ${(content.clientHeight / 2) + 1}px)`;
 
             blur.style.backgroundColor = "rgba(0, 0, 0, 0)"
 

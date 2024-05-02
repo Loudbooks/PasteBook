@@ -7,7 +7,7 @@
 
     import { page } from '$app/stores';
 
-    const shouldSkipScan = $page.url.searchParams.has('noInspect');
+    const scan = $page.url.searchParams.has('inspect');
 
     export let content: string = "No content provided"
     export let reportBook: boolean = false
@@ -68,7 +68,7 @@
     severes.set(severe)
 
     function scanContent(content: String): number {
-        if (shouldSkipScan) {
+        if (!scan) {
             return 0;
         }
 

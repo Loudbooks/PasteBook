@@ -5,6 +5,10 @@
     import type {Issue} from "$lib/issue";
     import {onMount} from "svelte";
 
+    import { page } from '$app/stores';
+
+    const shouldSkipScan = $page.url.searchParams.has('noInspect');
+
     export let content: string = "No content provided"
     export let reportBook: boolean = false
     export let newReport: boolean = false;
@@ -64,6 +68,10 @@
     severes.set(severe)
 
     function scanContent(content: String): number {
+        if (shouldSkipScan) {
+            return 0;
+        }
+
         if (reportBook === false) {
             if (content.trim().toLowerCase().includes("[warn") ||
                 content.trim().toLowerCase().includes("/warn]")) {

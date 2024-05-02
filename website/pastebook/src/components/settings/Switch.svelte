@@ -77,7 +77,7 @@
     width: 25px;
     margin-top: 0;
     border-radius: 50%;
-    background-color: black;
+    background-color: dimgray;
 
     @media (max-width: 600px) {
       height: 20px;

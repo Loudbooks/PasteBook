@@ -97,7 +97,7 @@
 
     animation: fadeIn 0.6s ease;
 
-    background-color: rgb(230, 230, 230, 1);
+    background-color: #eeeeee;
 
     :global(body.dark-mode) & {
       border-top: 1px solid #333;
@@ -105,7 +105,7 @@
       border-right: 1px solid #333;
       border-bottom: none;
 
-      background-color: rgb(20, 20, 20, 1);
+      background-color: #1a1a1a;
       color: white;
     }
 
@@ -128,7 +128,7 @@
     position: fixed;
     top: 120%;
     left: 50%;
-    background-color: rgb(230, 230, 230, 1);
+    background-color: #eeeeee;
     transition: all 0.5s ease;
 
     @media (max-width: 500px) {
@@ -139,7 +139,7 @@
 
     :global(body.dark-mode) & {
       border: 1px solid #333;
-      background-color: rgb(20, 20, 20, 1);
+      background-color: #1a1a1a;
     }
 
     border-radius: 20px;

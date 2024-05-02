@@ -146,6 +146,7 @@
 
     @media (max-width: 600px) {
       height: calc(100% - 130px);
+      margin-top: 6px;
     }
 
     :global(.dark-mode) & {

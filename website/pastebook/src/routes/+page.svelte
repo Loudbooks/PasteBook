@@ -32,12 +32,12 @@ import Mode from "../components/Mode.svelte";
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #eeeeee;
+    background-color: white;
     transition: all 0.5s var(--animation);
     overflow: hidden;
 
     :global(.dark-mode) & {
-      background-color: #1a1a1a;
+      background-color: black;
       color: white;
     }
 
@@ -87,8 +87,8 @@ import Mode from "../components/Mode.svelte";
       font-family: Gabarito, sans-serif;
       margin-top: 0;
       padding-top: 20px;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
       color: #333333;
       transition: all 0.5s ease;
       opacity: 0;

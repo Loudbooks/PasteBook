@@ -114,15 +114,19 @@
         <lines>
             {#each contentLines as line, index}
                 <linecontainer class="wrap-{wrapPre}">
-                    <number class="number">
-                        {getIndex(index + 1)}
-                    </number>
                     <linecontentcontainer class="severity-{scanContent(line)}">
                         {line}
                     </linecontentcontainer>
                 </linecontainer>
             {/each}
         </lines>
+        <numbers>
+            {#each contentLines as _, index}
+                <number class="number">
+                    {getIndex(index + 1)}
+                </number>
+            {/each}
+        </numbers>
     {:else}
         <textarea class="input" on:input="{onInput}" />
     {/if}

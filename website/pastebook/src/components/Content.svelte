@@ -17,14 +17,14 @@
     const results: Issue[] = [];
 
     for (const key in detection) {
-       let issue = {
-           id: detection[key].filename,
-           visual: detection[key].visual,
-           description: detection[key].description,
-           severity: detection[key].severity
-       }
+        let issue = {
+            id: detection[key].filename,
+            visual: detection[key].visual,
+            description: detection[key].description,
+            severity: detection[key].severity
+        }
 
-       results.push(issue)
+        results.push(issue)
     }
 
     onMount(() => {
@@ -114,19 +114,15 @@
         <lines>
             {#each contentLines as line, index}
                 <linecontainer class="wrap-{wrapPre}">
+                    <number class="number">
+                        {getIndex(index + 1)}
+                    </number>
                     <linecontentcontainer class="severity-{scanContent(line)}">
                         {line}
                     </linecontentcontainer>
                 </linecontainer>
             {/each}
         </lines>
-        <numbers>
-            {#each contentLines as _, index}
-                <number class="number">
-                    {getIndex(index + 1)}
-                </number>
-            {/each}
-        </numbers>
     {:else}
         <textarea class="input" on:input="{onInput}" />
     {/if}
@@ -159,7 +155,7 @@
     }
 
     &.new-true {
-        height: calc(100% - 175px);
+      height: calc(100% - 175px);
     }
 
     transition: all 0.5s ease;
@@ -214,7 +210,7 @@
     opacity: 1;
 
     &::selection {
-        background-color: transparent;
+      background-color: transparent;
     }
 
     @media (max-width: 600px){

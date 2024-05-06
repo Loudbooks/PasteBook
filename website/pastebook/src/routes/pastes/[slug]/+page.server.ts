@@ -4,7 +4,7 @@ import {pasteURL} from "$lib/stores";
 export async function load({ params }) {
     let path = params.slug
 
-    let response = await fetch("http://localhost:25658/list" + path);
+    let response = await fetch("http://localhost:25658/get/" + path);
 
     if (response.status === 404) {
         error(404, {

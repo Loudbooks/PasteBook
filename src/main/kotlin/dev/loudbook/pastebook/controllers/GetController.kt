@@ -28,6 +28,9 @@ class GetController {
 
         val headers = HttpHeaders()
         headers.add("Access-Control-Allow-Origin", "*")
+        headers.add("title", paste.title)
+        headers.add("reportBook", paste.reportBook.toString())
+        headers.add("created", paste.created.toString())
 
         return ResponseEntity.ok().headers(headers).body(Gson().toJson(paste))
     }

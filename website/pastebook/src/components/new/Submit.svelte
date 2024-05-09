@@ -24,8 +24,8 @@
 
     function onClick() {
         if ($writableTitle === "") {
-            console.log("Title is empty")
             let title = document.getElementById("title") as HTMLInputElement
+            title.focus()
             shakeElement(title, 500);
 
             return
@@ -48,6 +48,7 @@
         submit.style.animation = "blink 3s infinite";
 
         alreadyUploading = true;
+        submit.classList.add("loading");
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://pastebook.dev/upload");
         xhr.setRequestHeader("Content-Type", "plain/text");
@@ -62,13 +63,12 @@
         xhr.responseType = "text";
         xhr.onload = function () {
             if (xhr.status !== 200) {
-                submit.style.animation = "none";
+                submit.classList.remove("loading");
                 alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                alreadyUploading = false;
             }
 
             window.location.replace(xhr.response)
-
-            alreadyUploading = false;
         }
     }
 
@@ -124,7 +124,6 @@
     width: 100%;
     height: 50px;
     padding-bottom: 10px;
-    padding-top: 3px;
 
     .submit {
       margin: 0;
@@ -149,7 +148,13 @@
         color: white;
       }
 
-      &:hover {
+      :global(.loading) {
+        animation: blink 3s infinite;
+        color: #999999;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(.loading) {
         background-color: #cfcfcf;
 
         :global(.dark-mode) & {

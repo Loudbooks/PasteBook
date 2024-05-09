@@ -31,6 +31,7 @@ class GetController {
         headers.add("title", paste.title)
         headers.add("reportBook", paste.reportBook.toString())
         headers.add("created", paste.created.toString())
+        headers.add("wrap", paste.wrap.toString())
 
         return ResponseEntity.ok().headers(headers).body(Gson().toJson(paste))
     }

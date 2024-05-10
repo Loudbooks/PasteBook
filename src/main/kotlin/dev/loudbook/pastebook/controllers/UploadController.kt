@@ -58,7 +58,11 @@ class UploadController {
         val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         val discordID = try {
-            discord.send(title, pastebookURL, null).toLong()
+            if (!unlisted) {
+                discord.send(title, pastebookURL, null).toLong()
+            } else {
+                0L
+            }
         } catch (e: NullPointerException) {
             0L
         }

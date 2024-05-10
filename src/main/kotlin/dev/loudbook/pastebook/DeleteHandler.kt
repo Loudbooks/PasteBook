@@ -34,6 +34,11 @@ class DeleteHandler {
         println("Deleting ${pastes.size} pastes")
 
         for (paste in pastes) {
+            if (paste.unlisted) {
+                println("Skipping unlisted paste ${paste.id}")
+                continue
+            }
+
             println("Deleting paste ${paste.id}")
 
             discord.delete(paste.discordID.toString())

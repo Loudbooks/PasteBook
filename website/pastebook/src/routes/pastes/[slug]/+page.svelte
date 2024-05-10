@@ -133,6 +133,7 @@
     position: absolute;
     width: 100%;
     top: 0;
+    opacity: 0;
   }
 
   loadbarcontainer {

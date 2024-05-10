@@ -4,7 +4,7 @@ import {pasteURL} from "$lib/stores";
 export async function load({ params }) {
     let path = params.slug
 
-    let response = await fetch("http://localhost:25658/get/" + path);
+    let response = await fetch("http://localhost:25658/api/get/" + path + "/metadata");
 
     if (response.status === 404) {
         error(404, {
@@ -24,21 +24,18 @@ export async function load({ params }) {
         });
     }
 
-    let { created, content, title, reportBook, unlisted, wrap} = await response.json();
-
     pasteURL.set("https://pastebook.dev/pastes/" + path);
 
-    if (content === undefined) {
-        error(404, {
-            message: 'Content Not Found'
-        });
-    }
+    let title = response.headers.get("title");
+    let created = response.headers.get("created");
+    let wrap = response.headers.get("wrap");
+    let reportBook = response.headers.get("reportBook");
 
     return {
-        created: created,
-        content: content,
         title: title,
-        reportBook: reportBook,
+        created: created,
         wrap: wrap,
+        reportBook: reportBook,
+        url: "https://pastebook.dev/api/get/" + path + "/content",
     }
 }

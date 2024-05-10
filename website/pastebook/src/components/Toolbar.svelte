@@ -32,6 +32,8 @@
 
 <style lang="scss">
   toolbar {
+    z-index: 999;
+
     position: absolute;
     width: calc(100% - 20px);
     height: 30px;

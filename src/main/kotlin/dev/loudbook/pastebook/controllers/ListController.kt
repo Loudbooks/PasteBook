@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/api")
 class ListController {
     @Autowired
     lateinit var pasteRepository: PasteRepository
@@ -23,10 +25,10 @@ class ListController {
             return ResponseEntity.status(429).body("Rate limit exceeded")
         }
 
-        val pastes = pasteRepository.findAll(Sort.by(Sort.Direction.DESC, "created"))
-            .filter { it.unlisted.not() }
+        val pastes = pasteRepository.findAllDTO()
             .filter { it.created < System.currentTimeMillis() }
-            .take(40)
+            .filterNot { it.unlisted }
+            .take(80)
             .toList()
 
         val json = Gson().toJsonTree(pastes).asJsonArray

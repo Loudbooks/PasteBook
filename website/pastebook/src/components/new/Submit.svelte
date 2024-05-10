@@ -50,7 +50,7 @@
         alreadyUploading = true;
         submit.classList.add("loading");
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://pastebook.dev/upload");
+        xhr.open("POST", "https://pastebook.dev/api/upload");
         xhr.setRequestHeader("Content-Type", "plain/text");
         xhr.setRequestHeader("onlyPastebook", "true")
         xhr.setRequestHeader("access-control-allow-origin", "*")

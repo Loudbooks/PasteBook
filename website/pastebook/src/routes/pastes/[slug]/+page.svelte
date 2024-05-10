@@ -6,7 +6,7 @@
     import {severes, warnings, pasteURL} from "$lib/stores";
     import {formatTimeSince} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
-    import { tick } from 'svelte';
+    import {onMount, tick} from 'svelte';
 
     export let data
 
@@ -15,12 +15,14 @@
     let percent = 0
     let loading = true
 
-    setTimeout(() => {
-        if (loading) {
-            let loadContainer = document.getElementById("loadcontainer")
-            loadContainer.style.opacity = "1"
-        }
-    }, 200)
+    onMount(() => {
+        setTimeout(() => {
+            if (loading) {
+                let loadContainer = document.getElementById("loadcontainer")
+                loadContainer.style.opacity = "1"
+            }
+        }, 200)
+    })
 
     let promise = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();

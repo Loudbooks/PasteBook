@@ -36,6 +36,6 @@ export async function load({ params }) {
         created: created,
         wrap: wrap,
         reportBook: reportBook,
-        url: "https://pastebook.dev/api/get/" + path + "/content",
+        url: "http://localhost:25658/api/get/" + path + "/content",
     }
 }

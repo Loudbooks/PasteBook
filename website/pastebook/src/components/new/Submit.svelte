@@ -53,7 +53,6 @@
         xhr.open("POST", "https://pastebook.dev/api/upload");
         xhr.setRequestHeader("Content-Type", "plain/text");
         xhr.setRequestHeader("onlyPastebook", "true")
-        xhr.setRequestHeader("access-control-allow-origin", "*")
         xhr.setRequestHeader("access-control-allow-methods", "POST")
         xhr.setRequestHeader("title", $writableTitle);
         xhr.setRequestHeader("wrap", String($wrap))

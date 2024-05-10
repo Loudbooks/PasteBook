@@ -5,7 +5,6 @@ import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.mongo.PasteRepository
 import io.github.bucket4j.Bucket
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

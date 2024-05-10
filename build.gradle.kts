@@ -30,6 +30,7 @@ dependencies {
     implementation("net.datafaker:datafaker:2.1.0")
     implementation("me.paulschwarz:spring-dotenv:4.0.0")
     implementation("commons-validator:commons-validator:1.8.0")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.717")
 }
 
 dependencyManagement {

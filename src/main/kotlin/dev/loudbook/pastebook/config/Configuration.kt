@@ -1,5 +1,7 @@
-package dev.loudbook.pastebook
+package dev.loudbook.pastebook.config
 
+import dev.loudbook.pastebook.DeleteHandler
+import dev.loudbook.pastebook.Discord
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import java.nio.file.Files

@@ -1,5 +1,6 @@
 package dev.loudbook.pastebook
 
+import dev.loudbook.pastebook.data.R2Service
 import dev.loudbook.pastebook.mongo.PasteRepository
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +10,10 @@ import kotlin.concurrent.fixedRateTimer
 @Component
 class DeleteHandler {
     @Autowired
-    val pasteRepository: PasteRepository? = null
+    val r2Service: R2Service? = null
+
+    @Autowired
+    lateinit var pasteRepository: PasteRepository
 
     @PostConstruct
     fun init() {
@@ -26,13 +30,15 @@ class DeleteHandler {
         val now = System.currentTimeMillis()
         val minimum = now - 1000 * 60 * 60 * 9
 
-        val pastes = pasteRepository!!.findAfterTime(minimum)
+        val pastes = pasteRepository.findAfterTime(minimum)
         println("Deleting ${pastes.size} pastes")
 
         for (paste in pastes) {
             println("Deleting paste ${paste.id}")
+
             discord.delete(paste.discordID.toString())
-            pasteRepository!!.delete(paste)
+            pasteRepository.delete(paste)
+            paste.id?.let { r2Service?.deleteFile(it) }
         }
     }
 }

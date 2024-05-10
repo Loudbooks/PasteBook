@@ -1,4 +1,4 @@
-package dev.loudbook.pastebook.mongo
+package dev.loudbook.pastebook.data
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

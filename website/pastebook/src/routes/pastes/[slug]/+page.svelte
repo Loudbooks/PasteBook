@@ -25,10 +25,15 @@
         xhr.addEventListener("progress", (e) => {
             if (e.lengthComputable) {
                 statusContainer.innerText = "Receiving..."
+                loadBar.style.opacity = "1"
                 percent = (e.loaded / e.total) * 100
             }
 
-            loadBar.style.width = "calc(" + percent + "% + 1px)"
+            if (percent == 0) {
+                loadBar.style.width = "0"
+            } else {
+                loadBar.style.width = "calc(" + percent + "% + 1px)"
+            }
         });
 
         xhr.onload = async () => {
@@ -142,9 +147,10 @@
   loadbar {
     transition: background-color 0.2s ease-in-out;
     width: 0;
+    display: block;
+    opacity: 0;
     height: 25px;
     background-color: #c9c9c9;
-    display: block;
     content: '';
     align-self: center;
 

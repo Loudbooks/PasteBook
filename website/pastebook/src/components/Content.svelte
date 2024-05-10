@@ -136,7 +136,6 @@
     margin: 10px;
     border-radius: 20px;
     animation: fadeIn 0.5s;
-    animation-delay: 0.2s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;

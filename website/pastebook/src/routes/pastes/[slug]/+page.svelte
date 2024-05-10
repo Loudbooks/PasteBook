@@ -21,14 +21,13 @@
                 let loadContainer = document.getElementById("loadcontainer")
                 loadContainer.style.opacity = "1"
             }
-        }, 500)
+        }, 250)
     })
 
     let promise = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.responseType = 'text';
-        xhr.overrideMimeType('text/plain; charset=utf-8');
 
         let loadBar = document.getElementById("loadbar")
         let statusContainer = document.getElementById("status")

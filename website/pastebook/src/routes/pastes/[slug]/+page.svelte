@@ -21,7 +21,7 @@
                 let loadContainer = document.getElementById("loadcontainer")
                 loadContainer.style.opacity = "1"
             }
-        }, 200)
+        }, 500)
     })
 
     let promise = new Promise((resolve, reject) => {

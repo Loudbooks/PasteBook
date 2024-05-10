@@ -7,7 +7,6 @@ import dev.loudbook.pastebook.mongo.PasteRepository
 import io.github.bucket4j.Bucket
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -55,10 +54,9 @@ class GetController {
         }
 
         val headers = HttpHeaders()
-        headers.add("Content-Type", "text/plain; charset=utf-8")
 
         val paste = r2Service.getFile(id) ?: return ResponseEntity.notFound().build()
 
-        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).headers(headers).body(paste)
+        return ResponseEntity.ok().headers(headers).body(paste)
     }
 }

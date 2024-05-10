@@ -38,7 +38,7 @@ class R2Service {
     }
 
     fun uploadFile(key: String, paste: String) {
-        amazonS3?.putObject("pastebook", key, Gson().toJson(paste))
+        amazonS3?.putObject("pastebook", key, paste)
     }
 
     fun deleteFile(key: String) {
@@ -46,7 +46,7 @@ class R2Service {
     }
 
     fun getFile(key: String): String? {
-        val str = amazonS3?.getObject("pastebook", key)?.objectContent?.bufferedReader()?.use { it.readText() }
+        val str = amazonS3?.getObject("pastebook", key)?.objectContent?.readAllBytes()?.toString(Charsets.UTF_8)
 
         return str
     }

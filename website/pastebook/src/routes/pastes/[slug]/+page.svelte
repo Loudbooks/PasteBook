@@ -135,7 +135,7 @@
     top: 0;
     opacity: 0;
 
-    animation: bounce 1s infinite ease-in-out;
+    animation: bounce 5s infinite ease-in-out;
   }
 
   @keyframes bounce {
@@ -143,7 +143,7 @@
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.04);
     }
     100% {
       transform: scale(1);

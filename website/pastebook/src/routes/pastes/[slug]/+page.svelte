@@ -13,6 +13,14 @@
     const {title, created, wrap, reportBook, url} = data
 
     let percent = 0
+    let loading = true
+
+    setTimeout(() => {
+        if (loading) {
+            let loadContainer = document.getElementById("loadcontainer")
+            loadContainer.style.opacity = "1"
+        }
+    }, 200)
 
     let promise = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
@@ -43,6 +51,7 @@
 
                 resolve(xhr.response);
                 await tick()
+
                 clearLoading()
             } else {
                 error(xhr.status, xhr.statusText)
@@ -71,6 +80,7 @@
     function clearLoading() {
         let loadContainer = document.getElementById("loadcontainer")
         loadContainer.style.opacity = "0"
+        loading = false
 
         setTimeout(() => {
             loadContainer.style.display = "none"

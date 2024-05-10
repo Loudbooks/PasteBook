@@ -134,6 +134,20 @@
     width: 100%;
     top: 0;
     opacity: 0;
+
+    animation: bounce 1s infinite ease-in-out;
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   loadbarcontainer {

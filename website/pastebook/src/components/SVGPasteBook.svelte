@@ -89,7 +89,7 @@
   }
 
   svg path {
-    transition: stroke-dasharray 0.3s ease-in-out, stroke-dashoffset 0.3s ease-in-out, fill 0.3s ease-in-out, stroke 0.2s ease-in-out;
+    transition: stroke-dasharray 0.5s ease-in-out, stroke-dashoffset 0.5s ease-in-out, fill 0.3s ease-in-out, stroke 0.5s ease-in-out;
 
     fill: #eeeeee;
     stroke: #c9c9c9;

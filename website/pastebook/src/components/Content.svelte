@@ -194,7 +194,7 @@
   .number {
     display: inline-block;
     text-align: right;
-    padding-right: 10px;
+    padding-right: 20px;
     color: #9999;
     font-family: "JetBrains Mono NL", monospace;
     font-size: 13px;

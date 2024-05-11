@@ -95,6 +95,7 @@
   }
 </style>
 
+<!--
 <svelte:head>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="{title}"/>
@@ -103,4 +104,4 @@
     <meta property="og:description"
           content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes."/>
     <meta name="robots" content="noindex">
-</svelte:head>
+</svelte:head>-->

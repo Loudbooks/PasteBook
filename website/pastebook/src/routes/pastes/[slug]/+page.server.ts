@@ -26,16 +26,10 @@ export async function load({ params }) {
 
     pasteURL.set("https://pastebook.dev/pastes/" + path);
 
-    let title = response.headers.get("title");
-    let created = response.headers.get("created");
-    let wrap = response.headers.get("wrap");
-    let reportBook = response.headers.get("reportBook");
+    let metadataPromise = response.json();
 
     return {
-        title: title,
-        created: created,
-        wrap: wrap,
-        reportBook: reportBook,
+        metadata: metadataPromise,
         url: "https://pastebook.dev/api/get/" + path + "/content",
     }
 }

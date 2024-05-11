@@ -1,5 +1,6 @@
 package dev.loudbook.pastebook.controllers
 
+import com.google.gson.Gson
 import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.data.R2Service
 import dev.loudbook.pastebook.data.PasteDTO
@@ -32,20 +33,10 @@ class GetController {
             return ResponseEntity.status(429).body("Rate limit exceeded")
         }
 
-        val start = Instant.now()
-
         val paste: PasteDTO = pasteRepository.findDTOByID(id) ?: return ResponseEntity.notFound().build()
 
-        println("Get request for ${paste.title} took ${Instant.now().toEpochMilli() - start.toEpochMilli()}ms")
-
-        val headers = HttpHeaders()
-        headers.add("title", paste.title)
-        headers.add("reportBook", paste.reportBook.toString())
-        headers.add("created", paste.created.toString())
-        headers.add("wrap", paste.wrap.toString())
-        headers.add("id", paste.id!!)
-
-        return ResponseEntity.ok().headers(headers).body(null)
+        val json = Gson().toJson(paste)
+        return ResponseEntity.ok().body(json)
     }
 
     @GetMapping("/get/{id}/content")

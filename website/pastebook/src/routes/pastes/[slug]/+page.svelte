@@ -11,7 +11,7 @@
 
     export let data
 
-    const {title, created, wrap, reportBook, url} = data
+    const {metadata, url} = data
 
     let percent = 0
 
@@ -46,18 +46,27 @@
         xhr.send();
     });
 
-    const reloadTime = () => {
-        timeSinceStr = formatTimeSince(created)
-    }
-
     let timeSinceStr = "";
+    let created = new Date()
+    let title = ""
+    let reportBook = false
+    let wrap = false
 
-    reloadTime()
-    let clear
-    $: {
+    metadata.then((data) => {
+        created = new Date(data.created)
+        title = data.title
+        reportBook = data.reportBook
+        wrap = data.wrap
+
+        const reloadTime = () => {
+            timeSinceStr = formatTimeSince(created)
+        }
+
+        reloadTime()
+        let clear
         clearInterval(clear)
         clear = setInterval(reloadTime, 1000)
-    }
+    });
 </script>
 
 <main>
@@ -66,7 +75,7 @@
     <Mode/>
     <Header title="{title}" created="{timeSinceStr}"></Header>
     {#await promise then response}
-        <Content  content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
+        <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
 
         {#if ($warnings.length > 0 || $severes.length > 0)}
             <PotentialIssues/>

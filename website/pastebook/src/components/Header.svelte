@@ -79,7 +79,7 @@
         color: white;
       }
 
-      transition: color 1s ease;
+      transition: color 0.2s ease;
     }
 
     created {
@@ -104,7 +104,7 @@
         color: lightgray;
       }
 
-      transition: color 1s ease;
+      transition: color 0.2s ease;
     }
 
     @keyframes fadeIn {

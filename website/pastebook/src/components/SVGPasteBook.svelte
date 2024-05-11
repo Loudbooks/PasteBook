@@ -11,12 +11,16 @@
             })
 
             if (end == 0) {
+                document.querySelectorAll("svg path").forEach((path) => {
+                    path.style.strokeDashoffset = 0;
+                })
+
                 document.getElementById("svgcontainer").style.opacity = "0";
                 document.getElementById("svgcontainer").style.transform = "scale(1.2)";
 
                 setTimeout(() => {
                     document.getElementById("svgcontainer").style.display = "none";
-                }, 500)
+                }, 300)
             }
         });
     })
@@ -53,7 +57,7 @@
   }
 
   div {
-    transition: background-color 0.5s ease-in-out, opacity 0.5s ease, transform 0.5s ease;
+    transition: background-color 0.5s ease-in-out, opacity 0.35s ease, transform 0.5s ease;
     height: 100vh;
     width: 100vw;
     position: absolute;

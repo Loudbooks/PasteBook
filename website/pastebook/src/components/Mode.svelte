@@ -44,10 +44,11 @@
 
 <style lang="scss">
   container {
-    transition: all 1s ease;
+    transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease;
 
     .style {
-      transition: all 1s ease;
+      all: unset;
+      transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease;
 
       background: none;
       border: none;

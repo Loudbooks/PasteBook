@@ -41,6 +41,7 @@
 
 <style lang="scss">
   .pastecontainer {
+    all: unset;
     transition: background-color 0.5s, color 0.5s, border 0.5s;
 
     display: flex;

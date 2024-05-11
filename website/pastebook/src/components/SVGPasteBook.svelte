@@ -11,10 +11,6 @@
             })
 
             if (end == 0) {
-                document.querySelectorAll("svg path").forEach((path) => {
-                    path.style.strokeDashoffset = 0;
-                })
-
                 document.getElementById("svgcontainer").style.opacity = "0";
                 document.getElementById("svgcontainer").style.transform = "scale(1.2)";
 

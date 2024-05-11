@@ -109,27 +109,20 @@
     }
 </script>
 
-<contentcontainer class="new-{newReport}">
+<content-container class="new-{newReport}">
     {#if !newReport}
         <lines>
             {#each contentLines as line, index}
-                <linecontainer class="wrap-{wrapPre}">
-                    <number class="number">
-                        {getIndex(index + 1)}
-                    </number>
-                    <linecontentcontainer class="severity-{scanContent(line)}">
-                        {line}
-                    </linecontentcontainer>
-                </linecontainer>
+                <linecontainer class="wrap-{wrapPre}"><number class="number">{getIndex(index + 1)}</number><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
             {/each}
         </lines>
     {:else}
         <textarea class="input" on:input="{onInput}" />
     {/if}
-</contentcontainer>
+</content-container>
 
 <style lang="scss">
-  contentcontainer {
+  content-container {
     display: block;
     background-color: #eeeeee;
     width: calc(100% - 20px);
@@ -207,9 +200,11 @@
     font-size: 13px;
     margin: 0;
     opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
 
     &::selection {
-      background-color: transparent;
+      background-color: orange;
     }
 
     @media (max-width: 600px){
@@ -249,7 +244,7 @@
     }
   }
 
-  linecontentcontainer {
+  line-content-container {
     margin-right: 30px;
     &.severity-1 {
       background-color: rgb(255, 165, 0, 0.7);

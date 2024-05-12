@@ -187,7 +187,7 @@
 
   lines {
     display: block;
-    padding: 30px 30px 30px 20px;
+    padding: 30px 30px 30px 18px;
     height: calc(100% - 60px);
   }
 

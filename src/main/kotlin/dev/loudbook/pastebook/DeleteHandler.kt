@@ -1,5 +1,6 @@
 package dev.loudbook.pastebook
 
+import dev.loudbook.pastebook.data.PasteDTO
 import dev.loudbook.pastebook.data.R2Service
 import dev.loudbook.pastebook.mongo.PasteRepository
 import jakarta.annotation.PostConstruct
@@ -29,19 +30,28 @@ class DeleteHandler {
     private fun deleteFiles() {
         val now = System.currentTimeMillis()
         val minimum = now - 1000 * 60 * 60 * 9
+        println("Minimum time: $minimum")
 
-        val pastes = pasteRepository.findAfterTime(minimum)
-        println("Deleting ${pastes.size} pastes")
+        val deletablePastes = mutableListOf<PasteDTO>()
 
-        for (paste in pastes) {
-            if (paste.unlisted) {
-                println("Skipping unlisted paste ${paste.id}")
-                continue
+        var index = 0
+
+        pasteRepository.findAllDTO().forEach {
+            println("Comparing $minimum with ${it.created}")
+            index++
+
+            println(minimum > it.created)
+
+            if (it.created < minimum) {
+                deletablePastes.add(it)
+            }
+        }
+
+        for (paste in deletablePastes) {
+            if (!paste.unlisted) {
+                discord.delete(paste.discordID.toString())
             }
 
-            println("Deleting paste ${paste.id}")
-
-            discord.delete(paste.discordID.toString())
             pasteRepository.delete(paste)
             paste.id?.let { r2Service?.deleteFile(it) }
         }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api", "/")
 class UploadController {
     @Autowired
     private lateinit var discord: Discord

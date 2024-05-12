@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
 
 @RestController
-@RequestMapping("/api", "/")
 class UploadController {
     @Autowired
     private lateinit var discord: Discord
@@ -33,7 +32,7 @@ class UploadController {
     private val faker = Faker()
     private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)
 
-    @PostMapping("/upload")
+    @PostMapping(value = ["/api/upload", "/upload"])
     fun upload(request: HttpServletRequest, @RequestBody body: String): ResponseEntity<String> {
         if (!bucket.tryConsume(1)) {
             return ResponseEntity.status(429).body("Rate limit exceeded")

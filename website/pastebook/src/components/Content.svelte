@@ -187,7 +187,7 @@
 
   lines {
     display: block;
-    padding: 30px 30px 30px 10px;
+    padding: 30px 30px 30px 20px;
     height: calc(100% - 60px);
   }
 
@@ -226,8 +226,8 @@
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
     margin: 0;
-    padding-left: 38px;
-    text-indent: -16px;
+    padding-left: 40px;
+    text-indent: -20px;
 
     &.wrap-true {
       white-space: break-spaces;

@@ -30,18 +30,14 @@ class DeleteHandler {
     private fun deleteFiles() {
         val now = System.currentTimeMillis()
         val minimum = now - 1000 * 60 * 60 * 9
-        println("Minimum time: $minimum")
 
         val deletablePastes = mutableListOf<PasteDTO>()
 
         var index = 0
 
         pasteRepository.findAllDTO().forEach {
-            println("Comparing $minimum with ${it.created}")
             index++
-
-            println(minimum > it.created)
-
+            
             if (it.created < minimum) {
                 deletablePastes.add(it)
             }

@@ -3,12 +3,17 @@ package dev.loudbook.pastebook
 import jakarta.servlet.http.HttpServletRequest
 
 object IPUtils {
-    fun getIPFromRequest(request: HttpServletRequest): String {
-        val xRealIP = request.getHeader("X-REAL-IP")
-        return if (xRealIP != null) {
-            xRealIP.split(",")[0]
-        } else {
-            request.remoteAddr
+    fun getIPFromRequest(request: HttpServletRequest): String? {
+        var xRealIP = request.getHeader("Cf-Connecting-IP")
+
+        if (xRealIP == null) {
+            xRealIP = request.getHeader("CF-Connecting-IPv6")
         }
+
+        if (xRealIP == null) {
+            return null
+        }
+
+        return xRealIP.split(",")[0]
     }
 }

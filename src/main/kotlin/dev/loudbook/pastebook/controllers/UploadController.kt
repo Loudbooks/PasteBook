@@ -61,7 +61,9 @@ class UploadController {
 
         val filteredBody = ContentScanner.scanContent(body)
 
-        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap, IPUtils.getIPFromRequest(request))
+        val ip = IPUtils.getIPFromRequest(request) ?: return ResponseEntity.badRequest().body("Failed to get IP")
+
+        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap, ip)
         val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         val discordID = try {

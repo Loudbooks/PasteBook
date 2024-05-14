@@ -23,7 +23,7 @@ class UserService {
     }
 
     fun processRequest(request: HttpServletRequest): Boolean {
-        val ip = IPUtils.getIPFromRequest(request)
+        val ip = IPUtils.getIPFromRequest(request) ?: return false
         val user = usersRepository.findByIp(ip)
         if (user != null && user.banned) {
             return false

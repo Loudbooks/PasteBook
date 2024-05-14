@@ -1,6 +1,6 @@
 package dev.loudbook.pastebook
 
-import dev.loudbook.pastebook.data.PasteDTO
+import dev.loudbook.pastebook.data.PastePrivateDTO
 import dev.loudbook.pastebook.data.R2Service
 import dev.loudbook.pastebook.mongo.PasteRepository
 import jakarta.annotation.PostConstruct
@@ -31,7 +31,7 @@ class DeleteHandler {
         val now = System.currentTimeMillis()
         val minimum = now - 1000 * 60 * 60 * 9
 
-        val deletablePastes = mutableListOf<PasteDTO>()
+        val deletablePastes = mutableListOf<PastePrivateDTO>()
 
         var index = 0
 

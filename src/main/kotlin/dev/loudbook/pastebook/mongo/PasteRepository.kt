@@ -1,19 +1,13 @@
 package dev.loudbook.pastebook.mongo
 
-import dev.loudbook.pastebook.data.PasteDTO
+import dev.loudbook.pastebook.data.PastePrivateDTO
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 
-interface PasteRepository : MongoRepository<PasteDTO, String> {
-    @Query("{ 'created' : { \$lt : ?0 } }")
-    fun findAfterTime(created: Long): List<PasteDTO>
-
+interface PasteRepository : MongoRepository<PastePrivateDTO, String> {
     @Query(value = "{}", fields = "{ 'content' : 0 }")
-    fun findAllDTO(): List<PasteDTO>
+    fun findAllDTO(): List<PastePrivateDTO>
 
     @Query("{ 'id' : ?0 }", fields = "{ 'content' : 0 }")
-    fun findDTOByID(id: String): PasteDTO?
-
-    @Query("{ 'id' : ?0 }", fields = "{ 'content' : 1 }")
-    fun findContentByID(id: String): PasteDTO?
+    fun findDTOByID(id: String): PastePrivateDTO?
 }

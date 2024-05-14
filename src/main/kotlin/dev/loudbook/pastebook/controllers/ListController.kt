@@ -3,7 +3,9 @@ package dev.loudbook.pastebook.controllers
 import com.google.gson.Gson
 import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.mongo.PasteRepository
+import dev.loudbook.pastebook.mongo.UserService
 import io.github.bucket4j.Bucket
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -16,15 +18,23 @@ class ListController {
     @Autowired
     lateinit var pasteRepository: PasteRepository
 
+    @Autowired
+    lateinit var userService: UserService
+
     private val bucket: Bucket = BucketUtils.getBucketPerSeconds(4)
 
     @GetMapping("/list")
-    fun list(): ResponseEntity<String> {
+    fun list(request: HttpServletRequest): ResponseEntity<String> {
+        if (!userService.processRequest(request)) {
+            return ResponseEntity.status(403).body("Prohibited")
+        }
+
         if (!bucket.tryConsume(1)) {
             return ResponseEntity.status(429).body("Rate limit exceeded")
         }
 
         val pastes = pasteRepository.findAllDTO()
+            .map { it.toPublicDTO() }
             .filter { it.created < System.currentTimeMillis() }
             .filterNot { it.unlisted }
             .take(80)

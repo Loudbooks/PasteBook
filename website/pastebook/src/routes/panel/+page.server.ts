@@ -10,6 +10,12 @@ export async function load({ params }) {
         });
     }
 
+    if (response.status === 403) {
+        error(403, {
+            message: 'Forbidden'
+        });
+    }
+
     const json = await response.json()
 
     let pastes: Paste[] = []

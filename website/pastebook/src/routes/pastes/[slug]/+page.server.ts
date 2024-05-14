@@ -12,6 +12,12 @@ export async function load({ params }) {
         });
     }
 
+    if (response.status === 403) {
+        error(400, {
+            message: 'Forbidden'
+        });
+    }
+
     if (response.status === 500) {
         error(500, {
             message: 'Server Error'

@@ -3,9 +3,11 @@ package dev.loudbook.pastebook.controllers
 import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.ContentScanner
 import dev.loudbook.pastebook.Discord
-import dev.loudbook.pastebook.data.PasteDTO
+import dev.loudbook.pastebook.IPUtils
+import dev.loudbook.pastebook.data.PastePrivateDTO
 import dev.loudbook.pastebook.data.R2Service
 import dev.loudbook.pastebook.mongo.PasteRepository
+import dev.loudbook.pastebook.mongo.UserService
 import io.github.bucket4j.Bucket
 import jakarta.servlet.http.HttpServletRequest
 import net.datafaker.Faker
@@ -14,7 +16,6 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
 
@@ -29,11 +30,18 @@ class UploadController {
     @Autowired
     lateinit var pasteRepository: PasteRepository
 
+    @Autowired
+    lateinit var userService: UserService
+
     private val faker = Faker()
     private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)
 
     @PostMapping(value = ["/api/upload", "/upload"])
     fun upload(request: HttpServletRequest, @RequestBody body: String): ResponseEntity<String> {
+        if (!userService.processRequest(request)) {
+            return ResponseEntity.status(403).body("Prohibited")
+        }
+
         if (!bucket.tryConsume(1)) {
             return ResponseEntity.status(429).body("Rate limit exceeded")
         }
@@ -53,7 +61,7 @@ class UploadController {
 
         val filteredBody = ContentScanner.scanContent(body)
 
-        val paste = PasteDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap)
+        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap, IPUtils.getIPFromRequest(request))
         val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         val discordID = try {
@@ -74,7 +82,7 @@ class UploadController {
         return ResponseEntity.ok().headers(header).body(pastebookURL)
     }
 
-    fun uploadPastebook(paste: PasteDTO): String? {
+    fun uploadPastebook(paste: PastePrivateDTO): String? {
         val url = "https://pastebook.dev/pastes/${paste.id}"
         return url
     }

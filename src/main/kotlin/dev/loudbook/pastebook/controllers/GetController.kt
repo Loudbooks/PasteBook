@@ -43,7 +43,7 @@ class GetController {
 
         val paste: PastePrivateDTO = pasteRepository.findDTOByID(id) ?: return ResponseEntity.notFound().build()
 
-        val json = Gson().toJson(paste.toPublicDTO())
+        val json = Gson().toJson(userService.getUser(paste.creatorIP)?.toDTO()?.let { paste.toPublicDTO(it) }) ?: return ResponseEntity.notFound().build()
         return ResponseEntity.ok().body(json)
     }
 

@@ -4,4 +4,7 @@ export type Paste = {
     created: string;
     reportBook: boolean;
     wrap: boolean;
+    user: {
+        hashedIP: string;
+    }
 }

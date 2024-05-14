@@ -32,4 +32,8 @@ class UserService {
         incrementRequests(ip)
         return true
     }
+
+    fun getUser(ip: String): User? {
+        return usersRepository.findByIp(ip)
+    }
 }

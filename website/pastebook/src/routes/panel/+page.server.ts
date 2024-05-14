@@ -16,37 +16,9 @@ export async function load({ params }) {
         });
     }
 
-    const json = await response.json()
-
-    let pastes: Paste[] = []
-
-    json.forEach((paste: Paste) => {
-        pastes.push({
-            id: paste.id,
-            title: paste.title,
-            created: paste.created,
-            reportBook: paste.reportBook,
-            wrap: paste.wrap,
-        })
-    })
-
-    let current = Date.now();
-
-    pastes = pastes.filter(paste => {
-        return paste.created as unknown as number < current;
-    })
-
-    pastes.sort((a, b) => {
-        return (b.created as unknown as number) - (a.created as unknown as number);
-    });
-
-    if (pastes.length == 0) {
-        error(404, {
-            message: 'No Pastes Found'
-        });
-    }
+    const json = response.json()
 
     return {
-        pastes: pastes,
+        promise: json,
     }
 }

@@ -2,6 +2,7 @@ package dev.loudbook.pastebook.controllers
 
 import com.google.gson.Gson
 import dev.loudbook.pastebook.BucketUtils
+import dev.loudbook.pastebook.data.UserDTO
 import dev.loudbook.pastebook.mongo.PasteRepository
 import dev.loudbook.pastebook.mongo.UserService
 import io.github.bucket4j.Bucket
@@ -33,14 +34,19 @@ class ListController {
             return ResponseEntity.status(429).body("Rate limit exceeded")
         }
 
-        val pastes = pasteRepository.findAllDTO()
-            .map { it.toPublicDTO() }
-            .filter { it.created < System.currentTimeMillis() }
-            .filterNot { it.unlisted }
+        val users = pasteRepository.findAllDTO().map { it.creatorIP }.toMutableList()
+        val ipToUsers: Map<String, UserDTO> = users
+            .filter { userService.getUser(it) != null }
+            .associateWith { userService.getUser(it)!!.toDTO() }
+
+        val userPastes = pasteRepository.findAllDTO()
+            .asSequence()
+            .filter { it.creatorIP in users && ipToUsers.containsKey(it.creatorIP) && it.created < System.currentTimeMillis() && !it.unlisted }
+            .map { it.toPublicDTO(ipToUsers[it.creatorIP]!!) }
             .take(80)
             .toList()
 
-        val json = Gson().toJsonTree(pastes).asJsonArray
+        val json = Gson().toJsonTree(userPastes).asJsonArray
 
         json.mapIndexed { _, element ->
             element.asJsonObject.remove("content")

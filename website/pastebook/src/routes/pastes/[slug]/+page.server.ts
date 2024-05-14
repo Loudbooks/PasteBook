@@ -13,7 +13,7 @@ export async function load({ params }) {
     }
 
     if (response.status === 403) {
-        error(400, {
+        error(403, {
             message: 'Forbidden'
         });
     }

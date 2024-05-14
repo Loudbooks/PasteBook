@@ -11,7 +11,7 @@ object IPUtils {
         }
 
         if (xRealIP == null) {
-            return null
+            return request.remoteAddr
         }
 
         return xRealIP.split(",")[0]

@@ -16,7 +16,7 @@ class ListController {
     @Autowired
     lateinit var pasteRepository: PasteRepository
 
-    private val bucket: Bucket = BucketUtils.getBucketPerSeconds(2)
+    private val bucket: Bucket = BucketUtils.getBucketPerSeconds(4)
 
     @GetMapping("/list")
     fun list(): ResponseEntity<String> {

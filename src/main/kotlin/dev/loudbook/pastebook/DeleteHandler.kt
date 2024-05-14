@@ -11,7 +11,7 @@ import kotlin.concurrent.fixedRateTimer
 @Component
 class DeleteHandler {
     @Autowired
-    val r2Service: R2Service? = null
+    lateinit var r2Service: R2Service
 
     @Autowired
     lateinit var pasteRepository: PasteRepository
@@ -49,7 +49,7 @@ class DeleteHandler {
             }
 
             pasteRepository.delete(paste)
-            paste.id?.let { r2Service?.deleteFile(it) }
+            paste.id?.let { r2Service.deleteFile(it) } ?: println("Failed to delete paste with id ${paste.id}")
         }
     }
 }

@@ -2,7 +2,6 @@
   import { severes, warnings } from "$lib/stores.ts";
   import type { Issue } from "$lib/issue";
   import Header from "./Header.svelte";
-  import { onMount } from "svelte";
   import Pulltab from "./pulltab/Pulltab.svelte";
 
   let severIssues: Array<Issue> = $severes;

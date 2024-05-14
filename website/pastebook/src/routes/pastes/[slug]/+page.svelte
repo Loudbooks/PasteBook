@@ -6,7 +6,7 @@
     import {severes, warnings, pasteURL, loadProgress} from "$lib/stores";
     import {formatTimeSince} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
-    import {tick} from 'svelte';
+    import {onMount, tick} from 'svelte';
     import SVGPasteBook from "../../../components/SVGPasteBook.svelte";
 
     export let data
@@ -51,12 +51,14 @@
     let title = ""
     let reportBook = false
     let wrap = false
+    let hashedIP = ""
 
     metadata.then((data) => {
         created = new Date(data.created)
         title = data.title
         reportBook = data.reportBook
         wrap = data.wrap
+        hashedIP = data.user.hashedIP
 
         const reloadTime = () => {
             timeSinceStr = formatTimeSince(created)
@@ -67,13 +69,75 @@
         clearInterval(clear)
         clear = setInterval(reloadTime, 1000)
     });
+
+    let x = null;
+    let y = null;
+
+    onMount(() => {
+        document.addEventListener('mousemove', onMouseUpdate, false);
+        document.addEventListener('mouseenter', onMouseUpdate, false);
+
+        function onMouseUpdate(e) {
+            x = e.pageX;
+            y = e.pageY;
+        }
+    });
+
+    let isShifting = false
+
+    onMount(() => {
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Shift") {
+                isShifting = true
+
+                let hoveredElement = document.elementFromPoint(x, y).parentElement.parentElement
+
+                if (hoveredElement.id === "hoverable") {
+                    handler()
+                }
+            }
+        })
+
+        window.addEventListener("keyup", (e) => {
+            if (e.key === "Shift") {
+                isShifting = false
+            }
+        })
+    })
+
+    function handler() {
+        if (!isShifting) {
+            return
+        }
+
+        let idElement = document.getElementById("hash")
+        idElement.style.opacity = 1
+
+        if (window.innerWidth < 600) {
+            idElement.style.height = "7px"
+        } else {
+            idElement.style.height = "13px"
+        }
+    }
+    
+    function undoHandler() {
+        let idElement = document.getElementById("hash")
+
+        idElement.style.opacity = 0
+        idElement.style.height = "0"
+    }
 </script>
 
 <main>
-    <div></div>
+    <div id="padding-container">
+        <div id="padding"></div>
+    </div>
     <SVGPasteBook/>
     <Mode/>
-    <Header title="{title}" created="{timeSinceStr}"></Header>
+    <div id="hoverable" on:mouseenter={handler} on:mouseleave={undoHandler} role="tooltip">
+        <Header title="{title}" created="{timeSinceStr}"></Header>
+        <p id="hash">{hashedIP}</p>
+    </div>
     {#await promise then response}
         <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
 
@@ -86,11 +150,27 @@
 </main>
 
 <style lang="scss">
-  div {
+  #padding {
     padding-top: 10px + 30px;
 
     @media (max-width: 600px) {
       padding-top: 7px + 20px;
+    }
+  }
+
+  #hash {
+    transition: transform 0.3s, opacity 0.2s, height 0.3s;
+
+    padding-left: 30px;
+    margin: 0;
+    font-size: 13px;
+    font-family: Gabarito, sans-serif;
+    color: grey;
+    opacity: 0;
+    height: 0;
+
+    @media (max-width: 600px) {
+      font-size: 6px;
     }
   }
 </style>

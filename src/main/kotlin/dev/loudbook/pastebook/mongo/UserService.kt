@@ -1,7 +1,7 @@
 package dev.loudbook.pastebook.mongo
 
 import dev.loudbook.pastebook.IPUtils
-import dev.loudbook.pastebook.data.User
+import dev.loudbook.pastebook.data.user.User
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

@@ -1,6 +1,6 @@
 package dev.loudbook.pastebook.mongo
 
-import dev.loudbook.pastebook.data.User
+import dev.loudbook.pastebook.data.user.User
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 

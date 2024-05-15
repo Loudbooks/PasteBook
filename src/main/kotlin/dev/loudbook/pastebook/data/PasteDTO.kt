@@ -1,5 +1,6 @@
 package dev.loudbook.pastebook.data
 
+import dev.loudbook.pastebook.data.user.UserDTO
 import org.springframework.data.annotation.Id
 
 @Suppress("unused")

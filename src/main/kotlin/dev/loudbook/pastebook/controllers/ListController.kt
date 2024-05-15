@@ -2,7 +2,7 @@ package dev.loudbook.pastebook.controllers
 
 import com.google.gson.Gson
 import dev.loudbook.pastebook.BucketUtils
-import dev.loudbook.pastebook.data.UserDTO
+import dev.loudbook.pastebook.data.user.UserDTO
 import dev.loudbook.pastebook.mongo.PasteRepository
 import dev.loudbook.pastebook.mongo.UserService
 import io.github.bucket4j.Bucket

@@ -6,4 +6,5 @@ enum class ProfileResult {
     EMAIL_TAKEN,
     USERNAME_NOT_FOUND,
     INCORRECT_PASSWORD,
+    INVALID_EMAIL
 }

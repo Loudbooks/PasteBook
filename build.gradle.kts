@@ -25,6 +25,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("com.github.vladimir-bukhtoyarov:bucket4j-core:8.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("net.datafaker:datafaker:2.1.0")
@@ -33,6 +34,7 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.717")
     implementation("commons-codec:commons-codec:1.17.0")
     implementation("com.auth0:java-jwt:4.4.0")
+    testImplementation("org.springframework.security:spring-security-test")
 }
 
 dependencyManagement {

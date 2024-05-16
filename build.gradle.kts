@@ -35,6 +35,7 @@ dependencies {
     implementation("commons-codec:commons-codec:1.17.0")
     implementation("com.auth0:java-jwt:4.4.0")
     testImplementation("org.springframework.security:spring-security-test")
+    implementation("com.konghq:unirest-java:4.0.0-RC2")
 }
 
 dependencyManagement {

@@ -45,15 +45,18 @@ class ProfileService {
 
     fun processAccountCreation(username: String, email: String?, hashedPassword: String?, oAuth: Boolean = false): Result<String> {
         if (findPossibleProfile(username) != null) {
+            println("Username taken")
             return Result.failure(ProfileException(ProfileResult.USERNAME_TAKEN))
         }
 
         if (email != null) {
             if (findPossibleProfile(email) != null) {
+                println("Email taken")
                 return Result.failure(ProfileException(ProfileResult.EMAIL_TAKEN))
             }
 
-            if (!email.contains('@') || !email.contains('.')) {
+            if (!oAuth && (!email.contains('@') || !email.contains('.'))) {
+                println("Invalid email")
                 return Result.failure(ProfileException(ProfileResult.INVALID_EMAIL))
             }
         }

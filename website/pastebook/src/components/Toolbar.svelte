@@ -1,11 +1,16 @@
 <script lang="ts">
     import {onMount} from "svelte";
+    import type {Profile} from "$lib/profile";
+
+    export let profile: Profile;
 
     onMount(() => {
         const toolbar = document.querySelector('toolbar') as HTMLElement;
 
         toolbar.style.transform = 'translate(10px, 0)';
         toolbar.style.opacity = '1';
+
+        console.log(document.cookie)
     });
 
     function newPaste() {

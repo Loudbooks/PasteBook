@@ -2,6 +2,7 @@ package dev.loudbook.pastebook
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.support.GenericApplicationContext
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
@@ -10,7 +11,8 @@ import java.nio.file.Paths
 import java.util.*
 import java.util.function.Supplier
 
-@SpringBootApplication
+
+@SpringBootApplication(exclude = [SecurityAutoConfiguration::class])
 @EnableMongoRepositories
 class PasteBookApplication
 

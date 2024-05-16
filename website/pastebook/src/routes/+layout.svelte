@@ -1,8 +1,11 @@
 <script>
     import Toolbar from "../components/Toolbar.svelte";
+
+    export let data;
+    const { profile } = data;
 </script>
 
 <main>
-    <Toolbar></Toolbar>
+    <Toolbar profile={profile}></Toolbar>
     <slot></slot>
 </main>

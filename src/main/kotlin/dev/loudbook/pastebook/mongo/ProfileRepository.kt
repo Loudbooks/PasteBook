@@ -8,6 +8,6 @@ interface ProfileRepository : MongoRepository<Profile, String> {
     @Query("{ 'username' : ?0 }")
     fun findByUsername(username: String): Profile?
 
-    @Query("{ 'email' : ?0 }")
-    fun findByEmail(email: String): Profile?
+    @Query("{ '_id' : ?0 }")
+    fun findByEmail(id: String): Profile?
 }

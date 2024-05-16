@@ -2,19 +2,31 @@ package dev.loudbook.pastebook.controllers.profile
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import dev.loudbook.pastebook.data.user.profile.ProfileService
 import jakarta.servlet.http.HttpServletRequest
+import kong.unirest.Unirest
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.*
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.client.RestTemplate
-import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/api/profile")
 class ProfileController {
     @Autowired
     lateinit var profileService: ProfileService
+
+    @Value("\${jwt.secret}")
+    private lateinit var secret: String
+
+    @Value("\${discord.client-id}")
+    private lateinit var discordClientId: String
+
+    @Value("\${discord.client-secret}")
+    private lateinit var discordClientSecret: String
 
     @PostMapping("/signup")
     fun signup(request: HttpServletRequest): ResponseEntity<String> {
@@ -55,45 +67,48 @@ class ProfileController {
         }
     }
 
-    @PostMapping("/login/discord")
+    @GetMapping("/login/discord")
     fun loginDiscord(@RequestParam code: String, request: HttpServletRequest): ResponseEntity<String> {
-        val restTemplate = RestTemplate()
-        val headers = HttpHeaders()
-        headers.contentType = MediaType.APPLICATION_FORM_URLENCODED
+        val response = Unirest.post("https://discord.com/api/oauth2/token")
+            .header("Content-Type", "application/x-www-form-urlencoded")
+            .basicAuth(discordClientId, discordClientSecret)
+            .field("grant_type", "authorization_code")
+            .field("code", code)
+            .field("redirect_uri", "http://localhost:5173/login/discord")
+            .field("client_id", discordClientId)
+            .field("client_secret", discordClientSecret)
+            .field("scope", "identify")
+            .asString()
 
-        val requestJson = JsonObject()
-        requestJson.addProperty("grant_type", "authorization_code")
-        requestJson.addProperty("code", code)
-        requestJson.addProperty("redirect_uri", "https://pastebook.dev/api/profile/login/discord")
+        val accessToken = try {
+            JsonParser.parseString(response.body).asJsonObject.get("access_token").asString
+        } catch (e: NullPointerException) {
+            return ResponseEntity.badRequest().body("Invalid Discord response")
+        }
 
-        val response = Gson().toJsonTree(restTemplate.exchange(
-            UriComponentsBuilder.fromHttpUrl("https://discord.com/api/oauth2/token")
-                .toUriString(),
-            HttpMethod.POST,
-            HttpEntity(requestJson.toString(), headers),
-            String::class.java))
-
-        val accessToken = response.asJsonObject.get("access_token").asString
         val dataRequestHeaders = HttpHeaders()
         dataRequestHeaders.contentType = MediaType.APPLICATION_FORM_URLENCODED
         dataRequestHeaders.set("Authorization", "Bearer $accessToken")
 
-        val dataRequestEntity: HttpEntity<Any> = HttpEntity(dataRequestHeaders)
-        val dataResponse = Gson().toJsonTree(restTemplate.exchange(
-            UriComponentsBuilder.fromHttpUrl("https://discord.com/api/users/@me")
-                .toUriString(),
-            HttpMethod.GET,
-            dataRequestEntity,
-            String::class.java))
+        val dataResponse = Unirest.get("https://discord.com/api/users/@me")
+            .header("Authorization ", "Bearer $accessToken")
+            .asString()
 
-        val id = dataResponse.asJsonObject.get("id").asString
+        val json = try {
+            JsonParser.parseString(dataResponse.body).asJsonObject
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().body("Invalid Discord response")
+        }
+
+        val id = json.get("id").asString
             ?: return ResponseEntity.badRequest().body("Invalid Discord response")
-        val username = dataResponse.asJsonObject.get("username").asString
+        val username = json.get("username").asString
             ?: return ResponseEntity.badRequest().body("Invalid Discord response")
 
-        if (profileService.findPossibleProfile(id) != null) {
-            return ResponseEntity.ok().body(profileService.processLogin(id).getOrNull())
+        if (profileService.findPossibleProfile(id) != null || profileService.findPossibleProfile(username) != null) {
+            val processedResult = profileService.processLogin(id)
 
+            return ResponseEntity.ok().body(processedResult.getOrNull())
         }
 
         val result = profileService.processAccountCreation(username, id, null, true)

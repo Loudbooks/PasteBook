@@ -29,9 +29,9 @@
     <h1 id="title">Log In</h1>
     <div id="options">
         <div id="login-basic">
-            <NamedInput name="Username or Email" index={0}/>
+            <NamedInput name="Username or Email" index={0} type="username"/>
             <div id="spacer"/>
-            <NamedInput name="Password" index={1}/>
+            <NamedInput name="Password" index={1} type="password"/>
             <div id="spacer"/>
         </div>
         <div id="border">
@@ -91,7 +91,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    //position: absolute;
     width: 100%;
     top: 0;
     gap: 250px;
@@ -143,6 +142,10 @@
     margin: 0;
     font-family: Gabarito, sans-serif;
     font-weight: 900;
+
+    :global(.dark-mode) & {
+      color: white;
+    }
   }
 
   /*

@@ -1,11 +1,12 @@
 <script lang="ts">
     export let name: string
     export let index: number
+    export let type: string = "text"
 </script>
 
 <div id="container">
     <p>{name}</p>
-    <input type="text" id="login-input" class="input-index-{index}" />
+    <input type="{type}" id="login-input" class="input-index-{index}" />
 </div>
 
 <style lang="scss">

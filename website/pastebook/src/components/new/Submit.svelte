@@ -16,7 +16,6 @@
 
         setTimeout(() => {
           submit.style.opacity = "1"
-          submit.style.transform = "translateY(0)"
         }, 400)
     });
 
@@ -136,14 +135,14 @@
       background-color: #eeeeee;
       color: black;
       text-decoration: none;
-      border: 1px solid #c9c9c9;
+      border: 2px solid #c9c9c9;
 
       opacity: 0;
-      transform: translateY(30%);
+      transform: scale(1);
 
       :global(.dark-mode) & {
         background-color: #1a1a1a;
-        border: 1px solid #333;
+        border: 2px solid #333;
         color: white;
       }
 
@@ -153,18 +152,18 @@
         cursor: not-allowed;
       }
 
+      &:active {
+        transform: scale(0.96);
+      }
+
       &:hover:not(.loading) {
-        background-color: #cfcfcf;
+        background-color: #e0e0e0;
 
         :global(.dark-mode) & {
           background-color: #333;
         }
 
         cursor: pointer;
-      }
-
-      &:active {
-        transform: scale(0.96);
       }
     }
 

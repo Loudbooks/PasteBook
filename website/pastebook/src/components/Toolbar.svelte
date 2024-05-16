@@ -54,10 +54,10 @@
     justify-content: space-between;
 
     color: gray;
-    border: 1px solid #c9c9c9;
+    outline: 2px solid #c9c9c9;
 
     :global(.dark-mode) & {
-      border: 1px solid #333;
+      outline: 2px solid #333;
       background-color: #1a1a1a;
     }
 

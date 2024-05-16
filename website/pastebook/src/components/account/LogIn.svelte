@@ -60,14 +60,14 @@
         </div>
         <div id="login-withs">
             <div id="button-container">
-                <a id="discord" href="login/discord">
+                <a id="discord" href="https://discord.com/oauth2/authorize?client_id=1240490933376647220&response_type=code&redirect_uri=https%3A%2F%2Fpastebook.dev%2Fapi%2Fprofile%2Flogin%2Fdiscord&scope=identify">
                     <img src={discord} alt="Log in with Discord" width="40px" height="40px"/>
                     Log in with Discord
                 </a>
             </div>
             <div id="spacer-exclude"/>
             <div id="button-container">
-                <a id="google" href="login/google">
+                <a id="google" href="https://discord.com/oauth2/authorize?client_id=1240490933376647220&response_type=code&redirect_uri=https%3A%2F%2Fpastebook.dev%2Fapi%2Fprofile%2Flogin%2Fdiscord&scope=identify">
                     <img src={google} alt="Log in with Google" width="40px" height="40px"/>
                     Log in with Google
                 </a>

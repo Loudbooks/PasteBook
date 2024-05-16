@@ -181,7 +181,7 @@
     text-decoration: none;
     color: white;
     font-family: Gabarito, sans-serif;
-    font-weight: 900;
+    font-weight: 450;
     font-size: 19px;
     border-radius: 23px;
     transition: background-color 0.5s ease, transform 0.5s ease;

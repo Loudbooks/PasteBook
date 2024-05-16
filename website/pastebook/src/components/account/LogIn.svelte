@@ -46,6 +46,18 @@
                       stroke-width="1"/>
             </svg>
         </div>
+        <div id="border-horizontal">
+            <svg id="Border" xmlns="http://www.w3.org/2000/svg" width="430" height="24" viewBox="0 0 430 24">
+                <line id="Line_1" data-name="Line 1" x2="193" transform="translate(0 12)" fill="none" stroke="#707070"
+                      stroke-width="1"/>
+                <text id="or" transform="translate(215 -5)" fill="#707070" font-size="25" font-family="Gabarito"
+                      font-weight="600">
+                    <tspan x="-11.492" y="24">or</tspan>
+                </text>
+                <line id="Line_7" data-name="Line 7" x2="193" transform="translate(237 12)" fill="none" stroke="#707070"
+                      stroke-width="1"/>
+            </svg>
+        </div>
         <div id="login-withs">
             <div id="button-container">
                 <a id="discord" href="login/discord">
@@ -80,10 +92,18 @@
 
   #spacer {
     height: 76px;
+
+    @media (max-width: 800px) {
+      height: 27.5px;
+    }
   }
 
   #spacer-exclude {
     height: calc(76px + 27.5px);
+
+    @media (max-width: 800px) {
+      height: calc(27.5px + 27.5px);
+    }
   }
 
   #options {
@@ -93,7 +113,16 @@
     height: 100%;
     width: 100%;
     top: 0;
-    gap: 250px;
+    gap: 300px;
+
+    @media (max-width: 1100px) {
+      gap: 100px;
+    }
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 
   #login-basic {
@@ -106,6 +135,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 800px) {
+      padding: 205px 20px 20px;
+      width: 80%;
+    }
   }
 
   #login-withs {
@@ -118,6 +152,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 800px) {
+      padding: 20px 20px 20px;
+      width: 80%;
+    }
   }
 
   #border {
@@ -128,6 +167,18 @@
     top: 50%;
     transform: translate(-50%, -40%);
     overflow: hidden;
+
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  #border-horizontal {
+    transform: scale(0.6);
+
+    @media (min-width: 800px) {
+      display: none;
+    }
   }
 
   #title {
@@ -145,6 +196,10 @@
 
     :global(.dark-mode) & {
       color: white;
+    }
+
+    @media (max-width: 800px) {
+      font-size: 50px;
     }
   }
 

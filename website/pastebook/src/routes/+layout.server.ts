@@ -1,17 +1,13 @@
-import {parseJwt} from "$lib/jwthandler";
-
 export async function load({ cookies }) {
     let token = cookies.get('token');
+    let username = cookies.get('username');
+    let id = cookies.get('id');
 
-    if (token == null) {
+    if (token == null || username == null || id == null) {
         return {
             profile: null
         }
     }
-
-    let decoded = parseJwt(token);
-    let id = decoded.id;
-    let username = decoded.username;
 
     return {
         profile: {

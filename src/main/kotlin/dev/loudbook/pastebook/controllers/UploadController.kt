@@ -6,6 +6,8 @@ import dev.loudbook.pastebook.Discord
 import dev.loudbook.pastebook.IPUtils
 import dev.loudbook.pastebook.data.PastePrivateDTO
 import dev.loudbook.pastebook.data.R2Service
+import dev.loudbook.pastebook.data.RedisService
+import dev.loudbook.pastebook.data.user.profile.ProfileService
 import dev.loudbook.pastebook.mongo.PasteRepository
 import dev.loudbook.pastebook.mongo.UserService
 import io.github.bucket4j.Bucket
@@ -32,6 +34,12 @@ class UploadController {
 
     @Autowired
     lateinit var userService: UserService
+
+    @Autowired
+    lateinit var profileService: ProfileService
+
+    @Autowired
+    lateinit var redisService: RedisService
 
     private val faker = Faker()
     private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)

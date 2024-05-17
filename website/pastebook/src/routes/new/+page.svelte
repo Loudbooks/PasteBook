@@ -14,7 +14,7 @@
 <main>
     <div></div>
     <Mode/>
-    <Header newReport="true" class="header"></Header>
+    <Header newReport="true"></Header>
     <Content newReport="true"></Content>
     <Pulltab title="Upload Options">
         <svelte:fragment slot="content">

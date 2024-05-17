@@ -1,8 +1,7 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import type {Profile} from "$lib/profile";
 
-    export let profile: Profile;
+    export let isLogged: boolean;
 
     onMount(() => {
         const toolbar = document.querySelector('toolbar') as HTMLElement;
@@ -24,18 +23,73 @@
     function home() {
         window.location.href = '/';
     }
+
+    function profile() {
+        window.location.href = '/profile';
+    }
+
+    function logIn() {
+        window.location.href = '/login';
+    }
 </script>
 
-<toolbar>
-    <h1>PASTEBOOK</h1>
-    <buttons>
-        <button on:click={home}>HOME</button>
-        <button on:click={panel}>PANEL</button>
-        <button on:click={newPaste}>NEW</button>
-    </buttons>
-</toolbar>
+<div id="toolbar-container">
+    <toolbar>
+        <h1>PASTEBOOK</h1>
+        <buttons>
+            <button on:click={home}>HOME</button>
+            <button on:click={panel}>PANEL</button>
+            <button on:click={newPaste}>NEW</button>
+            {#if isLogged}
+                <button on:click={profile}>PROFILE</button>
+            {:else}
+                <button on:click={logIn}>LOGIN</button>
+            {/if}
+        </buttons>
+    </toolbar>
+</div>
+
 
 <style lang="scss">
+  #logged-in {
+    height: 50px;
+    width: 120px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 35px;
+    z-index: 998;
+    background-color: #eeeeee;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: gray;
+    outline: 2px solid #c9c9c9;
+
+    @media (max-width: 600px) {
+      height: 30px;
+      width: 60px;
+      right: 40px;
+      border-bottom-left-radius: 7px;
+      border-bottom-right-radius: 7px;
+    }
+
+    p {
+      font-size: 15px;
+      margin: 0;
+      padding: 0 0 0 10px;
+      font-family: Gabarito, sans-serif;
+      position: absolute;
+      bottom: 0;
+        transform: translate(50%, 0);
+      font-weight: 500;
+
+      @media (max-width: 600px) {
+        font-size: 7px;
+        padding: 0 0 0 5px;
+      }
+    }
+  }
+
   toolbar {
     z-index: 999;
 

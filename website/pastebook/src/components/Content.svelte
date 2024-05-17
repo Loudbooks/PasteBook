@@ -142,7 +142,7 @@
     }
 
     :global(.dark-mode) & {
-      border: 2px solid #333;
+      outline: 2px solid #333;
       background-color: #1a1a1a;
     }
 

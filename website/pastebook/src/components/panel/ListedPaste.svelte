@@ -55,17 +55,17 @@
     border: 1px solid #c9c9c9;
 
     &:hover {
-      background-color: #cfcfcf;
+      background-color: #e0e0e0;
 
       :global(.dark-mode) & {
-        background-color: #333;
+        background-color: #141414;
       }
 
       cursor: pointer;
     }
 
     &:active {
-      transform: scale(0.995);
+      transform: scale(0.99);
     }
 
     :global(.dark-mode) & {

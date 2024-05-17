@@ -15,7 +15,7 @@
         let submit = document.getElementsByClassName("submit")[0] as HTMLElement
 
         setTimeout(() => {
-          submit.style.opacity = "1"
+            submit.style.opacity = "1"
         }, 400)
     });
 
@@ -152,6 +152,8 @@
         cursor: not-allowed;
       }
 
+      animation: fadeIn 0.5s ease forwards;
+
       &:active {
         transform: scale(0.96);
       }
@@ -160,7 +162,7 @@
         background-color: #e0e0e0;
 
         :global(.dark-mode) & {
-          background-color: #333;
+          background-color: #141414;
         }
 
         cursor: pointer;
@@ -173,17 +175,26 @@
   }
 
   @keyframes blink {
-      0% {
-        opacity: 0.5;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.02);
-      }
-      100% {
-        opacity: 0.5;
-        transform: scale(1);
-      }
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
     }
+    50% {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 </style>

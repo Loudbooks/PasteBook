@@ -6,7 +6,7 @@
     onMount(() => {
         let content = document.querySelector("content") as HTMLDivElement;
 
-        content.style.top = `calc(100% + ${(content.clientHeight / 2) + 1}px)`;
+        content.style.top = `calc(100% + ${(content.clientHeight / 2) + 2}px)`;
     });
 
     let open = false;
@@ -19,7 +19,7 @@
         let tab = document.querySelector(".tab") as HTMLButtonElement;
 
         if (open) {
-            content.style.top = `calc(100% + ${(content.clientHeight / 2) + 1}px)`;
+            content.style.top = `calc(100% + ${(content.clientHeight / 2) + 2}px)`;
 
             blur.style.backgroundColor = "rgba(0, 0, 0, 0)"
 
@@ -64,7 +64,7 @@
     background-color: rgba(0, 0, 0, 0);
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 1000;
     outline: none;
     border: none;
     display: none;
@@ -90,9 +90,9 @@
     color: black;
     z-index: 3;
 
-    border-left: 1px solid #c9c9c9;
-    border-right: 1px solid #c9c9c9;
-    border-top: 1px solid #c9c9c9;
+    border-left: 2px solid #c9c9c9;
+    border-right: 2px solid #c9c9c9;
+    border-top: 2px solid #c9c9c9;
     border-bottom: none;
 
     animation: fadeIn 0.6s ease;
@@ -100,9 +100,9 @@
     background-color: #eeeeee;
 
     :global(body.dark-mode) & {
-      border-top: 1px solid #333;
-      border-left: 1px solid #333;
-      border-right: 1px solid #333;
+      border-top: 2px solid #333;
+      border-left: 2px solid #333;
+      border-right: 2px solid #333;
       border-bottom: none;
 
       background-color: #1a1a1a;
@@ -111,19 +111,19 @@
 
     :hover & {
       &.non-active {
-        background-color: rgb(200, 200, 200, 1);
+        background-color: #e0e0e0;
+
+        :global(.dark-mode) & {
+          background-color: #141414;
+        }
 
         top: -32px;
-
-        :global(body.dark-mode) & {
-          background-color: rgb(40, 40, 40, 1);
-        }
       }
     }
   }
 
   content {
-    z-index: 3;
+    z-index: 1001;
     width: 65vw;
     position: fixed;
     top: 120%;
@@ -135,10 +135,10 @@
       width: 91vw;
     }
 
-    border: 1px solid #c9c9c9;
+    border: 2px solid #c9c9c9;
 
     :global(body.dark-mode) & {
-      border: 1px solid #333;
+      border: 2px solid #333;
       background-color: #1a1a1a;
     }
 

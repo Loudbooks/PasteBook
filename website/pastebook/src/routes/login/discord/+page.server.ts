@@ -28,8 +28,15 @@ export async function load({ url, cookies }) {
         });
     }
 
-    const token= await response.text()
+    const jsonResponse: any = await response.json()
+
+    const token: string = jsonResponse.token
+    const username: string = jsonResponse.username
+    const id: string = jsonResponse.identification
+
     cookies.set('token', token, {path: '/'})
+    if (username != null) cookies.set('username', username, {path: '/'})
+    cookies.set('id', id, {path: '/'})
 
     redirect(301, '/panel')
 }

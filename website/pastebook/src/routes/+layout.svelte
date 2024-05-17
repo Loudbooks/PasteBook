@@ -6,6 +6,6 @@
 </script>
 
 <main>
-    <Toolbar profile={profile}></Toolbar>
+    <Toolbar isLogged={profile != null}></Toolbar>
     <slot></slot>
 </main>

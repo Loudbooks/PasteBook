@@ -3,7 +3,7 @@ package dev.loudbook.pastebook.data.user.profile
 import org.springframework.data.annotation.Id
 
 data class Profile(
-    @Id val identifier: String?,
+    @Id val identifier: String,
     val username: String,
     val password: ByteArray?,
     val salt: String?,

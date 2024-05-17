@@ -3,6 +3,8 @@ package dev.loudbook.pastebook.controllers.profile
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import dev.loudbook.pastebook.data.RedisService
+import dev.loudbook.pastebook.data.user.profile.ProfileDTO
 import dev.loudbook.pastebook.data.user.profile.ProfileService
 import jakarta.servlet.http.HttpServletRequest
 import kong.unirest.Unirest
@@ -19,8 +21,8 @@ class ProfileController {
     @Autowired
     lateinit var profileService: ProfileService
 
-    @Value("\${jwt.secret}")
-    private lateinit var secret: String
+    @Autowired
+    lateinit var redisService: RedisService
 
     @Value("\${discord.client-id}")
     private lateinit var discordClientId: String
@@ -42,7 +44,7 @@ class ProfileController {
 
         val result = profileService.processAccountCreation(username, email, password)
         return if (result.isSuccess) {
-            ResponseEntity.ok().body(result.getOrNull())
+            ResponseEntity.ok().body(ProfileDTO(result.getOrThrow(), email, username).toJson())
         } else {
             ResponseEntity.badRequest().body(result.exceptionOrNull()?.message)
         }
@@ -61,7 +63,9 @@ class ProfileController {
 
         val result = profileService.processLogin(identification, password)
         return if (result.isSuccess) {
-            ResponseEntity.ok().body(result.getOrNull())
+            val username = profileService.findPossibleProfile(identification)?.username ?: return ResponseEntity.badRequest().body("Invalid identification")
+
+            ResponseEntity.ok().body(ProfileDTO(result.getOrThrow(), identification, username).toJson())
         } else {
             ResponseEntity.badRequest().body(result.exceptionOrNull()?.message)
         }
@@ -108,13 +112,13 @@ class ProfileController {
         if (profileService.findPossibleProfile(id) != null || profileService.findPossibleProfile(username) != null) {
             val processedResult = profileService.processLogin(id)
 
-            return ResponseEntity.ok().body(processedResult.getOrNull())
+            return ResponseEntity.ok().body(ProfileDTO(processedResult.getOrThrow(), id, username).toJson())
         }
 
         val result = profileService.processAccountCreation(username, id, null, true)
 
         return if (result.isSuccess) {
-            ResponseEntity.ok().body(result.getOrNull())
+            ResponseEntity.ok().body(ProfileDTO(result.getOrThrow(), id, username).toJson())
         } else {
             ResponseEntity.badRequest().body(result.exceptionOrNull()?.message)
         }
@@ -128,13 +132,10 @@ class ProfileController {
             return ResponseEntity.badRequest().body("Invalid JSON")
         }
 
-        val jwt = request.getHeader("Authorization") ?: return ResponseEntity.badRequest().body("Missing JWT")
-        if (!profileService.validateToken(jwt)) {
-            return ResponseEntity.badRequest().body("Invalid JWT")
-        }
+        val token = request.getHeader("Authorization") ?: return ResponseEntity.badRequest().body("Missing authorization header")
 
-        val id = profileService.decodeToken(jwt).getClaim("id").asString()
-        var currentUser = profileService.findPossibleProfile(id) ?: return ResponseEntity.badRequest().body("Invalid JWT")
+        val id = redisService.getToken(token) ?: return ResponseEntity.badRequest().body("Invalid authorization header")
+        var currentUser = profileService.findPossibleProfile(id) ?: return ResponseEntity.badRequest().body("Invalid authorization header")
 
         if (json.has("username")) {
             val username = json.get("username").asString
@@ -160,20 +161,20 @@ class ProfileController {
             currentUser = currentUser.copy(password = profileService.saltPassword(password, newSalt), salt = newSalt)
         }
 
-        return ResponseEntity.ok().body(profileService.updateProfile(currentUser).toString())
+        redisService.deleteToken(token)
+
+        return ResponseEntity.ok().body(ProfileDTO(profileService.updateProfile(currentUser), currentUser.identifier, currentUser.username).toJson())
     }
 
     @DeleteMapping("/delete")
     fun deleteProfile(request: HttpServletRequest): ResponseEntity<String> {
-        val jwt = request.getHeader("Authorization") ?: return ResponseEntity.badRequest().body("Missing JWT")
-        if (!profileService.validateToken(jwt)) {
-            return ResponseEntity.badRequest().body("Invalid JWT")
-        }
+        val token = request.getHeader("Authorization") ?: return ResponseEntity.badRequest().body("Missing authorization header")
 
-        val id = profileService.decodeToken(jwt).getClaim("id").asString()
-        val currentUser = profileService.findPossibleProfile(id) ?: return ResponseEntity.badRequest().body("Invalid JWT")
+        val id = redisService.getToken(token) ?: return ResponseEntity.badRequest().body("Invalid authorization header")
+        val currentUser = profileService.findPossibleProfile(id) ?: return ResponseEntity.badRequest().body("Invalid authorization header")
 
         profileService.deleteProfile(currentUser)
-        return ResponseEntity.ok().body("Deleted")
+        redisService.deleteToken(token)
+        return ResponseEntity.ok().body(null)
     }
 }

@@ -1,5 +1,6 @@
 import {type Writable, writable} from "svelte/store";
 import type {Issue} from "$lib/issue";
+import type {Profile} from "$lib/profile";
 
 export const loadProgress = writable(0);
 
@@ -14,3 +15,5 @@ export const pasteURL = writable("");
 
 export const wrap = writable(false);
 export const unlisted = writable(false);
+
+export const currentProfile: Writable<Profile> = writable( {id: "", username: ""});

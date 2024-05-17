@@ -1,16 +1,16 @@
 package dev.loudbook.pastebook.data
 
+import io.lettuce.core.RedisClient
+import io.lettuce.core.api.async.RedisAsyncCommands
 import jakarta.annotation.PostConstruct
-import org.redisson.Redisson
-import org.redisson.api.RedissonClient
-import org.redisson.config.Config
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.time.Duration
 
 @Service
 class RedisService {
-    private var redis: RedissonClient? = null
+    private var redis: RedisClient? = null
+    private var asyncCommands: RedisAsyncCommands<String, String>? = null
 
     @Value("\${redis.uri}")
     private val uri: String? = null
@@ -18,28 +18,28 @@ class RedisService {
     @PostConstruct
     fun init() {
         try {
-            val config = Config()
-            config.useSingleServer().address = uri
+            redis = RedisClient.create(uri)
 
-            redis = Redisson.create(config)
+            asyncCommands = redis?.connect()?.async()
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     fun cacheToken(token: String, id: String) {
-        redis?.getBucket<String>(token)?.set(id, Duration.ofDays(7))
+        asyncCommands?.set(token, id)
+        asyncCommands?.expire(token, Duration.ofDays(7))
     }
 
     fun renewToken(token: String) {
-        redis?.getBucket<String>(token)?.expire(Duration.ofDays(7))
+        asyncCommands?.expire(token, Duration.ofDays(7))
     }
 
     fun getToken(token: String): String? {
-        return redis?.getBucket<String>(token)?.get()
+        return asyncCommands?.get(token)?.get()
     }
 
     fun deleteToken(token: String) {
-        redis?.getBucket<String>(token)?.delete()
+        asyncCommands?.del(token)
     }
 }

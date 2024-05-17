@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.keygen.KeyGenerators
 import org.springframework.stereotype.Service
 import java.security.SecureRandom
+import java.util.*
 
 @Service
 class ProfileService {
@@ -80,13 +81,17 @@ class ProfileService {
     }
 
     fun generateToken(id: String): String {
-        val random = SecureRandom()
-        val bytes = ByteArray(20)
-        random.nextBytes(bytes)
+        val secureRandom = SecureRandom()
+        val encoder = Base64.getUrlEncoder()
 
-        redisService.cacheToken(bytes.toString(), id)
+        val randomBytes = ByteArray(24)
+        secureRandom.nextBytes(randomBytes)
 
-        return bytes.toString()
+        val token = encoder.encodeToString(randomBytes)
+
+        redisService.cacheToken(token, id)
+
+        return token
     }
 
     fun findPossibleProfile(identification: String): Profile? {

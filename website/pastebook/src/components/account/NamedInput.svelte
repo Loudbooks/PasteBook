@@ -4,6 +4,7 @@
     export let type: string = "text"
     export let fieldID: string = "login-input"
     export let onTypeHandler: (data: string) => void = () => {};
+    export let submitButtonHandler: () => void = undefined;
 
     let currentData = ""
 
@@ -17,7 +18,14 @@
 
 <div id="container" class="{fieldID}">
     <p>{name}</p>
-    <input type="{type}" id="login-input" class="input-index-{index}" on:input={onType} />
+    {#if submitButtonHandler !== undefined}
+        <div>
+            <input type="{type}" id="login-input" class="input-index-{index} in-div" on:input={onType}>
+            <button on:click={submitButtonHandler}>SUBMIT</button>
+        </div>
+    {:else}
+        <input type="{type}" id="login-input" class="input-index-{index}" on:input={onType}/>
+    {/if}
 </div>
 
 <style lang="scss">
@@ -60,6 +68,46 @@
     }
 
     &:focus {
+      background-color: #e0e0e0;
+
+      :global(.dark-mode) & {
+        background-color: #141414;
+      }
+    }
+  }
+
+  .in-div {
+    width: calc(100% - 120px);
+  }
+
+  button {
+    all: unset;
+
+    transition: outline 0.3s ease, transform 0.3s ease, background-color 0.5s ease;
+
+    outline: 3px solid #c9c9c9;
+    background-color: #eeeeee;
+    border-radius: 20px;
+    width: 68px;
+    height: 60px;
+    font-family: Gabarito, sans-serif;
+    font-weight: 800;
+    color: gray;
+    font-size: 15px;
+    margin-left: 12px;
+    text-align: center;
+    position: absolute;
+
+    :global(.dark-mode) & {
+      outline: 3px solid #333333;
+      background-color: #1a1a1a;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:hover {
       background-color: #e0e0e0;
 
       :global(.dark-mode) & {

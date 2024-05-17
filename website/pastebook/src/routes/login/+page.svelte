@@ -31,7 +31,7 @@
         <div id="login-basic">
             <NamedInput name="Username or Email" index={0} type="username"/>
             <div id="spacer"/>
-            <NamedInput name="Password" index={1} type="password"/>
+            <NamedInput name="Password" index={1} type="password" submitButtonHandler={function () {}}/>
             <div id="spacer"/>
         </div>
         <div id="border">

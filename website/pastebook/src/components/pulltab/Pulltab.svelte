@@ -116,7 +116,11 @@
         :global(.dark-mode) & {
           background-color: #141414;
         }
+      }
+    }
 
+    :active & {
+      &.non-active {
         top: -32px;
       }
     }

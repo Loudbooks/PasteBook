@@ -33,12 +33,50 @@
             if (confirmPassword != "" && password != "")
                 (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "green");
             else {
-                if (document.body.classList.contains("dark-mode"))
-                    (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "#333333");
-                else
-                    (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "#c9c9c9");
+                resetColor("confirm-password");
             }
         }
+    }
+
+    function onEmailType() {
+        if (email == "") {
+            resetColor("email");
+            return
+        }
+
+        if (isValidEmail(email)) {
+            (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "green");
+        } else {
+            (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+        }
+    }
+
+    function onUsernameType() {
+        if (username == "") {
+            resetColor("username");
+            return
+        }
+
+        if (isValidUsername(username)) {
+            (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "green");
+        } else {
+            (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+        }
+    }
+
+    function resetColor(clazz: string) {
+        if (document.body.classList.contains("dark-mode"))
+            (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#333333");
+        else
+            (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#c9c9c9");
+    }
+
+    function isValidEmail(email: string) {
+        return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+    }
+
+    function isValidUsername(username: string) {
+        return /^[a-zA-Z0-9_]{3,16}$/.test(username);
     }
 </script>
 
@@ -46,16 +84,16 @@
 <div id="forms-container">
     <div id="forms">
         <div id="username">
-            <NamedInput name="Username" type="text" fieldID="username" index={0} onTypeHandler={function (value) {username = value}} />
+            <NamedInput name="Username" type="text" fieldID="username" index={0} onTypeHandler={function (value) {username = value; onUsernameType()}} />
         </div>
         <div id="email">
-            <NamedInput name="Email" type="email" fieldID="email" index={1} onTypeHandler={function (value) {email = value}} />
+            <NamedInput name="Email" type="email" fieldID="email" index={1} onTypeHandler={function (value) {email = value; onEmailType()}} />
         </div>
         <div id="password">
             <NamedInput name="Password" type="password" fieldID="password" index={2} onTypeHandler={function (value) {password = value; onConfirmPasswordChange()}} />
         </div>
         <div id="confirm-password">
-            <NamedInput name="Confirm Password" type="password" fieldID="confirm-password" index={3} onTypeHandler={function (value) {confirmPassword = value; onConfirmPasswordChange()}} />
+            <NamedInput name="Confirm Password" type="password" fieldID="confirm-password" index={3} submitButtonHandler={function () {}} onTypeHandler={function (value) {confirmPassword = value; onConfirmPasswordChange()}} />
         </div>
     </div>
 </div>

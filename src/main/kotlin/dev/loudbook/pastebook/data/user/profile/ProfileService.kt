@@ -1,5 +1,6 @@
 package dev.loudbook.pastebook.data.user.profile
 
+import dev.loudbook.pastebook.EmailService
 import dev.loudbook.pastebook.data.RedisService
 import dev.loudbook.pastebook.mongo.ProfileRepository
 import org.apache.commons.codec.digest.DigestUtils
@@ -16,6 +17,9 @@ class ProfileService {
 
     @Autowired
     private lateinit var redisService: RedisService
+
+    @Autowired
+    private lateinit var emailService: EmailService
 
     fun processLogin(identification: String, password: String? = null): Result<String> {
         val profile = findPossibleProfile(identification)
@@ -104,5 +108,13 @@ class ProfileService {
 
     fun saltPassword(password: String, salt: String): ByteArray {
         return DigestUtils.sha256(password + salt)
+    }
+
+    fun requestEmailConfirmation(email: String): String {
+        val randomSixDigitCode = (100000..999999).random()
+        redisService.cacheEmailConfirmation(email, randomSixDigitCode.toString())
+        emailService.sendConfirmationEmail(email, randomSixDigitCode)
+
+        return randomSixDigitCode.toString()
     }
 }

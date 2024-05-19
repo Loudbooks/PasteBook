@@ -71,6 +71,24 @@ class ProfileController {
         }
     }
 
+    @GetMapping("/login/requestEmail")
+    fun requestEmail(request: HttpServletRequest): ResponseEntity<String> {
+        val json = try {
+            Gson().toJsonTree(request.reader.readText()) as JsonObject
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().body("Invalid JSON")
+        }
+
+        val email = json.get("email")?.asString ?: return ResponseEntity.badRequest().body("Missing email")
+
+        if (profileService.findPossibleProfile(email) != null) {
+            return ResponseEntity.badRequest().body("Email taken")
+        }
+
+        val result = profileService.requestEmailConfirmation(email)
+        return ResponseEntity.ok().body(result)
+    }
+
     @GetMapping("/login/discord")
     fun loginDiscord(@RequestParam code: String, request: HttpServletRequest): ResponseEntity<String> {
         val response = Unirest.post("https://discord.com/api/oauth2/token")

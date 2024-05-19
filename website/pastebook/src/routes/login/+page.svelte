@@ -62,7 +62,7 @@
             <div id="button-container">
                 <a id="discord"
                    href="https://discord.com/oauth2/authorize?client_id=1240490933376647220&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Flogin%2Fdiscord&scope=identify">
-                    <img src={discord} alt="Log in with Discord" width="40px" height="40px"/>
+                    <img src={discord} alt="Log in with Discord" width="30px" height="30px"/>
                     Log in with Discord
                 </a>
             </div>
@@ -70,7 +70,7 @@
             <div id="button-container">
                 <a id="google"
                    href="https://discord.com/oauth2/authorize?client_id=1240490933376647220&response_type=code&redirect_uri=https%3A%2F%2Fpastebook.dev%2Fapi%2Fprofile%2Flogin%2Fdiscord&scope=identify">
-                    <img src={google} alt="Log in with Google" width="40px" height="40px"/>
+                    <img src={google} alt="Log in with Google" width="30px" height="30px"/>
                     Log in with Google
                 </a>
             </div>
@@ -139,8 +139,12 @@
     justify-content: center;
     animation: fadeLeft 0.5s ease;
 
+    @media (max-width: 1100px) {
+      width: 400px;
+    }
+
     @media (max-width: 800px) {
-      padding: 205px 20px 20px;
+      padding: 150px 20px 20px;
       width: 80%;
 
       animation: fadeDown 0.5s ease;
@@ -159,6 +163,10 @@
     justify-content: center;
 
     animation: fadeRight 0.5s ease;
+
+    @media (max-width: 1100px) {
+      width: 400px;
+    }
 
     @media (max-width: 800px) {
       padding: 20px 20px 20px;
@@ -272,8 +280,9 @@
       vertical-align: middle;
       margin-right: 10px;
       position: absolute;
-      left: 15px;
-      top: 10px;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 

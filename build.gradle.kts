@@ -36,6 +36,8 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     implementation("com.konghq:unirest-java:4.0.0-RC2")
     implementation("io.lettuce:lettuce-core:6.3.2.RELEASE")
+    implementation("com.sun.mail:jakarta.mail:2.0.1")
+    implementation("org.playframework:play-mailer_2.13:10.0.0")
 }
 
 dependencyManagement {

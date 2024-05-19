@@ -113,6 +113,8 @@
       :global(.dark-mode) & {
         background-color: #141414;
       }
+
+      cursor: pointer;
     }
   }
 </style>

@@ -42,4 +42,13 @@ class RedisService {
     fun deleteToken(token: String) {
         asyncCommands?.del(token)
     }
+
+    fun cacheEmailConfirmation(email: String, id: String) {
+        asyncCommands?.set(email, id)
+        asyncCommands?.expire(email, Duration.ofMinutes(10))
+    }
+
+    fun getEmailConfirmation(email: String): String? {
+        return asyncCommands?.get(email)?.get()
+    }
 }

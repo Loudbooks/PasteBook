@@ -71,6 +71,25 @@
             (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#c9c9c9");
     }
 
+    function submitSignup() {
+        document.cookie = `cachedSignup=${JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+        })}`
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://localhost:25658/api/profile/login/requestEmail", true);
+
+        xhr.send(
+            JSON.stringify({
+                email: email,
+            })
+        )
+
+        window.location.href = '/signup/verify';
+    }
+
     function isValidEmail(email: string) {
         return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
     }
@@ -93,7 +112,7 @@
             <NamedInput name="Password" type="password" fieldID="password" index={2} onTypeHandler={function (value) {password = value; onConfirmPasswordChange()}} />
         </div>
         <div id="confirm-password">
-            <NamedInput name="Confirm Password" type="password" fieldID="confirm-password" index={3} submitButtonHandler={function () {}} onTypeHandler={function (value) {confirmPassword = value; onConfirmPasswordChange()}} />
+            <NamedInput name="Confirm Password" type="password" fieldID="confirm-password" index={3} submitButtonHandler={function () {submitSignup()}} onTypeHandler={function (value) {confirmPassword = value; onConfirmPasswordChange()}} />
         </div>
     </div>
 </div>
@@ -137,16 +156,50 @@
     animation: fadeLeft 0.5s ease;
 
     @media (max-width: 800px) {
-      padding: 205px 20px 20px;
+      padding: 150px 20px 20px;
       width: 80%;
 
       animation: fadeDown 0.5s ease;
     }
+
+    overflow: hidden;
   }
 
   #forms {
     display: flex;
     flex-direction: column;
     gap: 40px;
+  }
+
+  @keyframes fadeUp {
+    from {
+      transform: translate(0, 10%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeDown {
+    from {
+      transform: translate(0, -10%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>

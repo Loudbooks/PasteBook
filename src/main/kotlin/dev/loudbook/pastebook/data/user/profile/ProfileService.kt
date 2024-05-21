@@ -40,7 +40,7 @@ class ProfileService {
         return Result.success(generateToken(profile.identifier))
     }
 
-    fun processAccountCreation(username: String, email: String, hashedPassword: String?, oAuth: Boolean = false): Result<String> {
+    fun processAccountCreation(username: String, email: String, hashedPassword: String?, sixDigitCode: String?, oAuth: Boolean = false): Result<String> {
         if (findPossibleProfile(username) != null) {
             println("Username taken")
             return Result.failure(ProfileException(ProfileResult.USERNAME_TAKEN))
@@ -56,6 +56,13 @@ class ProfileService {
             return Result.failure(ProfileException(ProfileResult.INVALID_EMAIL))
         }
 
+        if (sixDigitCode != null) {
+            if (redisService.getEmailConfirmation(email) != sixDigitCode) {
+                println("Invalid code")
+                return Result.failure(ProfileException(ProfileResult.INVALID_CODE))
+            }
+        }
+
         val salt = if (!oAuth) {
             generateSalt()
         } else {
@@ -68,7 +75,7 @@ class ProfileService {
             null
         }
 
-        profileRepository.save(Profile(email, username, saltedPassword, salt, oAuth))
+        profileRepository.save(Profile(email, username, saltedPassword, salt, oAuth, true))
         val token = generateToken(email)
 
         return Result.success(token)

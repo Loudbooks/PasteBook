@@ -7,7 +7,8 @@ data class Profile(
     val username: String,
     val password: ByteArray?,
     val salt: String?,
-    val oAuth: Boolean
+    val oAuth: Boolean,
+    val verified: Boolean
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -20,6 +21,7 @@ data class Profile(
         if (!password.contentEquals(other.password)) return false
         if (salt != other.salt) return false
         if (oAuth != other.oAuth) return false
+        if (verified != other.verified) return false
 
         return true
     }

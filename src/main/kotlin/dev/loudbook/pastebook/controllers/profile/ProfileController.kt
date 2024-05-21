@@ -33,7 +33,7 @@ class ProfileController {
     @PostMapping("/signup")
     fun signup(request: HttpServletRequest): ResponseEntity<String> {
         val json = try {
-            Gson().toJsonTree(request.reader.readText()) as JsonObject
+            Gson().fromJson(request.reader.readText(), JsonObject::class.java)
         } catch (e: Exception) {
             return ResponseEntity.badRequest().body("Invalid JSON")
         }
@@ -41,8 +41,9 @@ class ProfileController {
         val username = json.get("username")?.asString ?: return ResponseEntity.badRequest().body("Missing username")
         val email = json.get("email")?.asString ?: return ResponseEntity.badRequest().body("Missing email")
         val password = json.get("password")?.asString ?: return ResponseEntity.badRequest().body("Missing password")
+        val sixDigitCode = json.get("code")?.asString ?: return ResponseEntity.badRequest().body("Missing verification code")
 
-        val result = profileService.processAccountCreation(username, email, password)
+        val result = profileService.processAccountCreation(username, email, password, sixDigitCode)
         return if (result.isSuccess) {
             ResponseEntity.ok().body(ProfileDTO(result.getOrThrow(), email, username).toJson())
         } else {
@@ -53,7 +54,7 @@ class ProfileController {
     @PostMapping("/login")
     fun login(request: HttpServletRequest): ResponseEntity<String> {
         val json = try {
-            Gson().toJsonTree(request.reader.readText()) as JsonObject
+            Gson().fromJson(request.reader.readText(), JsonObject::class.java)
         } catch (e: Exception) {
             return ResponseEntity.badRequest().body("Invalid JSON")
         }
@@ -71,10 +72,10 @@ class ProfileController {
         }
     }
 
-    @GetMapping("/login/requestEmail")
+    @PostMapping("/login/requestEmail")
     fun requestEmail(request: HttpServletRequest): ResponseEntity<String> {
         val json = try {
-            Gson().toJsonTree(request.reader.readText()) as JsonObject
+            Gson().fromJson(request.reader.readText(), JsonObject::class.java)
         } catch (e: Exception) {
             return ResponseEntity.badRequest().body("Invalid JSON")
         }
@@ -85,8 +86,8 @@ class ProfileController {
             return ResponseEntity.badRequest().body("Email taken")
         }
 
-        val result = profileService.requestEmailConfirmation(email)
-        return ResponseEntity.ok().body(result)
+        profileService.requestEmailConfirmation(email)
+        return ResponseEntity.ok().body(null)
     }
 
     @GetMapping("/login/discord")
@@ -133,7 +134,7 @@ class ProfileController {
             return ResponseEntity.ok().body(ProfileDTO(processedResult.getOrThrow(), id, username).toJson())
         }
 
-        val result = profileService.processAccountCreation(username, id, null, true)
+        val result = profileService.processAccountCreation(username, id, null, null, true)
 
         return if (result.isSuccess) {
             ResponseEntity.ok().body(ProfileDTO(result.getOrThrow(), id, username).toJson())
@@ -145,7 +146,7 @@ class ProfileController {
     @PatchMapping("/update")
     fun updateProfile(request: HttpServletRequest): ResponseEntity<String> {
         val json = try {
-            Gson().toJsonTree(request.reader.readText()) as JsonObject
+            Gson().fromJson(request.reader.readText(), JsonObject::class.java)
         } catch (e: Exception) {
             return ResponseEntity.badRequest().body("Invalid JSON")
         }

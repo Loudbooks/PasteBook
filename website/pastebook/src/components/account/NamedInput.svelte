@@ -106,6 +106,15 @@
     }
   }
 
+  input:-webkit-autofill {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: black;
+
+    :global(.dark-mode) & {
+      -webkit-text-fill-color: white;
+    }
+  }
+
   .in-div {
     width: calc(100% - 120px);
   }

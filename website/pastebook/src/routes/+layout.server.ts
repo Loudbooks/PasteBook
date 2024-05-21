@@ -3,6 +3,11 @@ export async function load({ cookies }) {
     let username = cookies.get('username');
     let id = cookies.get('id');
 
+    console.log(token
+        + " " + username
+        + " " + id
+    )
+
     if (token == null || username == null || id == null) {
         return {
             profile: null

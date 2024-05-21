@@ -3,6 +3,7 @@
     import google from "$lib/assets/google.png";
     import discord from "$lib/assets/discord.png";
     import NamedInput from "../../components/account/NamedInput.svelte";
+    import Mode from "../../components/Mode.svelte";
 
     let id = ""
     let password = ""
@@ -26,18 +27,62 @@
         });
     })
 
-    function logIn() {
+    function onIdChange(value) {
+        id = value;
+        resetColor("login-username")
+    }
 
+    function onPasswordChange(value) {
+        password = value;
+        resetColor("login-password")
+    }
+
+    function resetColor(clazz: string) {
+        if (document.body.classList.contains("dark-mode"))
+            (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#333333");
+        else
+            (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#c9c9c9");
+    }
+
+    function logIn() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://localhost:25658/api/profile/login", true);
+
+        xhr.onreadystatechange = async function () {
+            if (xhr.status === 400) {
+                (document.getElementsByClassName("login-username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                (document.getElementsByClassName("login-password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+
+                return;
+            }
+
+            if (xhr.status === 200) {
+                let response = JSON.parse(await xhr.response);
+                document.cookie = `token=${response.token} ;path=/`;
+                document.cookie = `id=${response.identification} ;path=/`;
+                document.cookie = `username=${response.username} ;path=/`;
+
+                window.location.href = '/panel';
+            }
+        }
+
+        xhr.send(
+            JSON.stringify({
+                identification: id,
+                password: password
+            })
+        )
     }
 </script>
 
-<div id="background">
+<div id="background">\
+    <Mode></Mode>
     <h1 id="title">Log In</h1>
     <div id="options">
         <div id="login-basic">
-            <NamedInput name="Username or Email" index={0} type="username"/>
+            <NamedInput name="Username or Email" index={0} type="username" fieldID="login-username" onTypeHandler={function (value) {onIdChange(value)}}/>
             <div id="spacer"/>
-            <NamedInput name="Password" index={1} type="password" submitButtonHandler={function () {}}/>
+            <NamedInput name="Password" index={1} type="password" fieldID="login-password" onTypeHandler={function (value) {onPasswordChange(value)}} submitButtonHandler={function () {logIn()}}/>
             <div id="spacer"/>
         </div>
         <div id="border">

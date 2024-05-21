@@ -68,6 +68,7 @@ class ProfileController {
 
             ResponseEntity.ok().body(ProfileDTO(result.getOrThrow(), identification, username).toJson())
         } else {
+            println(result.exceptionOrNull()?.message)
             ResponseEntity.badRequest().body(result.exceptionOrNull()?.message)
         }
     }

@@ -1,7 +1,6 @@
-export async function load({ params, cookies }) {
+export async function load({ cookies }) {
     console.log(cookies.get("cachedSignup"))
     if (cookies.get("cachedSignup") === undefined) {
-        console.log("retu")
         return {
             failed: true
         }

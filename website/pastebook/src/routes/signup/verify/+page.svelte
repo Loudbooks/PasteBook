@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {onMount, tick} from "svelte";
+    import {onMount} from "svelte";
 
     export let data
     export let { email, username, password, failed } = data
@@ -107,6 +107,16 @@
                     }
 
                     submitting = false
+                }
+
+                if (xhr.status === 200) {
+                    let response = JSON.parse(await xhr.response)
+
+                    document.cookie = `token=${response.token} ;path=/`
+                    document.cookie = `username=${response.username} ;path=/`
+                    document.cookie = `id=${response.identification} ;path=/`
+
+                    window.location.href = "/profile"
                 }
             }
         }

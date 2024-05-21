@@ -72,6 +72,28 @@ class ProfileController {
         }
     }
 
+    @GetMapping("/validation/username")
+    fun validateUsername(request: HttpServletRequest): ResponseEntity<String> {
+        val profile = profileService.findPossibleProfile(request.getHeader("username") ?: return ResponseEntity.badRequest().body(null))
+
+        return if (profile == null) {
+            ResponseEntity.status(200).body(null)
+        } else {
+            ResponseEntity.status(409).body(null)
+        }
+    }
+
+    @GetMapping("/validation/email")
+    fun validateEmail(request: HttpServletRequest): ResponseEntity<String> {
+        val profile = profileService.findPossibleProfile(request.getHeader("email") ?: return ResponseEntity.badRequest().body(null))
+
+        return if (profile == null) {
+            ResponseEntity.status(200).body(null)
+        } else {
+            ResponseEntity.status(409).body(null)
+        }
+    }
+
     @PostMapping("/login/requestEmail")
     fun requestEmail(request: HttpServletRequest): ResponseEntity<String> {
         val json = try {
@@ -81,9 +103,14 @@ class ProfileController {
         }
 
         val email = json.get("email")?.asString ?: return ResponseEntity.badRequest().body("Missing email")
+        val username = json.get("username")?.asString ?: return ResponseEntity.badRequest().body("Missing username")
 
         if (profileService.findPossibleProfile(email) != null) {
             return ResponseEntity.badRequest().body("Email taken")
+        }
+
+        if (profileService.findPossibleProfile(username) != null) {
+            return ResponseEntity.badRequest().body("Username taken")
         }
 
         profileService.requestEmailConfirmation(email)

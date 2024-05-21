@@ -4,6 +4,9 @@
     import discord from "$lib/assets/discord.png";
     import NamedInput from "../../components/account/NamedInput.svelte";
 
+    let id = ""
+    let password = ""
+
     onMount(() => {
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
@@ -23,6 +26,9 @@
         });
     })
 
+    function logIn() {
+
+    }
 </script>
 
 <div id="background">
@@ -75,6 +81,9 @@
                 </a>
             </div>
         </div>
+    </div>
+    <div id="sign-up">
+        <button on:click={function () {window.location.href = "/signup"}}>Sign Up</button>
     </div>
 </div>
 
@@ -315,6 +324,27 @@
       background-color: #1a1a1a;
       border: solid 3px #333333;
       color: white;
+    }
+  }
+
+  button {
+    all: unset;
+
+    transition: transform 0.5s ease;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: gray;
+    font-family: Gabarito, sans-serif;
+    text-decoration: underline;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 800;
+
+    &:active {
+      transform: translateX(-50%) scale(0.95);
     }
   }
 

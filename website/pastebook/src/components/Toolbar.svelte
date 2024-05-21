@@ -51,45 +51,6 @@
 
 
 <style lang="scss">
-  #logged-in {
-    height: 50px;
-    width: 120px;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 35px;
-    z-index: 998;
-    background-color: #eeeeee;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    color: gray;
-    outline: 2px solid #c9c9c9;
-
-    @media (max-width: 600px) {
-      height: 30px;
-      width: 60px;
-      right: 40px;
-      border-bottom-left-radius: 7px;
-      border-bottom-right-radius: 7px;
-    }
-
-    p {
-      font-size: 15px;
-      margin: 0;
-      padding: 0 0 0 10px;
-      font-family: Gabarito, sans-serif;
-      position: absolute;
-      bottom: 0;
-        transform: translate(50%, 0);
-      font-weight: 500;
-
-      @media (max-width: 600px) {
-        font-size: 7px;
-        padding: 0 0 0 5px;
-      }
-    }
-  }
-
   toolbar {
     z-index: 999;
 

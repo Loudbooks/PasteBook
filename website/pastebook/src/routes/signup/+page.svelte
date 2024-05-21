@@ -7,6 +7,11 @@
     let password = "";
     let confirmPassword = "";
 
+    let usernameInput;
+    let emailInput;
+    let confirmPasswordInput;
+    let passwordInput;
+
     onMount(() => {
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
@@ -29,7 +34,9 @@
     function onConfirmPasswordChange() {
         if (confirmPassword != password) {
             (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            confirmPasswordInput.setError("Passwords do not match")
         } else {
+            confirmPasswordInput.setError("")
             if (confirmPassword != "" && password != "")
                 (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "green");
             else {
@@ -40,27 +47,35 @@
 
     function onEmailType() {
         if (email == "") {
+            emailInput.setError("")
             resetColor("email");
             return
         }
 
         if (isValidEmail(email)) {
             (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "green");
+            emailInput.setError("")
+            scanEmail(email)
         } else {
             (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            emailInput.setError("Invalid email")
         }
     }
 
     function onUsernameType() {
         if (username == "") {
+            usernameInput.setError("")
             resetColor("username");
             return
         }
 
         if (isValidUsername(username)) {
             (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "green");
+            usernameInput.setError("")
+            scanUsername(username)
         } else {
             (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            usernameInput.setError("Invalid username")
         }
     }
 
@@ -69,6 +84,48 @@
             (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#333333");
         else
             (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("--outline-color", "#c9c9c9");
+    }
+
+    function scanEmail(email: string) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', "http://localhost:25658/api/profile/validation/email", true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 409) {
+                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                emailInput.setError("Email taken")
+            }
+
+            if (xhr.status === 200) {
+                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "green");
+                emailInput.setError("")
+            }
+        }
+
+        xhr.setRequestHeader("email", email);
+
+        xhr.send()
+    }
+
+    function scanUsername(username: string) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', "http://localhost:25658/api/profile/validation/username", true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 409) {
+                (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                usernameInput.setError("Username taken")
+            }
+
+            if (xhr.status === 200) {
+                (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "green");
+                usernameInput.setError("")
+            }
+        }
+
+        xhr.setRequestHeader("username", username);
+
+        xhr.send()
     }
 
     function submitSignup() {
@@ -81,13 +138,29 @@
         const xhr = new XMLHttpRequest();
         xhr.open('POST', "http://localhost:25658/api/profile/login/requestEmail", true);
 
+        xhr.onreadystatechange = function () {
+            console.log("Result: " + xhr.response)
+            if (xhr.status === 400 && xhr.response === "Email taken") {
+                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                emailInput.setError("Invalid email")
+            }
+
+            if (xhr.status === 400 && xhr.response === "Username taken") {
+                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                emailInput.setError("Invalid email")
+            }
+
+            if (xhr.status === 200) {
+                window.location.href = '/signup/verify';
+            }
+        }
+
         xhr.send(
             JSON.stringify({
                 email: email,
+                username: username
             })
         )
-
-        window.location.href = '/signup/verify';
     }
 
     function isValidEmail(email: string) {
@@ -103,16 +176,16 @@
 <div id="forms-container">
     <div id="forms">
         <div id="username">
-            <NamedInput name="Username" type="text" fieldID="username" index={0} onTypeHandler={function (value) {username = value; onUsernameType()}} />
+            <NamedInput bind:this={usernameInput} name="Username" type="text" fieldID="username" index={0} onTypeHandler={function (value) {username = value; onUsernameType()}} />
         </div>
         <div id="email">
-            <NamedInput name="Email" type="email" fieldID="email" index={1} onTypeHandler={function (value) {email = value; onEmailType()}} />
+            <NamedInput bind:this={emailInput} name="Email" type="email" fieldID="email" index={1} onTypeHandler={function (value) {email = value; onEmailType()}} />
         </div>
         <div id="password">
-            <NamedInput name="Password" type="password" fieldID="password" index={2} onTypeHandler={function (value) {password = value; onConfirmPasswordChange()}} />
+            <NamedInput bind:this={passwordInput} name="Password" type="password" fieldID="password" index={2} onTypeHandler={function (value) {password = value; onConfirmPasswordChange()}} />
         </div>
         <div id="confirm-password">
-            <NamedInput name="Confirm Password" type="password" fieldID="confirm-password" index={3} submitButtonHandler={function () {submitSignup()}} onTypeHandler={function (value) {confirmPassword = value; onConfirmPasswordChange()}} />
+            <NamedInput bind:this={confirmPasswordInput} name="Confirm Password" type="password" fieldID="confirm-password" index={3} submitButtonHandler={function () {submitSignup()}} onTypeHandler={function (value) {confirmPassword = value; onConfirmPasswordChange()}} />
         </div>
     </div>
 </div>

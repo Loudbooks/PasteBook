@@ -7,6 +7,7 @@
     export let submitButtonHandler: () => void = undefined;
 
     let currentData = ""
+    let error = ""
 
 
     let onType = (event: Event) => {
@@ -14,10 +15,27 @@
         onTypeHandler(currentData)
     }
 
+    export function setError(newError: string) {
+        if (newError !== "") {
+            error = newError
+        }
+
+        setTimeout(() => {
+            let errorElement = document.getElementById(fieldID + "-error")
+
+            if (newError !== "") {
+                errorElement.style.opacity = "1"
+            } else {
+                errorElement.style.opacity = "0"
+            }
+        }, 1)
+
+    }
+
 </script>
 
 <div id="container" class="{fieldID}">
-    <p>{name}</p>
+    <p>{name}</p><p class="error" id="{fieldID}-error">{error}</p>
     {#if submitButtonHandler !== undefined}
         <div>
             <input type="{type}" id="login-input" class="input-index-{index} in-div" on:input={onType}>
@@ -46,6 +64,18 @@
     color: grey;
     font-family: Gabarito, sans-serif;
     font-size: 18px;
+    display: inline-block;
+  }
+
+  .error {
+    all: unset;
+    transition: opacity 0.5s ease;
+    display: inline-block;
+    color: red;
+    font-family: Gabarito, sans-serif;
+    font-size: 12px;
+    padding-left: 10px;
+    opacity: 0;
   }
 
   input {

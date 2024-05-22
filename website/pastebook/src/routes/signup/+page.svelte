@@ -33,7 +33,7 @@
 
     function onConfirmPasswordChange() {
         if (confirmPassword != password) {
-            (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             confirmPasswordInput.setError("Passwords do not match")
         } else {
             confirmPasswordInput.setError("")
@@ -56,7 +56,7 @@
             (document.getElementsByClassName("password")[0] as HTMLElement).style.setProperty("--outline-color", "green");
             passwordInput.setError("")
         } else {
-            (document.getElementsByClassName("password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("password")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             passwordInput.setError("Password must be between 8 and 64 characters")
         }
     }
@@ -73,7 +73,7 @@
             emailInput.setError("")
             scanEmail(email)
         } else {
-            (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             emailInput.setError("Invalid email")
         }
     }
@@ -90,7 +90,7 @@
             usernameInput.setError("")
             scanUsername(username)
         } else {
-            (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             usernameInput.setError("Invalid username")
         }
     }
@@ -106,10 +106,10 @@
         const xhr = new XMLHttpRequest();
         xhr.open('GET', "http://localhost:25658/api/profile/validation/email", true);
 
-        let promise = new Promise((resolve, reject) => {
+        let promise = new Promise((resolve) => {
             xhr.onreadystatechange = function () {
                 if (xhr.status === 409) {
-                    (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                    (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
                     emailInput.setError("Email taken")
                     resolve(false)
                 }
@@ -132,10 +132,10 @@
         const xhr = new XMLHttpRequest();
         xhr.open('GET', "http://localhost:25658/api/profile/validation/username", true);
 
-        let promise = new Promise((resolve, reject) => {
+        let promise = new Promise((resolve) => {
             xhr.onreadystatechange = function () {
                 if (xhr.status === 409) {
-                    (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                    (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
                     usernameInput.setError("Username taken")
                     resolve(false)
                 }
@@ -156,25 +156,25 @@
 
     function submitSignup() {
         if (confirmPassword != password) {
-            (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("confirm-password")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             confirmPasswordInput.setError("Passwords do not match")
             return
         }
 
         if (!isValidEmail(email)) {
-            (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             emailInput.setError("Invalid email")
             return
         }
 
         if (!isValidUsername(username)) {
-            (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("username")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             usernameInput.setError("Invalid username")
             return
         }
 
         if (!isValidPassword(password)) {
-            (document.getElementsByClassName("password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+            (document.getElementsByClassName("password")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
             passwordInput.setError("Invalid password")
             return
         }
@@ -199,12 +199,12 @@
         xhr.onreadystatechange = function () {
             console.log("Result: " + xhr.response)
             if (xhr.status === 400 && xhr.response === "Email taken") {
-                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
                 emailInput.setError("Invalid email")
             }
 
             if (xhr.status === 400 && xhr.response === "Username taken") {
-                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
                 emailInput.setError("Invalid email")
             }
 
@@ -236,9 +236,9 @@
 
     function isValidPassword(password: string) {
         if (password.length < 8) return false;
-        if (password.length > 64) return false;
+        return password.length <= 64;
 
-        return true;
+
     }
 </script>
 

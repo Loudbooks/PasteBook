@@ -50,8 +50,8 @@
 
         xhr.onreadystatechange = async function () {
             if (xhr.status === 400) {
-                (document.getElementsByClassName("login-username")[0] as HTMLElement).style.setProperty("--outline-color", "red");
-                (document.getElementsByClassName("login-password")[0] as HTMLElement).style.setProperty("--outline-color", "red");
+                (document.getElementsByClassName("login-username")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
+                (document.getElementsByClassName("login-password")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
 
                 return;
             }

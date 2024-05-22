@@ -83,7 +83,7 @@
     all: unset;
     transition: opacity 0.5s ease;
     display: inline-block;
-    color: red;
+    color: #87011a;
     font-family: Gabarito, sans-serif;
     font-size: 12px;
     padding-left: 10px;

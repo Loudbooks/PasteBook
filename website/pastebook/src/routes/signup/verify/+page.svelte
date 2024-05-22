@@ -132,7 +132,7 @@
             xhr.onreadystatechange = async function () {
                 if (xhr.status === 400) {
                     for (let i = 1; i <= 6; i++) {
-                        (document.getElementById(`cell-${i}`) as HTMLElement).style.setProperty("outline", "3px solid red");
+                        (document.getElementById(`cell-${i}`) as HTMLElement).style.setProperty("outline", "3px solid #87011a");
                     }
 
                     submitting = false

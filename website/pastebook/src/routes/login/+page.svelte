@@ -80,9 +80,12 @@
     <h1 id="title">Log In</h1>
     <div id="options">
         <div id="login-basic">
-            <NamedInput name="Username or Email" index={0} type="username" fieldID="login-username" onTypeHandler={function (value) {onIdChange(value)}}/>
+            <NamedInput name="Username or Email" index={0} type="username" fieldID="login-username"
+                        onTypeHandler={function (value) {onIdChange(value)}}/>
             <div id="spacer"/>
-            <NamedInput name="Password" index={1} type="password" fieldID="login-password" onTypeHandler={function (value) {onPasswordChange(value)}} submitButtonHandler={function () {logIn()}}/>
+            <NamedInput name="Password" index={1} type="password" fieldID="login-password"
+                        onTypeHandler={function (value) {onPasswordChange(value)}}
+                        submitButtonHandler={function () {logIn()}}/>
             <div id="spacer"/>
         </div>
         <div id="border">
@@ -119,10 +122,9 @@
             </div>
             <div id="spacer-exclude"/>
             <div id="button-container">
-                <a id="google"
-                   href="https://discord.com/oauth2/authorize?client_id=1240490933376647220&response_type=code&redirect_uri=https%3A%2F%2Fpastebook.dev%2Fapi%2Fprofile%2Flogin%2Fdiscord&scope=identify">
-                    <img src={google} alt="Log in with Google" width="30px" height="30px"/>
-                    Log in with Google
+                <a id="google">
+                    <img src={google} alt="Coming Soon" width="30px" height="30px"/>
+                    Coming Soon
                 </a>
             </div>
         </div>
@@ -133,19 +135,6 @@
 </div>
 
 <style lang="scss">
-  #background {
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    overflow: hidden;
-
-    background-color: white;
-
-    :global(.dark-mode) & {
-      background-color: black;
-    }
-  }
-
   #spacer {
     height: 76px;
 
@@ -316,7 +305,7 @@
     font-weight: 450;
     font-size: 19px;
     border-radius: 23px;
-    transition: background-color 0.5s ease, transform 0.5s ease;
+    transition: background-color 0.5s ease, transform 0.5s ease, opacity 0.5s ease, color 0.5s ease, border 0.5s ease;
     cursor: pointer;
     height: 60px;
     line-height: 60px;
@@ -351,24 +340,20 @@
 
   #google {
     background-color: #eeeeee;
+    opacity: 0.5;
     border: solid 3px #c9c9c9;
     color: black;
 
-    &:hover {
-      background-color: #e0e0e0;
-
-      :global(.dark-mode) & {
-        background-color: #141414;
-        border: solid 3px #333333;
-        color: white;
-
-      }
-    }
+    cursor: not-allowed;
 
     :global(.dark-mode) & {
       background-color: #1a1a1a;
       border: solid 3px #333333;
       color: white;
+    }
+
+    :active & {
+      transform: scale(1);
     }
   }
 

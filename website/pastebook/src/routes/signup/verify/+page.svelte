@@ -5,18 +5,48 @@
     export let { email, username, password, failed } = data
 
     let submitting = false;
+    let allNumbers = "0123456789"
 
     onMount(() => {
-
         if (failed == true) {
             window.location.href = "/signup"
+        }
+
+        let firstCell = document.getElementById("cell-1") as HTMLElement
+        let lastCell = document.getElementById("cell-6") as HTMLElement
+
+        firstCell.addEventListener("paste" , (event) => {
+            if (event.clipboardData === null) return
+
+            event.preventDefault()
+            let paste = event.clipboardData.getData('text');
+
+            let pasteArray = paste.split("")
+            pasteArray = pasteArray.filter((value) => allNumbers.includes(value))
+            if (pasteArray.length !== 6) return;
+
+            let cells = document.getElementsByClassName("input-cell") as HTMLCollectionOf<HTMLInputElement>
+
+            for (let i = 0; i < cells.length; i++) {
+                cells[i].value = pasteArray[i]
+            }
+
+            lastCell.focus()
+            submit()
+        })
+
+        let allCells = document.getElementsByClassName("input-cell") as HTMLCollectionOf<HTMLInputElement>
+        for (let i = 2; i <= allCells.length; i++) {
+            allCells[i - 1].addEventListener("paste", (event) => {
+                event.preventDefault()
+            })
         }
 
         document.addEventListener("keydown", (e) => {
             let current = document.activeElement;
             if (current === null) return
 
-            if (current.id !== "input-cell") return;
+            if (!current.classList.contains("input-cell")) return;
 
             for (let i = 1; i <= 6; i++) {
                 resetColor("cell-" + i)
@@ -28,7 +58,6 @@
                 return;
             }
 
-            let allNumbers = "0123456789"
             if (!allNumbers.includes(e.key)) {
                 e.preventDefault()
                 return;
@@ -49,28 +78,28 @@
         function next() {
             let current = document.activeElement;
 
-            if (current.id !== "input-cell") return;
+            if (!(current.classList.contains("input-cell"))) return;
 
-            let currentIndex = current.classList[0].replace("cell-", "");
+            let currentIndex = current.id.replace("cell-", "");
             let nextIndex = parseInt(currentIndex) + 1;
-            let next = document.getElementsByClassName("cell-" + nextIndex)[0] as HTMLElement
+            let next = document.getElementById("cell-" + nextIndex) as HTMLElement
 
             try {
                 next.focus();
                 (next as HTMLInputElement).value = ""
             } catch (e) {
-                submit()
+                // submit()
             }
         }
 
         function previous() {
             let current = document.activeElement;
 
-            if (current.id !== "input-cell") return;
+            if (!(current.classList.contains("input-cell"))) return;
 
-            let currentIndex = current.classList[0].replace("cell-", "");
+            let currentIndex = current.id.replace("cell-", "");
             let nextIndex = parseInt(currentIndex) - 1;
-            let next = document.getElementsByClassName("cell-" + nextIndex)[0] as HTMLElement
+            let next = document.getElementById("cell-" + nextIndex) as HTMLElement
 
             try {
                 next.focus();
@@ -85,7 +114,7 @@
             let string = ""
 
             for (let i = 1; i <= 6; i++) {
-                string += (document.getElementsByClassName("cell-" + i)[0] as HTMLInputElement).value
+                string += (document.getElementById("cell-" + i) as HTMLInputElement).value
             }
 
             const xhr = new XMLHttpRequest();
@@ -103,7 +132,7 @@
             xhr.onreadystatechange = async function () {
                 if (xhr.status === 400) {
                     for (let i = 1; i <= 6; i++) {
-                        (document.getElementsByClassName(`cell-${i}`)[0] as HTMLElement).style.setProperty("outline", "3px solid red");
+                        (document.getElementById(`cell-${i}`) as HTMLElement).style.setProperty("outline", "3px solid red");
                     }
 
                     submitting = false
@@ -124,9 +153,21 @@
 
     function resetColor(clazz: string) {
         if (document.body.classList.contains("dark-mode"))
-            (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("outline", "2px solid #333333");
+            (document.getElementById(clazz) as HTMLElement).style.setProperty("outline", "2px solid #333333");
         else
-            (document.getElementsByClassName(clazz)[0] as HTMLElement).style.setProperty("outline", "2px solid #c9c9c9");
+            (document.getElementById(clazz) as HTMLElement).style.setProperty("outline", "2px solid #c9c9c9");
+    }
+
+    function resendEmail() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://localhost:25658/api/profile/login/requestEmail", true);
+
+        xhr.send(
+            JSON.stringify({
+                email: email,
+                username: username,
+            })
+        )
     }
 </script>
 
@@ -135,14 +176,14 @@
     <div id="input-container">
         <p>Type in the six digit code sent to <strong>{email}</strong></p>
         <div id="cells">
-            <input id="input-cell" class="cell-1">
-            <input id="input-cell" class="cell-2">
-            <input id="input-cell" class="cell-3">
-            <input id="input-cell" class="cell-4">
-            <input id="input-cell" class="cell-5">
-            <input id="input-cell" class="cell-6">
+            <input id="cell-1" class="input-cell" on:paste={function () {console.log("test")}}>
+            <input id="cell-2" class="input-cell">
+            <input id="cell-3" class="input-cell">
+            <input id="cell-4" class="input-cell">
+            <input id="cell-5" class="input-cell">
+            <input id="cell-6" class="input-cell">
         </div>
-        <button id="resend">Resend Email</button>
+        <button id="resend" on:click={resendEmail}>Resend Email</button>
     </div>
 </div>
 

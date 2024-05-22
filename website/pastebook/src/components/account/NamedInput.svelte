@@ -1,4 +1,6 @@
 <script lang="ts">
+    import {onMount} from "svelte";
+
     export let name: string
     export let index: number
     export let type: string = "text"
@@ -9,6 +11,16 @@
     let currentData = ""
     let error = ""
 
+    onMount(() => {
+        if (submitButtonHandler !== undefined) {
+            let input = document.getElementsByClassName("input-index-" + index)[0] as HTMLInputElement
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    submitButtonHandler()
+                }
+            })
+        }
+    })
 
     let onType = (event: Event) => {
         currentData = (event.target as HTMLInputElement).value
@@ -81,7 +93,7 @@
   input {
     all: unset;
 
-    transition: outline 0.3s, transform 0.3s, background-color 0.5s;
+    transition: outline 0.5s ease, transform 0.3s ease, background-color 0.5s ease;
 
     outline: 3px solid var(--outline-color);
     background-color: #eeeeee;
@@ -122,7 +134,7 @@
   button {
     all: unset;
 
-    transition: outline 0.3s ease, transform 0.3s ease, background-color 0.5s ease;
+    transition: outline 0.5s ease, transform 0.3s ease, background-color 0.5s ease;
 
     outline: 3px solid #c9c9c9;
     background-color: #eeeeee;

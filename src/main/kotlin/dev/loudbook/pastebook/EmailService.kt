@@ -21,8 +21,6 @@ class EmailService {
     private val host: String? = null
 
     fun sendEmail(email: String, subject: String, message: String) {
-        println("Sending email to $email with subject: $subject and message: $message")
-
         val props = Properties()
         props["mail.smtp.auth"] = "true"
         props["mail.smtp.starttls.enable"] = "true"

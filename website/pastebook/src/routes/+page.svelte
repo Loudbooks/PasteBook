@@ -16,6 +16,8 @@ import Mode from "../components/Mode.svelte";
         <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a>
         <dot>⎯</dot>
         <a href="mailto:contact@pastebook.dev">CONTACT</a>
+        <dot>⎯</dot>
+        <a href="/privacy">PRIVACY</a>
     </buttons>
 
     <Mode></Mode>

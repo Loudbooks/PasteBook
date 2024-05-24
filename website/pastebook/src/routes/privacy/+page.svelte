@@ -100,22 +100,22 @@
                 in
                 full</a> .</p>
             <p><strong>TABLE OF CONTENTS</strong></p>
-            <p><a href="#infocollect">1. WHAT INFORMATION DO WE COLLECT?</a></p>
-            <p><a href="#infouse">2. HOW DO WE PROCESS YOUR INFORMATION?</a></p>
-            <p><a href="#legalbases">3. WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?</a></p>
-            <p><a href="#whoshare">4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</a></p>
-            <p><a href="#sociallogins">5. HOW DO WE HANDLE YOUR SOCIAL LOGINS?</a></p>
-            <p><a href="#inforetain">6. HOW LONG DO WE KEEP YOUR INFORMATION?</a></p>
-            <p><a href="#infosafe">7. HOW DO WE KEEP YOUR INFORMATION SAFE?</a></p>
-            <p><a href="#infominors">8. DO WE COLLECT INFORMATION FROM MINORS?</a></p>
-            <p><a href="#privacyrights">9. WHAT ARE YOUR PRIVACY RIGHTS?</a></p>
-            <p><a href="#DNT">10. CONTROLS FOR DO-NOT-TRACK FEATURES</a></p>
-            <p><a href="#uslaws">11. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</a></p>
-            <p><a href="#otherlaws">12. DO OTHER REGIONS HAVE SPECIFIC PRIVACY RIGHTS?</a></p>
-            <p><a href="#policyupdates">13. DO WE MAKE UPDATES TO THIS NOTICE?</a></p>
-            <p><a href="#contact">14. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</a></p>
-            <p><a href="#request">15. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</a></p>
-            <p><strong>1. WHAT INFORMATION DO WE COLLECT?</strong></p>
+            <p>1. WHAT INFORMATION DO WE COLLECT?</p>
+            <p>2. HOW DO WE PROCESS YOUR INFORMATION?</p>
+            <p>3. WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?</p>
+            <p>4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</p>
+            <p>5. HOW DO WE HANDLE YOUR SOCIAL LOGINS?</p>
+            <p>6. HOW LONG DO WE KEEP YOUR INFORMATION?</p>
+            <p>7. HOW DO WE KEEP YOUR INFORMATION SAFE?</p>
+            <p>8. DO WE COLLECT INFORMATION FROM MINORS?</p>
+            <p>9. WHAT ARE YOUR PRIVACY RIGHTS?</p>
+            <p>10. CONTROLS FOR DO-NOT-TRACK FEATURES</p>
+            <p>11. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</p>
+            <p>12. DO OTHER REGIONS HAVE SPECIFIC PRIVACY RIGHTS?</p>
+            <p>13. DO WE MAKE UPDATES TO THIS NOTICE?</p>
+            <p>14. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</p>
+            <p>15. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</p>
+            <p> <strong>1. WHAT INFORMATION DO WE COLLECT?</strong></p>
             <p><strong>Personal information you disclose to us</strong></p>
             <p><strong><em>In Short:</em></strong> <em>We collect personal information that you provide to us.</em></p>
             <p>We collect personal information that you voluntarily provide to us when you register on the Services,

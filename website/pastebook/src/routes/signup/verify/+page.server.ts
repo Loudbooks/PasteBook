@@ -1,12 +1,19 @@
+import {isLoggedIn} from "$lib/profileutils";
+
 export async function load({ cookies }) {
-    console.log(cookies.get("cachedSignup"))
     if (cookies.get("cachedSignup") === undefined) {
         return {
             failed: true
         }
     }
 
-    let data = JSON.parse(cookies.get("cachedSignup"))
+    if (isLoggedIn(cookies)) {
+        return {
+            failed: true
+        }
+    }
+
+    let data = JSON.parse(cookies.get("cachedSignup") as string)
 
     return {
         email: data.email,

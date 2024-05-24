@@ -7,16 +7,16 @@
     let password = "";
     let confirmPassword = "";
 
-    let usernameInput;
-    let emailInput;
-    let confirmPasswordInput;
-    let passwordInput;
+    let usernameInput: any
+    let emailInput: any
+    let confirmPasswordInput: any
+    let passwordInput: any
 
     onMount(() => {
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
-                let current = document.activeElement;
-
+                let current = document.activeElement
+                if (current === null) return;
                 if (current.id !== "login-input") return;
 
                 let currentIndex = current.classList[0].replace("input-index-", "");
@@ -197,7 +197,6 @@
         xhr.open('POST', "http://localhost:25658/api/profile/login/requestEmail", true);
 
         xhr.onreadystatechange = function () {
-            console.log("Result: " + xhr.response)
             if (xhr.status === 400 && xhr.response === "Email taken") {
                 (document.getElementsByClassName("email")[0] as HTMLElement).style.setProperty("--outline-color", "#87011a");
                 emailInput.setError("Invalid email")

@@ -8,8 +8,6 @@
 
         toolbar.style.transform = 'translate(10px, 0)';
         toolbar.style.opacity = '1';
-
-        console.log(document.cookie)
     });
 
     function newPaste() {

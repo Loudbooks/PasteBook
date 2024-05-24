@@ -70,6 +70,7 @@
       align-self: end;
       flex: 70%;
       padding-left: 30px;
+      color: black;
 
       animation: fadeIn ease 0.7s;
       animation-iteration-count: 1;

@@ -19,9 +19,10 @@
             if (event.clipboardData === null) return
 
             event.preventDefault()
-            let paste = event.clipboardData.getData('text');
 
+            let paste = event.clipboardData.getData('text');
             let pasteArray = paste.split("")
+
             pasteArray = pasteArray.filter((value) => allNumbers.includes(value))
             if (pasteArray.length !== 6) return;
 
@@ -113,6 +114,8 @@
             submitting = true
             let string = ""
 
+            document.cookie = `cachedSignup=`
+
             for (let i = 1; i <= 6; i++) {
                 string += (document.getElementById("cell-" + i) as HTMLInputElement).value
             }
@@ -176,7 +179,7 @@
     <div id="input-container">
         <p>Type in the six digit code sent to <strong>{email}</strong></p>
         <div id="cells">
-            <input id="cell-1" class="input-cell" on:paste={function () {console.log("test")}}>
+            <input id="cell-1" class="input-cell">
             <input id="cell-2" class="input-cell">
             <input id="cell-3" class="input-cell">
             <input id="cell-4" class="input-cell">

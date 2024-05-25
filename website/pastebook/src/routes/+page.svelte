@@ -69,6 +69,7 @@
       margin-top: 0;
       text-align: center;
       font-family: Gabarito, serif;
+      font-weight: 1000;
       font-size: 120px;
       margin-bottom: 10px;
       height: 120px;

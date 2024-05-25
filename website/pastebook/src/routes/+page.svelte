@@ -1,5 +1,16 @@
 <script>
-import Mode from "../components/Mode.svelte";
+    import Mode from "../components/Mode.svelte";
+    import {onMount} from "svelte";
+
+    let width = 0;
+
+    onMount(() => {
+        width = window.innerWidth;
+
+        window.onresize = () => {
+            width = window.innerWidth;
+        }
+    })
 </script>
 
 <about>
@@ -14,10 +25,19 @@ import Mode from "../components/Mode.svelte";
         <button onclick="window.location.href = '/panel';">PANEL</button>
         <dot>⎯</dot>
         <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a>
-        <dot>⎯</dot>
-        <a href="mailto:contact@pastebook.dev">CONTACT</a>
-        <dot>⎯</dot>
-        <a href="/privacy">PRIVACY</a>
+        {#if width > 768}
+            <dot>⎯</dot>
+            <a href="mailto:contact@pastebook.dev">CONTACT</a>
+            <dot>⎯</dot>
+            <a href="/privacy">PRIVACY</a>
+        {:else}
+            <br>
+            <div id="second-container">
+                <a href="mailto:contact@pastebook.dev">CONTACT</a>
+                <dot>⎯</dot>
+                <a href="/privacy">PRIVACY</a>
+            </div>
+        {/if}
     </buttons>
 
     <Mode></Mode>
@@ -27,7 +47,7 @@ import Mode from "../components/Mode.svelte";
   :root {
     --animation: ease;
   }
-  
+
   about {
     display: flex;
     flex-direction: column;
@@ -120,6 +140,7 @@ import Mode from "../components/Mode.svelte";
       font-size: 20px;
       margin: 0 10px;
       transition: all 1s ease;
+      text-align: center;
 
       &:hover {
         margin: 0 13px;
@@ -128,6 +149,11 @@ import Mode from "../components/Mode.svelte";
 
       &::selection {
         background-color: transparent;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 13px;
+        margin: 0 5px;
       }
     }
 
@@ -155,9 +181,15 @@ import Mode from "../components/Mode.svelte";
       }
 
       @media (max-width: 768px) {
-        font-size: 15px;
+        font-size: 13px;
         padding: 5px 0;
       }
+    }
+
+    #second-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     @keyframes fadeUp {

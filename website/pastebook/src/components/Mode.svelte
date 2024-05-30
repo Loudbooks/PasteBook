@@ -44,11 +44,11 @@
 
 <style lang="scss">
   container {
-    transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease;
+    transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
 
     .style {
       all: unset;
-      transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease;
+      transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
 
       background: none;
       border: none;
@@ -77,13 +77,15 @@
       z-index: 9999;
       font-family: Gabarito, sans-serif;
       text-decoration: none;
+      opacity: 0;
 
-      animation: flyIn ease 0.7s;
+      animation: flyIn ease 0.7s forwards;
+      animation-delay: 0.3s;
       animation-iteration-count: 1;
 
       &:hover {
         cursor: pointer;
-        transform: translateY(10%);
+        bottom: -2px;
       }
     }
   }
@@ -91,9 +93,11 @@
   @keyframes flyIn {
     0% {
       transform: translateY(90%);
+      opacity: 0;
     }
     100% {
       transform: translateY(0%);
+      opacity: 1;
     }
   }
 </style>

@@ -8,6 +8,7 @@
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
     import SVGPasteBook from "../../../components/SVGPasteBook.svelte";
+    import Highlight from "../../../components/Highlight.svelte";
 
     export let data
 
@@ -134,6 +135,7 @@
     </div>
     <SVGPasteBook/>
     <Mode/>
+    <Highlight/>
     <div id="hoverable" on:mouseenter={handler} on:mouseleave={undoHandler} role="tooltip">
         <Header title="{title}" created="{timeSinceStr}"></Header>
         <p id="hash">{hashedIP}</p>

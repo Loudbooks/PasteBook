@@ -45,8 +45,6 @@
 
         let submit = document.getElementsByClassName("submit")[0] as HTMLElement
 
-        submit.style.animation = "blink 3s infinite";
-
         alreadyUploading = true;
         submit.classList.add("loading");
         const xhr = new XMLHttpRequest();
@@ -147,9 +145,12 @@
         color: white;
       }
 
-      :global(.loading) {
+      &:global(.loading) {
         animation: blink 3s infinite;
         color: #999999;
+      }
+
+      &:hover:global(.loading) {
         cursor: not-allowed;
       }
 

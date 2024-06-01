@@ -179,6 +179,7 @@
 
 <svelte:head>
     <title></title>
+    <meta property="title" content="">
     <meta property="description" content="">
     <meta property="og:type" content="non"/>
     <meta property="og:title" content=""/>

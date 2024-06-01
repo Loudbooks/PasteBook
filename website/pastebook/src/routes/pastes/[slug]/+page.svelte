@@ -177,13 +177,12 @@
   }
 </style>
 
-<!--
 <svelte:head>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="{title}"/>
-    <meta property="og:site_name" content="PasteBook"/>
-    <meta property="og:url" content="{$pasteURL}"/>
+    <meta property="og:type" content=""/>
+    <meta property="og:title" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:url" content=""/>
     <meta property="og:description"
-          content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes."/>
+          content=""/>
     <meta name="robots" content="noindex">
-</svelte:head>-->
+</svelte:head>

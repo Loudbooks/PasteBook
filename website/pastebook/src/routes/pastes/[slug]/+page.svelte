@@ -3,7 +3,7 @@
     import Mode from "../../../components/Mode.svelte";
     import Header from "../../../components/Header.svelte";
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
-    import {severes, warnings, pasteURL, loadProgress} from "$lib/stores";
+    import {severes, warnings, loadProgress} from "$lib/stores";
     import {formatTimeSince} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
@@ -16,7 +16,7 @@
 
     let percent = 0
 
-    let promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve) => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.responseType = 'text';
@@ -178,7 +178,9 @@
 </style>
 
 <svelte:head>
-    <meta property="og:type" content=""/>
+    <title></title>
+    <meta property="description" content="">
+    <meta property="og:type" content="non"/>
     <meta property="og:title" content=""/>
     <meta property="og:site_name" content=""/>
     <meta property="og:url" content=""/>

@@ -75,6 +75,7 @@
                 return true
             }
 
+            if (reportBook !== true) continue
             for (let result of results) {
                 if (line.toLowerCase().includes(result.id.toLowerCase())) {
                     return true

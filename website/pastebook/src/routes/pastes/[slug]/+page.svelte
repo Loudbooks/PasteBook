@@ -3,7 +3,7 @@
     import Mode from "../../../components/Mode.svelte";
     import Header from "../../../components/Header.svelte";
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
-    import {severes, warnings, loadProgress} from "$lib/stores";
+    import {severes, warnings, loadProgress, pasteURL} from "$lib/stores";
     import {formatTimeSince} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
@@ -178,14 +178,11 @@
 </style>
 
 <svelte:head>
-    <title></title>
-    <meta property="title" content="">
-    <meta property="description" content="">
-    <meta property="og:type" content="non"/>
-    <meta property="og:title" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:url" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="{title}"/>
+    <meta property="og:site_name" content="PasteBook"/>
+    <meta property="og:url" content="{$pasteURL}"/>
     <meta property="og:description"
-          content=""/>
+          content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes."/>
     <meta name="robots" content="noindex">
 </svelte:head>

@@ -121,6 +121,11 @@
     width: 100%;
     height: 50px;
     padding-bottom: 10px;
+    transition: transform 0.5s ease;
+
+    &:active {
+      transform: scale(0.96);
+    }
 
     .submit {
       margin: 0;

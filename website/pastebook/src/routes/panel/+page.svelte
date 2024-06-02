@@ -64,6 +64,7 @@
             <Header title="Pastes" created="0"/>
             <div id="none-container">
                 <h1 id="no-pastes">No Pastes Found</h1>
+                <p id="flip">(╯°□°)╯︵ ┻━┻</p>
             </div>
         {:else}
             <Header title="Pastes" created="{pastes.length.toString()}"/>
@@ -81,6 +82,7 @@
   #none-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100%;
     position: fixed;
@@ -96,6 +98,7 @@
     font-weight: 900;
     color: black;
     opacity: 0;
+    margin-bottom: 0;
 
     :global(.dark-mode) & {
       color: white;
@@ -108,6 +111,29 @@
       font-size: 3rem;
     }
   }
+
+  #flip {
+    transition: color 0.2s;
+
+    font-size: 1.7rem;
+    font-family: Gabarito, sans-serif;
+    font-weight: 900;
+    color: black;
+    opacity: 0;
+    margin-top: 0;
+
+    :global(.dark-mode) & {
+      color: white;
+    }
+
+    animation: fadeUp 0.3s forwards;
+    animation-delay: 0.2s;
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
+  }
+
   @keyframes fadeUp {
     from {
       transform: translateY(30%);

@@ -48,16 +48,32 @@ export function formatTimeUntil(targetTime: number) {
     const days = Math.floor(hours / 24);
     let formattedTime = '';
     if (days > 0) {
-        formattedTime += days + ' days ';
+        if (days === 1) {
+            formattedTime += days + ' day ';
+        } else {
+            formattedTime += days + ' days ';
+        }
     }
     if (hours % 24 > 0) {
-        formattedTime += (hours % 24) + ' hours ';
+        if (hours % 24 === 1) {
+            formattedTime += (hours % 24) + ' hour ';
+        } else {
+            formattedTime += (hours % 24) + ' hours ';
+        }
     }
     if (minutes % 60 > 0) {
-        formattedTime += (minutes % 60) + ' minutes ';
+        if (minutes % 60 === 1) {
+            formattedTime += (minutes % 60) + ' minute ';
+        } else {
+            formattedTime += (minutes % 60) + ' minutes ';
+        }
     }
     if (seconds % 60 > 0) {
-        formattedTime += (seconds % 60) + ' seconds';
+        if (seconds % 60 === 1) {
+            formattedTime += (seconds % 60) + ' second ';
+        } else {
+            formattedTime += (seconds % 60) + ' seconds';
+        }
     }
 
     return formattedTime;

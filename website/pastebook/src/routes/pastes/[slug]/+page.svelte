@@ -7,9 +7,8 @@
     import {formatTimeSince, formatTimeUntil} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
-    import SVGPasteBook from "../../../components/SVGPasteBook.svelte";
+    import SVGPasteBook from "../../../components/svg/SVGPasteBook.svelte";
     import Highlight from "../../../components/Highlight.svelte";
-    import exp from "node:constants";
 
     export let data
 
@@ -147,7 +146,9 @@
     </div>
     {#await promise then response}
         <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
-        <p>Expires in <strong>{untilExpire}</strong></p>
+        {#if untilExpire !== ''}
+            <p id="expire">Expires in <strong>{untilExpire}</strong></p>
+        {/if}
 
         {#if ($warnings.length > 0 || $severes.length > 0)}
             <PotentialIssues/>
@@ -182,7 +183,7 @@
     }
   }
 
-  p {
+  #expire {
     color: gray;
     margin: 0;
     padding: 0 0 10px;

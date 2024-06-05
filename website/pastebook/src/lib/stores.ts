@@ -15,3 +15,4 @@ export const pasteURL = writable("");
 
 export const wrap = writable(false);
 export const unlisted = writable(false);
+export const expire = writable(86400000);

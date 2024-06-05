@@ -4,7 +4,7 @@
     import Mode from "../../components/Mode.svelte";
     import {onMount} from "svelte";
     import type {Paste} from "$lib/paste";
-    import SVGPasteBook from "../../components/SVGPasteBook.svelte";
+    import SVGPasteBook from "../../components/svg/SVGPasteBook.svelte";
     import {loadProgress} from "$lib/stores";
 
     export let data;

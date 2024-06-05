@@ -36,6 +36,6 @@ export async function load({ params }) {
 
     return {
         metadata: metadataPromise,
-        url: "http://localhost:25658/api/get/" + path + "/content",
+        url: "https://pastebook.dev/api/get/" + path + "/content",
     }
 }

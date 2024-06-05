@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {severes, warnings, writableContent, wrap} from "$lib/stores.ts"
+    import {severes, warnings, writableContent, wrap, validScan} from "$lib/stores.ts"
     import detection from "$lib/detections.json"
 
     import type {Issue} from "$lib/issue";
@@ -67,26 +67,49 @@
     warnings.set(warn)
     severes.set(severe)
 
+    if (canScan(contentLines)) validScan.set(true)
+
+    function canScan(lines: string[]): boolean {
+        for (let line of lines) {
+            if (getLineSeverity(line) !== 0) {
+                return true
+            }
+
+            if (reportBook !== true) continue
+            for (let result of results) {
+                if (line.toLowerCase().includes(result.id.toLowerCase())) {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
+    function getLineSeverity(line: string): number {
+        if (line.trim().toLowerCase().includes("[warn") ||
+            line.trim().toLowerCase().includes("/warn]")) {
+            return 1;
+        } else if (line.trim().toLowerCase().includes("[severe]") ||
+            line.trim().toLowerCase().includes("[error") ||
+            line.trim().toLowerCase().includes("/error]") ||
+            line.trim().toLowerCase().startsWith("caused by:") ||
+            line.toLowerCase().startsWith("\tat") ||
+            (line.toLowerCase().includes("exception") &&
+                line.toLowerCase().includes("provided by"))) {
+            return 2;
+        }
+
+        return 0;
+    }
+
     function scanContent(content: String): number {
         if (!scan) {
             return 0;
         }
 
         if (reportBook === false) {
-            if (content.trim().toLowerCase().includes("[warn") ||
-                content.trim().toLowerCase().includes("/warn]")) {
-                return 1;
-            } else if (content.trim().toLowerCase().includes("[severe]") ||
-                content.trim().toLowerCase().includes("[error") ||
-                content.trim().toLowerCase().includes("/error]") ||
-                content.trim().toLowerCase().startsWith("caused by:") ||
-                content.toLowerCase().startsWith("\tat") ||
-                (content.toLowerCase().includes("exception") &&
-                    content.toLowerCase().includes("provided by"))) {
-                return 2;
-            }
-
-            return 0;
+            return getLineSeverity(content)
         }
 
         for (let result of results) {

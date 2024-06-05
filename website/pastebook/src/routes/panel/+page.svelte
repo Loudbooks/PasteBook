@@ -64,6 +64,9 @@
             <Header title="Pastes" created="0"/>
             <div id="none-container">
                 <h1 id="no-pastes">No Pastes Found</h1>
+                <acontainer>
+                    <button onclick="window.location.href = '/new';">NEW</button>
+                </acontainer>
             </div>
         {:else}
             <Header title="Pastes" created="{pastes.length.toString()}"/>
@@ -81,6 +84,7 @@
   #none-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100%;
     position: fixed;
@@ -96,6 +100,7 @@
     font-weight: 900;
     color: black;
     opacity: 0;
+    margin-bottom: 0;
 
     :global(.dark-mode) & {
       color: white;
@@ -108,6 +113,33 @@
       font-size: 3rem;
     }
   }
+
+  acontainer {
+    transition: color 0.2s, transform 0.5s ease;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  #flip {
+    transition: color 0.2s, transform 0.2s ease;
+
+    font-size: 1.7rem;
+    font-family: Gabarito, sans-serif;
+    font-weight: 400;
+    color: gray;
+    opacity: 0;
+    margin-top: 0;
+    text-decoration: underline;
+    animation: fadeUp 0.3s forwards;
+    animation-delay: 0.35s;
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
+  }
+
   @keyframes fadeUp {
     from {
       transform: translateY(30%);
@@ -131,6 +163,39 @@
 
     @media (max-width: 600px) {
       padding-top: 7px + 20px;
+    }
+  }
+
+  button, a {
+    display: inline-block;
+    appearance: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 25px;
+    background-color: transparent;
+    color: gray;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-family: Gabarito, sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0;
+
+    animation: fadeUp 0.3s forwards;
+    animation-delay: 0.35s;
+
+    &:hover {
+      color: darkgray;
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 600px) {
+      font-size: 15px;
+      padding: 5px 0;
     }
   }
 </style>

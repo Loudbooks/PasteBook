@@ -54,4 +54,8 @@ class R2Service {
     fun fileExists(key: String): Boolean {
         return amazonS3?.doesObjectExist("pastebook", key) ?: false
     }
+
+    fun listFileNames(): List<String> {
+        return amazonS3?.listObjects("pastebook")?.objectSummaries?.map { it.key }?.toList() ?: emptyList()
+    }
 }

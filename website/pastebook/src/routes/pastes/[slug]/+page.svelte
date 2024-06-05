@@ -4,11 +4,12 @@
     import Header from "../../../components/Header.svelte";
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
     import {severes, warnings, loadProgress, pasteURL} from "$lib/stores";
-    import {formatTimeSince} from "$lib/timehandler";
+    import {formatTimeSince, formatTimeUntil} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
     import SVGPasteBook from "../../../components/SVGPasteBook.svelte";
     import Highlight from "../../../components/Highlight.svelte";
+    import exp from "node:constants";
 
     export let data
 
@@ -49,10 +50,12 @@
 
     let timeSinceStr = "";
     let created = new Date()
+    let expires = new Date()
     let title = ""
     let reportBook = false
     let wrap = false
     let hashedIP = ""
+    let untilExpire = ""
 
     metadata.then((data) => {
         created = new Date(data.created)
@@ -60,9 +63,11 @@
         reportBook = data.reportBook
         wrap = data.wrap
         hashedIP = data.user.hashedIP
+        expires = new Date(data.expiresAt)
 
         const reloadTime = () => {
             timeSinceStr = formatTimeSince(created)
+            untilExpire = formatTimeUntil(expires)
         }
 
         reloadTime()
@@ -142,6 +147,7 @@
     </div>
     {#await promise then response}
         <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
+        <p>Expires in <strong>{untilExpire}</strong></p>
 
         {#if ($warnings.length > 0 || $severes.length > 0)}
             <PotentialIssues/>
@@ -173,6 +179,19 @@
 
     @media (max-width: 600px) {
       font-size: 6px;
+    }
+  }
+
+  p {
+    color: gray;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: Gabarito, sans-serif;
+    text-align: center;
+
+    @media (max-width: 600px) {
+      font-size: 10px;
     }
   }
 </style>

@@ -185,7 +185,7 @@
   p {
     color: gray;
     margin: 0;
-    padding: 0;
+    padding: 0 0 10px;
     font-size: 14px;
     font-family: Gabarito, sans-serif;
     text-align: center;

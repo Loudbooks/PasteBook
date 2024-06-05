@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Content from "../../components/Content.svelte";
     import Header from "../../components/Header.svelte";
     import Submit from "../../components/new/Submit.svelte";
@@ -7,8 +7,13 @@
     import Pulltab from "../../components/pulltab/Pulltab.svelte";
     import Setting from "../../components/settings/Setting.svelte";
 
-    import {wrap} from "$lib/stores";
+    import {expire, wrap} from "$lib/stores";
     import {unlisted} from "$lib/stores";
+    import DropDown from "../../components/settings/DropDown.svelte";
+
+    function handleCallback(value: number) {
+        expire.set(value);
+    }
 </script>
 
 <main>
@@ -30,6 +35,11 @@
                     <Switch externalHandler={(selected) => {
                          $wrap = selected;
                     }}></Switch>
+                </svelte:fragment>
+            </Setting>
+            <Setting name="Expire Time" description="How long your paste should last before being annihilated">
+                <svelte:fragment slot="setting">
+                    <DropDown callback={handleCallback}></DropDown>
                 </svelte:fragment>
             </Setting>
         </svelte:fragment>

@@ -7,7 +7,7 @@
     import {formatTimeSince, formatTimeUntil} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
-    import SVGPasteBook from "../../../components/SVGPasteBook.svelte";
+    import SVGPasteBook from "../../../components/svg/SVGPasteBook.svelte";
     import Highlight from "../../../components/Highlight.svelte";
 
     export let data
@@ -67,10 +67,6 @@
         const reloadTime = () => {
             timeSinceStr = formatTimeSince(created)
             untilExpire = formatTimeUntil(expires)
-
-            if (untilExpire === '') {
-                window.location.replace("/panel")
-            }
         }
 
         reloadTime()
@@ -150,7 +146,9 @@
     </div>
     {#await promise then response}
         <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
-        <p id="expire">Expires in <strong>{untilExpire}</strong></p>
+        {#if untilExpire !== ''}
+            <p id="expire">Expires in <strong>{untilExpire}</strong></p>
+        {/if}
 
         {#if ($warnings.length > 0 || $severes.length > 0)}
             <PotentialIssues/>

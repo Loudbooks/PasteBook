@@ -48,8 +48,8 @@
     padding: 0;
     font: inherit;
     cursor: pointer;
-    height: 30px;
-    width: 60px;
+    height: 40px;
+    width: 70px;
     margin: 10px;
     border-radius: 30px;
     border: 1px solid #cfcfcf;
@@ -65,7 +65,7 @@
     }
 
     @media (max-width: 600px) {
-        width: 40px;
+      width: 40px;
       height: 25px;
     }
   }
@@ -73,8 +73,8 @@
   .circle {
     transition: all 0.5s ease;
     display: block;
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
     margin-top: 0;
     border-radius: 50%;
     background-color: dimgray;

@@ -64,7 +64,7 @@
     background-color: rgba(0, 0, 0, 0);
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 1001;
     outline: none;
     border: none;
     display: none;
@@ -88,7 +88,7 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     color: black;
-    z-index: 3;
+    z-index: 1003;
 
     border-left: 1px solid #c9c9c9;
     border-right: 1px solid #c9c9c9;
@@ -123,7 +123,7 @@
   }
 
   content {
-    z-index: 3;
+    z-index: 1003;
     width: 65vw;
     position: fixed;
     top: 120%;

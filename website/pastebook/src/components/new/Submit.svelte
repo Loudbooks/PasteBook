@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {unlisted, wrap, writableTitle} from "$lib/stores.ts";
+    import {expire, unlisted, wrap, writableTitle} from "$lib/stores.ts";
     import {writableContent} from "$lib/stores.ts";
     import {onMount} from "svelte";
 
@@ -55,17 +55,23 @@
         xhr.setRequestHeader("title", $writableTitle);
         xhr.setRequestHeader("wrap", String($wrap))
         xhr.setRequestHeader("unlisted", String($unlisted))
+        xhr.setRequestHeader("expires", String($expire))
 
         xhr.send($writableContent);
         xhr.responseType = "text";
         xhr.onload = function () {
             if (xhr.status !== 200) {
                 submit.classList.remove("loading");
-                alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                submit.innerText = "ERROR: " + xhr.status;
                 alreadyUploading = false;
+
+                setTimeout(() => {
+                    submit.innerText = "SUBMIT";
+                }, 3000)
+                return
             }
 
-            window.location.replace(xhr.response)
+            // window.location.replace(xhr.response)
         }
     }
 

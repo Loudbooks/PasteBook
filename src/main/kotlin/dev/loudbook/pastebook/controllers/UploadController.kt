@@ -65,6 +65,10 @@ class UploadController {
             expire += sinceTheEpoch
         }
 
+        if (expire > (sinceTheEpoch + 2.765e+9)) {
+            return ResponseEntity.badRequest().body("Expire time too long")
+        }
+
         val filteredBody = ContentScanner.scanContent(body)
 
         val ip = IPUtils.getIPFromRequest(request) ?: return ResponseEntity.badRequest().body("Failed to get IP")

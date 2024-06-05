@@ -28,7 +28,6 @@ class DeleteHandler {
     }
 
     private fun deleteFiles() {
-        val now = System.currentTimeMillis()
         val deletablePastes = mutableListOf<PastePrivateDTO>()
 
         var index = 0
@@ -37,7 +36,7 @@ class DeleteHandler {
             val expires = it.expires
             index++
             
-            if (System.currentTimeMillis() < expires) {
+            if (System.currentTimeMillis() > expires) {
                 deletablePastes.add(it)
             }
         }

@@ -7,7 +7,6 @@
     onMount(() => {
         let currentUrl = window.location.href;
         validScan.subscribe(() => {
-            console.log($validScan)
             if ($validScan) {
                 let style = document.getElementById("highlight")
                 style.style.display = "block";

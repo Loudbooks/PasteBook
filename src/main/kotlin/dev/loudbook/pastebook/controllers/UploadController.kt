@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
+import kotlin.math.exp
 
 @RestController
 class UploadController {
@@ -58,12 +59,17 @@ class UploadController {
         val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
         val wrap = request.getHeader("wrap")?.toBoolean() ?: false
         val unlisted = request.getHeader("unlisted")?.toBoolean() ?: false
+        var expire = request.getHeader("expire")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
+
+        if (expire < sinceTheEpoch) {
+            expire += sinceTheEpoch
+        }
 
         val filteredBody = ContentScanner.scanContent(body)
 
         val ip = IPUtils.getIPFromRequest(request) ?: return ResponseEntity.badRequest().body("Failed to get IP")
 
-        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap, ip)
+        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap, ip, expire)
         val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         val discordID = try {

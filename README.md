@@ -6,4 +6,4 @@
   
 </div>
 
-PasteBook was created with the intention of being used as a quick-and-easy solution to sharing temporary data with others. All data is to be deleted after nine hours.
+PasteBook was created with the intention of being used as a quick-and-easy solution to sharing temporary data with others. All data is to be deleted after 24 hours, unless specified otherwise.

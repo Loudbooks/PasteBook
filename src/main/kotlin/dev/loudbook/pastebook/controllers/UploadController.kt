@@ -52,14 +52,13 @@ class UploadController {
         var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.horse().name().lowercase()}-${faker.food().ingredient().lowercase()}"
         fileID = fileID.replace(" ", "").replace("'", "").replace(",", "").replace(".", "").replace("(", "").replace(")", "")
 
-        val start = Instant.now()
-        val sinceTheEpoch = start.toEpochMilli()
+        val sinceTheEpoch = System.currentTimeMillis()
 
         val title = request.getHeader("title") ?: return ResponseEntity.badRequest().body("Title is required")
         val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
         val wrap = request.getHeader("wrap")?.toBoolean() ?: false
         val unlisted = request.getHeader("unlisted")?.toBoolean() ?: false
-        var expire = request.getHeader("expire")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
+        var expire = request.getHeader("expires")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
 
         if (expire < sinceTheEpoch) {
             expire += sinceTheEpoch

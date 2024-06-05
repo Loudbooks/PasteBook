@@ -28,17 +28,15 @@ class DeleteHandler {
     }
 
     private fun deleteFiles() {
-        val now = System.currentTimeMillis()
-        val minimum = now - 1000 * 60 * 60 * 9
-
         val deletablePastes = mutableListOf<PastePrivateDTO>()
 
         var index = 0
 
         pasteRepository.findAllDTO().forEach {
+            val expires = it.expires
             index++
             
-            if (it.created < minimum) {
+            if (System.currentTimeMillis() > expires) {
                 deletablePastes.add(it)
             }
         }

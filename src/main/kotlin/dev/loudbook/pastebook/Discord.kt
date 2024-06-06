@@ -11,11 +11,15 @@ import kotlin.concurrent.schedule
 
 @Component
 class Discord(private val properties: Properties) {
-    fun send(name: String, pastebookURL: String, pasteGGURL: String?, expireTime: Long): String {
+    init {
+        send("WE TESTING", "STILL TESTING", null, 1717752907981)
+    }
+
+    final fun send(name: String, pastebookURL: String, pasteGGURL: String?, expireTime: Long): String {
         val content = if (pasteGGURL != null) {
-            "New paste created (${name}): [PasteBook](<${pastebookURL}>) | [PasteGG](${pasteGGURL})\nExpires <t:$expireTime:R>"
+            "New paste created (${name}): [PasteBook](<${pastebookURL}>) | [PasteGG](${pasteGGURL})\\n\\nExpires <t:$expireTime:R>"
         } else {
-             "New paste created: [${name}](<${pastebookURL}>)\nExpires <t:$expireTime:R>"
+             "New paste created: [${name}](<${pastebookURL}>)\\n\\nExpires <t:$expireTime:R>"
         }
 
         val jsonStr = """
@@ -28,6 +32,7 @@ class Discord(private val properties: Properties) {
     """.trimIndent()
 
         val discordURL = properties.getProperty("url")
+        println(jsonStr)
 
         val client = HttpClient.newBuilder().build()
         val request = HttpRequest.newBuilder()

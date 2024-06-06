@@ -147,7 +147,7 @@
     {#await promise then response}
         <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
         {#if untilExpire !== ''}
-            <p id="expire">Expires in <strong>{untilExpire}</strong></p>
+            <p id="expire" class="extra-padding-{$warnings.length > 0 || $severes.length > 0}">Expires in <strong>{untilExpire}</strong></p>
         {/if}
 
         {#if ($warnings.length > 0 || $severes.length > 0)}
@@ -193,6 +193,10 @@
 
     @media (max-width: 600px) {
       font-size: 10px;
+    }
+
+    &.extra-padding-true {
+      padding: 0 0 40px;
     }
   }
 </style>

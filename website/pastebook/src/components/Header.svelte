@@ -28,6 +28,7 @@
 <style lang="scss">
   topcontainer {
     display: flex;
+    overflow: hidden;
 
     input {
       display: inline-block;

@@ -71,7 +71,7 @@
                 return
             }
 
-            // window.location.replace(xhr.response)
+            window.location.replace(xhr.response)
         }
     }
 

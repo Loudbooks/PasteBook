@@ -7,8 +7,7 @@
     import Pulltab from "../../components/pulltab/Pulltab.svelte";
     import Setting from "../../components/settings/Setting.svelte";
 
-    import {expire, wrap} from "$lib/stores";
-    import {unlisted} from "$lib/stores";
+    import {expire, unlisted, wrap} from "$lib/stores";
     import DropDown from "../../components/settings/DropDown.svelte";
 
     function handleCallback(value: number) {
@@ -49,22 +48,22 @@
 </main>
 
 <style lang="scss">
-    div {
-        padding-top: 10px + 30px;
+  div {
+    padding-top: 10px + 30px;
 
-        @media (max-width: 600px) {
-            padding-top: 27px;
-        }
+    @media (max-width: 600px) {
+      padding-top: 27px;
     }
+  }
 
-    main {
-        flex-direction: column;
-        justify-content: center;
-        padding: 0;
-        height: calc(100vh - 30px);
-        margin: 0;
-        flex-shrink: inherit;
-    }
+  main {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    height: calc(100vh - 30px);
+    margin: 0;
+    flex-shrink: inherit;
+  }
 </style>
 
 <svelte:head>

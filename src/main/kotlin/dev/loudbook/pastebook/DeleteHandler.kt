@@ -22,21 +22,24 @@ class DeleteHandler {
     }
 
     private final fun beginLoop() {
-        fixedRateTimer("timer", true, 1000, 1000 * 60 * 30) {
+        fixedRateTimer("timer", true, 1000, 1000 * 60 * 10) {
             deleteFiles()
         }
     }
 
     private fun deleteFiles() {
         val deletablePastes = mutableListOf<PastePrivateDTO>()
+        val allPastes = mutableListOf<PastePrivateDTO>()
 
         var index = 0
 
         pasteRepository.findAllDTO().forEach {
             val expires = it.expires
             index++
+
+            allPastes.add(it)
             
-            if (System.currentTimeMillis() > expires) {
+            if (System.currentTimeMillis() > expires && expires != 0L) {
                 deletablePastes.add(it)
             }
         }
@@ -47,7 +50,14 @@ class DeleteHandler {
             }
 
             pasteRepository.delete(paste)
-            paste.id?.let { r2Service.deleteFile(it) } ?: println("Failed to delete paste with id ${paste.id}")
+            paste.id?.let { r2Service.deleteFile(it) } ?: println("Failed to delete paste; $paste")
+        }
+
+        for (listFileName in r2Service.listFileNames()) {
+            if (allPastes.none{ it.id == listFileName}) {
+                r2Service.deleteFile(listFileName)
+                println("Deleted invalid file $listFileName")
+            }
         }
     }
 }

@@ -60,6 +60,10 @@ class UploadController {
         val unlisted = request.getHeader("unlisted")?.toBoolean() ?: false
         var expire = request.getHeader("expires")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
 
+        if (expire < 60000) {
+            return ResponseEntity.badRequest().body("Expire time too short")
+        }
+
         if (expire < sinceTheEpoch) {
             expire += sinceTheEpoch
         }

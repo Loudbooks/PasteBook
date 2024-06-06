@@ -64,8 +64,10 @@
         }
     }
 
-    warnings.set(warn)
-    severes.set(severe)
+    if (scan) {
+        warnings.set(warn)
+        severes.set(severe)
+    }
 
     if (canScan(contentLines)) validScan.set(true)
 

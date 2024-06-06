@@ -81,7 +81,7 @@ class UploadController {
 
         val discordID = try {
             if (!unlisted) {
-                discord.send(title, pastebookURL, null).toLong()
+                discord.send(title, pastebookURL, null, expire / 1000L).toLong()
             } else {
                 0L
             }

@@ -2,8 +2,6 @@ package dev.loudbook.pastebook
 
 import com.google.gson.JsonParser
 import org.springframework.stereotype.Component
-import java.lang.IllegalStateException
-import java.lang.NullPointerException
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -14,10 +12,12 @@ import kotlin.concurrent.schedule
 @Component
 class Discord(private val properties: Properties) {
     fun send(name: String, pastebookURL: String, pasteGGURL: String?): String {
+        val seconds = System.currentTimeMillis() / 1000L
+
         val content = if (pasteGGURL != null) {
-            "New paste created (${name}): [PasteBook](<${pastebookURL}>) | [PasteGG](${pasteGGURL})"
+            "New paste created (${name}): [PasteBook](<${pastebookURL}>) | [PasteGG](${pasteGGURL})\nExpires <t:$seconds:R>"
         } else {
-             "New paste created: [${name}](<${pastebookURL}>)"
+             "New paste created: [${name}](<${pastebookURL}>)\nExpires <t:$seconds:R>"
         }
 
         val jsonStr = """

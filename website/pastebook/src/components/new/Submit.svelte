@@ -148,6 +148,7 @@
       border: 1px solid #c9c9c9;
 
       opacity: 0;
+      transform: translateY(30%);
 
       :global(.dark-mode) & {
         background-color: #1a1a1a;

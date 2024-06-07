@@ -22,7 +22,7 @@
 </script>
 
 <toolbar>
-    <h1>PASTEBOOK</h1>
+    <button id="main" on:click={home}>PASTEBOOK</button>
     <buttons>
         <button on:click={home}>HOME</button>
         <button on:click={panel}>PANEL</button>
@@ -65,17 +65,35 @@
       transform: scale(0.95);
     }
 
-    h1, button {
-      transition: opacity 0.7s;
+    button {
+      transition: opacity 0.7s, transform 0.5s, color 0.5s;
       align-self: center;
 
       font-size: 1rem;
       font-weight: 700;
       margin: 0;
-      padding: 0 0 0 30px;
       font-family: Gabarito, sans-serif;
       border: none;
       color: gray;
+
+      padding-left: 20px;
+      padding-right: 30px;
+      background-color: transparent;
+      outline: none;
+
+      @media (max-width: 600px) {
+        padding-left: 5px;
+        padding-right: 20px;
+      }
+
+      &:hover {
+        color: darkgray;
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
 
       @media (max-width: 600px) {
         font-size: 0.6rem;
@@ -85,29 +103,10 @@
 
     buttons {
       display: flex;
-
-      button {
-        transition: transform 0.5s, color 0.5s;
-        padding-left: 20px;
-        padding-right: 30px;
-        background-color: transparent;
-        border: none;
-        outline: none;
-
-        @media (max-width: 600px) {
-          padding-left: 5px;
-          padding-right: 20px;
-        }
-
-        &:hover {
-          color: darkgray;
-          cursor: pointer;
-        }
-
-        &:active {
-          transform: scale(0.95);
-        }
-      }
     }
+  }
+
+  #main {
+    padding-left: 30px;
   }
 </style>

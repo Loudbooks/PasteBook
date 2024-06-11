@@ -81,11 +81,6 @@
       background-color: transparent;
       outline: none;
 
-      @media (max-width: 600px) {
-        padding-left: 5px;
-        padding-right: 20px;
-      }
-
       &:hover {
         color: darkgray;
         cursor: pointer;
@@ -103,6 +98,11 @@
 
     buttons {
       display: flex;
+
+      @media (max-width: 600px) {
+        font-size: 0.6rem;
+        padding-right: 30px;
+      }
     }
   }
 

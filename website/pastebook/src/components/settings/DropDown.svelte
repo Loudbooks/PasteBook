@@ -7,12 +7,7 @@
 </script>
 
 <select on:change={handleCallback}>
-    <option value="3600000">1 hour</option>
-    <option value="43200000">12 hours</option>
-    <option selected="selected" value="86400000">24 hours</option>
-    <option value="604800000">1 week</option>
-    <option value="1209600000">2 weeks</option>
-    <option value="2592000000">1 month</option>
+    <slot name="options"/>
 </select>
 
 <style lang="scss">

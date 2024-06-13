@@ -38,7 +38,16 @@
             </Setting>
             <Setting name="Expire Time" description="How long your paste should last before being annihilated">
                 <svelte:fragment slot="setting">
-                    <DropDown callback={handleCallback}></DropDown>
+                    <DropDown callback={handleCallback}>
+                        <svelte:fragment slot="options">
+                            <option value="3600000">1 hour</option>
+                            <option value="43200000">12 hours</option>
+                            <option selected="selected" value="86400000">24 hours</option>
+                            <option value="604800000">1 week</option>
+                            <option value="1209600000">2 weeks</option>
+                            <option value="2592000000">1 month</option>
+                        </svelte:fragment>
+                    </DropDown>
                 </svelte:fragment>
             </Setting>
         </svelte:fragment>

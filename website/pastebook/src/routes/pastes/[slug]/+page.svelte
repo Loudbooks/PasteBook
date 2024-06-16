@@ -3,7 +3,7 @@
     import Mode from "../../../components/Mode.svelte";
     import Header from "../../../components/Header.svelte";
     import PotentialIssues from "../../../components/PotentialIssues.svelte";
-    import {severes, warnings, loadProgress, pasteURL} from "$lib/stores";
+    import {loadProgress, severes, warnings} from "$lib/stores";
     import {formatTimeSince, formatTimeUntil} from "$lib/timehandler";
     import {error} from "@sveltejs/kit";
     import {onMount, tick} from 'svelte';
@@ -202,7 +202,8 @@
 </style>
 
 <svelte:head>
-    <meta property="og:site_name" content="PasteBook"/>
-    <meta property="og:url" content="{$pasteURL}"/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:title" content=""/>
     <meta name="robots" content="noindex">
 </svelte:head>

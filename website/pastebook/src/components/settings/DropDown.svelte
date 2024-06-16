@@ -21,6 +21,7 @@
     line-height: 1;
     border-radius: 30px;
     height: 40px;
+
     @media (min-width: 600px) {
       background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
       background-size: 15%;
@@ -48,6 +49,7 @@
     }
 
     border: 1px solid #cfcfcf;
+    color: black;
     font-family: Gabarito, sans-serif;
 
     -webkit-appearance: none;

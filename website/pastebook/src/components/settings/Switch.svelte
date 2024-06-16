@@ -62,6 +62,10 @@
       width: 40px;
       height: 25px;
     }
+
+    :active & {
+      transform: scale(0.96);
+    }
   }
 
   :global(.bg-active-true) {

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {severes, warnings, writableContent, wrap, validScan} from "$lib/stores.ts"
+    import {severes, validScan, warnings, wrap, writableContent} from "$lib/stores.ts"
     import detection from "$lib/detections.json"
 
     import type {Issue} from "$lib/issue";
     import {onMount} from "svelte";
 
-    import { page } from '$app/stores';
+    import {page} from '$app/stores';
 
     const scan = $page.url.searchParams.has('inspect');
 
@@ -28,6 +28,11 @@
     }
 
     onMount(() => {
+        if (localStorage.getItem("wrap") !== null && localStorage.getItem("wrap") === "true") {
+            wrap.set(true)
+            wrapPre = true
+        }
+
         wrap.subscribe((value) => {
             let textArea = document.querySelector(".input") as HTMLTextAreaElement | null
 
@@ -234,6 +239,7 @@
 
     @media (max-width: 600px){
       font-size: 10px;
+      padding-right: 12px;
     }
 
     .dark-mode & {
@@ -251,8 +257,8 @@
     white-space: pre;
     font-family: "JetBrains Mono NL", monospace;
     margin: 0;
-    padding-left: 40px;
-    text-indent: -20px;
+    padding-left: 51px;
+    text-indent: -26px;
 
     &.wrap-true {
       white-space: break-spaces;
@@ -260,8 +266,8 @@
 
     @media (max-width: 600px){
       font-size: 11px;
-      padding-left: 39px;
-      text-indent: -17px;
+      padding-left: 30px;
+      text-indent: -18px;
     }
 
     :global(body.dark-mode) & {

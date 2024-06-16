@@ -1,7 +1,7 @@
 <script lang="ts">
     export let externalHandler: ((value: boolean) => void);
 
-    let isSelected = false;
+    export let isSelected = false;
 
     let circle: HTMLElement;
     let background: HTMLElement;

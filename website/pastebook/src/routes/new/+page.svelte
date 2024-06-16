@@ -9,10 +9,21 @@
 
     import {expire, unlisted, wrap} from "$lib/stores";
     import DropDown from "../../components/settings/DropDown.svelte";
+    import {onMount} from "svelte";
 
     function handleCallback(value: number) {
         expire.set(value);
     }
+
+    let defaultExpire = 86400000;
+    let defaultUnlisted = false;
+    let forceWrap = false;
+
+    onMount(() => {
+        defaultExpire = parseInt(localStorage.getItem("default-expire") ?? "86400000");
+        defaultUnlisted = localStorage.getItem("default-unlisted") === "true";
+        forceWrap = localStorage.getItem("wrap") === "true";
+    });
 </script>
 
 <main>
@@ -24,14 +35,14 @@
         <svelte:fragment slot="content">
             <Setting name="Unlisted" description="Hides your paste from the public">
                 <svelte:fragment slot="setting">
-                    <Switch externalHandler={(selected) => {
+                    <Switch isSelected={defaultUnlisted} externalHandler={(selected) => {
                         $unlisted = selected;
                     }}></Switch>
                 </svelte:fragment>
             </Setting>
             <Setting name="Text Wrap" description="Wraps your text to the edges of display">
                 <svelte:fragment slot="setting">
-                    <Switch externalHandler={(selected) => {
+                    <Switch isSelected={forceWrap} externalHandler={(selected) => {
                          $wrap = selected;
                     }}></Switch>
                 </svelte:fragment>
@@ -40,12 +51,36 @@
                 <svelte:fragment slot="setting">
                     <DropDown callback={handleCallback}>
                         <svelte:fragment slot="options">
-                            <option value="3600000">1 hour</option>
-                            <option value="43200000">12 hours</option>
-                            <option selected="selected" value="86400000">24 hours</option>
-                            <option value="604800000">1 week</option>
-                            <option value="1209600000">2 weeks</option>
-                            <option value="2592000000">1 month</option>
+                            {#if defaultExpire === 3600000}
+                                <option value="3600000" selected="selected">1 hour</option>
+                            {:else}
+                                <option value="3600000">1 hour</option>
+                            {/if}
+                            {#if defaultExpire === 43200000}
+                                <option value="43200000" selected="selected">12 hours</option>
+                            {:else}
+                                <option value="43200000">12 hours</option>
+                            {/if}
+                            {#if defaultExpire === 86400000}
+                                <option value="86400000" selected="selected">24 hours</option>
+                            {:else}
+                                <option value="86400000">24 hours</option>
+                            {/if}
+                            {#if defaultExpire === 604800000}
+                                <option value="604800000" selected="selected">1 week</option>
+                            {:else}
+                                <option value="604800000">1 week</option>
+                            {/if}
+                            {#if defaultExpire === 1209600000}
+                                <option value="1209600000" selected="selected">2 weeks</option>
+                            {:else}
+                                <option value="1209600000">2 weeks</option>
+                            {/if}
+                            {#if defaultExpire === 2592000000}
+                                <option value="2592000000" selected="selected">1 month</option>
+                            {:else}
+                                <option value="2592000000">1 month</option>
+                            {/if}
                         </svelte:fragment>
                     </DropDown>
                 </svelte:fragment>

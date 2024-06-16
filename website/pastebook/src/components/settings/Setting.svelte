@@ -29,6 +29,8 @@
   }
 
   settingtitle {
+    transition: color 0.5s ease;
+
     font-size: 1.5em;
     font-weight: bold;
     margin-right: 10px;

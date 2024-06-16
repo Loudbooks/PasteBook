@@ -124,7 +124,7 @@
             idElement.style.height = "13px"
         }
     }
-    
+
     function undoHandler() {
         let idElement = document.getElementById("hash")
 
@@ -147,7 +147,8 @@
     {#await promise then response}
         <Content content="{response}" reportBook="{reportBook}" wrapPre="{wrap}"></Content>
         {#if untilExpire !== ''}
-            <p id="expire" class="extra-padding-{$warnings.length > 0 || $severes.length > 0}">Expires in <strong>{untilExpire}</strong></p>
+            <p id="expire" class="extra-padding-{$warnings.length > 0 || $severes.length > 0}">Expires in
+                <strong>{untilExpire}</strong></p>
         {/if}
 
         {#if ($warnings.length > 0 || $severes.length > 0)}
@@ -202,8 +203,5 @@
 </style>
 
 <svelte:head>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:title" content=""/>
     <meta name="robots" content="noindex">
 </svelte:head>

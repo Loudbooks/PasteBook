@@ -122,24 +122,6 @@
     }
   }
 
-  #flip {
-    transition: color 0.2s, transform 0.2s ease;
-
-    font-size: 1.7rem;
-    font-family: Gabarito, sans-serif;
-    font-weight: 400;
-    color: gray;
-    opacity: 0;
-    margin-top: 0;
-    text-decoration: underline;
-    animation: fadeUp 0.3s forwards;
-    animation-delay: 0.35s;
-
-    @media (max-width: 600px) {
-      font-size: 1rem;
-    }
-  }
-
   @keyframes fadeUp {
     from {
       transform: translateY(30%);
@@ -166,7 +148,7 @@
     }
   }
 
-  button, a {
+  button {
     display: inline-block;
     appearance: none;
     border: none;

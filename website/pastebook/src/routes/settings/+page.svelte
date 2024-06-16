@@ -162,6 +162,13 @@
     to {
       opacity: 1;
     }
-
   }
 </style>
+
+<svelte:head>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="PasteBook Settings"/>
+    <meta property="og:site_name" content="PasteBook"/>
+    <meta property="og:url" content="https://pastebook.dev/settings"/>
+    <meta property="og:description" content="Manage your settings for PasteBook."/>
+</svelte:head>

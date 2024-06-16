@@ -30,7 +30,23 @@
         }
 
         defaultExpire = parseInt(localStorage.getItem("default-expire") ?? "86400000");
-        console.log(defaultExpire);
+    });
+
+    onMount(() => {
+        console.log("aaa");
+        if (localStorage.getItem('dark-mode') === null) {
+            localStorage.setItem('dark-mode', 'true');
+        }
+
+        darkMode = localStorage.getItem('dark-mode') === 'true';
+
+        if (darkMode) {
+            document.body.classList.add('dark-mode');
+            document.body.style.background = '#000000';
+        } else {
+            document.body.classList.remove('dark-mode');
+            document.body.style.backgroundColor = '#ffffff';
+        }
     });
 </script>
 

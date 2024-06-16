@@ -35,6 +35,7 @@
     text-align: left;
     align-self: start;
     color: black;
+    font-family: Gabarito, sans-serif;
 
     @media (max-width: 768px) {
       font-size: 1em;
@@ -50,6 +51,7 @@
     color: #666;
     text-align: left;
     align-self: start;
+    font-family: Gabarito, sans-serif;
 
     @media (max-width: 768px) {
       font-size: 0.7em;

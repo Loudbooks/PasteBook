@@ -12,19 +12,15 @@
         circle.classList.remove("selected");
 
         if (isSelected) {
-            if (document.body.classList.contains("dark-mode")) {
-                background.style.backgroundColor = "#333";
-            } else {
-                background.style.backgroundColor = "#cfcfcf";
-            }
+            background.classList.remove("bg-non-active");
+            background.classList.add("bg-selected");
+
             circle.classList.remove("non-active");
             circle.classList.add("selected");
         } else {
-            if (document.body.classList.contains("dark-mode")) {
-                background.style.backgroundColor = "#1a1a1a";
-            } else {
-                background.style.backgroundColor = "#eeeeee";
-            }
+            background.classList.remove("bg-selected");
+            background.classList.add("bg-non-active");
+
             circle.classList.remove("selected");
             circle.classList.add("non-active");
         }
@@ -34,8 +30,8 @@
 </script>
 
 <settings>
-    <button bind:this={background} class="container" on:click={toggleSelected}>
-        <circ bind:this={circle} class="circle non-active"></circ>
+    <button bind:this={background} class="container bg-active-{isSelected}" on:click={toggleSelected}>
+        <circ bind:this={circle} class="circle active-{isSelected}"></circ>
     </button>
 </settings>
 
@@ -53,20 +49,34 @@
     margin: 10px;
     border-radius: 30px;
     border: 1px solid #cfcfcf;
-    background-color: #eeeeee;
 
     :hover & {
       cursor: pointer;
     }
 
     :global(.dark-mode) & {
-      background-color: #1a1a1a;
       border: 1px solid #333;
     }
 
     @media (max-width: 600px) {
       width: 40px;
       height: 25px;
+    }
+  }
+
+  :global(.bg-active-true) {
+    background-color: #cfcfcf;
+
+    :global(.dark-mode) & {
+      background-color: #333;
+    }
+  }
+
+  :global(.bg-active-false) {
+    background-color: #eeeeee;
+
+    :global(.dark-mode) & {
+      background-color: #1a1a1a;
     }
   }
 
@@ -91,7 +101,7 @@
     padding: 0;
   }
 
-  .non-active {
+  .active-false {
     margin-left: 2px;
 
     @media (max-width: 600px) {
@@ -99,7 +109,7 @@
     }
   }
 
-  :global(.selected) {
+  :global(.active-true) {
     position: relative;
     margin-left: 31px;
 

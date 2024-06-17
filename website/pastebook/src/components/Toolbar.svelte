@@ -28,7 +28,6 @@
 <toolbar>
     <button id="main" on:click={home}>PASTEBOOK</button>
     <buttons>
-        <button on:click={home}>HOME</button>
         <button on:click={panel}>PANEL</button>
         <button on:click={settings}>SETTINGS</button>
         <button on:click={newPaste}>NEW</button>

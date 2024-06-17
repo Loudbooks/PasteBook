@@ -9,20 +9,6 @@
     let wrap = false;
     let defaultUnlisted = false;
     let defaultExpire = 86400000;
-    let theme: string;
-
-    let themeOptions = [
-        {value: "dark", text: "Dark"},
-        {value: "light", text: "Light"}
-    ];
-    let defaultExpireOptions = [
-        {value: 3600000, text: "1 hour"},
-        {value: 43200000, text: "12 hours"},
-        {value: 86400000, text: "24 hours"},
-        {value: 604800000, text: "1 week"},
-        {value: 1209600000, text: "2 weeks"},
-        {value: 2592000000, text: "1 month"}
-    ];
 
     onMount(() => {
         darkMode = localStorage.getItem("dark-mode") === "true";
@@ -44,8 +30,6 @@
         }
 
         defaultExpire = parseInt(localStorage.getItem("default-expire") ?? "86400000");
-
-        theme = localStorage.getItem("theme") ?? "dark";
     });
 
     onMount(() => {
@@ -73,21 +57,20 @@
     <Header title="Settings" created=""></Header>
     <div id="container">
         <div id="settings">
-            <Setting name="Theme" description="Changes the look of PasteBook">
+            <Setting name="Dark Mode" description="Activates the dark side">
                 <svelte:fragment slot="setting">
-                    <DropDown callback={(value) => {
-                        localStorage.setItem("theme", value.toString());
-                    }}>
-                        <svelte:fragment slot="options">
-                            {#each themeOptions as option}
-                                {#if theme === option.value}
-                                    <option value={option.value} selected="selected">{option.text}</option>
-                                {:else}
-                                    <option value={option.value}>{option.text}</option>
-                                {/if}
-                            {/each}
-                        </svelte:fragment>
-                    </DropDown>
+                    <Switch isSelected={darkMode} externalHandler={(selected) => {
+                        if (selected) {
+                            document.body.classList.add('dark-mode');
+                            document.body.style.background = '#000000';
+                        } else {
+                            document.body.classList.remove('dark-mode');
+                            document.body.style.backgroundColor = '#ffffff';
+                        }
+
+                        localStorage.setItem("dark-mode", selected.toString());
+
+                        }}></Switch>
                 </svelte:fragment>
             </Setting>
             <Setting name="Force Text Wrap" description="Forcefully enable text wrap on all pastes">
@@ -97,12 +80,6 @@
                         }}></Switch>
                 </svelte:fragment>
             </Setting>
-            </div>
-            </div>
-            <br>
-    <Header title="Default Paste Options" created="" subtitle></Header>
-            <div id="container" class="default-settings">
-        <div id="settings">
             <Setting name="Default Unlisted" description="Default paste visibility">
                 <svelte:fragment slot="setting">
                     <Switch isSelected={defaultUnlisted} externalHandler={(selected) => {
@@ -116,13 +93,36 @@
                         localStorage.setItem("default-expire", value.toString());
                     }}>
                         <svelte:fragment slot="options">
-                            {#each defaultExpireOptions as option}
-                                {#if defaultExpire === option.value}
-                                    <option value={option.value} selected="selected">{option.text}</option>
-                                {:else}
-                                    <option value={option.value}>{option.text}</option>
-                                {/if}
-                            {/each}
+                            {#if defaultExpire === 3600000}
+                                <option value="3600000" selected="selected">1 hour</option>
+                            {:else}
+                                <option value="3600000">1 hour</option>
+                            {/if}
+                            {#if defaultExpire === 43200000}
+                                <option value="43200000" selected="selected">12 hours</option>
+                            {:else}
+                                <option value="43200000">12 hours</option>
+                            {/if}
+                            {#if defaultExpire === 86400000}
+                                <option value="86400000" selected="selected">24 hours</option>
+                            {:else}
+                                <option value="86400000">24 hours</option>
+                            {/if}
+                            {#if defaultExpire === 604800000}
+                                <option value="604800000" selected="selected">1 week</option>
+                            {:else}
+                                <option value="604800000">1 week</option>
+                            {/if}
+                            {#if defaultExpire === 1209600000}
+                                <option value="1209600000" selected="selected">2 weeks</option>
+                            {:else}
+                                <option value="1209600000">2 weeks</option>
+                            {/if}
+                            {#if defaultExpire === 2592000000}
+                                <option value="2592000000" selected="selected">1 month</option>
+                            {:else}
+                                <option value="2592000000">1 month</option>
+                            {/if}
                         </svelte:fragment>
                     </DropDown>
                 </svelte:fragment>
@@ -132,11 +132,6 @@
 </main>
 
 <style lang="scss">
-
-.default-settings {
-    margin-top: 200px;
-}
-
   #container {
     transition: all 0.5s ease;
 

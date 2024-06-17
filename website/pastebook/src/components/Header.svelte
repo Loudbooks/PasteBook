@@ -1,10 +1,9 @@
 <script lang="ts">
     import {pasteName, writableTitle} from "$lib/stores.ts";
 
-    export let title = "";
-    export let created = "";
-    export let newReport: string = "false";
-    export let subtitle: boolean = false;
+    export let title = ""
+    export let created = ""
+    export let newReport: string = "false"
 
     pasteName.set(title)
 
@@ -17,7 +16,7 @@
     {#if newReport === "true"}
         <input id="title" placeholder="Title..." on:input="{onType}">
     {:else}
-        <name class={subtitle ? 'subtitle' : ''}>
+        <name>
             {title}
         </name>
         <created>
@@ -82,11 +81,6 @@
       }
 
       transition: color 0.2s ease;
-    }
-
-    name.subtitle {
-      font-size: 25px;
-      font-weight: 500;
     }
 
     created {

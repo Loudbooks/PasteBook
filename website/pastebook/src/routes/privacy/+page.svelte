@@ -1018,22 +1018,6 @@
     }
   }
 
-  ul > li > ul {
-    list-style-type: circle;
-
-    @media (max-width: 600px) {
-      font-size: 10px;
-    }
-  }
-
-  ul > li > ul > li > ul {
-    list-style-type: square;
-
-    @media (max-width: 600px) {
-      font-size: 10px;
-    }
-  }
-
   ol li {
     font-family: Gabarito, sans-serif;
   }
@@ -1046,4 +1030,6 @@
     <meta property="og:url" content="https://pastebook.dev/privacy">
     <meta property="og:description"
           content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes."/>
+    <meta name="description"
+          content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes. "/>
 </svelte:head>

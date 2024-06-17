@@ -1017,10 +1017,6 @@
       color: white;
     }
   }
-
-  ol li {
-    font-family: Gabarito, sans-serif;
-  }
 </style>
 
 <svelte:head>

@@ -2,32 +2,37 @@
     import {loadProgress} from "$lib/stores";
     import {onMount} from "svelte";
 
+    let fullContainer: HTMLElement
+    let svgContainer: HTMLElement
+
     onMount(() => {
         loadProgress.subscribe((value) => {
             let end = 900 - (900 * value) / 100;
 
             document.querySelectorAll("svg path").forEach((path) => {
+                let svgPath = path as SVGPathElement;
+
                 if (value != 900) {
-                    path.style.strokeOpacity = 1;
+                    svgPath.style.strokeOpacity = "1";
                 }
 
-                path.style.strokeDashoffset = end;
+                svgPath.style.strokeDashoffset = "end";
             })
 
             if (end == 0) {
-                document.getElementById("full-container").style.opacity = "0";
-                document.getElementById("svg-container").style.transform = "scale(1.2)";
+                fullContainer.style.opacity = "0";
+                svgContainer.style.transform = "scale(1.2)";
 
                 setTimeout(() => {
-                    document.getElementById("full-container").style.display = "none";
+                    fullContainer.style.display = "none";
                 }, 300)
             }
         });
     })
 </script>
 
-<full-container id="full-container">
-    <div id="svg-container">
+<full-container id="full-container" bind:this={fullContainer}>
+    <div id="svg-container" bind:this={svgContainer}>
         <svg width="1414" height="215" viewBox="0 0 1414 215" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1309.76 103.103V2.69998V1.69998H1308.76H1254.46H1253.46V2.69998V207V208H1254.46H1308.76H1309.76V207V159.572L1346.67 207.609L1346.97 208H1347.46H1409.86H1411.9L1410.65 206.389L1350.38 128.253L1408.52 60.6521L1409.94 59H1407.76H1348.36H1347.91L1347.61 59.3458L1309.76 103.103Z"
                   stroke="black" stroke-width="2"/>

@@ -143,10 +143,13 @@
 
     function scrollToElement(elementId: string) {
         const element = document.getElementById(elementId);
+        const container = document.querySelector("content-container");
 
-        if (element === null) return;
+        if (element === null || container === null) return;
 
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const currentX = container.scrollLeft;
+        element.scrollIntoView({block: "center", inline: "center", behavior: "smooth"});
+        container.scrollLeft = currentX;
     }
 
     function updateLineView(newLine: number) {

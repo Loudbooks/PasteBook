@@ -207,6 +207,10 @@
         newParams.set('line', id);
         pushState(currentURL.origin + currentURL.pathname + '?' + newParams.toString(), {replaceState: true});
     }
+
+    function removeSpaces(line: string): string {
+        return line.replace(/\s/g, '')
+    }
 </script>
 
 <content-container class="new-{newReport}">
@@ -214,7 +218,7 @@
         <div style="display: table">
             <lines>
                 {#each contentLines as line, index}
-                    <linecontainer id="line-container-{getIndex(index + 1).replace(' ', '')}" class="wrap-{wrapPre}"><a role="button" id="line-{getIndex(index + 1).replace(' ', '')}" on:click={clickNumber}><number class="number" id="line-number-{getIndex(index + 1).replace(' ', '')}">{getIndex(index + 1)}</number></a><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
+                    <linecontainer id="line-container-{removeSpaces(getIndex(index + 1))}" class="wrap-{wrapPre}"><a role="button" id="line-{removeSpaces(getIndex(index + 1))}" on:click={clickNumber}><number class="number" id="line-number-{removeSpaces(getIndex(index + 1))}">{getIndex(index + 1)}</number></a><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
                 {/each}
              </lines>
         </div>

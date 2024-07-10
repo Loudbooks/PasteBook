@@ -5,7 +5,7 @@
     export let highlight = false;
 
     onMount(() => {
-        let currentUrl = window.location.href;
+        let currentUrl = new URL(window.location.href);
         validScan.subscribe(() => {
             if ($validScan) {
                 let style = document.getElementById("highlight")
@@ -21,23 +21,37 @@
         }
 
         highlight = localStorage.getItem('auto-highlight') === 'true';
-        if (currentUrl.includes("?inspect")) highlight = true;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.has('inspect')) highlight = true;
 
         if (highlight) {
-            if (!currentUrl.includes("?inspect")) window.location.href = currentUrl + `?inspect`
+            if (!urlParams.has('inspect')) {
+                let newParams = new URLSearchParams([...Array.from(currentUrl.searchParams.entries()), ...Object.entries({inspect: "true"})]);
+                window.location.href = currentUrl.origin + currentUrl.pathname + '?' + newParams.toString();
+            }
         }
     });
 
     function toggleHighlight() {
         highlight = !highlight;
-        let currentUrl = window.location.href;
+        let currentUrl = new URL(window.location.href)
 
         if (highlight) {
             localStorage.setItem('auto-highlight', 'true');
-            window.location.href = currentUrl + `?inspect`
+            let currentParams = new URLSearchParams(window.location.search);
+            currentParams.set('inspect', 'true');
+            window.location.href = currentUrl.origin + currentUrl.pathname + '?' + currentParams.toString();
         } else {
             localStorage.setItem('auto-highlight', 'false');
-            window.location.href = currentUrl.replace('?inspect', '');
+            let currentParams = new URLSearchParams(window.location.search);
+            currentParams.delete('inspect');
+            if (currentParams.toString() === '') {
+                window.location.href = currentUrl.origin + currentUrl.pathname;
+                return;
+            }
+
+            window.location.href = currentUrl.origin + currentUrl.pathname + '?' + currentParams.toString();
         }
     }
 </script>

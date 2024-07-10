@@ -6,6 +6,7 @@
     import {onMount} from "svelte";
 
     import {page} from '$app/stores';
+    import {pushState} from "$app/navigation";
 
     const scan = $page.url.searchParams.has('inspect');
 
@@ -15,6 +16,8 @@
     export let wrapPre: boolean = false;
 
     const results: Issue[] = [];
+
+    let currentScrolledLine = 0;
 
     for (const key in detection) {
         let issue = {
@@ -137,15 +140,84 @@
         let maxStringLength = max.toString().length
         return index.toString().padStart(maxStringLength, " ")
     }
+
+    function scrollToElement(elementId: string) {
+        const element = document.getElementById(elementId);
+
+        if (element === null) return;
+
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateLineView(newLine: number) {
+        let newLineElement = document.getElementById("line-container-" + newLine)
+        let newLineElementNumber = document.getElementById("line-number-" + newLine)
+
+        if (currentScrolledLine != 0) {
+            let currentLine = document.getElementById("line-container-" + currentScrolledLine)
+            let newLineElementNumber = document.getElementById("line-number-" + currentScrolledLine)
+            currentLine.style.marginTop = "0px"
+            currentLine.style.marginBottom = "0px"
+
+            newLineElementNumber.style.fontWeight = "normal"
+        }
+
+        newLineElement.style.marginTop = "20px"
+        newLineElement.style.marginBottom = "20px"
+
+        newLineElementNumber.style.fontWeight = "1000"
+        currentScrolledLine = newLine
+    }
+
+    function getLineNumberFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('line');
+    }
+
+    onMount(() => {
+        const lineNumber = getLineNumberFromURL();
+        if (lineNumber) {
+            let element = document.getElementById("line-" + lineNumber)
+            if (element !== null) {
+                currentScrolledLine = parseInt(lineNumber)
+                updateLineView(parseInt(lineNumber))
+
+                if (element.scrollIntoView) {
+                    element.scrollIntoView({behavior: 'smooth', block: 'center'});
+                }
+            }
+        }
+    })
+
+    function clickNumber(event: MouseEvent) {
+        let element = event.currentTarget as HTMLElement
+        scrollToElement(element.id)
+
+        let id = element.id.replace("line-", "")
+
+        if (currentScrolledLine === parseInt(id)) {
+            return;
+        }
+
+        updateLineView(parseInt(id))
+        currentScrolledLine = parseInt(id)
+
+        let currentURL = new URL(window.location.href)
+        let newParams = new URLSearchParams(window.location.search);
+        newParams.set('line', id);
+        pushState(currentURL.origin + currentURL.pathname + '?' + newParams.toString(), {replaceState: true});
+    }
 </script>
 
 <content-container class="new-{newReport}">
     {#if !newReport}
-        <lines>
-            {#each contentLines as line, index}
-                <linecontainer class="wrap-{wrapPre}"><number class="number">{getIndex(index + 1)}</number><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
-            {/each}
-        </lines>
+        <div style="display: table">
+            <lines>
+                {#each contentLines as line, index}
+                    <linecontainer id="line-container-{getIndex(index + 1).replace(' ', '')}" class="wrap-{wrapPre}"><a role="button" id="line-{getIndex(index + 1).replace(' ', '')}" on:click={clickNumber}><number class="number" id="line-number-{getIndex(index + 1).replace(' ', '')}">{getIndex(index + 1)}</number></a><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
+                {/each}
+             </lines>
+        </div>
     {:else}
         <textarea class="input" on:input="{onInput}" />
     {/if}
@@ -208,6 +280,7 @@
 
   linecontainer {
     display: block;
+    margin: 0;
     &:hover {
       .number {
         color: #919191;
@@ -246,12 +319,12 @@
       color: #999;
     }
 
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, font-weight 0.5s ease;
   }
 
   linecontainer {
     display: block;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, margin 0.5s ease;
 
     font-size: 13px;
     white-space: pre;
@@ -292,6 +365,12 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  a {
+    &:hover {
+      cursor: pointer;
     }
   }
 </style>

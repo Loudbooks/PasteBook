@@ -177,13 +177,15 @@
     onMount(() => {
         const lineNumber = getLineNumberFromURL();
         if (lineNumber) {
-            let element = document.getElementById("line-" + lineNumber)
+            let element = document.getElementById("line-number-" + lineNumber)
             if (element !== null) {
                 currentScrolledLine = parseInt(lineNumber)
                 updateLineView(parseInt(lineNumber))
 
-                if (element.scrollIntoView) {
-                    element.scrollIntoView({behavior: 'smooth', block: 'center'});
+                if ($wrap) {
+                    window.scrollTo(0, element.getBoundingClientRect().y - window.innerHeight / 2 + 200)
+                } else {
+                    window.scrollTo(0, element.getBoundingClientRect().y - window.innerHeight / 2)
                 }
             }
         }
@@ -191,9 +193,10 @@
 
     function clickNumber(event: MouseEvent) {
         let element = event.currentTarget as HTMLElement
-        scrollToElement(element.id)
 
         let id = element.id.replace("line-", "")
+
+            scrollToElement("line-container-" + id)
 
         if (currentScrolledLine === parseInt(id)) {
             return;

@@ -348,7 +348,7 @@
     }
 
     @media (max-width: 600px){
-      font-size: 11px;
+      font-size: 10px;
       padding-left: 30px;
       text-indent: -18px;
     }

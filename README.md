@@ -2,7 +2,7 @@
   <h1>PasteBook</h1>
   <p>PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes.</p>
   
-  ![Static Badge](https://img.shields.io/badge/Website-brightgreen?style=for-the-badge&link=https%3A%2F%2Fpastebook.dev)
+  [![Static Badge](https://img.shields.io/badge/Website-brightgreen?style=for-the-badge)](https://pastebook.dev)
   
 </div>
 

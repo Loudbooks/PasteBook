@@ -73,6 +73,10 @@
         let clear
         clearInterval(clear)
         clear = setInterval(reloadTime, 1000)
+
+        onMount(() => {
+            document.title = title + " • PasteBook"
+        })
     });
 
     let x = null;
@@ -81,7 +85,6 @@
     onMount(() => {
         document.addEventListener('mousemove', onMouseUpdate, false);
         document.addEventListener('mouseenter', onMouseUpdate, false);
-        document.title = title + " • PasteBook"
 
         function onMouseUpdate(e) {
             x = e.pageX;

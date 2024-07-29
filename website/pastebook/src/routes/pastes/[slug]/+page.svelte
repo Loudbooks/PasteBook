@@ -64,6 +64,8 @@
         hashedIP = data.user.hashedIP
         expires = new Date(data.expiresAt)
 
+        document.title = title + " • PasteBook"
+
         const reloadTime = () => {
             timeSinceStr = formatTimeSince(created)
             untilExpire = formatTimeUntil(expires)

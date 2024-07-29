@@ -73,10 +73,6 @@
         let clear
         clearInterval(clear)
         clear = setInterval(reloadTime, 1000)
-
-        onMount(() => {
-            document.title = title + " • PasteBook"
-        })
     });
 
     let x = null;
@@ -135,6 +131,10 @@
         idElement.style.opacity = 0
         idElement.style.height = "0"
     }
+
+    function loadHandler() {
+        document.title = title + " • PasteBook"
+    }
 </script>
 
 <main>
@@ -144,7 +144,7 @@
     <SVGPasteBook/>
     <Mode/>
     <Highlight/>
-    <div id="hoverable" on:mouseenter={handler} on:mouseleave={undoHandler} role="tooltip">
+    <div id="hoverable" on:load={loadHandler} on:mouseenter={handler} on:mouseleave={undoHandler} role="tooltip">
         <Header title="{title}" created="{timeSinceStr}"></Header>
         <p id="hash">{hashedIP}</p>
     </div>

@@ -64,8 +64,6 @@
         hashedIP = data.user.hashedIP
         expires = new Date(data.expiresAt)
 
-        document.title = title + " • PasteBook"
-
         const reloadTime = () => {
             timeSinceStr = formatTimeSince(created)
             untilExpire = formatTimeUntil(expires)
@@ -83,6 +81,7 @@
     onMount(() => {
         document.addEventListener('mousemove', onMouseUpdate, false);
         document.addEventListener('mouseenter', onMouseUpdate, false);
+        document.title = title + " • PasteBook"
 
         function onMouseUpdate(e) {
             x = e.pageX;

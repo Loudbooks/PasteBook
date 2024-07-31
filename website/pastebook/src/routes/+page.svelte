@@ -150,7 +150,6 @@
       text-align: center;
 
       &:hover {
-        margin: 0 13px;
         cursor: default;
       }
 

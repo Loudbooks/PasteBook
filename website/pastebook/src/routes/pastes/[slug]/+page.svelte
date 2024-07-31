@@ -96,6 +96,7 @@
                 isShifting = true
 
                 let hoveredElement = document.elementFromPoint(x, y).parentElement.parentElement
+                if (hoveredElement === null) return
 
                 if (hoveredElement.id === "hoverable") {
                     handler()
@@ -116,7 +117,9 @@
         }
 
         let idElement = document.getElementById("hash")
-        idElement.style.opacity = 1
+        if (idElement === null) return
+
+        idElement.style.opacity = "1"
 
         if (window.innerWidth < 600) {
             idElement.style.height = "7px"
@@ -127,6 +130,7 @@
 
     function undoHandler() {
         let idElement = document.getElementById("hash")
+        if (idElement === null) return
 
         idElement.style.opacity = 0
         idElement.style.height = "0"

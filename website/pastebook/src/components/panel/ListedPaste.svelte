@@ -22,7 +22,7 @@
     }
 
     function onClick() {
-        window.location.href = `/pastes/${paste.id}`
+        window.location.href = `/p/${paste.id}`
     }
 </script>
 

@@ -27,7 +27,6 @@ dependencies {
     implementation("com.github.vladimir-bukhtoyarov:bucket4j-core:8.0.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("net.datafaker:datafaker:2.1.0")
     implementation("me.paulschwarz:spring-dotenv:4.0.0")
     implementation("commons-validator:commons-validator:1.8.0")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.717")

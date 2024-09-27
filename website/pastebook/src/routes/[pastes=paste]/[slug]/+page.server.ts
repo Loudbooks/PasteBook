@@ -30,7 +30,7 @@ export async function load({ params }) {
         });
     }
 
-    pasteURL.set("https://pastebook.dev/pastes/" + path);
+    pasteURL.set("https://pastebook.dev/p/" + path);
 
     let metadataPromise = response.json();
 

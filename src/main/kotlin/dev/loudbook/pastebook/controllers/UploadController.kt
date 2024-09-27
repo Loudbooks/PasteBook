@@ -10,15 +10,12 @@ import dev.loudbook.pastebook.mongo.PasteRepository
 import dev.loudbook.pastebook.mongo.UserService
 import io.github.bucket4j.Bucket
 import jakarta.servlet.http.HttpServletRequest
-import net.datafaker.Faker
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.time.Instant
-import kotlin.math.exp
 
 @RestController
 class UploadController {
@@ -34,7 +31,6 @@ class UploadController {
     @Autowired
     lateinit var userService: UserService
 
-    private val faker = Faker()
     private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)
 
     @PostMapping(value = ["/api/upload", "/upload"])
@@ -49,15 +45,14 @@ class UploadController {
 
         val header = HttpHeaders()
 
-        var fileID = "${faker.cat().name().lowercase()}-${faker.dog().name().lowercase()}-${faker.horse().name().lowercase()}-${faker.food().ingredient().lowercase()}"
-        fileID = fileID.replace(" ", "").replace("'", "").replace(",", "").replace(".", "").replace("(", "").replace(")", "")
+        var fileID = generateRandomString()
 
         val sinceTheEpoch = System.currentTimeMillis()
 
         val title = request.getHeader("title") ?: return ResponseEntity.badRequest().body("Title is required")
-        val reportBook = request.getHeader("reportBook")?.toBoolean() ?: false
-        val wrap = request.getHeader("wrap")?.toBoolean() ?: false
-        val unlisted = request.getHeader("unlisted")?.toBoolean() ?: false
+        val reportBook = request.getHeader("reportBook")?.toBoolean() == true
+        val wrap = request.getHeader("wrap")?.toBoolean() == true
+        val unlisted = request.getHeader("unlisted")?.toBoolean() == true
         var expire = request.getHeader("expires")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
 
         if (expire < 60000) {
@@ -85,7 +80,7 @@ class UploadController {
             } else {
                 0L
             }
-        } catch (e: NullPointerException) {
+        } catch (_: NullPointerException) {
             0L
         }
 
@@ -98,7 +93,14 @@ class UploadController {
     }
 
     fun uploadPastebook(paste: PastePrivateDTO): String? {
-        val url = "https://pastebook.dev/pastes/${paste.id}"
+        val url = "https://pastebook.dev/p/${paste.id}"
         return url
+    }
+
+    fun generateRandomString(length: Int = 5): String {
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        return (1..length)
+            .map { chars.random() }
+            .joinToString("")
     }
 }

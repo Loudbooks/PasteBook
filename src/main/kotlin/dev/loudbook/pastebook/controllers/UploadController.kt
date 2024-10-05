@@ -2,7 +2,6 @@ package dev.loudbook.pastebook.controllers
 
 import dev.loudbook.pastebook.BucketUtils
 import dev.loudbook.pastebook.ContentScanner
-import dev.loudbook.pastebook.Discord
 import dev.loudbook.pastebook.IPUtils
 import dev.loudbook.pastebook.data.PastePrivateDTO
 import dev.loudbook.pastebook.data.R2Service
@@ -19,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class UploadController {
-    @Autowired
-    private lateinit var discord: Discord
-
     @Autowired
     lateinit var r2Service: R2Service
 
@@ -71,20 +67,8 @@ class UploadController {
 
         val ip = IPUtils.getIPFromRequest(request) ?: return ResponseEntity.badRequest().body("Failed to get IP")
 
-        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, null, reportBook, unlisted, wrap, ip, expire)
+        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, reportBook, unlisted, wrap, ip, expire)
         val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
-
-        val discordID = try {
-            if (!unlisted) {
-                discord.send(title, pastebookURL, null, expire / 1000L).toLong()
-            } else {
-                0L
-            }
-        } catch (_: NullPointerException) {
-            0L
-        }
-
-        paste.discordID = discordID
 
         r2Service.uploadFile(fileID, filteredBody)
         pasteRepository.save(paste)

@@ -45,10 +45,6 @@ class DeleteHandler {
         }
 
         for (paste in deletablePastes) {
-            if (!paste.unlisted) {
-                discord.delete(paste.discordID.toString())
-            }
-
             pasteRepository.delete(paste)
             paste.id?.let { r2Service.deleteFile(it) } ?: println("Failed to delete paste; $paste")
         }

@@ -153,6 +153,13 @@
     }
 
     function updateLineView(newLine: number) {
+        if (currentScrolledLine === newLine) {
+            currentScrolledLine = 0
+            removeCurrentScrolledLine()
+
+            return;
+        }
+        
         let newLineElement = document.getElementById("line-container-" + newLine)
         let newLineElementNumber = document.getElementById("line-number-" + newLine)
 
@@ -193,6 +200,16 @@
             }
         }
     })
+
+    function removeCurrentScrolledLine() {
+        let currentLine = document.getElementById("line-container-" + currentScrolledLine)
+        let currentLineNumber = document.getElementById("line-number-" + currentScrolledLine)
+
+        currentLine.style.marginTop = "0px"
+        currentLine.style.marginBottom = "0px"
+
+        currentLineNumber.style.fontWeight = "normal"
+    }
 
     function clickNumber(event: MouseEvent) {
         let element = event.currentTarget as HTMLElement

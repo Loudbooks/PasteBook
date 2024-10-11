@@ -1,76 +1,84 @@
-<script>
-    import {onMount} from "svelte";
-    import {validScan} from '$lib/stores.ts';
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { validScan } from "$lib/stores.ts";
 
-    export let highlight = false;
+  export let highlight = false;
 
-    onMount(() => {
-        let currentUrl = new URL(window.location.href);
-        validScan.subscribe(() => {
-            if ($validScan) {
-                let style = document.getElementById("highlight")
-                style.style.display = "block";
-            } else {
-                let style = document.getElementById("highlight")
-                style.style.display = "none";
-            }
-        })
+  function setCookie(name: string, value: string, days: number) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  }
 
-        if (localStorage.getItem('auto-highlight') === null) {
-            localStorage.setItem('auto-highlight', 'false');
-        }
+  function getCookie(name: string) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
 
-        highlight = localStorage.getItem('auto-highlight') === 'true';
-        const urlParams = new URLSearchParams(window.location.search);
+  onMount(() => {
+    if (!getCookie("auto-highlight")) {
+      setCookie("auto-highlight", "false", 365);
+    }
 
-        if (urlParams.has('inspect')) highlight = true;
+    highlight = getCookie("auto-highlight") === "true";
 
-        if (highlight) {
-            if (!urlParams.has('inspect')) {
-                let newParams = new URLSearchParams([...Array.from(currentUrl.searchParams.entries()), ...Object.entries({inspect: "true"})]);
-                window.location.href = currentUrl.origin + currentUrl.pathname + '?' + newParams.toString();
-            }
-        }
+    if (getCookie("inspect") === "true") {
+      highlight = true;
+    }
+
+    validScan.subscribe(() => {
+      const style = document.getElementById("highlight");
+      style.style.display = $validScan ? "block" : "none";
     });
 
-    function toggleHighlight() {
-        highlight = !highlight;
-        let currentUrl = new URL(window.location.href)
-
-        if (highlight) {
-            localStorage.setItem('auto-highlight', 'true');
-            let currentParams = new URLSearchParams(window.location.search);
-            currentParams.set('inspect', 'true');
-            window.location.href = currentUrl.origin + currentUrl.pathname + '?' + currentParams.toString();
-        } else {
-            localStorage.setItem('auto-highlight', 'false');
-            let currentParams = new URLSearchParams(window.location.search);
-            currentParams.delete('inspect');
-            if (currentParams.toString() === '') {
-                window.location.href = currentUrl.origin + currentUrl.pathname;
-                return;
-            }
-
-            window.location.href = currentUrl.origin + currentUrl.pathname + '?' + currentParams.toString();
-        }
+    if (highlight) {
+      setCookie("inspect", "true", 365);
     }
+  });
+
+  function toggleHighlight() {
+    highlight = !highlight;
+
+    setCookie("auto-highlight", highlight ? "true" : "false", 365);
+
+    if (highlight) {
+      setCookie("inspect", "true", 365);
+    } else {
+      document.cookie = "inspect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    window.location.reload();
+  }
 </script>
 
 <container>
-    {#if highlight}
-        <button id="highlight" class="style" on:click="{toggleHighlight}">UNHIGHLIGHT</button>
-    {:else}
-        <button id="highlight" class="style" on:click="{toggleHighlight}">HIGHLIGHT</button>
-    {/if}
+  {#if highlight}
+    <button id="highlight" class="style" on:click={toggleHighlight}
+      >UNHIGHLIGHT</button
+    >
+  {:else}
+    <button id="highlight" class="style" on:click={toggleHighlight}
+      >HIGHLIGHT</button
+    >
+  {/if}
 </container>
 
 <style lang="scss">
   container {
-    transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
+    transition:
+      background 0.5s ease,
+      color 0.5s ease,
+      transform 0.5s ease,
+      bottom 0.5s ease;
 
     .style {
       all: unset;
-      transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
+      transition:
+        background 0.5s ease,
+        color 0.5s ease,
+        transform 0.5s ease,
+        bottom 0.5s ease;
 
       background: none;
       border: none;
@@ -109,7 +117,7 @@
 
       &:hover {
         cursor: pointer;
-        bottom: -2px
+        bottom: -2px;
       }
     }
   }

@@ -1,122 +1,122 @@
 <script lang="ts">
-    import {expire, unlisted, wrap, writableTitle} from "$lib/stores.ts";
-    import {writableContent} from "$lib/stores.ts";
-    import {onMount} from "svelte";
+  import { expire, unlisted, wrap, writableTitle } from "$lib/stores.ts";
+  import { writableContent } from "$lib/stores.ts";
+  import { onMount } from "svelte";
 
-    onMount(() => {
-        writableTitle.subscribe(() => {
-            allFieldsFilled()
-        });
-
-        writableContent.subscribe(() => {
-            allFieldsFilled()
-        });
-
-        let submit = document.getElementsByClassName("submit")[0] as HTMLElement
-
-        setTimeout(() => {
-          submit.style.opacity = "1"
-          submit.style.transform = "translateY(0)"
-        }, 400)
+  onMount(() => {
+    writableTitle.subscribe(() => {
+      allFieldsFilled();
     });
 
-    let alreadyUploading = false;
+    writableContent.subscribe(() => {
+      allFieldsFilled();
+    });
 
-    function onClick() {
-        if ($writableTitle === "") {
-            let title = document.getElementById("title") as HTMLInputElement
-            title.focus()
-            shakeElement(title, 500);
+    let submit = document.getElementsByClassName("submit")[0] as HTMLElement;
 
-            return
-        }
+    setTimeout(() => {
+      submit.style.opacity = "1";
+      submit.style.transform = "translateY(0)";
+    }, 400);
+  });
 
-        if (!allFieldsFilled()) {
-            return
-        }
+  let alreadyUploading = false;
 
-        if (alreadyUploading) {
-            return;
-        }
+  function onClick() {
+    if ($writableTitle === "") {
+      let title = document.getElementById("title") as HTMLInputElement;
+      title.focus();
+      shakeElement(title, 500);
 
-        if ($writableTitle === "") {
-            $writableTitle = "Untitled";
-        }
-
-        let submit = document.getElementsByClassName("submit")[0] as HTMLElement
-
-        alreadyUploading = true;
-        submit.classList.add("loading");
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://pastebook.dev/api/upload");
-        xhr.setRequestHeader("Content-Type", "plain/text");
-        xhr.setRequestHeader("onlyPastebook", "true")
-        xhr.setRequestHeader("access-control-allow-methods", "POST")
-        xhr.setRequestHeader("title", $writableTitle);
-        xhr.setRequestHeader("wrap", String($wrap))
-        xhr.setRequestHeader("unlisted", String($unlisted))
-        xhr.setRequestHeader("expires", String($expire))
-
-        xhr.send($writableContent);
-        xhr.responseType = "text";
-        xhr.onload = function () {
-            if (xhr.status !== 200) {
-                submit.classList.remove("loading");
-                submit.innerText = "ERROR: " + xhr.status;
-                alreadyUploading = false;
-
-                setTimeout(() => {
-                    submit.innerText = "SUBMIT";
-                }, 3000)
-                return
-            }
-
-            window.location.replace(xhr.response)
-        }
+      return;
     }
 
-    function allFieldsFilled() {
-        let ready = $writableContent !== "";
-
-        if (ready) {
-            document.querySelector(".submit").classList.add("ready");
-            document.querySelector(".submit").classList.remove("not-ready");
-        } else {
-            document.querySelector(".submit").classList.remove("ready");
-            document.querySelector(".submit").classList.add("not-ready");
-        }
-
-        return ready;
+    if (!allFieldsFilled()) {
+      return;
     }
 
-    const shakeElement = (element: HTMLElement, duration: number) => {
-        const startTime = Date.now();
-        const shakeInterval = 1000 / 60;
+    if (alreadyUploading) {
+      return;
+    }
 
-        const shake = () => {
-            const elapsedTime = Date.now() - startTime;
-            const progress = elapsedTime / duration;
-            const fullShakes = Math.floor(progress / 0.25);
+    if ($writableTitle === "") {
+      $writableTitle = "Untitled";
+    }
 
-            if (fullShakes % 2 === 0) {
-                element.style.transform = 'translateX(-15px)';
-            } else {
-                element.style.transform = 'translateX(15px)';
-            }
+    let submit = document.getElementsByClassName("submit")[0] as HTMLElement;
 
-            if (progress < 1) {
-                setTimeout(shake, shakeInterval);
-            } else {
-                element.style.transform = 'translateX(0)';
-            }
-        };
+    alreadyUploading = true;
+    submit.classList.add("loading");
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://pastebook.dev/api/upload");
+    xhr.setRequestHeader("Content-Type", "plain/text");
+    xhr.setRequestHeader("onlyPastebook", "true");
+    xhr.setRequestHeader("access-control-allow-methods", "POST");
+    xhr.setRequestHeader("title", $writableTitle);
+    xhr.setRequestHeader("wrap", String($wrap));
+    xhr.setRequestHeader("unlisted", String($unlisted));
+    xhr.setRequestHeader("expires", String($expire));
 
-        shake();
+    xhr.send($writableContent);
+    xhr.responseType = "text";
+    xhr.onload = function () {
+      if (xhr.status !== 200) {
+        submit.classList.remove("loading");
+        submit.innerText = "ERROR: " + xhr.status;
+        alreadyUploading = false;
+
+        setTimeout(() => {
+          submit.innerText = "SUBMIT";
+        }, 3000);
+        return;
+      }
+
+      window.location.replace(xhr.response);
     };
+  }
+
+  function allFieldsFilled() {
+    let ready = $writableContent !== "";
+
+    if (ready) {
+      document.querySelector(".submit").classList.add("ready");
+      document.querySelector(".submit").classList.remove("not-ready");
+    } else {
+      document.querySelector(".submit").classList.remove("ready");
+      document.querySelector(".submit").classList.add("not-ready");
+    }
+
+    return ready;
+  }
+
+  const shakeElement = (element: HTMLElement, duration: number) => {
+    const startTime = Date.now();
+    const shakeInterval = 1000 / 60;
+
+    const shake = () => {
+      const elapsedTime = Date.now() - startTime;
+      const progress = elapsedTime / duration;
+      const fullShakes = Math.floor(progress / 0.25);
+
+      if (fullShakes % 2 === 0) {
+        element.style.transform = "translateX(-15px)";
+      } else {
+        element.style.transform = "translateX(15px)";
+      }
+
+      if (progress < 1) {
+        setTimeout(shake, shakeInterval);
+      } else {
+        element.style.transform = "translateX(0)";
+      }
+    };
+
+    shake();
+  };
 </script>
 
 <container>
-    <button class="submit" on:click="{onClick}">SUBMIT</button>
+  <button class="submit" on:click={onClick}>SUBMIT</button>
 </container>
 
 <style lang="scss">
@@ -141,7 +141,10 @@
       font-family: Gabarito, sans-serif;
       font-size: 20px;
       font-weight: 800;
-      transition: opacity 0.5s, transform 0.5s, background-color 0.5s;
+      transition:
+        opacity 0.5s,
+        transform 0.5s,
+        background-color 0.5s;
       background-color: #eeeeee;
       color: black;
       text-decoration: none;
@@ -186,17 +189,17 @@
   }
 
   @keyframes blink {
-      0% {
-        opacity: 0.5;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.02);
-      }
-      100% {
-        opacity: 0.5;
-        transform: scale(1);
-      }
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
     }
+    50% {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+  }
 </style>

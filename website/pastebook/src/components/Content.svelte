@@ -1,253 +1,261 @@
 <script lang="ts">
-    import {severes, validScan, warnings, wrap, writableContent} from "$lib/stores.ts"
-    import detection from "$lib/detections.json"
+  import {
+    severes,
+    validScan,
+    warnings,
+    wrap,
+    writableContent,
+  } from "$lib/stores";
+  import detection from "$lib/detections.json";
 
-    import type {Issue} from "$lib/issue";
-    import {onMount} from "svelte";
+  import type { Issue } from "$lib/issue";
+  import { onMount } from "svelte";
+  import { pushState } from "$app/navigation";
 
-    import {page} from '$app/stores';
-    import {pushState} from "$app/navigation";
+  export let content: string = "No content provided";
+  export let reportBook: boolean = false;
+  export let newReport: boolean = false;
+  export let wrapPre: boolean = false;
+  export let inspect: boolean = false;
 
-    const scan = $page.url.searchParams.has('inspect');
+  const results: Issue[] = detection.map(
+    ({ filename, visual, description, severity }) => ({
+      id: filename,
+      visual,
+      description,
+      severity,
+    }),
+  );
 
-    export let content: string = "No content provided"
-    export let reportBook: boolean = false
-    export let newReport: boolean = false;
-    export let wrapPre: boolean = false;
+  let currentScrolledLine = 0;
+  let contentLines = content.split("\n");
 
-    const results: Issue[] = [];
+  const warn: Issue[] = [];
+  const severe: Issue[] = [];
 
-    let currentScrolledLine = 0;
+  onMount(() => {
+    const wrapValue = localStorage.getItem("wrap");
+    if (wrapValue === "true") {
+      wrap.set(true);
+      wrapPre = true;
+    }
 
-    for (const key in detection) {
-        let issue = {
-            id: detection[key].filename,
-            visual: detection[key].visual,
-            description: detection[key].description,
-            severity: detection[key].severity
+    wrap.subscribe((value) => {
+      const textArea = document.querySelector(
+        ".input",
+      ) as HTMLTextAreaElement | null;
+      if (textArea) {
+        textArea.style.whiteSpace = value ? "break-spaces" : "pre";
+      }
+    });
+
+    const lineNumber = getLineNumberFromURL();
+    if (lineNumber) {
+      scrollToLine(lineNumber);
+    }
+  });
+
+  if (inspect) {
+    inspectContent(contentLines);
+    warnings.set(warn);
+    severes.set(severe);
+  }
+
+  if (canScan(contentLines)) {
+    validScan.set(true);
+  }
+
+  function inspectContent(lines: string[]) {
+    for (const line of lines) {
+      if (!reportBook) continue;
+
+      for (const result of results) {
+        if (line.toLowerCase().includes(result.id.toLowerCase())) {
+          result.severity === 1 ? warn.push(result) : severe.push(result);
         }
-
-        results.push(issue)
+      }
     }
+  }
 
-    onMount(() => {
-        if (localStorage.getItem("wrap") !== null && localStorage.getItem("wrap") === "true") {
-            wrap.set(true)
-            wrapPre = true
+  function canScan(lines: string[]): boolean {
+    return lines.some((line) => {
+      return (
+        getLineSeverity(line) !== 0 ||
+        (reportBook &&
+          results.some((result) =>
+            line.toLowerCase().includes(result.id.toLowerCase()),
+          ))
+      );
+    });
+  }
+
+  function getLineSeverity(line: string): number {
+    const trimmed = line.trim().toLowerCase();
+    if (trimmed.includes("[warn") || trimmed.includes("/warn]")) return 1;
+    if (
+      trimmed.includes("[severe]") ||
+      trimmed.includes("[error") ||
+      trimmed.includes("/error]") ||
+      trimmed.startsWith("caused by:") ||
+      trimmed.startsWith("\tat") ||
+      (trimmed.includes("exception") && trimmed.includes("provided by"))
+    ) {
+      return 2;
+    }
+    return 0;
+  }
+
+  function scanContent(line: string): number {
+    if (!inspect) return 0;
+    if (!reportBook) return getLineSeverity(line);
+
+    const result = results.find((result) =>
+      line.toLowerCase().includes(result.id.toLowerCase()),
+    );
+    return result ? result.severity : 0;
+  }
+
+  function onInput(event: InputEvent) {
+    writableContent.set((event.target as HTMLInputElement).value);
+  }
+
+  function getIndex(index: number): string {
+    return index
+      .toString()
+      .padStart(contentLines.length.toString().length, " ");
+  }
+
+  function scrollToLine(lineNumber: number) {
+    const lineElement = document.getElementById(`line-number-${lineNumber}`);
+    if (lineElement) {
+      currentScrolledLine = lineNumber;
+      updateLineView(lineNumber);
+
+      const offsetY = $wrap
+        ? window.innerHeight / 2 - 200
+        : window.innerHeight / 2;
+      window.scrollTo(0, lineElement.getBoundingClientRect().y - offsetY);
+    }
+  }
+
+  function updateLineView(newLine: number) {
+    const newLineElement = document.getElementById(`line-container-${newLine}`);
+    const newLineNumberElement = document.getElementById(
+      `line-number-${newLine}`,
+    );
+    if (newLineElement && newLineNumberElement) {
+      if (currentScrolledLine) {
+        const currentLineElement = document.getElementById(
+          `line-container-${currentScrolledLine}`,
+        );
+        const currentLineNumberElement = document.getElementById(
+          `line-number-${currentScrolledLine}`,
+        );
+        if (currentLineElement && currentLineNumberElement) {
+          currentLineElement.style.marginTop = "0px";
+          currentLineElement.style.marginBottom = "0px";
+          currentLineNumberElement.style.fontWeight = "normal";
         }
+      }
 
-        wrap.subscribe((value) => {
-            let textArea = document.querySelector(".input") as HTMLTextAreaElement | null
+      newLineElement.style.marginTop = "20px";
+      newLineElement.style.marginBottom = "20px";
+      newLineNumberElement.style.fontWeight = "1000";
 
-            if (textArea === null) {
-                return;
-            }
-
-            if (value === true) {
-                textArea.style.whiteSpace = "break-spaces"
-            } else {
-                textArea.style.whiteSpace = "pre"
-            }
-        })
-    })
-
-    let contentLines = content.split("\n")
-
-    const warn: Issue[] = []
-    const severe: Issue[] = []
-
-    for (let contentLine of contentLines) {
-        if (reportBook === false) {
-            continue;
-        }
-
-        for (let result of results) {
-            if (contentLine.toLowerCase().includes(result.id.toLowerCase())) {
-                if (result.severity === 1) {
-                    warn.push(result)
-                } else if (result.severity === 2) {
-                    severe.push(result)
-                }
-            }
-        }
+      currentScrolledLine = newLine;
     }
+  }
 
-    if (scan) {
-        warnings.set(warn)
-        severes.set(severe)
+  function getLineNumberFromURL(): number | null {
+    const lineParam = new URLSearchParams(window.location.search).get("line");
+    return lineParam ? parseInt(lineParam, 10) : null;
+  }
+
+  function removeCurrentScrolledLine() {
+    const currentLineElement = document.getElementById(
+      `line-container-${currentScrolledLine}`,
+    );
+    const currentLineNumberElement = document.getElementById(
+      `line-number-${currentScrolledLine}`,
+    );
+    if (currentLineElement && currentLineNumberElement) {
+      currentLineElement.style.marginTop = "0px";
+      currentLineElement.style.marginBottom = "0px";
+      currentLineNumberElement.style.fontWeight = "normal";
     }
+  }
 
-    if (canScan(contentLines)) validScan.set(true)
+  function clickNumber(event: MouseEvent) {
+    const element = event.currentTarget as HTMLElement;
+    const id = parseInt(element.id.replace("line-", ""), 10);
 
-    function canScan(lines: string[]): boolean {
-        for (let line of lines) {
-            if (getLineSeverity(line) !== 0) {
-                return true
-            }
+    scrollToElement(`line-container-${id}`);
 
-            if (reportBook !== true) continue
-            for (let result of results) {
-                if (line.toLowerCase().includes(result.id.toLowerCase())) {
-                    return true
-                }
-            }
-        }
+    if (currentScrolledLine !== id) {
+      updateLineView(id);
 
-        return false
+      const currentURL = new URL(window.location.href);
+      const newParams = new URLSearchParams(currentURL.search);
+      newParams.set("line", id.toString());
+
+      pushState(currentURL.pathname + "?" + newParams.toString(), {
+        replace: true,
+      });
     }
+  }
 
-    function getLineSeverity(line: string): number {
-        if (line.trim().toLowerCase().includes("[warn") ||
-            line.trim().toLowerCase().includes("/warn]")) {
-            return 1;
-        } else if (line.trim().toLowerCase().includes("[severe]") ||
-            line.trim().toLowerCase().includes("[error") ||
-            line.trim().toLowerCase().includes("/error]") ||
-            line.trim().toLowerCase().startsWith("caused by:") ||
-            line.toLowerCase().startsWith("\tat") ||
-            (line.toLowerCase().includes("exception") &&
-                line.toLowerCase().includes("provided by"))) {
-            return 2;
-        }
-
-        return 0;
+  function scrollToElement(elementId: string) {
+    const element = document.getElementById(elementId);
+    const container = document.querySelector("content-container");
+    if (element && container) {
+      const currentX = container.scrollLeft;
+      element.scrollIntoView({
+        block: "center",
+        inline: "center",
+        behavior: "smooth",
+      });
+      container.scrollLeft = currentX;
     }
+  }
 
-    function scanContent(content: String): number {
-        if (!scan) {
-            return 0;
-        }
-
-        if (reportBook === false) {
-            return getLineSeverity(content)
-        }
-
-        for (let result of results) {
-            if (content.toLowerCase().includes(result.id.toLowerCase())) {
-                return result.severity;
-            }
-        }
-
-        return 0;
-    }
-
-    function onInput(event: InputEvent) {
-        writableContent.set((event.target as HTMLInputElement).value)
-    }
-
-    function getIndex(index: number): string {
-        let max = contentLines.length
-        let maxStringLength = max.toString().length
-        return index.toString().padStart(maxStringLength, " ")
-    }
-
-    function scrollToElement(elementId: string) {
-        const element = document.getElementById(elementId);
-        const container = document.querySelector("content-container");
-
-        if (element === null || container === null) return;
-
-        const currentX = container.scrollLeft;
-        element.scrollIntoView({block: "center", inline: "center", behavior: "smooth"});
-        container.scrollLeft = currentX;
-    }
-
-    function updateLineView(newLine: number) {
-        if (currentScrolledLine === newLine) {
-            currentScrolledLine = 0
-            removeCurrentScrolledLine()
-
-            return;
-        }
-        
-        let newLineElement = document.getElementById("line-container-" + newLine)
-        let newLineElementNumber = document.getElementById("line-number-" + newLine)
-
-        if (currentScrolledLine != 0) {
-            let currentLine = document.getElementById("line-container-" + currentScrolledLine)
-            let newLineElementNumber = document.getElementById("line-number-" + currentScrolledLine)
-            currentLine.style.marginTop = "0px"
-            currentLine.style.marginBottom = "0px"
-
-            newLineElementNumber.style.fontWeight = "normal"
-        }
-
-        newLineElement.style.marginTop = "20px"
-        newLineElement.style.marginBottom = "20px"
-
-        newLineElementNumber.style.fontWeight = "1000"
-        currentScrolledLine = newLine
-    }
-
-    function getLineNumberFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('line');
-    }
-
-    onMount(() => {
-        const lineNumber = getLineNumberFromURL();
-        if (lineNumber) {
-            let element = document.getElementById("line-number-" + lineNumber)
-            if (element !== null) {
-                currentScrolledLine = parseInt(lineNumber)
-                updateLineView(parseInt(lineNumber))
-
-                if ($wrap) {
-                    window.scrollTo(0, element.getBoundingClientRect().y - window.innerHeight / 2 + 200)
-                } else {
-                    window.scrollTo(0, element.getBoundingClientRect().y - window.innerHeight / 2)
-                }
-            }
-        }
-    })
-
-    function removeCurrentScrolledLine() {
-        let currentLine = document.getElementById("line-container-" + currentScrolledLine)
-        let currentLineNumber = document.getElementById("line-number-" + currentScrolledLine)
-
-        currentLine.style.marginTop = "0px"
-        currentLine.style.marginBottom = "0px"
-
-        currentLineNumber.style.fontWeight = "normal"
-    }
-
-    function clickNumber(event: MouseEvent) {
-        let element = event.currentTarget as HTMLElement
-
-        let id = element.id.replace("line-", "")
-
-            scrollToElement("line-container-" + id)
-
-        if (currentScrolledLine === parseInt(id)) {
-            return;
-        }
-
-        updateLineView(parseInt(id))
-        currentScrolledLine = parseInt(id)
-
-        let currentURL = new URL(window.location.href)
-        let newParams = new URLSearchParams(window.location.search);
-        newParams.set('line', id);
-        pushState(currentURL.origin + currentURL.pathname + '?' + newParams.toString(), {replaceState: true});
-    }
-
-    function removeSpaces(line: string): string {
-        return line.replace(/\s/g, '')
-    }
+  function removeSpaces(line: string): string {
+    return line.replace(/\s/g, "");
+  }
 </script>
 
 <content-container class="new-{newReport}">
-    {#if !newReport}
-        <div style="display: table">
-            <lines>
-                {#each contentLines as line, index}
-                    <linecontainer id="line-container-{removeSpaces(getIndex(index + 1))}" class="wrap-{wrapPre}"><a role="button" id="line-{removeSpaces(getIndex(index + 1))}" on:click={clickNumber}><number class="number" id="line-number-{removeSpaces(getIndex(index + 1))}">{getIndex(index + 1)}</number></a><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
-                {/each}
-             </lines>
-        </div>
-    {:else}
-        <textarea class="input" on:input="{onInput}" />
-    {/if}
+  {#if !newReport}
+    <div style="display: table">
+      <lines>
+        {#each contentLines as line, index}
+          <linecontainer
+            id="line-container-{removeSpaces(getIndex(index + 1))}"
+            class="wrap-{wrapPre}"
+          >
+            <a
+              role="button"
+              id="line-{removeSpaces(getIndex(index + 1))}"
+              on:click={clickNumber}
+              tabindex="0"
+              on:keydown={() => {}}
+            >
+              <number
+                class="number"
+                id="line-number-{removeSpaces(getIndex(index + 1))}"
+              >
+                {getIndex(index + 1)}
+              </number>
+            </a>
+            <line-content-container class="severity-{scanContent(line)}">
+              {line}
+            </line-content-container>
+          </linecontainer>
+        {/each}
+      </lines>
+    </div>
+  {:else}
+    <textarea class="input" on:input={onInput} />
+  {/if}
 </content-container>
 
 <style lang="scss">
@@ -300,7 +308,7 @@
       color: white;
     }
 
-    @media (max-width: 600px){
+    @media (max-width: 600px) {
       font-size: 10px;
     }
   }
@@ -337,7 +345,7 @@
       background-color: orange;
     }
 
-    @media (max-width: 600px){
+    @media (max-width: 600px) {
       font-size: 10px;
       padding-right: 12px;
     }
@@ -346,12 +354,16 @@
       color: #999;
     }
 
-    transition: all 0.2s ease, font-weight 0.5s ease;
+    transition:
+      all 0.2s ease,
+      font-weight 0.5s ease;
   }
 
   linecontainer {
     display: block;
-    transition: color 0.2s ease, margin 0.5s ease;
+    transition:
+      color 0.2s ease,
+      margin 0.5s ease;
 
     font-size: 13px;
     white-space: pre;
@@ -364,7 +376,7 @@
       white-space: break-spaces;
     }
 
-    @media (max-width: 600px){
+    @media (max-width: 600px) {
       font-size: 10px;
       padding-left: 30px;
       text-indent: -18px;

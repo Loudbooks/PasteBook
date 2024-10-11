@@ -1,18 +1,21 @@
 <script lang="ts">
-    export let callback: (value: number) => void;
+  export let callback: (value: number) => void;
 
-    function handleCallback(event: Event) {
-        callback(parseInt((event.target as HTMLSelectElement).value));
-    }
+  function handleCallback(event: Event) {
+    callback(parseInt((event.target as HTMLSelectElement).value));
+  }
 </script>
 
 <select on:change={handleCallback}>
-    <slot name="options"/>
+  <slot name="options" />
 </select>
 
 <style lang="scss">
   select {
-    transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease,
+      border 0.5s ease;
 
     width: 110px;
     padding: 5px 5px 5px 15px;

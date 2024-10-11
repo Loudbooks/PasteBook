@@ -1,59 +1,58 @@
 <script lang="ts">
-    import {onMount} from "svelte";
+  import { onMount } from "svelte";
 
-    export let title: string;
+  export let title: string;
 
-    onMount(() => {
-        let content = document.querySelector("content") as HTMLDivElement;
+  onMount(() => {
+    let content = document.querySelector("content") as HTMLDivElement;
 
-        content.style.top = `calc(100% + ${(content.clientHeight / 2) + 1}px)`;
-    });
+    content.style.top = `calc(100% + ${content.clientHeight / 2 + 1}px)`;
+  });
 
-    let open = false;
-    let cooldown = false;
+  let open = false;
+  let cooldown = false;
 
+  function toggleClick() {
+    let content = document.querySelector("content") as HTMLDivElement;
+    let blur = document.querySelector(".blur") as HTMLDivElement;
+    let tab = document.querySelector(".tab") as HTMLButtonElement;
 
-    function toggleClick() {
-        let content = document.querySelector("content") as HTMLDivElement;
-        let blur = document.querySelector(".blur") as HTMLDivElement;
-        let tab = document.querySelector(".tab") as HTMLButtonElement;
+    if (open) {
+      content.style.top = `calc(100% + ${content.clientHeight / 2 + 1}px)`;
 
-        if (open) {
-            content.style.top = `calc(100% + ${(content.clientHeight / 2) + 1}px)`;
+      blur.style.backgroundColor = "rgba(0, 0, 0, 0)";
 
-            blur.style.backgroundColor = "rgba(0, 0, 0, 0)"
+      cooldown = true;
+      setTimeout(() => {
+        blur.style.display = "none";
+        tab.classList.add("non-active");
+        cooldown = false;
+      }, 500);
 
-            cooldown = true;
-            setTimeout(() => {
-                blur.style.display = "none";
-                tab.classList.add("non-active");
-                cooldown = false;
-            }, 500)
+      open = false;
+    } else {
+      if (cooldown) return;
+      content.style.top = `50%`;
 
-            open = false;
-        } else {
-            if (cooldown) return;
-            content.style.top = `50%`;
+      blur.style.display = "block";
 
-            blur.style.display = "block";
+      setTimeout(() => {
+        blur.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+      }, 1);
 
-            setTimeout(() => {
-                blur.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-            }, 1)
+      tab.classList.remove("non-active");
 
-            tab.classList.remove("non-active");
-
-            open = true;
-        }
+      open = true;
     }
+  }
 </script>
 
 <contentcontainer>
-    <content>
-        <button class="tab non-active" on:click={toggleClick}>{title}</button>
-        <slot name="content"></slot>
-    </content>
-    <button class="blur" on:click={toggleClick}></button>
+  <content>
+    <button class="tab non-active" on:click={toggleClick}>{title}</button>
+    <slot name="content"></slot>
+  </content>
+  <button class="blur" on:click={toggleClick}></button>
 </contentcontainer>
 
 <style lang="scss">

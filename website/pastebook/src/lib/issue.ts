@@ -3,4 +3,4 @@ export type Issue = {
   description: string;
   visual: string;
   severity: number;
-}
+};

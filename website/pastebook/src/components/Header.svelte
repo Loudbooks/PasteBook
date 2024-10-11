@@ -1,28 +1,28 @@
 <script lang="ts">
-    import {pasteName, writableTitle} from "$lib/stores.ts";
+  import { pasteName, writableTitle } from "$lib/stores.ts";
 
-    export let title = ""
-    export let created = ""
-    export let newReport: string = "false"
+  export let title = "";
+  export let created = "";
+  export let newReport: string = "false";
 
-    pasteName.set(title)
+  pasteName.set(title);
 
-    function onType(event: InputEvent) {
-        writableTitle.set((event.target as HTMLInputElement).value)
-    }
+  function onType(event: InputEvent) {
+    writableTitle.set((event.target as HTMLInputElement).value);
+  }
 </script>
 
 <topcontainer class="new-{newReport}">
-    {#if newReport === "true"}
-        <input id="title" placeholder="Title..." on:input="{onType}">
-    {:else}
-        <name>
-            {title}
-        </name>
-        <created>
-            {created}
-        </created>
-    {/if}
+  {#if newReport === "true"}
+    <input id="title" placeholder="Title..." on:input={onType} />
+  {:else}
+    <name>
+      {title}
+    </name>
+    <created>
+      {created}
+    </created>
+  {/if}
 </topcontainer>
 
 <style lang="scss">
@@ -49,7 +49,9 @@
         color: white;
       }
 
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
       outline: none;
       background-color: transparent;
       border: none;

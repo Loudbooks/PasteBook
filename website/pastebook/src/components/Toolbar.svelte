@@ -1,37 +1,37 @@
 <script lang="ts">
-    import {onMount} from "svelte";
+  import { onMount } from "svelte";
 
-    onMount(() => {
-        const toolbar = document.querySelector('toolbar') as HTMLElement;
+  onMount(() => {
+    const toolbar = document.querySelector("toolbar") as HTMLElement;
 
-        toolbar.style.transform = 'translate(10px, 0)';
-        toolbar.style.opacity = '1';
-    });
+    toolbar.style.transform = "translate(10px, 0)";
+    toolbar.style.opacity = "1";
+  });
 
-    function newPaste() {
-        window.location.href = '/new';
-    }
+  function newPaste() {
+    window.location.href = "/new";
+  }
 
-    function panel() {
-        window.location.href = '/panel';
-    }
+  function panel() {
+    window.location.href = "/panel";
+  }
 
-    function settings() {
-        window.location.href = '/settings';
-    }
+  function settings() {
+    window.location.href = "/settings";
+  }
 
-    function home() {
-        window.location.href = '/';
-    }
+  function home() {
+    window.location.href = "/";
+  }
 </script>
 
 <toolbar>
-    <button id="main" on:click={home}>PASTEBOOK</button>
-    <buttons>
-        <button on:click={panel}>PANEL</button>
-        <button on:click={settings}>SETTINGS</button>
-        <button on:click={newPaste}>NEW</button>
-    </buttons>
+  <button id="main" on:click={home}>PASTEBOOK</button>
+  <buttons>
+    <button on:click={panel}>PANEL</button>
+    <button on:click={settings}>SETTINGS</button>
+    <button on:click={newPaste}>NEW</button>
+  </buttons>
 </toolbar>
 
 <style lang="scss">
@@ -45,7 +45,10 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     transform: translate(10px, -100%);
-    transition: opacity 0.5s ease, background-color 0.5s ease, border 0.5s ease;
+    transition:
+      opacity 0.5s ease,
+      background-color 0.5s ease,
+      border 0.5s ease;
 
     background-color: #eeeeee;
     opacity: 0;
@@ -70,7 +73,10 @@
     }
 
     button {
-      transition: opacity 0.7s, transform 0.5s, color 0.5s;
+      transition:
+        opacity 0.7s,
+        transform 0.5s,
+        color 0.5s;
       align-self: center;
 
       font-size: 1rem;

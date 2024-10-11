@@ -1,47 +1,50 @@
 <script lang="ts">
-    import type {Paste} from "$lib/paste";
-    import {formatTimeSince} from "$lib/timehandler";
+  import type { Paste } from "$lib/paste";
+  import { formatTimeSince } from "$lib/timehandler";
 
-    export let paste: Paste
+  export let paste: Paste;
 
-    let title = paste.title
-    let created = paste.created
-    let id = paste.id
+  let title = paste.title;
+  let created = paste.created as unknown as number;
+  let id = paste.id;
 
-    const reloadTime = () => {
-        timeSinceStr = formatTimeSince(created)
-    }
+  const reloadTime = () => {
+    timeSinceStr = formatTimeSince(created);
+  };
 
-    let timeSinceStr = formatTimeSince(created)
+  let timeSinceStr = formatTimeSince(created);
 
-    reloadTime()
-    let clear
-    $: {
-        clearInterval(clear)
-        clear = setInterval(reloadTime, 1000)
-    }
+  reloadTime();
+  let clear: any;
+  $: {
+    clearInterval(clear);
+    clear = setInterval(reloadTime, 1000);
+  }
 
-    function onClick() {
-        window.location.href = `/p/${paste.id}`
-    }
+  function onClick() {
+    window.location.href = `/p/${paste.id}`;
+  }
 </script>
 
 <pastebackground>
-    <button class="pastecontainer" on:click={onClick}>
-        <name>
-            <h1>{title}</h1>
-            <p>{id}</p>
-        </name>
-        <created>
-            {timeSinceStr}
-        </created>
-    </button>
+  <button class="pastecontainer" on:click={onClick}>
+    <name>
+      <h1>{title}</h1>
+      <p>{id}</p>
+    </name>
+    <created>
+      {timeSinceStr}
+    </created>
+  </button>
 </pastebackground>
-
 
 <style lang="scss">
   .pastecontainer {
-    transition: background-color 0.5s, color 0.5s, border 0.5s, transform 0.4s;
+    transition:
+      background-color 0.5s,
+      color 0.5s,
+      border 0.5s,
+      transform 0.4s;
 
     display: flex;
     padding: 1rem;

@@ -1,3 +1,3 @@
 export function match(param) {
-	return param === 'pastes' || param === 'paste' || param === 'p';
+  return param === "pastes" || param === "paste" || param === "p";
 }

@@ -1,54 +1,62 @@
 <script>
-    import {onMount} from "svelte";
+  import { onMount } from "svelte";
 
-    export let darkMode = false;
+  export let darkMode = false;
 
-    onMount(() => {
-      if (localStorage.getItem('dark-mode') === null) {
-        localStorage.setItem('dark-mode', 'true');
-      }
-
-        darkMode = localStorage.getItem('dark-mode') === 'true';
-
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-            document.body.style.background = '#000000';
-        } else {
-            document.body.classList.remove('dark-mode');
-            document.body.style.backgroundColor = '#ffffff';
-        }
-    });
-
-    function toggleStyle() {
-        darkMode = !darkMode;
-
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('dark-mode', 'true');
-            document.body.style.background = '#000000';
-        } else {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('dark-mode', 'false');
-            document.body.style.backgroundColor = '#ffffff';
-        }
+  onMount(() => {
+    if (localStorage.getItem("dark-mode") === null) {
+      localStorage.setItem("dark-mode", "true");
     }
+
+    darkMode = localStorage.getItem("dark-mode") === "true";
+
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+      document.body.style.background = "#000000";
+    } else {
+      document.body.classList.remove("dark-mode");
+      document.body.style.backgroundColor = "#ffffff";
+    }
+  });
+
+  function toggleStyle() {
+    darkMode = !darkMode;
+
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("dark-mode", "true");
+      document.body.style.background = "#000000";
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("dark-mode", "false");
+      document.body.style.backgroundColor = "#ffffff";
+    }
+  }
 </script>
 
 <container>
-    {#if darkMode}
-        <button class="style" on:click="{toggleStyle}">LIGHT</button>
-    {:else}
-        <button class="style" on:click="{toggleStyle}">DARK</button>
-    {/if}
+  {#if darkMode}
+    <button class="style" on:click={toggleStyle}>LIGHT</button>
+  {:else}
+    <button class="style" on:click={toggleStyle}>DARK</button>
+  {/if}
 </container>
 
 <style lang="scss">
   container {
-    transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
+    transition:
+      background 0.5s ease,
+      color 0.5s ease,
+      transform 0.5s ease,
+      bottom 0.5s ease;
 
     .style {
       all: unset;
-      transition: background 0.5s ease, color 0.5s ease, transform 0.5s ease, bottom 0.5s ease;
+      transition:
+        background 0.5s ease,
+        color 0.5s ease,
+        transform 0.5s ease,
+        bottom 0.5s ease;
 
       background: none;
       border: none;

@@ -1,53 +1,64 @@
 <script>
-    import Mode from "../components/Mode.svelte";
-    import {onMount} from "svelte";
+  import Mode from "../components/Mode.svelte";
+  import { onMount } from "svelte";
 
-    let width = 0;
+  let width = 0;
 
-    onMount(() => {
-        width = window.innerWidth;
+  onMount(() => {
+    width = window.innerWidth;
 
-        window.onresize = () => {
-            width = window.innerWidth;
-        }
-    })
+    window.onresize = () => {
+      width = window.innerWidth;
+    };
+  });
 </script>
 
 <about>
-    <h1>PasteBook</h1>
-    <p class="author">By Loudbook</p>
-    <p class="description">PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your
-        privacy by
-        automatically deleting your pastes.</p>
-    <buttons>
-        {#if width > 768}
-            <button onclick="window.location.href = '/new';">NEW</button>
-            <dot>⎯</dot>
-            <button onclick="window.location.href = '/panel';">PANEL</button>
-            <dot>⎯</dot>
-            <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a>
-            <dot>⎯</dot>
-            <a href="mailto:contact@pastebook.dev">CONTACT</a>
-            <dot>⎯</dot>
-            <a href="/privacy">PRIVACY</a>
-        {:else}
-            <div id="second-container">
-                <button onclick="window.location.href = '/new';">NEW</button>
-                <dot>⎯</dot>
-                <button onclick="window.location.href = '/panel';">PANEL</button>
-            </div>
-            <div id="second-container">
-                <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a>
-                <dot>⎯</dot>
-                <a href="mailto:contact@pastebook.dev">CONTACT</a>
-                <dot>⎯</dot>
-                <a href="/privacy">PRIVACY</a>
-            </div>
-        {/if}
-    </buttons>
+  <h1>PasteBook</h1>
+  <p class="author">By Loudbook</p>
+  <p class="description">
+    PasteBook is an aesthetic, effortless way to share your blocks of text, and
+    respects your privacy by automatically deleting your pastes.
+  </p>
+  <buttons>
+    {#if width > 768}
+      <button onclick="window.location.href = '/new';">NEW</button>
+      <dot>⎯</dot>
+      <button onclick="window.location.href = '/panel';">PANEL</button>
+      <dot>⎯</dot>
+      <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a
+      >
+      <dot>⎯</dot>
+      <a href="mailto:contact@pastebook.dev">CONTACT</a>
+      <dot>⎯</dot>
+      <a href="/privacy">PRIVACY</a>
+    {:else}
+      <div id="second-container">
+        <button onclick="window.location.href = '/new';">NEW</button>
+        <dot>⎯</dot>
+        <button onclick="window.location.href = '/panel';">PANEL</button>
+      </div>
+      <div id="second-container">
+        <a href="https://github.com/Loudbooks/PasteBook" target="_blank"
+          >GITHUB</a
+        >
+        <dot>⎯</dot>
+        <a href="mailto:contact@pastebook.dev">CONTACT</a>
+        <dot>⎯</dot>
+        <a href="/privacy">PRIVACY</a>
+      </div>
+    {/if}
+  </buttons>
 
-    <Mode></Mode>
+  <Mode></Mode>
 </about>
+
+<svelte:head>
+  <meta
+    name="description"
+    content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes. "
+  />
+</svelte:head>
 
 <style lang="scss">
   :root {
@@ -163,7 +174,8 @@
       }
     }
 
-    button, a {
+    button,
+    a {
       display: inline-block;
       appearance: none;
       border: none;
@@ -215,8 +227,3 @@
     }
   }
 </style>
-
-<svelte:head>
-    <meta name="description"
-          content="PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes. "/>
-</svelte:head>

@@ -1,42 +1,45 @@
 <script lang="ts">
-    export let externalHandler: ((value: boolean) => void);
+  export let externalHandler: (value: boolean) => void;
 
-    export let isSelected = false;
+  export let isSelected = false;
 
-    let circle: HTMLElement;
-    let background: HTMLElement;
+  let circle: HTMLElement;
+  let background: HTMLElement;
 
-    function toggleSelected() {
-        isSelected = !isSelected;
+  function toggleSelected() {
+    isSelected = !isSelected;
 
-        circle.classList.remove("selected");
+    circle.classList.remove("selected");
 
-        if (isSelected) {
-            background.classList.remove("bg-non-active");
-            background.classList.add("bg-selected");
+    if (isSelected) {
+      background.classList.remove("bg-non-active");
+      background.classList.add("bg-selected");
 
-            circle.classList.remove("non-active");
-            circle.classList.add("selected");
-        } else {
-            background.classList.remove("bg-selected");
-            background.classList.add("bg-non-active");
+      circle.classList.remove("non-active");
+      circle.classList.add("selected");
+    } else {
+      background.classList.remove("bg-selected");
+      background.classList.add("bg-non-active");
 
-            circle.classList.remove("selected");
-            circle.classList.add("non-active");
-        }
-
-        externalHandler(isSelected)
+      circle.classList.remove("selected");
+      circle.classList.add("non-active");
     }
+
+    externalHandler(isSelected);
+  }
 </script>
 
 <settings>
-    <button bind:this={background} class="container bg-active-{isSelected}" on:click={toggleSelected}>
-        <circ bind:this={circle} class="circle active-{isSelected}"></circ>
-    </button>
+  <button
+    bind:this={background}
+    class="container bg-active-{isSelected}"
+    on:click={toggleSelected}
+  >
+    <circ bind:this={circle} class="circle active-{isSelected}"></circ>
+  </button>
 </settings>
 
 <style lang="scss">
-
   .container {
     transition: all 0.5s ease;
     display: block;

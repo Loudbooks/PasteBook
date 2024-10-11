@@ -1,65 +1,65 @@
 <script lang="ts">
-    import {severes, warnings} from "$lib/stores.ts";
-    import type {Issue} from "$lib/issue";
-    import Header from "./Header.svelte";
-    import Pulltab from "./pulltab/Pulltab.svelte";
+  import { severes, warnings } from "$lib/stores.ts";
+  import type { Issue } from "$lib/issue";
+  import Header from "./Header.svelte";
+  import Pulltab from "./pulltab/Pulltab.svelte";
 
-    let severIssues: Array<Issue> = $severes;
-    let warningIssues: Array<Issue> = $warnings;
+  let severIssues: Array<Issue> = $severes;
+  let warningIssues: Array<Issue> = $warnings;
 
-    let filteredSevere: Issue[] = [];
-    let filteredWarning: Issue[] = [];
+  let filteredSevere: Issue[] = [];
+  let filteredWarning: Issue[] = [];
 
-    for (let severIssue of severIssues) {
-        if (!filteredSevere.some((issue) => issue.visual === severIssue.visual)) {
-            filteredSevere.push(severIssue);
-        }
+  for (let severIssue of severIssues) {
+    if (!filteredSevere.some((issue) => issue.visual === severIssue.visual)) {
+      filteredSevere.push(severIssue);
     }
+  }
 
-    for (let warningIssue of warningIssues) {
-        if (
-            !filteredWarning.some((issue) => issue.visual === warningIssue.visual)
-        ) {
-            filteredWarning.push(warningIssue);
-        }
+  for (let warningIssue of warningIssues) {
+    if (
+      !filteredWarning.some((issue) => issue.visual === warningIssue.visual)
+    ) {
+      filteredWarning.push(warningIssue);
     }
+  }
 </script>
 
 <Pulltab title="Potential Issues">
-    <svelte:fragment slot="content">
-        {#if !(filteredSevere.length === 0)}
-            <header>
-                <Header
-                        class="severeheader"
-                        title="Severe"
-                        created={filteredSevere.length}
-                ></Header>
-            </header>
-            <severe class="severe">
-                {#each filteredSevere as issue}
-                    <span>{issue.visual + ":"}</span>
-                    <li>{issue.description}</li>
-                    <br/>
-                {/each}
-            </severe>
-        {/if}
-        {#if !(filteredWarning.length === 0)}
-            <header>
-                <Header
-                        class="warnheader"
-                        title="Warnings"
-                        created={filteredWarning.length}
-                ></Header>
-            </header>
-            <warn class="warn">
-                {#each filteredWarning as issue}
-                    <span>{issue.visual + ":"}</span>
-                    <li>{issue.description}</li>
-                    <br/>
-                {/each}
-            </warn>
-        {/if}
-    </svelte:fragment>
+  <svelte:fragment slot="content">
+    {#if !(filteredSevere.length === 0)}
+      <header>
+        <Header
+          class="severeheader"
+          title="Severe"
+          created={filteredSevere.length}
+        ></Header>
+      </header>
+      <severe class="severe">
+        {#each filteredSevere as issue}
+          <span>{issue.visual + ":"}</span>
+          <li>{issue.description}</li>
+          <br />
+        {/each}
+      </severe>
+    {/if}
+    {#if !(filteredWarning.length === 0)}
+      <header>
+        <Header
+          class="warnheader"
+          title="Warnings"
+          created={filteredWarning.length}
+        ></Header>
+      </header>
+      <warn class="warn">
+        {#each filteredWarning as issue}
+          <span>{issue.visual + ":"}</span>
+          <li>{issue.description}</li>
+          <br />
+        {/each}
+      </warn>
+    {/if}
+  </svelte:fragment>
 </Pulltab>
 
 <style lang="scss">
@@ -67,8 +67,9 @@
     font-weight: bold;
     padding-left: 10px;
     padding-right: 10px;
-    font-family: JetBrains Mono NL,
-    monospace;
+    font-family:
+      JetBrains Mono NL,
+      monospace;
 
     @media (max-width: 800px) {
       font-size: 1em;

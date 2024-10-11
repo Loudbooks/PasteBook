@@ -1,16 +1,16 @@
 <script lang="ts">
-    export let name: string;
-    export let description: string;
+  export let name: string;
+  export let description: string;
 </script>
 
 <settingcontainer>
-    <settingheading>
-        <settingtitle>{name}</settingtitle>
-        <settingdescription>{description}</settingdescription>
-    </settingheading>
-    <settingcontent>
-        <slot name="setting"></slot>
-    </settingcontent>
+  <settingheading>
+    <settingtitle>{name}</settingtitle>
+    <settingdescription>{description}</settingdescription>
+  </settingheading>
+  <settingcontent>
+    <slot name="setting"></slot>
+  </settingcontent>
 </settingcontainer>
 
 <style lang="scss">
@@ -57,7 +57,6 @@
 
     @media (max-width: 768px) {
       font-size: 0.7em;
-
     }
   }
 

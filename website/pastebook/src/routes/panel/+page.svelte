@@ -26,6 +26,7 @@
         user: {
           hashedIP: paste.user.hashedIP,
         },
+        expiresAt: paste.expiresAt,
       });
     });
     let current = Date.now();

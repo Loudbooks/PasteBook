@@ -7,4 +7,5 @@ export type Paste = {
   user: {
     hashedIP: string;
   };
+  expiresAt: string;
 };

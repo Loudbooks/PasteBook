@@ -1,18 +1,20 @@
 <script lang="ts">
   import type { Paste } from "$lib/paste";
-  import { formatTimeSince } from "$lib/timehandler";
+  import { formatTimeSince, formatTimeUntil } from "$lib/timehandler";
 
   export let paste: Paste;
 
   let title = paste.title;
   let created = paste.created as unknown as number;
-  let id = paste.id;
+  let expire = paste.expiresAt as unknown as number;
 
   const reloadTime = () => {
     timeSinceStr = formatTimeSince(created);
+    expireStr = formatTimeUntil(expire).split(" ")[0] + " " + formatTimeUntil(expire).split(" ")[1];
   };
 
   let timeSinceStr = formatTimeSince(created);
+  let expireStr = formatTimeUntil(expire);
 
   reloadTime();
   let clear: any;
@@ -30,7 +32,7 @@
   <button class="pastecontainer" on:click={onClick}>
     <name>
       <h1>{title}</h1>
-      <p>{id}</p>
+      <p>Expires in <strong>{expireStr}</strong></p>
     </name>
     <created>
       {timeSinceStr}

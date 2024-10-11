@@ -91,13 +91,14 @@
 
   function getLineSeverity(line: string): number {
     const trimmed = line.trim().toLowerCase();
+    const lowerCase = line.toLowerCase();
     if (trimmed.includes("[warn") || trimmed.includes("/warn]")) return 1;
     if (
       trimmed.includes("[severe]") ||
       trimmed.includes("[error") ||
       trimmed.includes("/error]") ||
       trimmed.startsWith("caused by:") ||
-      trimmed.startsWith("\tat") ||
+      lowerCase.startsWith("\tat") ||
       (trimmed.includes("exception") && trimmed.includes("provided by"))
     ) {
       return 2;

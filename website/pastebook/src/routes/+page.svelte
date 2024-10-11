@@ -103,13 +103,14 @@
       font-family: Gabarito, sans-serif;
       font-size: 20px;
       margin-top: 0;
-      color: #333333;
+      color: gray;
       opacity: 0;
+      font-weight: 600;
 
       transition: all 0.5s var(--animation);
 
       :global(.dark-mode) & {
-        color: lightgray;
+        color: gray;
       }
 
       @media (max-width: 768px) {
@@ -126,12 +127,13 @@
       font-size: 25px;
       font-family: Gabarito, sans-serif;
       margin-top: 0;
-      padding-top: 20px;
+      padding-top: 10px;
       padding-left: 15px;
       padding-right: 15px;
       color: #333333;
       transition: all 0.5s ease;
       opacity: 0;
+      max-width: 1200px;
 
       animation: fadeUp 1s var(--animation);
       animation-delay: 0.2s;
@@ -179,8 +181,8 @@
       display: inline-block;
       appearance: none;
       border: none;
-      padding: 10px 20px;
-      font-size: 25px;
+      padding: 10px 10px;
+      font-size: 20px;
       background-color: transparent;
       color: gray;
       cursor: pointer;

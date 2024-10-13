@@ -322,8 +322,6 @@
         color: #919191;
       }
     }
-
-    user-select: none;
   }
 
   lines {
@@ -391,7 +389,7 @@
   }
 
   line-content-container {
-    margin-right: 30px;
+    // margin-right: 30px;t
     &.severity-1 {
       background-color: rgb(255, 165, 0, 0.7);
     }
@@ -399,9 +397,6 @@
     &.severity-2 {
       background-color: rgb(255, 0, 0, 0.6);
     }
-
-    // enable selection
-    user-select: text;
   }
 
   @keyframes fadeIn {

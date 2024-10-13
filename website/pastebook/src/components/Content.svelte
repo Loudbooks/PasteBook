@@ -322,6 +322,8 @@
         color: #919191;
       }
     }
+
+    user-select: none;
   }
 
   lines {
@@ -397,6 +399,9 @@
     &.severity-2 {
       background-color: rgb(255, 0, 0, 0.6);
     }
+
+    // enable selection
+    user-select: text;
   }
 
   @keyframes fadeIn {

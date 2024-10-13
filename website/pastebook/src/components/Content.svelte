@@ -245,12 +245,7 @@
                 id="line-number-{removeSpaces(getIndex(index + 1))}"
               >
                 {getIndex(index + 1)}
-              </number>
-            </a>
-            <line-content-container class="severity-{scanContent(line)}">
-              {line}
-            </line-content-container>
-          </linecontainer>
+              </number></a><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
         {/each}
       </lines>
     </div>

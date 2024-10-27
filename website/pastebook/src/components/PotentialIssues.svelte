@@ -44,6 +44,7 @@
       </severe>
     {/if}
     {#if !(filteredWarning.length === 0)}
+      <div style="height: 20px;"></div>
       <header>
         <Header
           class="warnheader"

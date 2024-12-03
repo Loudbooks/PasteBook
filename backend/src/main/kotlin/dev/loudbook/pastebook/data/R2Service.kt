@@ -22,6 +22,9 @@ class R2Service {
 
     @Value("\${s3.url}")
     private val url: String? = null
+    
+    @Value("\${s3.bucket}")
+    private val bucket: String? = null
 
     @PostConstruct
     fun init() {
@@ -38,24 +41,20 @@ class R2Service {
     }
 
     fun uploadFile(key: String, paste: String) {
-        amazonS3?.putObject("pastebook", key, paste)
+        amazonS3?.putObject(bucket, key, paste)
     }
 
     fun deleteFile(key: String) {
-        amazonS3?.deleteObject("pastebook", key)
+        amazonS3?.deleteObject(bucket, key)
     }
 
     fun getFile(key: String): String? {
-        val str = amazonS3?.getObject("pastebook", key)?.objectContent?.readAllBytes()?.toString(Charsets.UTF_8)
+        val str = amazonS3?.getObject(bucket, key)?.objectContent?.readAllBytes()?.toString(Charsets.UTF_8)
 
         return str
     }
 
-    fun fileExists(key: String): Boolean {
-        return amazonS3?.doesObjectExist("pastebook", key) ?: false
-    }
-
     fun listFileNames(): List<String> {
-        return amazonS3?.listObjects("pastebook")?.objectSummaries?.map { it.key }?.toList() ?: emptyList()
+        return amazonS3?.listObjects(bucket)?.objectSummaries?.map { it.key }?.toList() ?: emptyList()
     }
 }

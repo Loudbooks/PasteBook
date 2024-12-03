@@ -38,7 +38,7 @@ export async function load({ params, cookies }) {
 
   return {
     metadata: metadataPromise,
-    url: "https://pastebook.dev/api/get/" + path + "/content",
+    url: "http://localhost:25658/api/get/" + path + "/content",
     inspect: cookies.get("inspect") === "true",
   };
 }

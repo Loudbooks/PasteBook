@@ -31,6 +31,7 @@
   },
   "type": "module",
   "dependencies": {
-    "just-extend": "^6.2.0"
+    "just-extend": "^6.2.0",
+    "pako": "^2.1.0"
   }
 }

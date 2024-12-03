@@ -44,6 +44,7 @@
     }
 
     let submit = document.getElementsByClassName("submit")[0] as HTMLElement;
+    submit.classList.add("loading");
 
     alreadyUploading = true;
     const xhr = new XMLHttpRequest();

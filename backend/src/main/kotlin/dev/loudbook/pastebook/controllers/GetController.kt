@@ -17,7 +17,6 @@ import java.io.ByteArrayOutputStream
 import java.util.zip.GZIPOutputStream
 
 @RestController
-@RequestMapping("/api")
 class GetController {
     @Autowired
     lateinit var r2Service: R2Service
@@ -95,5 +94,4 @@ class GetController {
 
         return byteArrayOutputStream.toByteArray()
     }
-
 }

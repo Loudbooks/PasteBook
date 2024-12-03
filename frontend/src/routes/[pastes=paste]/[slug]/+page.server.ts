@@ -1,11 +1,10 @@
 import { error } from "@sveltejs/kit";
-import { pasteURL } from "$lib/stores";
 
 export async function load({ params, cookies }) {
   let path = params.slug;
 
   let response = await fetch(
-    "http://localhost:25658/api/get/" + path + "/metadata",
+    "http://localhost:25658/get/" + path + "/metadata",
   );
 
   if (response.status === 404) {
@@ -32,13 +31,17 @@ export async function load({ params, cookies }) {
     });
   }
 
-  pasteURL.set("https://pastebook.dev/p/" + path);
-
   let metadataPromise = response.json();
 
   return {
     metadata: metadataPromise,
-    url: "http://localhost:25658/api/get/" + path + "/content",
+    content: metadataPromise.then(async () => {
+      return fetch("http://localhost:25658/get/" + path + "/content").then(
+        (response) => {
+          return response.text();
+        },
+      );
+    }),
     inspect: cookies.get("inspect") === "true",
   };
 }

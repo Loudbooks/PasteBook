@@ -5,47 +5,13 @@
   import PotentialIssues from "../../../components/PotentialIssues.svelte";
   import { loadProgress, severes, warnings } from "$lib/stores";
   import { formatTimeSince, formatTimeUntil } from "$lib/timehandler";
-  import { error } from "@sveltejs/kit";
   import { onMount, tick } from "svelte";
   import SVGPasteBook from "../../../components/svg/SVGPasteBook.svelte";
   import Highlight from "../../../components/Highlight.svelte";
 
   export let data;
 
-  const { metadata, url } = data;
-
-  let percent = 0;
-
-  let promise = new Promise((resolve) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.responseType = "text";
-
-    xhr.addEventListener("progress", (e) => {
-      if (e.lengthComputable) {
-        percent = (e.loaded / e.total) * 100;
-      }
-
-      loadProgress.set(percent);
-    });
-
-    xhr.onload = async () => {
-      if (xhr.status === 200) {
-        loadProgress.set(99.9);
-
-        resolve(xhr.response);
-        await tick();
-        loadProgress.set(100);
-      } else {
-        error(xhr.status, xhr.statusText);
-      }
-    };
-    xhr.onerror = () => {
-      error(xhr.status, xhr.statusText);
-    };
-
-    xhr.send();
-  });
+  const { metadata, content } = data;
 
   let timeSinceStr = "";
   let created = new Date();
@@ -62,17 +28,22 @@
     reportBook = data.reportBook;
     wrap = data.wrap;
     hashedIP = data.user.hashedIP;
-    expires = new Date(data.expiresAt);
+    expires = new Date(data.expiresAt)
 
     const reloadTime = () => {
-      timeSinceStr = formatTimeSince(created);
-      untilExpire = formatTimeUntil(expires);
+      timeSinceStr = formatTimeSince(created as unknown as number);
+      untilExpire = formatTimeUntil(expires as unknown as number);
     };
 
     reloadTime();
     let clear;
     clearInterval(clear);
     clear = setInterval(reloadTime, 1000);
+  });
+
+  content.then((data) => {
+    loadProgress.set(100);
+    tick();
   });
 
   let x = null;
@@ -159,7 +130,7 @@
     <Header {title} created={timeSinceStr}></Header>
     <p id="hash">{hashedIP}</p>
   </div>
-  {#await promise then response}
+  {#await content then response}
     <Content
       content={response}
       {reportBook}

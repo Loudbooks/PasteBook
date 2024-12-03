@@ -3,6 +3,8 @@
   import { writableContent } from "$lib/stores.ts";
   import { onMount } from "svelte";
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   onMount(() => {
     writableTitle.subscribe(() => {
       allFieldsFilled();
@@ -48,9 +50,8 @@
     alreadyUploading = true;
     submit.classList.add("loading");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://pastebook.dev/api/upload");
+    xhr.open("POST", `${backendUrl}/upload`);
     xhr.setRequestHeader("Content-Type", "plain/text");
-    xhr.setRequestHeader("onlyPastebook", "true");
     xhr.setRequestHeader("access-control-allow-methods", "POST");
     xhr.setRequestHeader("title", $writableTitle);
     xhr.setRequestHeader("wrap", String($wrap));

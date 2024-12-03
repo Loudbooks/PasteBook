@@ -29,7 +29,7 @@ class UploadController {
 
     private val bucket: Bucket = BucketUtils.getBucketPerMinutes(4)
 
-    @PostMapping(value = ["/api/upload", "/upload"])
+    @PostMapping(value = ["/upload"])
     fun upload(request: HttpServletRequest, @RequestBody body: String): ResponseEntity<String> {
         if (!userService.processRequest(request)) {
             return ResponseEntity.status(403).body("Prohibited")
@@ -41,7 +41,7 @@ class UploadController {
 
         val header = HttpHeaders()
 
-        var fileID = generateRandomString()
+        val fileID = generateRandomString()
 
         val sinceTheEpoch = System.currentTimeMillis()
 
@@ -68,17 +68,11 @@ class UploadController {
         val ip = IPUtils.getIPFromRequest(request) ?: return ResponseEntity.badRequest().body("Failed to get IP")
 
         val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, reportBook, unlisted, wrap, ip, expire)
-        val pastebookURL = uploadPastebook(paste) ?: return ResponseEntity.badRequest().body("Failed to upload pastebook")
 
         r2Service.uploadFile(fileID, filteredBody)
         pasteRepository.save(paste)
 
-        return ResponseEntity.ok().headers(header).body(pastebookURL)
-    }
-
-    fun uploadPastebook(paste: PastePrivateDTO): String? {
-        val url = "https://pastebook.dev/p/${paste.id}"
-        return url
+        return ResponseEntity.ok().headers(header).body(fileID)
     }
 
     fun generateRandomString(length: Int = 5): String {

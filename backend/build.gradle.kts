@@ -46,6 +46,12 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+tasks.bootJar {
+    archiveBaseName.set("pastebook")
+    archiveVersion.set("")
+    archiveClassifier.set("")
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }

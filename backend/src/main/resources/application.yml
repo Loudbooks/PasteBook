@@ -9,7 +9,7 @@ spring:
       uri: ${SPRING_DATA_MONGODB_URI}
 
 s3:
-  url: ${R2_ENDPOINT}
-  accessKey: ${AWS_ACCESS_KEY_ID}
-  secretKey: ${AWS_SECRET_ACCESS_KEY}
-  bucket: ${R2_BUCKET}
+  url: ${S3_ENDPOINT}
+  accessKey: ${S3_ACCESS_KEY_ID}
+  secretKey: ${S3_SECRET_ACCESS_KEY}
+  bucket: ${S3_BUCKET}

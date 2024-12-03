@@ -13,9 +13,7 @@ Start by creating a file named `docker-compose.yml`. Add the content below.
 ```yml
 services:
   pastebook-backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: loudbook/pastebook-backend:latest
     ports:
       - "8080:8080"
     environment:
@@ -31,9 +29,8 @@ services:
       - pastebook-network
 
   frontend:
+    image: loudbook/pastebook-frontend:latest
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
       args:
         VITE_API_URL: ""
     ports:

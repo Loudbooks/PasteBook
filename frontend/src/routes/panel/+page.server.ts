@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit";
 
 export async function load({ params }) {
-  const response = await fetch("http://localhost:25658/list");
+  const response = await fetch("http://pastebook-backend:8080/list");
 
   if (response.status === 429) {
     error(429, {

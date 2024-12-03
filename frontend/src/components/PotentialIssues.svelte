@@ -69,7 +69,7 @@
     padding-left: 10px;
     padding-right: 10px;
     font-family:
-      JetBrains Mono NL,
+      "JetBrains Mono",
       monospace;
 
     @media (max-width: 800px) {

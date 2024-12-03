@@ -3,7 +3,7 @@
   import { writableContent } from "$lib/stores.ts";
   import { onMount } from "svelte";
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.VITE_API_URL;
 
   onMount(() => {
     writableTitle.subscribe(() => {
@@ -47,6 +47,8 @@
 
     let submit = document.getElementsByClassName("submit")[0] as HTMLElement;
 
+    console.log(backendUrl)
+
     alreadyUploading = true;
     submit.classList.add("loading");
     const xhr = new XMLHttpRequest();
@@ -72,7 +74,7 @@
         return;
       }
 
-      window.location.replace(xhr.response);
+      window.location.replace("/p/" + xhr.response);
     };
   }
 

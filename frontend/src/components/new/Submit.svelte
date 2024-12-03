@@ -3,8 +3,6 @@
   import { writableContent } from "$lib/stores.ts";
   import { onMount } from "svelte";
 
-  const backendUrl = import.meta.env.VITE_API_URL;
-
   onMount(() => {
     writableTitle.subscribe(() => {
       allFieldsFilled();
@@ -50,9 +48,11 @@
     console.log(backendUrl)
 
     alreadyUploading = true;
-    submit.classList.add("loading");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `${backendUrl}/upload`);
+
+    let domain = window.location.host;
+
+    xhr.open("POST", `https://api.${domain}/upload`);
     xhr.setRequestHeader("Content-Type", "plain/text");
     xhr.setRequestHeader("access-control-allow-methods", "POST");
     xhr.setRequestHeader("title", $writableTitle);

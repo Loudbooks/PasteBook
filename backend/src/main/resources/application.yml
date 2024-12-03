@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: PasteBook
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI}
+
+s3:
+  url: ${R2_ENDPOINT}
+  accessKey: ${AWS_ACCESS_KEY_ID}
+  secretKey: ${AWS_SECRET_ACCESS_KEY}
+  bucket: ${R2_BUCKET}

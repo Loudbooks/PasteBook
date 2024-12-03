@@ -9,7 +9,7 @@ on:
     branches:
       - master
       - docker
-
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
       
-    - name: Build with Gradle
+    - name: Build with Gradle (backend)
       run: |
         cd backend
         ./gradlew bootJar
@@ -39,7 +39,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }} 
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push frontend Docker image to GHCR
       uses: docker/build-push-action@v3
@@ -63,7 +63,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    - name: Build and push frontend Docker image
+    - name: Build and push frontend Docker image to Docker Hub
       uses: docker/build-push-action@v3
       with:
         context: ./frontend
@@ -71,7 +71,7 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:latest
 
-    - name: Build and push backend Docker image
+    - name: Build and push backend Docker image to Docker Hub
       uses: docker/build-push-action@v3
       with:
         context: ./backend

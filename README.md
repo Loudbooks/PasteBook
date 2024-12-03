@@ -1,19 +1,14 @@
-<div align="center">
-  <h1>PasteBook</h1>
-  <p>PasteBook is an aesthetic, effortless way to share your blocks of text.
-  
-  [![Static Badge](https://img.shields.io/badge/Website-brightgreen?style=for-the-badge)](https://pastebook.dev)
-  
-</div>
+# PasteBook 
+An easy on the eyes, portable, fun paste bin written in Svelte and Kotlin.
 
-# Installation
+## Installation
 The following is a guide to get PasteBook running on your system under your domain with SSL. All of this was tested on Ubuntu Linux.
 
-## Prerequisites
+### Prerequisites
 - An S3 bucket. In testing, CloudFlare R2 was used. CloudFlare R2 is free. You can learn more [here](https://www.cloudflare.com/developer-platform/products/r2/).
 - Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).
 
-## Preparation
+### Preparation
 Start by creating a file named `docker-compose.yml`. Add the content below.
 ```yml
 services:
@@ -67,7 +62,7 @@ networks:
   pastebook-network:
     driver: bridge
 ```
-## Configuration
+### Configuration
 All of the following values must be changed.
 <br>
 
@@ -79,7 +74,7 @@ All of the following values must be changed.
 
 `VITE_API_URL` - The full endpoint of the API. When locally testing this is `http://localhost:8080`. In my case, when in production, it would be `https://api.pastebook.dev/`.
 
-## Creation
+### Creation
 Run the following.
 ```
 docker-compose up
@@ -87,22 +82,21 @@ docker-compose up
 
 Awesome! PasteBook is now running.
 
-# Nginx Configuration
+## Nginx Configuration
 In order to run PasteBook under a domain, you will need to use a reverse proxy. The following will serve as a guide to setting up Nginx.
 
-## Prerequisites
+### Prerequisites
 - PasteBook is fully installed with the instructions above.
 - A working Nginx installation. Learn more [here](https://nginx.org/en/linux_packages.html#instructions).
 - A working Certbot installation. Learn more [here](https://certbot.eff.org/instructions?ws=nginx&os=snap).
 ## Preparation
 Navigate to `/etc/nginx/sites-enabled`.
 Create a file under the name `pastebook.conf` and add the following content:
-```conf
+```nginx
 server {
     listen 80;
     server_name <DOMAIN>
 
-    # Redirect HTTP to HTTPS
     location / {
         return 301 https://$host$request_uri;
     }
@@ -144,16 +138,16 @@ server {
 }
 ```
 
-## Configuration 
+### Configuration 
 `<DOMAIN>` - Change this to your domain name. For example, mine is `pastebook.dev`.
 
-## SSL Configuration
+### SSL Configuration
 Run the following, with `<DOMAIN>` changed to your domain.
 ```
 sudo certbot --nginx -d <DOMAIN> -d api.<DOMAIN>
 ```
 
-## Committing Changes
+### Committing Changes
 Run the following.
 ```
 systemctl restart nginx

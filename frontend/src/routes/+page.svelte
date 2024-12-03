@@ -24,8 +24,6 @@
     {#if width > 768}
       <button onclick="window.location.href = '/new';">NEW</button>
       <dot>⎯</dot>
-      <button onclick="window.location.href = '/panel';">PANEL</button>
-      <dot>⎯</dot>
       <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a
       >
       <dot>⎯</dot>
@@ -35,8 +33,6 @@
     {:else}
       <div id="second-container">
         <button onclick="window.location.href = '/new';">NEW</button>
-        <dot>⎯</dot>
-        <button onclick="window.location.href = '/panel';">PANEL</button>
       </div>
       <div id="second-container">
         <a href="https://github.com/Loudbooks/PasteBook" target="_blank"
@@ -105,7 +101,7 @@
       margin-top: 0;
       color: gray;
       opacity: 0;
-      font-weight: 600;
+      font-weight: 400;
 
       transition: all 0.5s var(--animation);
 

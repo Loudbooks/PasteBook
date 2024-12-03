@@ -30,15 +30,13 @@ services:
 
   frontend:
     image: loudbook/pastebook-frontend:latest
-    build:
-      args:
-        VITE_API_URL: ""
     ports:
       - "80:3000"
     depends_on:
       - pastebook-backend
     networks:
       - pastebook-network
+    pull_policy: always
 
   mongo:
     image: mongo:6.0
@@ -51,6 +49,7 @@ services:
       - mongo-data:/data/db
     networks:
       - pastebook-network
+    pull_policy: always
 
 volumes:
   mongo-data:
@@ -68,8 +67,6 @@ All of the following values must be changed.
 `S3_SECRET_ACCESS_KEY` - The secret access key associated with your R2 bucket, S3 bucket, etc.
 
 `S3_ENDPOINT` - The endpoint associated with your R2 bucket, S3 bucket, etc. 
-
-`VITE_API_URL` - The full endpoint of the API. When locally testing this is `http://localhost:8080`. In my case, when in production, it would be `https://api.pastebook.dev/`.
 
 ### Creation
 Run the following.
@@ -123,7 +120,7 @@ server {
 
 server {
     listen 443 ssl;
-    server_name api<DOMAIN>
+    server_name api.<DOMAIN>
 
     location / {
         proxy_buffering off;  
@@ -148,6 +145,14 @@ sudo certbot --nginx -d <DOMAIN> -d api.<DOMAIN>
 Run the following.
 ```
 systemctl restart nginx
+```
+
+# Updating PasteBook
+Run the following commands in succession.
+```bash
+docker compose stop
+docker compose pull
+docker compose up -d
 ```
 
 # Final Notes

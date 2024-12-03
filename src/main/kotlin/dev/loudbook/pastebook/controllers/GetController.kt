@@ -12,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.io.ByteArrayOutputStream
+import java.util.zip.GZIPOutputStream
 
 @RestController
 @RequestMapping("/api")
@@ -48,7 +47,11 @@ class GetController {
     }
 
     @GetMapping("/get/{id}/content")
-    fun getContent(@PathVariable id: String, request: HttpServletRequest): ResponseEntity<String> {
+    fun getContent(
+        @RequestParam(required = false, defaultValue = "true") compress: Boolean,
+        @PathVariable id: String,
+        request: HttpServletRequest
+    ): ResponseEntity<Any> {
         if (!userService.processRequest(request)) {
             return ResponseEntity.status(403).body("Prohibited")
         }
@@ -58,10 +61,40 @@ class GetController {
         }
 
         val headers = HttpHeaders()
-        headers.add("Content-Type", "text/plain; charset=utf-8")
+
+        if (compress) {
+            headers.add("Content-Encoding", "gzip")
+        } else {
+            headers.add("Content-Type", "text/plain; charset=utf-8")
+        }
 
         val paste = r2Service.getFile(id) ?: return ResponseEntity.notFound().build()
+        val pasteData = paste.toByteArray()
 
-        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).headers(headers).body(paste)
+        return if (compress) {
+            val compressed = compressData(pasteData)
+            println("Compressed ${pasteData.size} bytes to ${compressed.size} bytes")
+            ResponseEntity.ok()
+                .contentType(MediaType.TEXT_PLAIN)
+                .headers(headers)
+                .body(compressed)
+        } else {
+            ResponseEntity.ok()
+                .contentType(MediaType.TEXT_PLAIN)
+                .headers(headers)
+                .body(paste)
+        }
     }
+
+    private fun compressData(data: ByteArray): ByteArray {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val gzipOutputStream = GZIPOutputStream(byteArrayOutputStream)
+
+        gzipOutputStream.use { outputStream ->
+            outputStream.write(data)
+        }
+
+        return byteArrayOutputStream.toByteArray()
+    }
+
 }

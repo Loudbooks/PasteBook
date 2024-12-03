@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { expire, unlisted, wrap, writableTitle } from "$lib/stores.ts";
+  import { expire, wrap, writableTitle } from "$lib/stores.ts";
   import { writableContent } from "$lib/stores.ts";
   import { onMount } from "svelte";
 
@@ -57,7 +57,6 @@
     xhr.setRequestHeader("access-control-allow-methods", "POST");
     xhr.setRequestHeader("title", $writableTitle);
     xhr.setRequestHeader("wrap", String($wrap));
-    xhr.setRequestHeader("unlisted", String($unlisted));
     xhr.setRequestHeader("expires", String($expire));
 
     xhr.send($writableContent);

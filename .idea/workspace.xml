@@ -4,81 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b4f5047-4916-4ee0-9bfc-17bd3fb07def" name="Changes" comment="GZip Cleanup">
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/BucketUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/ContentScanner.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/DeleteHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/IPUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/PasteBookApplication.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/config/Configuration.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/config/WebConfig.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/controllers/GetController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/controllers/ListController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/controllers/UploadController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/data/Paste.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/data/PasteDTO.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/data/PastePrivateDTO.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/data/R2Service.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/data/User.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/data/UserDTO.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/mongo/PasteRepository.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/mongo/UserService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/loudbook/pastebook/mongo/UsersRepository.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/dev/loudbook/pastebook/pastebook/PasteBookApplicationTests.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/.npmrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/.prettierrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/app.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/app.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/Beta.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/Content.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/Header.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/Highlight.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/Mode.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/PotentialIssues.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/Toolbar.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/new/Submit.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/panel/ListedPaste.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/pulltab/Pulltab.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/settings/DropDown.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/settings/Setting.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/settings/Switch.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/components/svg/SVGPasteBook.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/assets/arrow-white.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/assets/arrow.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/assets/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/detections.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/issue.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/paste.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/stores.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/lib/timehandler.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/params/paste.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/+error.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/+layout.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/[pastes=paste]/[slug]/+page.server.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/[pastes=paste]/[slug]/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/new/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/panel/+page.server.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/panel/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/privacy/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/src/routes/settings/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/static/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/static/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/svelte.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/pastebook/vite.config.ts" beforeDir="false" />
-    </list>
+    <list default="true" id="7b4f5047-4916-4ee0-9bfc-17bd3fb07def" name="Changes" comment="GZip Cleanup" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,7 +78,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.PasteBookApplication.executor": "Run",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "docker",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

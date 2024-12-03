@@ -48,7 +48,6 @@ class UploadController {
         val title = request.getHeader("title") ?: return ResponseEntity.badRequest().body("Title is required")
         val reportBook = request.getHeader("reportBook")?.toBoolean() == true
         val wrap = request.getHeader("wrap")?.toBoolean() == true
-        val unlisted = request.getHeader("unlisted")?.toBoolean() == true
         var expire = request.getHeader("expires")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
 
         if (expire < 60000) {
@@ -67,7 +66,7 @@ class UploadController {
 
         val ip = IPUtils.getIPFromRequest(request) ?: return ResponseEntity.badRequest().body("Failed to get IP")
 
-        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, reportBook, unlisted, wrap, ip, expire)
+        val paste = PastePrivateDTO(fileID, title, sinceTheEpoch, reportBook, wrap, ip, expire)
 
         r2Service.uploadFile(fileID, filteredBody)
         pasteRepository.save(paste)

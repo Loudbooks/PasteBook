@@ -7,7 +7,7 @@
   import Pulltab from "../../components/pulltab/Pulltab.svelte";
   import Setting from "../../components/settings/Setting.svelte";
 
-  import { expire, unlisted, wrap } from "$lib/stores";
+  import { expire, wrap } from "$lib/stores";
   import DropDown from "../../components/settings/DropDown.svelte";
   import { onMount } from "svelte";
 
@@ -16,14 +16,12 @@
   }
 
   let defaultExpire = 86400000;
-  let defaultUnlisted = false;
   let forceWrap = false;
 
   onMount(() => {
     defaultExpire = parseInt(
       localStorage.getItem("default-expire") ?? "86400000",
     );
-    defaultUnlisted = localStorage.getItem("default-unlisted") === "true";
     forceWrap = localStorage.getItem("wrap") === "true";
   });
 </script>
@@ -35,16 +33,6 @@
   <Content newReport="true"></Content>
   <Pulltab title="Upload Options">
     <svelte:fragment slot="content">
-      <Setting name="Unlisted" description="Hides your paste from the public">
-        <svelte:fragment slot="setting">
-          <Switch
-            isSelected={defaultUnlisted}
-            externalHandler={(selected) => {
-              $unlisted = selected;
-            }}
-          ></Switch>
-        </svelte:fragment>
-      </Setting>
       <Setting
         name="Text Wrap"
         description="Wraps your text to the edges of display"

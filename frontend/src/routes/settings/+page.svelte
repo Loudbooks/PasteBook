@@ -7,7 +7,6 @@
 
   let darkMode = false;
   let wrap = false;
-  let defaultUnlisted = false;
   let defaultExpire = 86400000;
 
   onMount(() => {
@@ -21,12 +20,6 @@
 
     if (wrap) {
       document.body.classList.add("wrap");
-    }
-
-    defaultUnlisted = localStorage.getItem("default-unlisted") === "true";
-
-    if (defaultUnlisted) {
-      document.body.classList.add("default-unlisted");
     }
 
     defaultExpire = parseInt(
@@ -86,16 +79,6 @@
             isSelected={wrap}
             externalHandler={(selected) => {
               localStorage.setItem("wrap", selected.toString());
-            }}
-          ></Switch>
-        </svelte:fragment>
-      </Setting>
-      <Setting name="Default Unlisted" description="Default paste visibility">
-        <svelte:fragment slot="setting">
-          <Switch
-            isSelected={defaultUnlisted}
-            externalHandler={(selected) => {
-              localStorage.setItem("default-unlisted", selected.toString());
             }}
           ></Switch>
         </svelte:fragment>

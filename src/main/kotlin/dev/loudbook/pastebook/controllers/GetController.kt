@@ -73,7 +73,6 @@ class GetController {
 
         return if (compress) {
             val compressed = compressData(pasteData)
-            println("Compressed ${pasteData.size} bytes to ${compressed.size} bytes")
             ResponseEntity.ok()
                 .contentType(MediaType.TEXT_PLAIN)
                 .headers(headers)

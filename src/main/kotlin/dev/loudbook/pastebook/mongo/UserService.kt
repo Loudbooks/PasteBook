@@ -18,7 +18,6 @@ class UserService {
             usersRepository.save(newUser)
         } else {
             usersRepository.save(User(ip, 1, System.currentTimeMillis(), false))
-            println("New user: $ip")
         }
     }
 

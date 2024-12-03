@@ -45,8 +45,6 @@
 
     let submit = document.getElementsByClassName("submit")[0] as HTMLElement;
 
-    console.log(backendUrl)
-
     alreadyUploading = true;
     const xhr = new XMLHttpRequest();
 

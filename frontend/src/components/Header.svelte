@@ -57,10 +57,6 @@
       border: none;
       resize: none;
       overflow: scroll;
-
-      &:active {
-        transform: scale(0.99);
-      }
     }
 
     name {

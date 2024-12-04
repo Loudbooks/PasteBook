@@ -31,7 +31,7 @@ services:
   frontend:
     image: loudbook/pastebook-frontend:latest
     ports:
-      - "80:3000"
+      - "3000:3000"
     depends_on:
       - pastebook-backend
     networks:

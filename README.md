@@ -153,7 +153,6 @@ systemctl restart nginx
 Run the following commands in succession.
 ```bash
 docker compose stop
-docker compose pull
 docker compose up -d
 ```
 

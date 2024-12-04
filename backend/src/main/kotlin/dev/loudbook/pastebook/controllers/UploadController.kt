@@ -50,7 +50,7 @@ class UploadController {
         val wrap = request.getHeader("wrap")?.toBoolean() == true
         var expire = request.getHeader("expires")?.toLong() ?: (sinceTheEpoch + 8.64e+7).toLong()
 
-        val hostDomain = request.getHeader("X-Domain-Name")
+        val hostDomain = request.getHeader("Domain-Name")
 
         if (expire < 60000) {
             return ResponseEntity.badRequest().body("Expire time too short")

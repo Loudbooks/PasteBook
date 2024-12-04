@@ -89,7 +89,7 @@ Create a file under the name `pastebook.conf` and add the following content:
 ```nginx
 server {
     listen 80;
-    server_name <DOMAIN>
+    server_name <DOMAIN>;
 
     location / {
         return 301 https://$host$request_uri;
@@ -98,7 +98,7 @@ server {
 
 server {
     listen 443 ssl;
-    server_name <DOMAIN>
+    server_name <DOMAIN>;
 
     location / {
         proxy_buffering off;  
@@ -111,7 +111,7 @@ server {
 
 server {
     listen 80;
-    server_name api.<DOMAIN>
+    server_name api.<DOMAIN>;
 
     location / {
         return 301 https://$host$request_uri;
@@ -120,7 +120,9 @@ server {
 
 server {
     listen 443 ssl;
-    server_name api.<DOMAIN>
+    server_name api.<DOMAIN>;
+
+    client_max_body_size 6M;
 
     location / {
         proxy_buffering off;  

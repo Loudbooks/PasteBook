@@ -33,7 +33,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - pastebook-backend
+      - backend
     networks:
       - pastebook-network
     pull_policy: always

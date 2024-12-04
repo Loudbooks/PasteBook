@@ -71,7 +71,7 @@ All of the following values must be changed.
 ### Creation
 Run the following.
 ```
-docker-compose up
+docker compose up -d
 ```
 
 Awesome! PasteBook is now running.
@@ -83,7 +83,7 @@ In order to run PasteBook under a domain, you will need to use a reverse proxy. 
 - PasteBook is fully installed with the instructions above.
 - A working Nginx installation. Learn more [here](https://nginx.org/en/linux_packages.html#instructions).
 - A working Certbot installation. Learn more [here](https://certbot.eff.org/instructions?ws=nginx&os=snap).
-## Preparation
+## Nginx Preparation
 Navigate to `/etc/nginx/sites-enabled`.
 Create a file under the name `pastebook.conf` and add the following content:
 ```nginx
@@ -134,6 +134,9 @@ server {
 }
 ```
 
+## Domain Preparation
+You will need to create a DNS A record pointing to your machine with the root and with the `api.` prefix. I use CloudFlare.
+
 ### Configuration 
 `<DOMAIN>` - Change this to your domain name. For example, mine is `pastebook.dev`.
 
@@ -153,7 +156,6 @@ systemctl restart nginx
 Run the following commands in succession.
 ```bash
 docker compose stop
-docker compose pull
 docker compose up -d
 ```
 

@@ -24,40 +24,50 @@
     line-height: 1;
     border-radius: 30px;
     height: 40px;
-
-    @media (min-width: 600px) {
-      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
-      background-size: 15%;
-      background-position-x: 80px;
+    
+    border: 1px solid #cfcfcf;
+    color: black;
+    font-family: Gabarito, sans-serif;
+    
+    -webkit-appearance: none;
+    float: right;
+    
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #cfcfcf;
+      
+      :global(.dark-mode) & {
+        background-color: #333;
+      }
     }
-    @media (max-width: 600px) {
-      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
-      background-size: 15%;
-      background-position-x: 75px;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &:active {
+      background-color: #cfcfcf;
     }
 
     :global(.dark-mode) & {
+      color: white;
+      
       border: 1px solid #333;
+      
       @media (min-width: 600px) {
         background: url("$lib/assets/arrow-white.svg") no-repeat right #1a1a1a;
         background-size: 15%;
         background-position-x: 80px;
       }
+      
       @media (max-width: 600px) {
         background: url("$lib/assets/arrow-white.svg") no-repeat right #1a1a1a;
         background-size: 15%;
         background-position-x: 75px;
       }
-      color: white;
     }
-
-    border: 1px solid #cfcfcf;
-    color: black;
-    font-family: Gabarito, sans-serif;
-
-    -webkit-appearance: none;
-    float: right;
-
+    
     @media (max-width: 600px) {
       height: 25px;
       font-size: 12px;
@@ -65,21 +75,16 @@
       width: 100px;
     }
 
-    &:hover {
-      cursor: pointer;
-      background-color: #cfcfcf;
-
-      :global(.dark-mode) & {
-        background-color: #333;
-      }
+    @media (min-width: 600px) {
+      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
+      background-size: 15%;
+      background-position-x: 80px;
     }
-
-    &:focus {
-      outline: none;
-    }
-
-    &:active {
-      background-color: #cfcfcf;
+    
+    @media (max-width: 600px) {
+      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
+      background-size: 15%;
+      background-position-x: 75px;
     }
   }
 </style>

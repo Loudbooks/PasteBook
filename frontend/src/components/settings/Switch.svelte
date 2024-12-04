@@ -34,6 +34,7 @@
     bind:this={background}
     class="container bg-active-{isSelected}"
     on:click={toggleSelected}
+    aria-label="Toggle"
   >
     <circ bind:this={circle} class="circle active-{isSelected}"></circ>
   </button>
@@ -61,13 +62,13 @@
       border: 1px solid #333;
     }
 
+    :active & {
+      transform: scale(0.96);
+    }
+
     @media (max-width: 600px) {
       width: 40px;
       height: 25px;
-    }
-
-    :active & {
-      transform: scale(0.96);
     }
   }
 
@@ -96,16 +97,16 @@
     border-radius: 50%;
     background-color: dimgray;
 
-    @media (max-width: 600px) {
-      height: 20px;
-      width: 20px;
-    }
-
     :global(.dark-mode) & {
       background-color: white;
     }
 
     padding: 0;
+
+    @media (max-width: 600px) {
+      height: 20px;
+      width: 20px;
+    }
   }
 
   .active-false {

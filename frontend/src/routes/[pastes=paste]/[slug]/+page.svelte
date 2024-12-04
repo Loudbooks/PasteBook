@@ -195,12 +195,12 @@
     font-family: Gabarito, sans-serif;
     text-align: center;
 
-    @media (max-width: 600px) {
-      font-size: 10px;
-    }
-
     &.extra-padding-true {
       padding: 0 0 40px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 10px;
     }
   }
 </style>

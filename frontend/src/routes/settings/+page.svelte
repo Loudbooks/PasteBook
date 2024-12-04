@@ -161,17 +161,17 @@
     padding: 10px 10px 5px;
     opacity: 0;
 
-    @media (max-width: 600px) {
-      height: calc(100% - 130px);
-      margin-top: 6px;
-    }
-
     :global(.dark-mode) & {
       border: 1px solid #333;
       background-color: #1a1a1a;
     }
 
     animation: fadeIn 0.5s forwards;
+
+    @media (max-width: 600px) {
+      height: calc(100% - 130px);
+      margin-top: 6px;
+    }
   }
 
   #padding {

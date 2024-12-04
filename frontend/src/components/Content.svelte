@@ -239,6 +239,7 @@
               on:click={clickNumber}
               tabindex="0"
               on:keydown={() => {}}
+              href=null
             >
               <number
                 class="number"
@@ -250,7 +251,7 @@
       </lines>
     </div>
   {:else}
-    <textarea class="input" on:input={onInput} />
+    <textarea class="input" on:input={onInput}></textarea>
   {/if}
 </content-container>
 
@@ -269,11 +270,6 @@
     overflow-x: scroll;
     border: 1px solid #c9c9c9;
 
-    @media (max-width: 600px) {
-      height: calc(100% - 130px);
-      margin-top: 6px;
-    }
-
     :global(.dark-mode) & {
       border: 1px solid #333;
       background-color: #1a1a1a;
@@ -284,6 +280,11 @@
     }
 
     transition: all 0.5s ease;
+
+    @media (max-width: 600px) {
+      height: calc(100% - 130px);
+      margin-top: 6px;
+    }
   }
 
   .input {
@@ -341,11 +342,6 @@
       background-color: orange;
     }
 
-    @media (max-width: 600px) {
-      font-size: 10px;
-      padding-right: 12px;
-    }
-
     .dark-mode & {
       color: #999;
     }
@@ -353,6 +349,11 @@
     transition:
       all 0.2s ease,
       font-weight 0.5s ease;
+
+    @media (max-width: 600px) {
+      font-size: 10px;
+      padding-right: 12px;
+    }
   }
 
   linecontainer {
@@ -372,19 +373,18 @@
       white-space: break-spaces;
     }
 
+    :global(body.dark-mode) & {
+      color: white;
+    }
+
     @media (max-width: 600px) {
       font-size: 10px;
       padding-left: 30px;
       text-indent: -18px;
     }
-
-    :global(body.dark-mode) & {
-      color: white;
-    }
   }
 
   line-content-container {
-    // margin-right: 30px;t
     &.severity-1 {
       background-color: rgb(255, 165, 0, 0.7);
     }

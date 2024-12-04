@@ -49,10 +49,10 @@
 
 <contentcontainer>
   <content>
-    <button class="tab non-active" on:click={toggleClick}>{title}</button>
+    <button class="tab non-active" on:click={toggleClick} aria-label="button">{title}</button>
     <slot name="content"></slot>
   </content>
-  <button class="blur" on:click={toggleClick}></button>
+  <button class="blur" on:click={toggleClick} aria-label="button"></button>
 </contentcontainer>
 
 <style lang="scss">
@@ -130,21 +130,22 @@
     background-color: #eeeeee;
     transition: all 0.5s ease;
 
-    @media (max-width: 500px) {
-      width: 91vw;
-    }
-
+    
     border: 1px solid #c9c9c9;
-
+    
     :global(body.dark-mode) & {
       border: 1px solid #333;
       background-color: #1a1a1a;
     }
-
+    
     border-radius: 20px;
     transform: translate(-50%, -50%);
     padding: 10px;
     font-family: Gabarito, sans-serif;
+
+    @media (max-width: 500px) {
+      width: 91vw;
+    }
   }
 
   @keyframes fadeIn {

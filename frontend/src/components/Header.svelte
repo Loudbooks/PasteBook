@@ -73,12 +73,11 @@
       animation: fadeIn ease 0.7s;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
+      transition: color 0.2s ease;
 
       :global(.dark-mode) & {
         color: white;
       }
-
-      transition: color 0.2s ease;
     }
 
     created {
@@ -99,11 +98,11 @@
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
 
+      transition: color 0.2s ease;
+
       :global(.dark-mode) & {
         color: lightgray;
       }
-
-      transition: color 0.2s ease;
     }
 
     @keyframes fadeIn {

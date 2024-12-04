@@ -91,11 +91,6 @@
       margin: 0;
       right: 100px;
 
-      @media (max-width: 600px) {
-        left: 30px;
-        right: unset;
-      }
-
       bottom: 0;
 
       background: #ffcc00;
@@ -118,6 +113,11 @@
       &:hover {
         cursor: pointer;
         bottom: -2px;
+      }
+
+      @media (max-width: 600px) {
+        left: 30px;
+        right: unset;
       }
     }
   }

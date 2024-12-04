@@ -1101,11 +1101,6 @@
     overflow-x: scroll;
     outline: 1px solid #c9c9c9;
 
-    @media (max-width: 600px) {
-      height: calc(100% - 130px);
-      margin-top: 6px;
-    }
-
     :global(.dark-mode) & {
       outline: 1px solid #333;
       background-color: #1a1a1a;
@@ -1123,6 +1118,11 @@
         opacity: 1;
       }
     }
+
+    @media (max-width: 600px) {
+      height: calc(100% - 130px);
+      margin-top: 6px;
+    }
   }
 
   #inner-content {
@@ -1135,12 +1135,12 @@
     transition: color 0.5s ease;
     font-size: 12px;
 
-    @media (max-width: 600px) {
-      font-size: 10px;
-    }
-
     :global(.dark-mode) & {
       color: white;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 10px;
     }
   }
 
@@ -1169,12 +1169,12 @@
     color: black;
     transition: color 0.5s ease;
 
-    @media (max-width: 600px) {
-      font-size: 10px;
-    }
-
     :global(.dark-mode) & {
       color: white;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 10px;
     }
   }
 </style>

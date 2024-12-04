@@ -48,70 +48,75 @@
     background-color: #eeeeee;
     opacity: 0;
 
-    @media (max-width: 600px) {
-      height: 20px;
-    }
-
+    
     display: flex;
     justify-content: space-between;
-
+    
     color: gray;
     border: 1px solid #c9c9c9;
-
+    
     :global(.dark-mode) & {
       border: 1px solid #333;
       background-color: #1a1a1a;
     }
-
+    
     &:active {
       transform: scale(0.95);
     }
-
+    
     button {
       transition:
-        opacity 0.7s,
-        transform 0.5s,
-        color 0.5s;
+      opacity 0.7s,
+      transform 0.5s,
+      color 0.5s;
       align-self: center;
-
+      
       font-size: 1rem;
       font-weight: 700;
       margin: 0;
       font-family: Gabarito, sans-serif;
       border: none;
       color: gray;
-
+      
       padding-left: 20px;
       padding-right: 30px;
       background-color: transparent;
       outline: none;
-
+      
       &:hover {
         color: darkgray;
         cursor: pointer;
       }
-
+      
       &:active {
         transform: scale(0.95);
       }
-
+      
       @media (max-width: 600px) {
         font-size: 0.6rem;
         padding: 0 0 0 20px;
       }
     }
-
+    
     buttons {
       display: flex;
-
+      
       @media (max-width: 600px) {
         font-size: 0.6rem;
-        padding-right: 30px;
+        padding-right: 20px;
       }
+    }
+
+    @media (max-width: 600px) {
+      height: 20px;
     }
   }
 
   #main {
     padding-left: 30px;
+
+    @media (max-width: 600px) {
+      padding-left: 20px;
+    }
   }
 </style>

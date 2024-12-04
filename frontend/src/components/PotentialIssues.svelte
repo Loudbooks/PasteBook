@@ -72,11 +72,11 @@
       "JetBrains Mono",
       monospace;
 
+    display: inline-block;
+
     @media (max-width: 800px) {
       font-size: 1em;
     }
-
-    display: inline-block;
   }
 
   .severe,
@@ -89,10 +89,6 @@
     margin: 10px 10px 10px;
     color: black;
     opacity: 0;
-
-    @media (max-width: 800px) {
-      font-size: 0.8em;
-    }
 
     animation: fadeIn 0.5s ease-in-out forwards;
     animation-delay: 0.1s;
@@ -109,6 +105,10 @@
     white-space: nowrap;
     overflow: scroll;
     padding: 10px 20px 10px 10px;
+
+    @media (max-width: 800px) {
+      font-size: 0.8em;
+    }
   }
 
   .severe {

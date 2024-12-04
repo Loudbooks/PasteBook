@@ -39,12 +39,12 @@
     color: black;
     font-family: Gabarito, sans-serif;
 
-    @media (max-width: 768px) {
-      font-size: 1em;
-    }
-
     :global(.dark-mode) & {
       color: white;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1em;
     }
   }
 

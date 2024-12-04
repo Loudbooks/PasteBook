@@ -5,6 +5,7 @@ import dev.loudbook.pastebook.data.User
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class UserService {
@@ -17,7 +18,8 @@ class UserService {
             val newUser = user.incrementRequests()
             usersRepository.save(newUser)
         } else {
-            usersRepository.save(User(ip, 1, System.currentTimeMillis(), false))
+            val userID = UUID.randomUUID().toString()
+            usersRepository.save(User(ip, userID, 1, System.currentTimeMillis(), false))
         }
     }
 

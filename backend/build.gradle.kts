@@ -30,7 +30,6 @@ dependencies {
     implementation("me.paulschwarz:spring-dotenv:4.0.0")
     implementation("commons-validator:commons-validator:1.8.0")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.717")
-    implementation("commons-codec:commons-codec:1.17.0")
 }
 
 dependencyManagement {

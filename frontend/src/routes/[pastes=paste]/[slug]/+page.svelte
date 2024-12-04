@@ -19,7 +19,7 @@
   let title = "";
   let reportBook = false;
   let wrap = false;
-  let hashedIP = "";
+  let userId = "";
   let untilExpire = "";
 
   metadata.then((data) => {
@@ -27,7 +27,7 @@
     title = data.title;
     reportBook = data.reportBook;
     wrap = data.wrap;
-    hashedIP = data.user.hashedIP;
+    userId = data.user.id;
     expires = new Date(data.expiresAt)
 
     const reloadTime = () => {
@@ -41,7 +41,7 @@
     clear = setInterval(reloadTime, 1000);
   });
 
-  content.then((data) => {
+  content.then(() => {
     loadProgress.set(100);
     tick();
   });
@@ -128,7 +128,7 @@
     role="tooltip"
   >
     <Header {title} created={timeSinceStr}></Header>
-    <p id="hash">{hashedIP}</p>
+    <p id="hash">{userId}</p>
   </div>
   {#await content then response}
     <Content

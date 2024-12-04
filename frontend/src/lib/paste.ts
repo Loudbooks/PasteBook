@@ -5,7 +5,7 @@ export type Paste = {
   reportBook: boolean;
   wrap: boolean;
   user: {
-    hashedIP: string;
+    id: string;
   };
   expiresAt: string;
 };

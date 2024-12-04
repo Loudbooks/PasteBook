@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7b4f5047-4916-4ee0-9bfc-17bd3fb07def" name="Changes" comment="GZip Cleanup" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="PasteBook" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Loudbooks&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Loudbooks/PasteBook.git&quot;,
+    &quot;accountId&quot;: &quot;5fd98bf1-b098-4f97-94ec-ecb80643af4a&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2hBq0QrmcaqIWZbLDsn8220HHI0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build PasteBook.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.PasteBook [jar].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.PasteBookApplication.executor": "Run",
+    "git-widget-placeholder": "docker",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "ts.external.directory.path": "/Users/samgordon/IdeaProjects/PasteBook/website/pastebook/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.PasteBookApplication">
+    <configuration name="PasteBook [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PasteBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="PasteBook.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dev.loudbook.pastebook.PasteBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.PasteBook [jar]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.59" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b4f5047-4916-4ee0-9bfc-17bd3fb07def" name="Changes" comment="" />
+      <created>1717077596486</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717077596486</updated>
+      <workItem from="1717077597886" duration="2344000" />
+      <workItem from="1717350793088" duration="698000" />
+      <workItem from="1717354176930" duration="2457000" />
+      <workItem from="1717360978712" duration="437000" />
+      <workItem from="1717361424794" duration="3870000" />
+      <workItem from="1717554777782" duration="6767000" />
+      <workItem from="1717634772148" duration="1975000" />
+      <workItem from="1717689430755" duration="1275000" />
+      <workItem from="1717886535824" duration="99000" />
+      <workItem from="1718051571728" duration="673000" />
+      <workItem from="1718109622605" duration="1004000" />
+      <workItem from="1718332152676" duration="7000" />
+      <workItem from="1718510741647" duration="2507000" />
+      <workItem from="1719160715033" duration="1867000" />
+      <workItem from="1720645908670" duration="2338000" />
+      <workItem from="1720673419190" duration="1715000" />
+      <workItem from="1720820752082" duration="615000" />
+      <workItem from="1723929666162" duration="117000" />
+      <workItem from="1727397098116" duration="1235000" />
+      <workItem from="1727899028357" duration="107000" />
+      <workItem from="1728075616127" duration="12000" />
+      <workItem from="1728091376742" duration="871000" />
+      <workItem from="1728839497771" duration="8000" />
+      <workItem from="1729043933145" duration="36000" />
+      <workItem from="1729189517265" duration="218000" />
+      <workItem from="1729530997543" duration="1286000" />
+      <workItem from="1730243969864" duration="21000" />
+      <workItem from="1733089215703" duration="652000" />
+      <workItem from="1733179488865" duration="15000" />
+      <workItem from="1733193208776" duration="3117000" />
+    </task>
+    <task id="LOCAL-00001" summary="Expires header">
+      <option name="closed" value="true" />
+      <created>1717555382256</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717555382256</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add upper limit">
+      <option name="closed" value="true" />
+      <created>1717555760991</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717555760991</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Wrong sign :eyes:">
+      <option name="closed" value="true" />
+      <created>1717555844456</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717555844456</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fix header name">
+      <option name="closed" value="true" />
+      <created>1717557266099</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717557266099</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update Paste DTO">
+      <option name="closed" value="true" />
+      <created>1717559046280</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717559046280</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add too short error">
+      <option name="closed" value="true" />
+      <created>1717621189142</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717621189142</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Deletion improvements">
+      <option name="closed" value="true" />
+      <created>1717622016508</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717622016508</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Expire time">
+      <option name="closed" value="true" />
+      <created>1717680036283</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717680036283</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Expire time">
+      <option name="closed" value="true" />
+      <created>1717688761717</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717688761717</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix Discord sending">
+      <option name="closed" value="true" />
+      <created>1717689238092</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1717689238092</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Remove debug">
+      <option name="closed" value="true" />
+      <created>1717689464124</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1717689464124</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Change ID system">
+      <option name="closed" value="true" />
+      <created>1727397437193</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727397437193</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Remove Discord hook">
+      <option name="closed" value="true" />
+      <created>1728091529981</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728091529981</updated>
+    </task>
+    <task id="LOCAL-00014" summary="GZip Compression">
+      <option name="closed" value="true" />
+      <created>1733194993130</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733194993130</updated>
+    </task>
+    <task id="LOCAL-00015" summary="GZip Cleanup">
+      <option name="closed" value="true" />
+      <created>1733195099153</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733195099153</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Expires header" />
+    <MESSAGE value="Add upper limit" />
+    <MESSAGE value="Wrong sign :eyes:" />
+    <MESSAGE value="Fix header name" />
+    <MESSAGE value="Update Paste DTO" />
+    <MESSAGE value="Add too short error" />
+    <MESSAGE value="Deletion improvements" />
+    <MESSAGE value="Expire time" />
+    <MESSAGE value="Fix Discord sending" />
+    <MESSAGE value="Remove debug" />
+    <MESSAGE value="Change ID system" />
+    <MESSAGE value="Remove Discord hook" />
+    <MESSAGE value="GZip Compression" />
+    <MESSAGE value="GZip Cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="GZip Cleanup" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -12,7 +12,7 @@ The following is a guide to get PasteBook running on your system under your doma
 Start by creating a file named `docker-compose.yml`. Add the content below.
 ```yml
 services:
-  pastebook-backend:
+  backend:
     image: loudbook/pastebook-backend:latest
     ports:
       - "8080:8080"

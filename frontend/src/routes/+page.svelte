@@ -22,7 +22,7 @@
   </p>
   <buttons>
     {#if width > 768}
-      <button onclick="window.location.href = '/new';">NEW</button>
+      <button onclick={() => {window.location.href = '/new'}}>NEW</button>
       <dot>⎯</dot>
       <a href="https://github.com/Loudbooks/PasteBook" target="_blank">GITHUB</a
       >
@@ -32,7 +32,7 @@
       <a href="/privacy">PRIVACY</a>
     {:else}
       <div id="second-container">
-        <button onclick="window.location.href = '/new';">NEW</button>
+        <button onclick={() => {window.location.href = '/new'}}>NEW</button>
       </div>
       <div id="second-container">
         <a href="https://github.com/Loudbooks/PasteBook" target="_blank"

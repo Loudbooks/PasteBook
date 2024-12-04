@@ -4,7 +4,7 @@ export async function load({ params, cookies }) {
   let path = params.slug;
 
   let response = await fetch(
-    "http://pastebook-backend:8080/get/" + path + "/metadata",
+    "http://backend:8080/get/" + path + "/metadata",
   );
 
   if (response.status === 404) {
@@ -36,7 +36,7 @@ export async function load({ params, cookies }) {
   return {
     metadata: metadataPromise,
     content: metadataPromise.then(async () => {
-      return fetch("http://pastebook-backend:8080/get/" + path + "/content").then(
+      return fetch("http://backend:8080/get/" + path + "/content").then(
         (response) => {
           return response.text();
         },

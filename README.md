@@ -71,7 +71,7 @@ All of the following values must be changed.
 ### Creation
 Run the following.
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 Awesome! PasteBook is now running.

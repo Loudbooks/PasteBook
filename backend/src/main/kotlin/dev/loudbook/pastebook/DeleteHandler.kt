@@ -4,6 +4,8 @@ import dev.loudbook.pastebook.data.PastePrivateDTO
 import dev.loudbook.pastebook.data.R2Service
 import dev.loudbook.pastebook.mongo.PasteRepository
 import jakarta.annotation.PostConstruct
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import kotlin.concurrent.fixedRateTimer
@@ -15,6 +17,8 @@ class DeleteHandler {
 
     @Autowired
     lateinit var pasteRepository: PasteRepository
+
+    private val logger: Logger = LoggerFactory.getLogger(DeleteHandler::class.java)
 
     @PostConstruct
     fun init() {
@@ -46,13 +50,13 @@ class DeleteHandler {
 
         for (paste in deletablePastes) {
             pasteRepository.delete(paste)
-            paste.id?.let { r2Service.deleteFile(it) } ?: println("Failed to delete paste; $paste")
+            paste.id?.let { r2Service.deleteFile(it) } ?: logger.error("Failed to delete paste; $paste")
         }
 
         for (listFileName in r2Service.listFileNames()) {
             if (allPastes.none{ it.id == listFileName}) {
                 r2Service.deleteFile(listFileName)
-                println("Deleted invalid file $listFileName")
+                logger.warn("Deleted invalid file $listFileName")
             }
         }
     }

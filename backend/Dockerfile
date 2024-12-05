@@ -1,5 +1,5 @@
 
-FROM openjdk:21-jdk-slim
+FROM openjdk:23-slim
 
 WORKDIR /pastebook-backend
 

@@ -35,13 +35,11 @@ export async function load({ params, cookies }) {
 
   return {
     metadata: metadataPromise,
-    content: metadataPromise.then(async () => {
-      return fetch("http://backend:8080/get/" + path + "/content").then(
+    content: fetch("http://backend:8080/get/" + path + "/content").then(
         (response) => {
           return response.text();
         },
-      );
-    }),
+      ),
     inspect: cookies.get("inspect") === "true",
   };
 }

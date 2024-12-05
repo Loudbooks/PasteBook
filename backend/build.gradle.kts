@@ -54,3 +54,7 @@ tasks.bootJar {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+configurations.implementation {
+    exclude(group = "commons-logging", module = "commons-logging")
+}

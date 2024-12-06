@@ -1,9 +1,11 @@
 <script lang="ts">
   import Toolbar from "../components/Toolbar.svelte";
   import { title, description } from "$lib/stores";
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
+  import type { Snippet } from "svelte";
 
-  let { data }: { data: PageData } = $props();
+  let { data, children }: { data: PageData, children: Snippet } = $props();
+
   const newTitle = data.title || 'PasteBook';
   const newDescription = data.description || 'PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes.';
 
@@ -17,5 +19,5 @@
 
 <main>
   <Toolbar></Toolbar>
-  <slot></slot>
+  {@render children()}
 </main>

@@ -8,17 +8,13 @@ install_packages() {
     apt-get install -y curl nginx certbot python3-certbot-nginx
     echo
     echo "Packages have been installed."
-    echo
 }
 
 download_docker_compose() {
     echo
     echo "Downloading docker-compose.yml..."
-    echo
     curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/docker-compose.yml -o docker-compose.yml
-    echo
     echo "docker-compose.yml has been created."
-    echo
 }
 
 create_env_file() {
@@ -34,7 +30,6 @@ DESCRIPTION=${DESCRIPTION}
 EOL
     echo
     echo ".env file has been created."
-    echo
 }
 
 download_and_configure_nginx() {
@@ -60,7 +55,6 @@ download_and_configure_nginx() {
     sudo certbot --nginx -d ${DOMAIN} -d api.${DOMAIN}
     echo
     echo "SSL setup completed."
-    echo
 
     systemctl restart nginx
 }

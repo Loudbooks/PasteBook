@@ -1,6 +1,7 @@
 <script lang="ts">
   import Toolbar from "../components/Toolbar.svelte";
   import { title, description } from "$lib/stores";
+    import { onMount } from "svelte";
 
   let { data }: { data: PageData } = $props();
   const newTitle = data.title || 'PasteBook';
@@ -8,6 +9,10 @@
 
   title.set(newTitle);
   description.set(newDescription);
+
+  onMount(() => {
+    document.title = newTitle;
+  });
 </script>
 
 <main>

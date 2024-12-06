@@ -50,6 +50,8 @@ jobs:
       with:
         context: ./frontend
         file: ./frontend/Dockerfile
+        build-args: |
+          COMMIT_HASH=${{ env.hash }}
         push: true
         tags: |
           ghcr.io/loudbooks/pastebook-frontend:latest

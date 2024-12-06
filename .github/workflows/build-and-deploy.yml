@@ -77,9 +77,13 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: ./frontend
+        build-args: |
+          COMMIT_HASH=${{ env.hash }}
         file: ./frontend/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:latest
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:latest
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:${{ env.hash }}
 
     - name: Build and push backend Docker image to Docker Hub
       uses: docker/build-push-action@v3
@@ -87,4 +91,6 @@ jobs:
         context: ./backend
         file: ./backend/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:latest
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:latest
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:${{ env.hash }}

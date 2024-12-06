@@ -13,7 +13,7 @@ Start by creating a file named `docker-compose.yml`. Add the content below.
 ```yml
 services:
   backend:
-    image: ghcr.io/loudbook/pastebook-backend:latest
+    image: ghcr.io/loudbooks/pastebook-backend:latest
     ports:
       - "8080:8080"
     environment:
@@ -29,12 +29,12 @@ services:
       - pastebook-network
 
   frontend:
-    image: ghcr.io/loudbook/pastebook-frontend:latest
+    image: ghcr.io/loudbooks/pastebook-frontend:latest
     ports:
       - "3000:3000"
     environment:
-      - TITLE=PasteBook
-      - DESCRIPTION=PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes.
+      - TITLE=
+      - DESCRIPTION=
     depends_on:
       - backend
     networks:
@@ -62,7 +62,10 @@ networks:
     driver: bridge
 ```
 ### Configuration
-All of the following values must be changed.
+> [!CAUTION]
+> Do not change any prefilled configurations other than ones listen below. You will break things.
+
+**Required configurations:**
 <br>
 
 `S3_ACCESS_KEY_ID` - The access key associated with your R2 bucket, S3 bucket, etc.
@@ -70,6 +73,12 @@ All of the following values must be changed.
 `S3_SECRET_ACCESS_KEY` - The secret access key associated with your R2 bucket, S3 bucket, etc.
 
 `S3_ENDPOINT` - The endpoint associated with your R2 bucket, S3 bucket, etc. 
+
+**Optional configurations:**
+<br>
+`TITLE` - The title to be used around PasteBook.
+
+`DESCRIPTION` - The description to be used in embeds and on the home page of PasteBook.
 
 ### Creation
 Run the following.

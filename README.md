@@ -13,7 +13,7 @@ Start by creating a file named `docker-compose.yml`. Add the content below.
 ```yml
 services:
   backend:
-    image: loudbook/pastebook-backend:latest
+    image: ghcr.io/loudbook/pastebook-backend:latest
     ports:
       - "8080:8080"
     environment:
@@ -29,7 +29,7 @@ services:
       - pastebook-network
 
   frontend:
-    image: loudbook/pastebook-frontend:latest
+    image: ghcr.io/loudbook/pastebook-frontend:latest
     ports:
       - "3000:3000"
     depends_on:

@@ -32,6 +32,9 @@ services:
     image: ghcr.io/loudbook/pastebook-frontend:latest
     ports:
       - "3000:3000"
+    environment:
+      - TITLE=PasteBook
+      - DESCRIPTION=PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes.
     depends_on:
       - backend
     networks:

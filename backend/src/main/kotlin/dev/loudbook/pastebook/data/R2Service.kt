@@ -1,18 +1,23 @@
 package dev.loudbook.pastebook.data
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider
-import com.amazonaws.auth.BasicAWSCredentials
-import com.amazonaws.client.builder.AwsClientBuilder
-import com.amazonaws.services.s3.AmazonS3
-import com.amazonaws.services.s3.AmazonS3ClientBuilder
-import com.google.gson.Gson
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider
+import software.amazon.awssdk.core.sync.RequestBody
+import software.amazon.awssdk.regions.Region
+import software.amazon.awssdk.services.s3.S3Client
+import software.amazon.awssdk.services.s3.S3Configuration
+import software.amazon.awssdk.services.s3.model.CreateBucketRequest
+import software.amazon.awssdk.services.s3.model.GetObjectRequest
+import software.amazon.awssdk.services.s3.model.ListObjectsRequest
+import software.amazon.awssdk.services.s3.model.PutObjectRequest
+import java.net.URI
 
 @Service
 class R2Service {
-    private var amazonS3: AmazonS3? = null
+    private var amazonS3: S3Client? = null
 
     @Value("\${s3.accessKey}")
     private val accessKey: String? = null
@@ -29,32 +34,43 @@ class R2Service {
     @PostConstruct
     fun init() {
         try {
-            amazonS3 = AmazonS3ClientBuilder.standard().apply {
-                setEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(url, "us-east-1"))
-            }
-
-                .withCredentials(AWSStaticCredentialsProvider(BasicAWSCredentials(accessKey, secretKey)))
+            amazonS3 = S3Client.builder()
+                .region(Region.US_EAST_1)
+                .credentialsProvider(AwsCredentialsProvider { AwsBasicCredentials.create(accessKey, secretKey) })
+                .endpointOverride(URI.create(url!!))
+                .serviceConfiguration(S3Configuration.builder()
+                    .pathStyleAccessEnabled(true)
+                    .build())
                 .build()
+
+            println("Connected to S3, found buckets: ${amazonS3?.listBuckets()?.buckets()?.map { it.name() }}")
+
+            println("Creating bucket $bucket")
+
+            if (!amazonS3?.listBuckets()?.buckets()?.any { it.name() == bucket }!!) {
+                amazonS3?.createBucket(CreateBucketRequest.builder().bucket(bucket).build())
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     fun uploadFile(key: String, paste: String) {
-        amazonS3?.putObject(bucket, key, paste)
+        amazonS3?.putObject(PutObjectRequest.builder().bucket(bucket).key(key).build(), RequestBody.fromString(paste))
     }
 
     fun deleteFile(key: String) {
-        amazonS3?.deleteObject(bucket, key)
+        amazonS3?.deleteObject { it.bucket(bucket).key(key) }
     }
 
     fun getFile(key: String): String? {
-        val str = amazonS3?.getObject(bucket, key)?.objectContent?.readAllBytes()?.toString(Charsets.UTF_8)
+        val str = amazonS3?.getObject(GetObjectRequest.builder().bucket(bucket).key(key).build())?.readAllBytes()
+            ?.toString(Charsets.UTF_8)
 
         return str
     }
 
     fun listFileNames(): List<String> {
-        return amazonS3?.listObjects(bucket)?.objectSummaries?.map { it.key }?.toList() ?: emptyList()
+        return amazonS3?.listObjects(ListObjectsRequest.builder().bucket(bucket).build())?.contents()?.map { it.key() } ?: emptyList()
     }
 }

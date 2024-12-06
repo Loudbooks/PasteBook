@@ -1,88 +1,46 @@
 # PasteBook 
 An easy on the eyes, portable, fun paste bin written in Svelte and Kotlin.
 
-## Installation
+### Prerequisites
+Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).
+
+## Automated Installation
+This script will download and install all the files necessary to run PasteBook, as well as guide you through setting up SSL.
+```bash
+bash <(curl -sL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/install.sh)
+```
+
+> [!CAUTION]
+> Do not modify `docker-compose.yml`. You will break things.
+
+Once the script has completed, you can start PasteBook with the following command.
+```bash
+docker compose up -d
+```
+
+## Manual Installation
 The following is a guide to get PasteBook running on your system under your domain with SSL. All of this was tested on Ubuntu Linux.
 
-### Prerequisites
-- An S3 bucket. In testing, CloudFlare R2 was used. CloudFlare R2 is free. You can learn more [here](https://www.cloudflare.com/developer-platform/products/r2/).
-- Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).
-
 ### Preparation
-Start by creating a file named `docker-compose.yml`. Add the content below.
-```yml
-services:
-  backend:
-    image: ghcr.io/loudbooks/pastebook-backend:latest
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/pastebook
-      - SPRING_DATA_MONGODB_DATABASE=pastebook
-      - S3_ACCESS_KEY_ID=
-      - S3_SECRET_ACCESS_KEY=
-      - S3_ENDPOINT=
-      - S3_BUCKET=pastebook
-    depends_on:
-      - mongo
-    networks:
-      - pastebook-network
+Download `docker-compose.yml` [here](https://github.com/Loudbooks/PasteBook/blob/master/docker-compose.yml).
 
-  frontend:
-    image: ghcr.io/loudbooks/pastebook-frontend:latest
-    ports:
-      - "3000:3000"
-    environment:
-      - TITLE=
-      - DESCRIPTION=
-    depends_on:
-      - backend
-    networks:
-      - pastebook-network
-    pull_policy: always
-
-  mongo:
-    image: mongo:6.0
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_DATABASE: pastebook
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - pastebook-network
-    pull_policy: always
-
-volumes:
-  mongo-data:
-
-networks:
-  pastebook-network:
-    driver: bridge
-```
 ### Configuration
 > [!CAUTION]
-> Do not change any prefilled configurations other than ones listen below. You will break things.
+> Do not modify `docker-compose.yml`. You will break things.
 
-**Required configurations:**
-<br>
+Create a file by the name of `.env` in the same directory as `docker-compose.yml`. Add the following.
+```env
+TITLE=
+DESCRIPTION=
+```
 
-`S3_ACCESS_KEY_ID` - The access key associated with your R2 bucket, S3 bucket, etc.
-
-`S3_SECRET_ACCESS_KEY` - The secret access key associated with your R2 bucket, S3 bucket, etc.
-
-`S3_ENDPOINT` - The endpoint associated with your R2 bucket, S3 bucket, etc. 
-
-**Optional configurations:**
-<br>
 `TITLE` - The title to be used around PasteBook.
 
 `DESCRIPTION` - The description to be used in embeds and on the home page of PasteBook.
 
 ### Creation
 Run the following.
-```
+```bash
 docker compose up -d
 ```
 
@@ -97,70 +55,24 @@ In order to run PasteBook under a domain, you will need to use a reverse proxy. 
 - A working Certbot installation. Learn more [here](https://certbot.eff.org/instructions?ws=nginx&os=snap).
 ## Nginx Preparation
 Navigate to `/etc/nginx/sites-enabled`.
-Create a file under the name `pastebook.conf` and add the following content:
-```nginx
-server {
-    listen 80;
-    server_name <DOMAIN>;
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-server {
-    listen 443 ssl;
-    server_name <DOMAIN>;
-
-    location / {
-        proxy_buffering off;  
-        proxy_set_header X-Real-IP $remote_addr;                                                                                                
-        proxy_set_header X-Forwarded-Host $host;                                                                                                
-        proxy_set_header X-Forwarded-Port $server_port;                                                                                         
-        proxy_pass http://localhost:3000/;   
-    }
-}
-
-server {
-    listen 80;
-    server_name api.<DOMAIN>;
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-server {
-    listen 443 ssl;
-    server_name api.<DOMAIN>;
-
-    client_max_body_size 6M;
-
-    location / {
-        proxy_buffering off;  
-        proxy_set_header X-Real-IP $remote_addr;                                                                                                
-        proxy_set_header X-Forwarded-Host $host;                                                                                                
-        proxy_set_header X-Forwarded-Port $server_port;                                                                                         
-        proxy_pass http://localhost:8080/;   
-    }
-}
-```
 
 ## Domain Preparation
 You will need to create a DNS A record pointing to your machine with the root and with the `api.` prefix. I use CloudFlare.
 
 ### Configuration 
+Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/pastebook.conf).
+
 `<DOMAIN>` - Change this to your domain name. For example, mine is `pastebook.dev`.
 
 ### SSL Configuration
 Run the following, with `<DOMAIN>` changed to your domain.
-```
+```bash
 sudo certbot --nginx -d <DOMAIN> -d api.<DOMAIN>
 ```
 
 ### Committing Changes
 Run the following.
-```
+```bash
 systemctl restart nginx
 ```
 

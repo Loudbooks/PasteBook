@@ -51,7 +51,12 @@
 
     let domain = window.location.host;
 
-    xhr.open("POST", `https://api.${domain}/upload`);
+    if (domain.includes("localhost")) {
+      xhr.open("POST", `http://localhost:8080/upload`);
+    } else {
+      xhr.open("POST", `https://api.${domain}/upload`);
+    }
+
     xhr.setRequestHeader("Content-Type", "plain/text");
     xhr.setRequestHeader("access-control-allow-methods", "POST");
     xhr.setRequestHeader("title", $writableTitle);

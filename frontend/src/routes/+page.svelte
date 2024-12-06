@@ -2,9 +2,12 @@
     import Mode from "../components/Mode.svelte";
     import { onMount } from "svelte";
 
+    export const commitHash = import.meta.env.VITE_COMMIT_HASH || 'unknown';
+
     let width = 0;
 
     onMount(() => {
+
       width = window.innerWidth;
 
       window.onresize = () => {
@@ -19,20 +22,10 @@
       PasteBook is an aesthetic, effortless way to share your blocks of text, and
       respects your privacy by automatically deleting your pastes.
     </p>
-    <buttons>
-      <div id="second-container">
-        <a href="https://github.com/Loudbooks/PasteBook" target="_blank"
-          >GITHUB</a
-        >
-        <dot>⎯</dot>
-        <a href="mailto:contact@pastebook.dev">CONTACT</a>
-        <dot>⎯</dot>
-        <a href="/privacy">PRIVACY</a>
-      </div>
-      <div id="second-container">
-        <button on:click={() => {window.location.href = '/new'}} aria-label="button">NEW</button>
-      </div>
-    </buttons>
+
+    <p class="footer">
+      <a href="https://github.com/Loudbooks/PasteBook" target="_blank" aria-label="button">pastebook</a>@<a href="https://github.com/Loudbooks/PasteBook/commit/{commitHash}" target="_blank" aria-label="button">{commitHash}</a>
+    </p>
 
     <Mode></Mode>
   </about>
@@ -109,77 +102,35 @@
           max-width: 400px;
         }
       }
+    }
 
-      buttons {
-        opacity: 0;
-        animation: fadeUp 1s var(--animation);
-        animation-delay: 0.3s;
-        animation-fill-mode: forwards;
+    .footer {
+      position: fixed;
+      bottom: 5px;
+      font-size: 11px;
+      font-family: "Jetbrains Mono", sans-serif;
+      color: gray;
+
+      animation: fadeUp 1s var(--animation) forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
+
+      @media (max-width: 768px) {
+        font-size: 8px;
       }
 
-      dot {
-        color: gray;
-        font-size: 20px;
-        margin: 0 10px;
-        transition: all 1s ease;
-        text-align: center;
-
-        &:hover {
-          cursor: default;
-        }
-
-        &::selection {
-          background-color: transparent;
-        }
-
-        @media (max-width: 768px) {
-          font-size: 13px;
-          margin: 0 5px;
-        }
-      }
-
-      button,
       a {
-        display: inline-block;
-        appearance: none;
-        border: none;
-        padding: 10px 10px;
-        font-size: 20px;
-        background-color: transparent;
         color: gray;
-        cursor: pointer;
-        transition: all 0.5s;
-        font-family: Gabarito, sans-serif;
         text-decoration: none;
         font-weight: 600;
 
         &:hover {
-          color: darkgray;
-          cursor: pointer;
-        }
-
-        &:active {
-          transform: scale(0.97);
-        }
-
-        @media (max-width: 768px) {
-          font-size: 13px;
-          padding: 5px 0;
+          text-decoration: underline;
         }
       }
+    }
 
-      #second-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-
-        a {
-          display: block;
-        }
-      }
-
-      @keyframes fadeUp {
+    @keyframes fadeUp {
         from {
           opacity: 0;
           transform: translateY(25px);
@@ -189,5 +140,4 @@
           transform: translateY(0);
         }
       }
-    }
   </style>

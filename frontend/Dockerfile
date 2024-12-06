@@ -15,6 +15,9 @@ COPY --from=build /pastebook-frontend /pastebook-frontend
 
 RUN npm install --production
 
+ARG COMMIT_HASH
+ENV VITE_COMMIT_HASH=$COMMIT_HASH
+
 EXPOSE 3000
 
 CMD ["node", "build"]

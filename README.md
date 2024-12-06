@@ -7,7 +7,7 @@ Docker. Both the frontend and backend are to be installed with Docker. You can l
 ## Automated Installation
 This script will download and install all the files necessary to run PasteBook, as well as guide you through setting up SSL.
 ```bash
-bash <(curl -s https://github.com/Loudbooks/PasteBook/blob/master/install.sh)
+bash <(curl -sL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/install.sh)
 ```
 
 > [!CAUTION]

@@ -43,10 +43,6 @@ class R2Service {
                     .build())
                 .build()
 
-            println("Connected to S3, found buckets: ${amazonS3?.listBuckets()?.buckets()?.map { it.name() }}")
-
-            println("Creating bucket $bucket")
-
             if (!amazonS3?.listBuckets()?.buckets()?.any { it.name() == bucket }!!) {
                 amazonS3?.createBucket(CreateBucketRequest.builder().bucket(bucket).build())
             }

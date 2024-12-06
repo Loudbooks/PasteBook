@@ -1,13 +1,12 @@
-  <script>
+  <script lang="ts">
     import Mode from "../components/Mode.svelte";
     import { onMount } from "svelte";
+    import { title, description } from "$lib/stores";
 
     export const commitHash = import.meta.env.VITE_COMMIT_HASH || 'unknown';
-
     let width = 0;
 
     onMount(() => {
-
       width = window.innerWidth;
 
       window.onresize = () => {
@@ -17,10 +16,9 @@
   </script>
 
   <about>
-    <h1>PasteBook</h1>
+    <h1>{$title}</h1>
     <p class="description">
-      PasteBook is an aesthetic, effortless way to share your blocks of text, and
-      respects your privacy by automatically deleting your pastes.
+      {$description}
     </p>
 
     <p class="footer">

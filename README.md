@@ -4,21 +4,7 @@ An easy on the eyes, portable, lightning fast pastebin written in Svelte and Kot
 ### Prerequisites
 Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).
 
-## Automated Installation - Ubuntu
-This script will download and install all the files necessary to run PasteBook, as well as guide you through setting up SSL.
-```bash
-bash <(curl -sL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/install.sh)
-```
-
-> [!CAUTION]
-> Do not modify `docker-compose.yml`. You will break things.
-
-Once the script has completed, you can start PasteBook with the following command.
-```bash
-docker compose up -d
-```
-
-## Manual Installation
+## Installation
 The following is a guide to get PasteBook running on your system under your domain with SSL. All of this was tested on Ubuntu Linux.
 
 ### Preparation

@@ -11,13 +11,6 @@
     writableContent.subscribe(() => {
       allFieldsFilled();
     });
-
-    let submit = document.getElementsByClassName("submit")[0] as HTMLElement;
-
-    setTimeout(() => {
-      submit.style.opacity = "1";
-      submit.style.transform = "translateY(0)";
-    }, 400);
   });
 
   let alreadyUploading = false;
@@ -156,8 +149,7 @@
       text-decoration: none;
       border: 1px solid #c9c9c9;
 
-      opacity: 0;
-      transform: translateY(30%);
+      animation: fadeIn 0.5s forwards;
 
       :global(.dark-mode) & {
         background-color: #1a1a1a;
@@ -206,6 +198,16 @@
     100% {
       opacity: 0.5;
       transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 </style>

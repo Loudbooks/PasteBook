@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { title } from "$lib/stores";
+  import { disableNew } from "$lib/stores";
 
   onMount(() => {
     const toolbar = document.querySelector("toolbar") as HTMLElement;
@@ -26,7 +27,9 @@
   <button id="main" on:click={home}>{$title.toUpperCase()}</button>
   <buttons>
     <button on:click={settings}>SETTINGS</button>
-    <button on:click={newPaste}>NEW</button>
+    {#if !$disableNew}
+      <button on:click={newPaste}>NEW</button>
+    {/if}
   </buttons>
 </toolbar>
 

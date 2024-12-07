@@ -25,8 +25,9 @@ create_env_file() {
     read -p "Enter the description to be used for the home page of PasteBook (leave blank for default): " DESCRIPTION
 
     cat <<EOL > .env
-TITLE=${TITLE}
-DESCRIPTION=${DESCRIPTION}
+TITLE=
+DESCRIPTION=
+DISABLE_NEW=
 EOL
     echo
     echo ".env file has been created."

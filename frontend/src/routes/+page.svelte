@@ -69,7 +69,6 @@
 
         @media (max-width: 768px) {
           font-size: 70px;
-          height: 60px;
         }
       }
 

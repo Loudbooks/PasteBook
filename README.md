@@ -1,5 +1,5 @@
 # PasteBook 
-An easy on the eyes, portable, fun paste bin written in Svelte and Kotlin.
+An easy on the eyes, portable, lightning fast pastebin written in Svelte and Kotlin.
 
 ### Prerequisites
 Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).

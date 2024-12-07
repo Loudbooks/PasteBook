@@ -64,7 +64,6 @@
         font-weight: 1000;
         font-size: 120px;
         margin-bottom: 10px;
-        height: 120px;
         
         animation: fadeUp 1s var(--animation);
 

@@ -63,7 +63,7 @@
         font-family: Gabarito, serif;
         font-weight: 1000;
         font-size: 120px;
-        margin-bottom: 10px;
+        margin-bottom: -10px;
         
         animation: fadeUp 1s var(--animation);
 

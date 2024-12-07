@@ -4,8 +4,8 @@ install_packages() {
     echo
     echo "Installing packages..."
     echo
-    apt-get update
-    apt-get install -y curl nginx certbot python3-certbot-nginx
+    sudo apt-get update
+    sudo apt-get install -y curl nginx certbot python3-certbot-nginx
     echo
     echo "Packages have been installed."
 }
@@ -13,7 +13,7 @@ install_packages() {
 download_docker_compose() {
     echo
     echo "Downloading docker-compose.yml..."
-    curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/docker-compose.yml -o docker-compose.yml
+    sudo curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/docker-compose.yml -o docker-compose.yml
     echo "docker-compose.yml has been created."
 }
 
@@ -39,12 +39,12 @@ download_and_configure_nginx() {
     echo "Downloading default Nginx configuration..."
     echo
 
-    curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/pastebook.conf -o /etc/nginx/sites-available/pastebook.conf
+    sudo curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/pastebook.conf -o /etc/nginx/sites-available/pastebook.conf
 
     read -p "Enter your domain name (e.g., pastebook.dev): " DOMAIN
-    sed -i "s/<DOMAIN>/${DOMAIN}/g" /etc/nginx/sites-available/pastebook.conf
+    sudo sed -i "s/<DOMAIN>/${DOMAIN}/g" /etc/nginx/sites-available/pastebook.conf
 
-    ln -s /etc/nginx/sites-available/pastebook.conf /etc/nginx/sites-enabled/
+    sudo ln -s /etc/nginx/sites-available/pastebook.conf /etc/nginx/sites-enabled/
     echo
     echo "Nginx configuration completed."
     echo

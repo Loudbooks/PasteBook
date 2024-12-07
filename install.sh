@@ -23,11 +23,12 @@ create_env_file() {
     echo
     read -p "Enter the title to be used for PasteBook (leave blank for default): " TITLE
     read -p "Enter the description to be used for the home page of PasteBook (leave blank for default): " DESCRIPTION
+    read -p "Disable new paste creation? (yes/no): " DISABLE_NEW
 
     cat <<EOL > .env
-TITLE=
-DESCRIPTION=
-DISABLE_NEW=
+TITLE=${TITLE}
+DESCRIPTION=${DESCRIPTION}
+DISABLE_NEW=${DISABLE_NEW}
 EOL
     echo
     echo ".env file has been created."

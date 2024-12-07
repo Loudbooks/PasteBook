@@ -32,11 +32,14 @@ Create a file by the name of `.env` in the same directory as `docker-compose.yml
 ```env
 TITLE=
 DESCRIPTION=
+DISABLE_NEW=
 ```
 
 `TITLE` - The title to be used around PasteBook.
 
 `DESCRIPTION` - The description to be used in embeds and on the home page of PasteBook.
+
+`DISABLE_NEW` - Disables the new paste page. API is still accessible.
 
 ### Creation
 Run the following.

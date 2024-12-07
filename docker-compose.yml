@@ -23,6 +23,7 @@ services:
     environment:
       - TITLE=${TITLE}
       - DESCRIPTION=${DESCRIPTION}
+      - DISABLE_NEW=${DISABLE_NEW}
     depends_on:
       - backend
     networks:
@@ -30,7 +31,7 @@ services:
     pull_policy: always
 
   mongo:
-    image: mongo:latest
+    image: mongo:6.0
     container_name: mongo
     ports:
       - "27017:27017"

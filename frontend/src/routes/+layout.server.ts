@@ -4,6 +4,6 @@ export const load: PageServerLoad = async () => {
 	return {
 		title: process.env.TITLE,
 		description: process.env.DESCRIPTION,
-		disableNew : process.env.DISABLE_NEW,
+		disableNew: process.env.DISABLE_NEW?.toLowerCase() === 'true',
 	};
 };

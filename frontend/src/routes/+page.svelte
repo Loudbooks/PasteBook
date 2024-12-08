@@ -17,7 +17,6 @@
   </script>
 
   <about>
-    <LoadingTitle/>
     <h1>{$title}</h1>
     <p class="description">
       {@html $description}

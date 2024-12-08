@@ -19,13 +19,18 @@ Create a file by the name of `.env` in the same directory as `docker-compose.yml
 TITLE=
 DESCRIPTION=
 DISABLE_NEW=
+FAVICON_URL=
 ```
+
+All of the following are optional. You can leave it all blank, or not even have a `.env` file at all. 
 
 `TITLE` - The title to be used around PasteBook.
 
 `DESCRIPTION` - The description to be used in embeds and on the home page of PasteBook.
 
 `DISABLE_NEW` - Disables the new paste page. API is still accessible.
+
+`FAVICON_URL` - The URL that the favicon will be provided with. 
 
 ### Creation
 Run the following.

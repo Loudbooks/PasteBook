@@ -1,7 +1,7 @@
 import { type Writable, writable } from "svelte/store";
 import type { Issue } from "$lib/issue";
 
-export const loadProgress = writable(0);
+export const loadProgress = writable(false);
 
 export const writableContent = writable("");
 export const writableTitle = writable("");

@@ -6,7 +6,7 @@
   import { loadProgress, severes, warnings } from "$lib/stores";
   import { formatTimeSince, formatTimeUntil } from "$lib/timehandler";
   import { onMount, tick } from "svelte";
-  import SVGPasteBook from "../../../components/svg/SVGPasteBook.svelte";
+  import LoadingTitle from "../../../components/image/LoadingTitle.svelte";
   import Highlight from "../../../components/Highlight.svelte";
 
   export let data;
@@ -42,7 +42,7 @@
   });
 
   content.then(() => {
-    loadProgress.set(100);
+    loadProgress.set(true);
     tick();
   });
 
@@ -117,7 +117,7 @@
   <div id="padding-container">
     <div id="padding"></div>
   </div>
-  <SVGPasteBook />
+  <LoadingTitle />
   <Mode />
   <Highlight />
   <div

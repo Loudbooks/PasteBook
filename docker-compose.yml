@@ -24,6 +24,7 @@ services:
       - TITLE=${TITLE}
       - DESCRIPTION=${DESCRIPTION}
       - DISABLE_NEW=${DISABLE_NEW}
+      - FAVICON_URL=${FAVICON_URL}
     depends_on:
       - backend
     networks:

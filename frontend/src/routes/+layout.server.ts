@@ -5,5 +5,6 @@ export const load: PageServerLoad = async () => {
 		title: process.env.TITLE,
 		description: process.env.DESCRIPTION,
 		disableNew: process.env.DISABLE_NEW?.toLowerCase() === 'true',
+		faviconUrl: process.env.FAVICON_URL,
 	};
 };

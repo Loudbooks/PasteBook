@@ -26,8 +26,8 @@
 <toolbar>
   <button id="main" on:click={home}>{$title.toUpperCase()}</button>
   <buttons>
-    <button on:click={settings}>SETTINGS</button>
     {#if !$disableNew}
+      <button on:click={settings}>SETTINGS</button>
       <button on:click={newPaste}>NEW</button>
     {/if}
   </buttons>

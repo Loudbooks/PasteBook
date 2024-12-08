@@ -18,7 +18,7 @@
   <about>
     <h1>{$title}</h1>
     <p class="description">
-      {$description}
+      {@html $description}
     </p>
 
     <p class="footer">

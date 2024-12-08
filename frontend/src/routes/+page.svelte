@@ -2,7 +2,6 @@
     import Mode from "../components/Mode.svelte";
     import { onMount } from "svelte";
     import { title, description } from "$lib/stores";
-    import LoadingTitle from "../components/image/LoadingTitle.svelte";
 
     export const commitHash = import.meta.env.VITE_COMMIT_HASH || 'unknown';
     let width = 0;

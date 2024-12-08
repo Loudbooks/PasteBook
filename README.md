@@ -56,9 +56,8 @@ Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/mas
 ### SSL Configuration
 Run the following, with `<DOMAIN>` changed to your domain.
 ```bash
-sudo certbot --nginx -d <DOMAIN> -d api.<DOMAIN>
+sudo certbot certonly --standalone -d <DOMAIN> -d api.<DOMAIN>
 ```
-
 ### Committing Changes
 Run the following.
 ```bash

@@ -82,8 +82,9 @@
       border: none;
       color: gray;
       
-      padding-left: 20px;
-      padding-right: 30px;
+      margin-left: 20px;
+      margin-right: 30px;
+      padding: 0;
       background-color: transparent;
       outline: none;
       
@@ -98,7 +99,7 @@
       
       @media (max-width: 600px) {
         font-size: 0.6rem;
-        padding: 0 0 0 20px;
+        margin: 0 0 0 20px;
       }
     }
     
@@ -107,7 +108,7 @@
       
       @media (max-width: 600px) {
         font-size: 0.6rem;
-        padding-right: 20px;
+        margin-right: 20px;
       }
     }
 
@@ -117,10 +118,10 @@
   }
 
   #main {
-    padding-left: 30px;
+    margin-left: 30px;
 
     @media (max-width: 600px) {
-      padding-left: 20px;
+      margin-left: 20px;
     }
   }
 </style>

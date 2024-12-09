@@ -1,6 +1,6 @@
 package dev.loudbook.pastebook.mongo
 
-import dev.loudbook.pastebook.data.User
+import org.bson.Document
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
@@ -31,12 +31,26 @@ class MigrationHandler(private val mongoTemplate: MongoTemplate) : CommandLineRu
 
         logger.info("Beginning migration of missing IDs...")
 
-        val query = Query(Criteria.where("id").exists(false))
-        val update = Update().set("id", UUID.randomUUID().toString())
-        val result = mongoTemplate.updateMulti(query, update, User::class.java)
+        val users = mongoTemplate.findAll(Document::class.java, "users")
 
-        if (result.modifiedCount > 0) {
-            logger.info("Fixed ${result.modifiedCount} missing IDs.")
+        var result = 0
+
+        users.forEach {
+            val id = it.getString("id")
+            if (id == null) {
+                val newId = UUID.randomUUID().toString()
+                val query = Query(Criteria.where("_id").`is`(it.getObjectId("_id")))
+                val update = Update().set("id", newId)
+                mongoTemplate.updateFirst(query, update, "users")
+                logger.info("Fixed missing ID for user ${it.getString("ip")}")
+
+                result++
+            }
+        }
+
+
+        if (result > 0) {
+            logger.info("Fixed ${result} missing IDs.")
         } else {
             logger.info("No missing IDs found.")
         }

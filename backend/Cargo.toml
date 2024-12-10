@@ -1,7 +1,7 @@
 [package]
 name = "backend"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
 actix-web = "4"
@@ -17,3 +17,4 @@ log = "0.4.22"
 dotenv = "0.15"
 futures-util = "0.3.31"
 aws-credential-types = { version = "1.2.1", features = ["hardcoded-credentials"] }
+env_logger = "0.11.5"

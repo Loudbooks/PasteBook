@@ -10,17 +10,22 @@ pub struct AWSService {
 
 impl AWSService {
     pub async fn new(endpoint: &str, bucket_name: &str, access_key: &str, secret_key: &str) -> Result<Self> {
+        println!("Connecting to AWS S3...");
         let region = Region::new("auto");
         let credentials = Credentials::from_keys(access_key, secret_key, None);
         let shared_credentials = SharedCredentialsProvider::new(credentials);
 
         let config = Config::builder()
+            .force_path_style(true)
             .region(region)
             .credentials_provider(shared_credentials)
             .endpoint_url(endpoint)
+            .behavior_version_latest()
             .build();
 
         let client = Client::from_conf(config);
+
+        println!("Connected to AWS S3");
 
         Ok(Self {
             client,
@@ -29,7 +34,7 @@ impl AWSService {
     }
 
     pub async fn get_file(&self, key: &str) -> Result<Vec<u8>> {
-        let resp = self
+        let response = self
             .client
             .get_object()
             .bucket(&self.bucket_name)
@@ -37,7 +42,7 @@ impl AWSService {
             .send()
             .await?;
 
-        let data = resp.body.collect().await?;
+        let data = response.body.collect().await?;
         Ok(data.into_bytes().to_vec())
     }
 
@@ -63,7 +68,7 @@ impl AWSService {
     }
 
     pub async fn list_files(&self) -> Result<Vec<String>> {
-        let resp = self
+        let response = self
             .client
             .list_objects_v2()
             .bucket(&self.bucket_name)
@@ -71,12 +76,21 @@ impl AWSService {
             .await?;
 
         let mut keys = Vec::new();
-        for object in resp.contents.unwrap_or_default() {
+        for object in response.contents.unwrap_or_default() {
             if let Some(key) = object.key {
                 keys.push(key);
             }
         }
 
         Ok(keys)
+    }
+
+    pub async fn create_bucket(&self, bucket_name: &str) -> Result<()> {
+        self.client
+            .create_bucket()
+            .bucket(bucket_name)
+            .send()
+            .await?;
+        Ok(())
     }
 }

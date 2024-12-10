@@ -6,13 +6,13 @@ use crate::models::user::User;
 use crate::mongoresult::MongoResult;
 
 pub struct MongoService {
-    client: Client,
     user_collection: Collection<User>,
     paste_collection: Collection<Paste>,
 }
 
 impl MongoService {
     pub async fn new(uri: &str, db_name: &str) -> MongoResult<Self> {
+        println!("Connecting to MongoDB...");
         let client_options = ClientOptions::parse(uri).await?;
         let client = Client::with_options(client_options)?;
 
@@ -20,8 +20,9 @@ impl MongoService {
         let user_collection = database.collection::<User>("users");
         let paste_collection = database.collection::<Paste>("pastes");
 
+        println!("Connected to MongoDB");
+
         Ok(Self {
-            client,
             user_collection,
             paste_collection,
         })

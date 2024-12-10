@@ -44,7 +44,7 @@ async fn main() -> std::io::Result<()> {
     let mongo_service = Arc::new(
         MongoService::new(
             &mongo_url,
-            "pastebook"
+            &bucket_name,
         )
             .await
             .expect("Failed to initialize MongoService")

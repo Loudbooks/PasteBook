@@ -1,11 +1,12 @@
 FROM rust:latest as builder
 
 COPY ./Cargo.toml ./Cargo.lock ./
+RUN cargo fetch
 COPY ./src ./src
-RUN cargo build
+RUN cargo build --release
 
-FROM rust:latest
+FROM debian:bullseye-slim
 
-COPY --from=builder target/debug/backend /usr/local/bin/backend
+COPY --from=builder target/release/backend /usr/local/bin/backend
 
 CMD ["/usr/local/bin/backend"]

@@ -15,6 +15,7 @@ use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use dotenv::dotenv;
 use std::env;
 use std::sync::Arc;
+use aws_sdk_s3::types::builders::CorsRuleBuilder;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -52,8 +53,14 @@ async fn main() -> std::io::Result<()> {
     let delete_handler = DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&mongo_service));
     delete_handler.start_delete_loop();
 
+    let cors = CorsRuleBuilder::default()
+        .allowed_origins(vec!["*"])
+        .allowed_methods(vec!["GET", "POST"])
+        .allowed_headers(vec!["*"])
+        .build();
+
     HttpServer::new(move || {
-        App::new()
+        App::new().wrap(cors)
             .app_data(web::Data::new(Arc::clone(&aws_service)))
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
             .route("/get/{id}/content", web::get().to(get_content_handler))

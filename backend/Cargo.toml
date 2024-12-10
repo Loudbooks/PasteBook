@@ -1,0 +1,19 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-web = "4"
+mongodb = "3.1.0"
+aws-sdk-s3 = { version = "1.65.0" }
+tokio = { version = "1", features = ["full"] }
+anyhow = "1.0.94"
+serde = { version = "1.0.215", features = ["derive"] }
+flate2 = "1.0.35"
+chrono = "0.4.39"
+rand = "0.8.5"
+log = "0.4.22"
+dotenv = "0.15"
+futures-util = "0.3.31"
+aws-credential-types = { version = "1.2.1", features = ["hardcoded-credentials"] }

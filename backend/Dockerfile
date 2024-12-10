@@ -5,7 +5,7 @@ RUN cargo fetch
 COPY ./src ./src
 RUN cargo build --release
 
-FROM ubuntu/latest
+FROM ubuntu:noble
 
 COPY --from=builder target/release/backend /usr/local/bin/backend
 

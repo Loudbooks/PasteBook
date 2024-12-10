@@ -18,3 +18,7 @@ dotenv = "0.15"
 futures-util = "0.3.31"
 aws-credential-types = { version = "1.2.1", features = ["hardcoded-credentials"] }
 env_logger = "0.11.5"
+
+[[bin]]
+name = "backend"
+path = "src/main.rs"

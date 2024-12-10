@@ -1,4 +1,4 @@
-FROM rust:latest as builder
+FROM rust:latest AS builder
 
 COPY ./Cargo.toml ./Cargo.lock ./
 RUN cargo fetch

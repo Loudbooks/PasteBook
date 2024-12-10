@@ -44,13 +44,6 @@ jobs:
           echo "Unknown branch: ${{ github.ref_name }}"
           exit 1
         fi
-        echo "branch_tag=${{ env.tag }}" >> $GITHUB_ENV
-        
-    - name: Debug Branch and Tags
-      run: |
-        echo "Branch name: ${{ github.ref_name }}"
-        echo "Tag: ${{ env.tag }}"
-        echo "Branch tag: ${{ env.branch_tag }}"
         
     - name: Build and push frontend Docker image to GHCR
       uses: docker/build-push-action@v3
@@ -61,7 +54,7 @@ jobs:
           COMMIT_HASH=${{ env.hash }}
         push: true
         tags: |
-          ghcr.io/loudbooks/pastebook-frontend:${{ env.branch_tag }}
+          ghcr.io/loudbooks/pastebook-frontend:${{ env.tag }}
           ghcr.io/loudbooks/pastebook-frontend:${{ env.hash }}
 
     - name: Build and push backend Docker image to GHCR
@@ -71,7 +64,7 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: |
-          ghcr.io/loudbooks/pastebook-backend:${{ env.branch_tag }}
+          ghcr.io/loudbooks/pastebook-backend:${{ env.tag }}
           ghcr.io/loudbooks/pastebook-backend:${{ env.hash }}
 
     - name: Log in to Docker Hub
@@ -89,7 +82,7 @@ jobs:
         file: ./frontend/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:${{ env.branch_tag }}
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:${{ env.tag }}
           ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:${{ env.hash }}
 
     - name: Build and push backend Docker image to Docker Hub
@@ -99,5 +92,5 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:${{ env.branch_tag }}
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:${{ env.tag }}
           ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:${{ env.hash }}

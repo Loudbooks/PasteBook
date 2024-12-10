@@ -5,7 +5,7 @@ RUN cargo fetch
 COPY ./src ./src
 RUN cargo build --release
 
-FROM debian:bullseye-slim
+FROM ubuntu/latest
 
 COPY --from=builder target/release/backend /usr/local/bin/backend
 

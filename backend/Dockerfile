@@ -11,6 +11,6 @@ RUN cargo build --release --target x86_64-unknown-linux-musl
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y libc6
-COPY --from=builder target/release/backend /usr/local/bin/backend
+COPY --from=builder target/x86_64-unknown-linux-musl/release/backend /usr/local/bin/backend
 
 CMD ["/usr/local/bin/backend"]

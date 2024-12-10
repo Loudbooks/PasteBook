@@ -5,7 +5,7 @@ RUN cargo fetch
 COPY ./src ./src
 RUN cargo build --release
 
-FROM debian:bullseye
+FROM debian:bookworm
 
 RUN apt-get update && apt-get install -y libc6
 COPY --from=builder target/release/backend /usr/local/bin/backend

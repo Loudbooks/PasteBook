@@ -86,6 +86,10 @@ impl AWSService {
     }
 
     pub async fn create_bucket(&self, bucket_name: &str) -> Result<()> {
+        if self.client.head_bucket().bucket(bucket_name).send().await.is_ok() {
+            return Ok(());
+        }
+
         self.client
             .create_bucket()
             .bucket(bucket_name)

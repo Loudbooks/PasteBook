@@ -60,22 +60,20 @@ impl DeleteHandler {
         }
 
         for paste in &deletable_pastes {
-            let paste_id = paste.id.as_deref().unwrap_or_default();
+            let paste_id = &paste.id;
             if let Err(err) = mongo_service.delete_paste(paste_id).await {
                 error!("Failed to delete paste from database: {:?}", err);
             }
-            if let Some(id) = &paste.id {
+            if let id = &paste.id {
                 if let Err(err) = mongo_service.delete_paste(id).await {
                     error!("Failed to delete paste file: {}", err);
                 }
-            } else {
-                error!("Paste ID is missing for: {:?}", paste);
             }
         }
 
         if let Ok(file_names) = aws_service.list_files().await {
             for file_name in file_names {
-                if all_pastes.iter().all(|paste| paste.id.as_deref() != Some(&file_name)) {
+                if all_pastes.iter().all(|paste| &paste.id != &file_name) {
                     if let Err(err) = aws_service.delete_file(&file_name).await {
                         error!("Failed to delete invalid file {}: {}", file_name, err);
                     } else {

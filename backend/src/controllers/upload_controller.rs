@@ -63,7 +63,7 @@ pub async fn upload_handler(
     let file_id = generate_random_string(5);
 
     let paste = Paste {
-        id: Some(file_id.clone()),
+        id: file_id.clone(),
         title: title.to_string(),
         created: since_the_epoch,
         report_book,
@@ -78,6 +78,8 @@ pub async fn upload_handler(
     if let Err(e) = mongo_service.put_paste(paste).await {
         return HttpResponse::InternalServerError().body(format!("Failed to save to database: {:?}", e));
     }
+
+    mongo_service.increment_requests(&ip).await.expect("Failed to increment requests");
 
     let host_domain = req
         .headers()

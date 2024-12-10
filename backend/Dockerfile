@@ -1,10 +1,11 @@
-FROM rust:latest
+FROM rust:latest as builder
 
-COPY ./ ./
-
+COPY ./Cargo.toml ./Cargo.lock ./
+COPY ./src ./src
 RUN cargo build
 
-RUN cp ./target/debug/backend ./
-RUN rm -rf ./src ./Cargo.toml ./Cargo.lock ./target
+FROM rust:latest
 
-CMD ["./backend"]
+COPY --from=builder target/debug/backend /usr/local/bin/backend
+
+CMD ["/usr/local/bin/backend"]

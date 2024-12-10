@@ -3,7 +3,7 @@ use crate::models::user::UserDTO;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Paste {
-    pub id: Option<String>,
+    pub id: String,
     pub title: String,
     pub created: u64,
     pub report_book: bool,
@@ -14,7 +14,7 @@ pub struct Paste {
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PasteDTO {
-    pub id: Option<String>,
+    pub id: String,
     pub user: UserDTO,
     pub title: String,
     pub created: u64,

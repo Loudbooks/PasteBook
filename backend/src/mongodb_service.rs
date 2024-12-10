@@ -31,9 +31,9 @@ impl MongoService {
     pub async fn increment_requests(&self, ip: &str) -> MongoResult<()> {
         let filter = doc! { "ip": ip };
         let update = doc! {
-            "$inc": { "request_count": 1 },
+            "$inc": { "requests": 1 },
             "$setOnInsert": {
-                "user_id": uuid::Uuid::new().to_string(),
+                "id": uuid::Uuid::new().to_string(),
                 "created_at": chrono::Utc::now().timestamp_millis(),
                 "banned": false
             }

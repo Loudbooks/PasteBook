@@ -5,8 +5,9 @@ RUN cargo fetch
 COPY ./src ./src
 RUN cargo build --release
 
-FROM ubuntu:24.04
+FROM debian:bullseye
 
+RUN apt-get update && apt-get install -y libc6
 COPY --from=builder target/release/backend /usr/local/bin/backend
 
 CMD ["/usr/local/bin/backend"]

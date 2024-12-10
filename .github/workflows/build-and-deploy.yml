@@ -7,6 +7,7 @@ on:
       - backend/**
     branches:
       - master
+      - dev
       
 jobs:
   build:
@@ -45,6 +46,19 @@ jobs:
       id: get_commit_hash
       run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
+    - name: Set Docker Tags
+      id: set_tags
+      run: |
+        if [ "${{ github.ref_name }}" == "master" ]; then
+          echo "tag=latest" >> $GITHUB_ENV
+        elif [ "${{ github.ref_name }}" == "dev" ]; then
+          echo "tag=dev" >> $GITHUB_ENV
+        else
+          echo "Unknown branch: ${{ github.ref_name }}"
+          exit 1
+        fi
+        echo "branch_tag=${{ env.tag }}" >> $GITHUB_ENV
+
     - name: Build and push frontend Docker image to GHCR
       uses: docker/build-push-action@v3
       with:
@@ -54,7 +68,7 @@ jobs:
           COMMIT_HASH=${{ env.hash }}
         push: true
         tags: |
-          ghcr.io/loudbooks/pastebook-frontend:latest
+          ghcr.io/loudbooks/pastebook-frontend:${{ env.branch_tag }}
           ghcr.io/loudbooks/pastebook-frontend:${{ env.hash }}
 
     - name: Build and push backend Docker image to GHCR
@@ -64,7 +78,7 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: |
-          ghcr.io/loudbooks/pastebook-backend:latest
+          ghcr.io/loudbooks/pastebook-backend:${{ env.branch_tag }}
           ghcr.io/loudbooks/pastebook-backend:${{ env.hash }}
 
     - name: Log in to Docker Hub
@@ -82,7 +96,7 @@ jobs:
         file: ./frontend/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:latest
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:${{ env.branch_tag }}
           ${{ secrets.DOCKER_USERNAME }}/pastebook-frontend:${{ env.hash }}
 
     - name: Build and push backend Docker image to Docker Hub
@@ -92,5 +106,5 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:latest
+          ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:${{ env.branch_tag }}
           ${{ secrets.DOCKER_USERNAME }}/pastebook-backend:${{ env.hash }}

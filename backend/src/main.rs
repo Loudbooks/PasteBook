@@ -13,14 +13,12 @@ use crate::delete_service::DeleteHandler;
 use crate::mongodb_service::MongoService;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpServer};
-use dotenv::dotenv;
 use std::env;
 use std::sync::Arc;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init();
-    dotenv().ok();
 
     let database_url = env::var("S3_ENDPOINT").expect("S3_ENDPOINT must be set");
     let aws_access_key = env::var("S3_ACCESS_KEY_ID").expect("S3_ACCESS_KEY_ID must be set");

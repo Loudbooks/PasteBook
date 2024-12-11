@@ -2,9 +2,9 @@ use std::sync::Arc;
 use std::time::Duration;
 use chrono::Utc;
 use futures_util::StreamExt;
-use log::{error, warn};
 use tokio::spawn;
 use tokio::time::interval;
+use log::{error, warn};
 use crate::aws_service::AWSService;
 use crate::mongodb_service::MongoService;
 
@@ -65,7 +65,7 @@ impl DeleteHandler {
                 error!("Failed to delete paste from database: {:?}", err);
             }
             let id = &paste.id;
-            
+
             if let Err(err) = mongo_service.delete_paste(id).await {
                 error!("Failed to delete paste file: {}", err);
             } else {

@@ -8,16 +8,16 @@ actix-web = "4"
 actix-cors = "0.7.0"
 mongodb = "3.1.0"
 aws-sdk-s3 = { version = "1.65.0" }
-tokio = { version = "1", features = ["full"] }
-anyhow = "1.0.94"
+tokio = { version = "1", features = ["rt"] }
+anyhow = { version = "1.0.40", default-features = false }
 serde = { version = "1.0.215", features = ["derive"] }
-flate2 = "1.0.35"
-chrono = "0.4.39"
+flate2 = { version = "1.0.19", features = ["zlib"] }
+chrono = { version = "0.4.19", features = ["serde"] }
 rand = "0.8.5"
-log = "0.4.22"
 futures-util = "0.3.31"
 aws-credential-types = { version = "1.2.1", features = ["hardcoded-credentials"] }
 env_logger = "0.11.5"
+log = "0.4.22"
 
 [[bin]]
 name = "backend"

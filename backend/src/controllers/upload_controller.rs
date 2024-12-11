@@ -69,7 +69,7 @@ pub async fn upload_handler(
         report_book,
         wrap,
         creator_ip: ip.clone(),
-        expires,
+        expires_at: expires,
     };
 
     if let Err(e) = aws_service.put_file(&file_id, (&body).as_ref()).await {

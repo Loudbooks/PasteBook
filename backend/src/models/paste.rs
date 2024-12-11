@@ -9,7 +9,8 @@ pub struct Paste {
     pub report_book: bool,
     pub wrap: bool,
     pub creator_ip: String,
-    pub expires: u64,
+    #[serde(rename = "expiresAt")]
+    pub expires_at: u64,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -20,7 +21,8 @@ pub struct PasteDTO {
     pub created: u64,
     pub report_book: bool,
     pub wrap: bool,
-    pub expires: u64,
+    #[serde(rename = "expiresAt")]
+    pub expires_at: u64,
 }
 
 impl Paste {
@@ -32,7 +34,7 @@ impl Paste {
             created: self.created,
             report_book: self.report_book,
             wrap: self.wrap,
-            expires: self.expires,
+            expires_at: self.expires_at,
         }
     }
 }

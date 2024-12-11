@@ -51,7 +51,7 @@ impl DeleteHandler {
             while let Some(paste) = pastes_cursor.next().await {
                 let paste = paste.expect("Failed to get paste");
 
-                if paste.expires > 0 && paste.expires < now as u64 {
+                if paste.expires_at > 0 && paste.expires_at < now as u64 {
                     deletable_pastes.push(paste.clone());
                 }
 

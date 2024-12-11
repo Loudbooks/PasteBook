@@ -28,7 +28,7 @@
     reportBook = data.reportBook;
     wrap = data.wrap;
     userId = data.user.id;
-    expires = new Date(data.expiresAt)
+    expires = new Date(data.expires_at);
 
     const reloadTime = () => {
       timeSinceStr = formatTimeSince(created as unknown as number);

@@ -2,9 +2,9 @@ name: Build and Publish Docker Images
 
 on:
   push:
-    # paths:
-    #   - frontend/**
-    #   - backend/**
+    paths:
+      - frontend/**
+      - backend/**
     branches:
       - master
       - dev

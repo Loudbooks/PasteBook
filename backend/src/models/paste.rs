@@ -9,7 +9,6 @@ pub struct Paste {
     pub report_book: bool,
     pub wrap: bool,
     pub creator_ip: String,
-    #[serde(rename = "expiresAt")]
     pub expires_at: u64,
 }
 
@@ -21,7 +20,6 @@ pub struct PasteDTO {
     pub created: u64,
     pub report_book: bool,
     pub wrap: bool,
-    #[serde(rename = "expiresAt")]
     pub expires_at: u64,
 }
 

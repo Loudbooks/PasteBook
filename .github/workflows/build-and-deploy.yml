@@ -45,6 +45,7 @@ jobs:
           else
             echo "Unknown branch: ${{ github.ref_name }}"
             exit 1
+          fi
 
       - name: Build and push Docker image to GHCR
         uses: docker/build-push-action@v3

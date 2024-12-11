@@ -64,10 +64,12 @@ impl DeleteHandler {
             if let Err(err) = mongo_service.delete_paste(paste_id).await {
                 error!("Failed to delete paste from database: {:?}", err);
             }
-            if let id = &paste.id {
-                if let Err(err) = mongo_service.delete_paste(id).await {
-                    error!("Failed to delete paste file: {}", err);
-                }
+            let id = &paste.id;
+            
+            if let Err(err) = mongo_service.delete_paste(id).await {
+                error!("Failed to delete paste file: {}", err);
+            } else {
+                warn!("Deleted paste file: {}", id);
             }
         }
 

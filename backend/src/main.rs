@@ -11,11 +11,11 @@ use crate::controllers::get_controller::{get_content_handler, get_metadata_handl
 use crate::controllers::upload_controller::upload_handler;
 use crate::delete_service::DeleteHandler;
 use crate::mongodb_service::MongoService;
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
+use actix_cors::Cors;
+use actix_web::{web, App, HttpServer};
 use dotenv::dotenv;
 use std::env;
 use std::sync::Arc;
-use actix_cors::Cors;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -52,7 +52,7 @@ async fn main() -> std::io::Result<()> {
 
     let delete_handler = DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&mongo_service));
     delete_handler.start_delete_loop();
-    
+
     HttpServer::new(move || {
         let cors = Cors::permissive();
 
@@ -67,9 +67,4 @@ async fn main() -> std::io::Result<()> {
         .bind(("0.0.0.0", 8080))?
         .run()
         .await
-}
-
-async fn health_check() -> impl Responder {
-    println!("Health check");
-    HttpResponse::Ok().body("OK")
 }

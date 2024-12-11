@@ -1,16 +1,14 @@
-mod aws_service;
-mod mongodb_service;
 mod models;
 mod controllers;
-mod mongoresult;
 mod utils;
 mod delete_service;
+mod database;
 
-use crate::aws_service::AWSService;
+use database::aws_service::AWSService;
 use crate::controllers::get_controller::{get_content_handler, get_metadata_handler};
 use crate::controllers::upload_controller::upload_handler;
 use crate::delete_service::DeleteHandler;
-use crate::mongodb_service::MongoService;
+use database::mongodb_service::MongoService;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpServer};
 use std::env;

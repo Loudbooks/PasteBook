@@ -5,8 +5,8 @@ use futures_util::StreamExt;
 use tokio::spawn;
 use tokio::time::interval;
 use log::{error, warn};
-use crate::aws_service::AWSService;
-use crate::mongodb_service::MongoService;
+use crate::database::aws_service::AWSService;
+use crate::database::mongodb_service::MongoService;
 
 pub struct DeleteHandler {
     aws_service: Arc<AWSService>,

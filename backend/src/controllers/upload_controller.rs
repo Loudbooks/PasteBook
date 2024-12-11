@@ -1,6 +1,6 @@
-use crate::aws_service::AWSService;
+use crate::database::aws_service::AWSService;
 use crate::models::paste::Paste;
-use crate::mongodb_service::MongoService;
+use crate::database::mongodb_service::MongoService;
 use crate::utils::iputils::IPUtils;
 use actix_web::{web, HttpRequest, HttpResponse, Responder};
 use rand::{distributions::Alphanumeric, thread_rng, Rng};

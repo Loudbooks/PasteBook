@@ -1,10 +1,10 @@
-use crate::aws_service::AWSService;
+use crate::database::aws_service::AWSService;
 use actix_web::{
     web, HttpRequest, HttpResponse, Responder,
 };
 use serde::Deserialize;
 use std::sync::Arc;
-use crate::mongodb_service::MongoService;
+use crate::database::mongodb_service::MongoService;
 
 #[derive(Deserialize)]
 pub struct ContentQuery {

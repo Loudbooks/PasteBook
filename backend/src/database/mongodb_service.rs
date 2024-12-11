@@ -1,9 +1,10 @@
 use mongodb::bson::{doc, uuid};
 use mongodb::{Client, Collection, Cursor};
 use mongodb::options::ClientOptions;
+use crate::database::migration_service::MigrationService;
 use crate::models::paste::Paste;
 use crate::models::user::User;
-use crate::mongoresult::MongoResult;
+use crate::database::mongoresult::MongoResult;
 
 pub struct MongoService {
     user_collection: Collection<User>,
@@ -17,10 +18,14 @@ impl MongoService {
         let client = Client::with_options(client_options)?;
 
         let database = client.database(db_name);
+        let admin_database = client.database("admin");
         let user_collection = database.collection::<User>("users");
         let paste_collection = database.collection::<Paste>("pastes");
 
         println!("Connected to MongoDB");
+        
+        let migration_service = MigrationService::new(&database, &admin_database, &user_collection, &paste_collection);
+        migration_service.run_migrations().await;
 
         Ok(Self {
             user_collection,
@@ -33,7 +38,7 @@ impl MongoService {
         let update = doc! {
             "$inc": { "requests": 1 },
             "$setOnInsert": {
-                "id": uuid::Uuid::new().to_string(),
+                "_id": uuid::Uuid::new().to_string(),
                 "created_at": chrono::Utc::now().timestamp_millis(),
                 "banned": false
             }

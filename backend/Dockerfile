@@ -1,16 +1,12 @@
-FROM rust:bookworm AS builder
+FROM rust:1.83.0-alpine AS builder
 
-COPY ./Cargo.toml ./Cargo.lock ./
-RUN cargo fetch
-COPY ./src ./src
+COPY . .
 
-RUN rustup target add x86_64-unknown-linux-musl
-RUN apt-get update && apt-get install -y musl-tools
-RUN cargo build --release --target x86_64-unknown-linux-musl
+RUN apk add --no-cache clang lld musl-dev git
+RUN cargo build --release --locked
 
-FROM debian:bookworm
+FROM alpine:3.18 AS final
 
-RUN apt-get update && apt-get install -y libc6
-COPY --from=builder target/x86_64-unknown-linux-musl/release/backend /usr/local/bin/backend
+COPY --from=builder target/release/backend /usr/local/bin/backend
 
 CMD ["/usr/local/bin/backend"]

@@ -82,6 +82,7 @@ impl MigrationService {
     pub async fn paste_migration_12_11_24(&self) -> Result<(), mongodb::error::Error> {
         if !self.database.list_collection_names().await?.contains(&"pastePrivateDTO".to_string()) {
             println!("No pastes to migrate.");
+            return Ok(());
         }
         
         println!("Migrating pastes...");

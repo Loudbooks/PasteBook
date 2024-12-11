@@ -25,7 +25,7 @@ impl AWSService {
 
         let client = Client::from_conf(config);
 
-        println!("Connected to AWS S3");
+        println!("Connected to AWS S3.");
 
         Ok(Self {
             client,

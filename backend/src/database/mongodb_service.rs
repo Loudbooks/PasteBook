@@ -22,7 +22,7 @@ impl MongoService {
         let user_collection = database.collection::<User>("users");
         let paste_collection = database.collection::<Paste>("pastes");
 
-        println!("Connected to MongoDB");
+        println!("Connected to MongoDB.");
         
         let migration_service = MigrationService::new(&database, &admin_database, &user_collection, &paste_collection);
         migration_service.run_migrations().await;

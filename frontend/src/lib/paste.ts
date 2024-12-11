@@ -7,5 +7,5 @@ export type Paste = {
   user: {
     id: string;
   };
-  expiresAt: string;
+  expires_at: string;
 };

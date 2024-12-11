@@ -1,10 +1,12 @@
+FROM rust:1.83.0-alpine AS builder
 
-FROM openjdk:23-slim
+COPY . .
 
-WORKDIR /pastebook-backend
+RUN apk add --no-cache clang lld musl-dev git
+RUN cargo build --release --locked
 
-COPY build/libs/pastebook.jar pastebook.jar
+FROM alpine:3.18 AS final
 
-EXPOSE 8080
+COPY --from=builder target/release/backend /usr/local/bin/backend
 
-ENTRYPOINT ["java", "-jar", "pastebook.jar"]
+CMD ["/usr/local/bin/backend"]

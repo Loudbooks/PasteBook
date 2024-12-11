@@ -1,5 +1,5 @@
 # PasteBook 
-An easy on the eyes, portable, lightning fast pastebin written in Svelte and Kotlin.
+An easy on the eyes, portable, lightning fast pastebin written in Svelte and Rust.
 
 ### Prerequisites
 Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).
@@ -73,9 +73,11 @@ systemctl restart nginx
 Run the following commands in succession.
 ```bash
 docker compose stop
+docker compose pull
 docker compose up -d
 ```
 
 # Final Notes
 Wow. There was a lot that can go wrong there. I'm not an expert. If you need help, you can email me at contact@loudbook.dev or find me elsewhere.
+
 💜

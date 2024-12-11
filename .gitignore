@@ -2,3 +2,4 @@
 !.gitignore
 docker-compose.yml
 .idea
+/backend/target

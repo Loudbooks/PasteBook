@@ -11,8 +11,8 @@ services:
       - S3_BUCKET=pastebook
       - S3_ENDPOINT=http://minio:9000
     depends_on:
-      - mongo
-      - minio
+      minio:
+        condition: service_healthy
     networks:
       - pastebook-network
 
@@ -43,7 +43,7 @@ services:
     networks:
       - pastebook-network
     pull_policy: always
-
+    
   minio:
     image: quay.io/minio/minio:latest
     container_name: minio
@@ -60,7 +60,12 @@ services:
         aliases:
             - pastebook.minio
     pull_policy: always
-
+    healthcheck:                                                                                                                                               
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]                                                                                   
+      interval: 2s                                                                                                                                             
+      timeout: 2s                                                                                                                                              
+      retries: 5 
+      
 volumes:
   mongo-data:
   minio-data:

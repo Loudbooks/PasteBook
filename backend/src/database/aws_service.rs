@@ -2,6 +2,7 @@ use anyhow::Result;
 use aws_sdk_s3::config::{Credentials, Region, SharedCredentialsProvider};
 use aws_sdk_s3::primitives::ByteStream;
 use aws_sdk_s3::{Client, Config};
+use log::info;
 
 pub struct AWSService {
     client: Client,
@@ -10,7 +11,7 @@ pub struct AWSService {
 
 impl AWSService {
     pub async fn new(endpoint: &str, bucket_name: &str, access_key: &str, secret_key: &str) -> Result<Self> {
-        println!("Connecting to AWS S3...");
+        info!("Connecting to AWS S3...");
         let region = Region::new("auto");
         let credentials = Credentials::from_keys(access_key, secret_key, None);
         let shared_credentials = SharedCredentialsProvider::new(credentials);
@@ -25,7 +26,7 @@ impl AWSService {
 
         let client = Client::from_conf(config);
 
-        println!("Connected to AWS S3.");
+        info!("Connected to AWS S3.");
 
         Ok(Self {
             client,

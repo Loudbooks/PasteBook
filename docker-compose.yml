@@ -25,6 +25,7 @@ services:
       - DESCRIPTION=${DESCRIPTION}
       - DISABLE_NEW=${DISABLE_NEW}
       - FAVICON_URL=${FAVICON_URL}
+      - MAX_PAYLOAD_SIZE=${MAX_PAYLOAD_SIZE}
     depends_on:
       - backend
     networks:

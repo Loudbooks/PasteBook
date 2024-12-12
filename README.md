@@ -20,6 +20,7 @@ TITLE=
 DESCRIPTION=
 DISABLE_NEW=
 FAVICON_URL=
+MAX_PAYLOAD_SIZE=
 ```
 
 All of the following are optional. You can leave it all blank, or not even have a `.env` file at all. 
@@ -31,6 +32,8 @@ All of the following are optional. You can leave it all blank, or not even have 
 `DISABLE_NEW` - Disables the new paste page. API is still accessible.
 
 `FAVICON_URL` - The URL that the favicon will be provided with. 
+
+`MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
 
 ### Creation
 Run the following.

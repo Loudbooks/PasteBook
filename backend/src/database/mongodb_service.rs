@@ -39,7 +39,7 @@ impl MongoService {
         let update = doc! {
             "$inc": { "requests": 1 },
             "$setOnInsert": {
-                "_id": uuid::Uuid::new().to_string(),
+                "id": uuid::Uuid::new().to_string(),
                 "created_at": chrono::Utc::now().timestamp_millis(),
                 "banned": false
             }

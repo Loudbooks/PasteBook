@@ -38,7 +38,8 @@ All of the following are optional. You can leave it all blank, or not even have 
 ### Creation
 Run the following.
 ```bash
-docker compose up -d
+sudo systemctl enable docker
+sudo docker compose up -d
 ```
 
 Awesome! PasteBook is now running.

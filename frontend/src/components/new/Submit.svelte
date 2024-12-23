@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { expire, wrap, writableTitle } from "$lib/stores.ts";
   import { writableContent } from "$lib/stores.ts";
   import { onMount } from "svelte";
@@ -70,7 +71,7 @@
         return;
       }
 
-      window.location.replace("/p/" + xhr.response);
+      goto("/p/" + xhr.response);
     };
   }
 

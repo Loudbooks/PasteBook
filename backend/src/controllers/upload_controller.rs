@@ -38,7 +38,7 @@ pub async fn upload_handler(
         .headers()
         .get("expires")
         .and_then(|v| v.to_str().ok()?.parse::<u64>().ok())
-        .unwrap_or_else(|| 86_400_000);
+        .unwrap_or(86_400_000);
 
     let since_the_epoch = SystemTime::now()
         .duration_since(UNIX_EPOCH)
@@ -72,7 +72,7 @@ pub async fn upload_handler(
         expires_at: expires,
     };
 
-    if let Err(e) = aws_service.put_file(&file_id, (&body).as_ref()).await {
+    if let Err(e) = aws_service.put_file(&file_id, body.as_ref()).await {
         return HttpResponse::InternalServerError().body(format!("Failed to upload file: {:?}", e));
     }
     if let Err(e) = mongo_service.put_paste(paste).await {

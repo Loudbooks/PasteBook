@@ -75,7 +75,7 @@ impl DeleteHandler {
 
         if let Ok(file_names) = aws_service.list_files().await {
             for file_name in file_names {
-                if all_pastes.iter().all(|paste| &paste.id != &file_name) {
+                if all_pastes.iter().all(|paste| paste.id != file_name) {
                     if let Err(err) = aws_service.delete_file(&file_name).await {
                         error!("Failed to delete invalid file {}: {}", file_name, err);
                     } else {

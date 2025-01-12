@@ -1,6 +1,7 @@
 use crate::models::paste::Paste;
 use crate::models::user::User;
 use futures_util::StreamExt;
+use log::{error, info};
 use mongodb::bson::{doc, Document};
 use mongodb::{Collection, Database};
 
@@ -22,17 +23,17 @@ impl MigrationService {
     }
     
     pub async fn run_migrations(&self) {
-        self.user_migration_12_11_24().await.map_err(|e| println!("Error migrating users: {}", e)).ok();
-        self.paste_migration_12_11_24().await.map_err(|e| println!("Error migrating pastes: {}", e)).ok();
+        self.user_migration_12_11_24().await.map_err(|e| error!("Error migrating users: {}", e)).ok();
+        self.paste_migration_12_11_24().await.map_err(|e| error!("Error migrating pastes: {}", e)).ok();
     }
     
     pub async fn user_migration_12_11_24(&self) -> Result<(), mongodb::error::Error> {
         if !self.database.list_collection_names().await?.contains(&"user".to_string()) {
-            println!("No users to migrate.");
+            info!("No users to migrate.");
             return Ok(());
         }
         
-        println!("Migrating users...");
+        info!("Migrating users...");
         let old_user_collection = self.database.collection::<Document>("user");
 
         let mut amount = 0;
@@ -48,7 +49,7 @@ impl MigrationService {
             let last_visit = old_user.get_i64("lastVisit").unwrap_or_default();
             
             if user_ip.is_empty() || user_id.is_empty() {
-                println!("Skipping user with empty IP or ID.");
+                info!("Skipping user with empty IP or ID.");
                 continue;
             }
 
@@ -65,7 +66,7 @@ impl MigrationService {
             amount += 1;
         }
 
-        println!("Migrated {} out of {} users", amount, target_amount);
+        info!("Migrated {} out of {} users", amount, target_amount);
         
         let qualified_old_database_name = self.database.name().to_owned() + ".user";
         let qualified_new_database_name = self.database.name().to_owned() + ".user_migrated_12_11_24";
@@ -81,11 +82,11 @@ impl MigrationService {
     
     pub async fn paste_migration_12_11_24(&self) -> Result<(), mongodb::error::Error> {
         if !self.database.list_collection_names().await?.contains(&"pastePrivateDTO".to_string()) {
-            println!("No pastes to migrate.");
+            info!("No pastes to migrate.");
             return Ok(());
         }
         
-        println!("Migrating pastes...");
+        info!("Migrating pastes...");
         let old_paste_collection = self.database.collection::<Document>("pastePrivateDTO");
 
         let mut amount = 0;
@@ -102,7 +103,7 @@ impl MigrationService {
             let paste_wrap = old_paste.get_bool("wrap").unwrap_or_default();
             
             if paste_id.is_empty() {
-                println!("Skipping paste with empty ID.");
+                info!("Skipping paste with empty ID.");
                 continue;
             }
 
@@ -121,7 +122,7 @@ impl MigrationService {
             amount += 1;
         }
 
-        println!("Migrated {} out of {} pastes", amount, target_amount);
+        info!("Migrated {} out of {} pastes", amount, target_amount);
         
         let qualified_old_database_name = self.database.name().to_owned() + ".pastePrivateDTO";
         let qualified_new_database_name = self.database.name().to_owned() + ".pastePrivateDTO_migrated_12_11_24";

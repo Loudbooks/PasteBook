@@ -23,6 +23,7 @@ async fn main() -> std::io::Result<()> {
     let aws_secret_key = env::var("S3_SECRET_ACCESS_KEY").expect("S3_SECRET_ACCESS_KEY must be set");
     let bucket_name = env::var("S3_BUCKET").expect("S3_BUCKET must be set");
     let mongo_url = env::var("SPRING_DATA_MONGODB_URI").expect("SPRING_DATA_MONGODB_URI must be set");
+    let max_payload_size = env::var("MAX_PAYLOAD_SIZE").unwrap_or("10".to_string()).parse::<usize>().unwrap();
 
     let aws_service = Arc::new(
         AWSService::new(
@@ -54,6 +55,7 @@ async fn main() -> std::io::Result<()> {
 
         App::new()
             .wrap(cors)
+            .app_data(web::PayloadConfig::default().limit(max_payload_size * 1024 * 1024))
             .app_data(web::Data::new(Arc::clone(&aws_service)))
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
             .route("/get/{id}/content", web::get().to(get_content_handler))

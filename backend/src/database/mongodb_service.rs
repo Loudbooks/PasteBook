@@ -1,3 +1,4 @@
+use log::info;
 use mongodb::bson::{doc, uuid};
 use mongodb::{Client, Collection, Cursor};
 use mongodb::options::ClientOptions;
@@ -13,7 +14,7 @@ pub struct MongoService {
 
 impl MongoService {
     pub async fn new(uri: &str, db_name: &str) -> MongoResult<Self> {
-        println!("Connecting to MongoDB...");
+        info!("Connecting to MongoDB...");
         let client_options = ClientOptions::parse(uri).await?;
         let client = Client::with_options(client_options)?;
 
@@ -22,7 +23,7 @@ impl MongoService {
         let user_collection = database.collection::<User>("users");
         let paste_collection = database.collection::<Paste>("pastes");
 
-        println!("Connected to MongoDB.");
+        info!("Connected to MongoDB.");
         
         let migration_service = MigrationService::new(&database, &admin_database, &user_collection, &paste_collection);
         migration_service.run_migrations().await;
@@ -38,7 +39,7 @@ impl MongoService {
         let update = doc! {
             "$inc": { "requests": 1 },
             "$setOnInsert": {
-                "_id": uuid::Uuid::new().to_string(),
+                "id": uuid::Uuid::new().to_string(),
                 "created_at": chrono::Utc::now().timestamp_millis(),
                 "banned": false
             }

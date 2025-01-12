@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { title } from "$lib/stores";
   import { disableNew } from "$lib/stores";
+  import { goto } from "$app/navigation";
 
   onMount(() => {
     const toolbar = document.querySelector("toolbar") as HTMLElement;
@@ -11,15 +12,15 @@
   });
 
   function newPaste() {
-    window.location.href = "/new";
+    goto("/new");
   }
 
   function settings() {
-    window.location.href = "/settings";
+    goto("/settings");
   }
 
   function home() {
-    window.location.href = "/";
+    goto("/");
   }
 </script>
 

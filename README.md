@@ -20,6 +20,7 @@ TITLE=
 DESCRIPTION=
 DISABLE_NEW=
 FAVICON_URL=
+MAX_PAYLOAD_SIZE=
 ```
 
 > [!NOTE]
@@ -35,10 +36,13 @@ All of the following are optional. You can leave it all blank, or not even have 
 
 `FAVICON_URL` - The URL that the favicon will be provided with. 
 
+`MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
+
 ### Creation
 Run the following.
 ```bash
-docker compose up -d
+sudo systemctl enable docker
+sudo docker compose up -d
 ```
 
 Awesome! PasteBook is now running.
@@ -57,9 +61,16 @@ Navigate to `/etc/nginx/sites-enabled`.
 You will need to create a DNS A record pointing to your machine with the root and with the `api.` prefix. I use CloudFlare.
 
 ### Configuration 
-Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/pastebook.conf).
+Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/pastebook.conf) and place it in `/etc/nginx/sites-enabled`.
 
 `<DOMAIN>` - Change this to your domain name. For example, mine is `pastebook.dev`.
+
+> [!NOTE]
+> You can easily replace all instances of `<DOMAIN>` with your domain with the following command. In this example, I used `pastebook.dev`. Make sure to use yours.
+> 
+> ```bash
+> DOMAIN=pastebook.dev && sudo sed -i "s/<DOMAIN>/${DOMAIN}/g" /etc/nginx/sites-available/pastebook.conf
+> ```
 
 ### SSL Configuration
 Run the following, with `<DOMAIN>` changed to your domain.

@@ -23,9 +23,6 @@ FAVICON_URL=
 MAX_PAYLOAD_SIZE=
 ```
 
-> [!NOTE]
-> If you're testing locally with a numerical IP, you can add the `BACKEND_PORT` field. Please note that running with a numerical IP is NOT supported. You may run into issues.
-
 All of the following are optional. You can leave it all blank, or not even have a `.env` file at all. 
 
 `TITLE` - The title to be used around PasteBook.
@@ -37,6 +34,9 @@ All of the following are optional. You can leave it all blank, or not even have 
 `FAVICON_URL` - The URL that the favicon will be provided with. 
 
 `MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
+
+> [!NOTE]
+> If you're testing locally with a numerical IP, you can add the `BACKEND_PORT` field. Please note that running with a numerical IP is NOT supported. You may run into issues.
 
 ### Creation
 Run the following.

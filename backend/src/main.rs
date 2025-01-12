@@ -16,6 +16,8 @@ use std::sync::Arc;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    println!("PasteBook backend service starting...");
+
     env_logger::init();
 
     let database_url = env::var("S3_ENDPOINT").expect("S3_ENDPOINT must be set");
@@ -49,7 +51,9 @@ async fn main() -> std::io::Result<()> {
 
     let delete_handler = DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&mongo_service));
     delete_handler.start_delete_loop();
-
+    
+    println!("Pre-bind complete. Starting server...");
+    
     HttpServer::new(move || {
         let cors = Cors::permissive();
 

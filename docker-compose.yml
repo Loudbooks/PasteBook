@@ -28,6 +28,7 @@ services:
       - DISABLE_NEW=${DISABLE_NEW}
       - FAVICON_URL=${FAVICON_URL}
       - MAX_PAYLOAD_SIZE=${MAX_PAYLOAD_SIZE}
+      - BACKEND_PORT=${BACKEND_PORT}
     depends_on:
       - backend
     networks:

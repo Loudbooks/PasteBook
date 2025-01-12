@@ -5,11 +5,15 @@ import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 const config = {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
-  preprocess: vitePreprocess(),
+  preprocess: [
+    vitePreprocess({ postcss: true }),
+  ],
 
   kit: {
-    adapter: adapter(),
-  },
+    adapter: adapter({
+      precompress: true,
+    })
+  }
 };
 
 export default config;

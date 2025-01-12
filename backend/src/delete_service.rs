@@ -84,7 +84,6 @@ impl DeleteHandler {
                 }
             }
         }
-
         Ok(())
     }
 }

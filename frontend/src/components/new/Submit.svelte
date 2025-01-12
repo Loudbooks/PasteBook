@@ -45,7 +45,7 @@
 
     let domain = window.location.host;
 
-    if (domain.includes("localhost")) {
+    if (domain.includes("localhost") || domain.match(/192\.168\.\d+\.\d+/)) {
       xhr.open("POST", `http://localhost:8080/upload`);
     } else {
       xhr.open("POST", `https://api.${domain}/upload`);

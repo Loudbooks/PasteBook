@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { expire, wrap, writableTitle } from "$lib/stores.ts";
+  import { backendPort, expire, wrap, writableTitle } from "$lib/stores.ts";
   import { writableContent } from "$lib/stores.ts";
   import { onMount } from "svelte";
 
@@ -45,7 +45,7 @@
     let domain = window.location.host;
 
     if (domain.includes("localhost")) {
-      xhr.open("POST", `http://localhost:8080/upload`);
+      xhr.open("POST", `http://localhost:${$backendPort}/upload`);
     } else {
       xhr.open("POST", `https://api.${domain}/upload`);
     }

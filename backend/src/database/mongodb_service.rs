@@ -5,7 +5,7 @@ use mongodb::options::ClientOptions;
 use crate::database::migration_service::MigrationService;
 use crate::models::paste::Paste;
 use crate::models::user::User;
-use crate::database::mongoresult::MongoResult;
+use crate::database::mongo_result::MongoResult;
 
 pub struct MongoService {
     user_collection: Collection<User>,

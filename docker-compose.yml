@@ -41,8 +41,6 @@ services:
     image: mongo:6.0
     container_name: mongo
     restart: always
-    ports:
-      - "27017:27017"
     environment:
       MONGO_INITDB_DATABASE: pastebook
     volumes:
@@ -61,8 +59,6 @@ services:
       - MINIO_ROOT_PASSWORD=minioadmin
     volumes:
       - minio-data:/data/db
-    ports:
-      - "9000:9000"
     networks:
       pastebook-network:
         aliases:

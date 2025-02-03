@@ -1,7 +1,7 @@
 use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 use std::sync::Arc;
-use crate::utils::datautils;
-use crate::utils::iputils::IPUtils;
+use crate::utils::data::DataUtils;
+use crate::utils::ip::IPUtils;
 use crate::database::aws_service::AWSService;
 use crate::database::mongodb_service::MongoService;
 use crate::types::content;
@@ -30,7 +30,7 @@ async fn get_content(
     match aws_service.get_file(&path).await {
         Ok(data) => {
             if compress {
-                let compressed = datautils::compress_data(&data);
+                let compressed = DataUtils::compress_data(&data);
                 HttpResponse::Ok()
                     .content_type("text/plain; charset=utf-8")
                     .append_header(("Content-Encoding", "gzip"))

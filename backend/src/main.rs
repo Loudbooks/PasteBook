@@ -1,5 +1,4 @@
 mod models;
-mod controllers;
 mod utils;
 mod delete_service;
 mod database;
@@ -64,13 +63,8 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::Data::new(Arc::clone(&aws_service)))
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
             .configure(configure_routes) // NOTE: this ".configure" method basically? Does a batch .route or .service thing. Im actually not sure if it messes with .app_data or not so please check that.
-            //.route("/get/{id}/content", web::get().to(get_content_handler))
-            // .route("/get/{id}/metadata", web::get().to(get_metadata_handler))
-            // .route("/upload", web::post().to(upload_handler))
     })
         .bind(("0.0.0.0", 8080))?
         .run()
         .await
 }
-// TODO: Move your logic in the above .route() calls to the route files I made in `routes/` im not actually sure if the params/slugs {id} work so id give that a quick test. 
-// I dont have the stuff to test it myself but let me know if you have any issues o7.

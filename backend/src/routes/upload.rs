@@ -3,7 +3,7 @@ use crate::models::paste::Paste;
 use crate::database::mongodb_service::MongoService;
 use crate::utils::ip::IPUtils;
 use crate::utils::string::StringUtils;
-use actix_web::{post, web, HttpRequest, HttpResponse, Responder};
+use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 

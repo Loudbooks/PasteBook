@@ -2,10 +2,9 @@ use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 use std::sync::Arc;
 use crate::utils::datautils;
 use crate::utils::iputils::IPUtils;
-use crate::controllers::get_controller::{get_metadata_handler};
 use crate::database::aws_service::AWSService;
 use crate::database::mongodb_service::MongoService;
-use crate::controllers::get_controller::ContentQuery; // if needed
+use crate::types::content;
 
 
 // Note this "route" url gets appended after the baseurl specified in `mod.rs` make sure that the URL is correct.
@@ -17,7 +16,7 @@ async fn get_content(
     mongo_service: web::Data<Arc<MongoService>>,
     request: HttpRequest,
     path: web::Path<String>,
-    query: web::Query<ContentQuery>,
+    query: web::Query<content::ContentQuery>,
 ) -> impl Responder {
     let compress = query.compress.unwrap_or(true);
     let ip = IPUtils::extract_ip(&request);
@@ -54,6 +53,19 @@ async fn get_metadata(
     request: HttpRequest,
     path: web::Path<String>,
 ) -> impl Responder {
-    // Delegate to the controller's logic.
-    get_metadata_handler(mongo_service, request, path).await
+    let ip = IPUtils::extract_ip(&request);
+    if mongo_service.is_user_banned(&ip).await.expect("Failed to check if user is banned") {
+        return HttpResponse::Forbidden().body("Prohibited");
+    }
+
+    match mongo_service.get_paste_metadata(&path).await {
+        Ok(Some(metadata)) => {
+            let user = mongo_service.get_user(&metadata.creator_ip).await.unwrap();
+
+            let public_dto = metadata.to_public_dto(user.unwrap().to_dto());
+            HttpResponse::Ok().json(public_dto)
+        }
+        Ok(None) => HttpResponse::NotFound().body("Not Found"),
+        Err(_) => HttpResponse::InternalServerError().body("Internal Server Error"),
+    }
 }

@@ -1,6 +1,6 @@
 use actix_web::{get, HttpResponse};
 
-// Unlike typescript, we have to use empty strings instead of a / because stupid
+// Note this "route" url gets appended after the baseurl specified in `mod.rs` make sure that the URL is correct.
 #[get("/content")]
 async fn get_content() -> HttpResponse {
     HttpResponse::Ok().body("ok")

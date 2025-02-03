@@ -363,7 +363,7 @@
 
     font-size: 13px;
     white-space: pre;
-    font-family: "JetBrains Mono ", monospace;
+    font-family: "JetBrains Mono", monospace;
     margin: 0;
     padding-left: 51px;
     text-indent: -26px;

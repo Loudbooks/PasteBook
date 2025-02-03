@@ -3,7 +3,9 @@ mod controllers;
 mod utils;
 mod delete_service;
 mod database;
+mod routes;
 
+use crate::routes::configure_routes;
 use database::aws_service::AWSService;
 use crate::controllers::get_controller::{get_content_handler, get_metadata_handler};
 use crate::controllers::upload_controller::upload_handler;
@@ -62,9 +64,10 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::PayloadConfig::default().limit(max_payload_size * 1024 * 1024))
             .app_data(web::Data::new(Arc::clone(&aws_service)))
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
-            .route("/get/{id}/content", web::get().to(get_content_handler))
-            .route("/get/{id}/metadata", web::get().to(get_metadata_handler))
-            .route("/upload", web::post().to(upload_handler))
+            .configure(configure_routes)
+            // .route("/get/{id}/content", web::get().to(get_content_handler))
+            // .route("/get/{id}/metadata", web::get().to(get_metadata_handler))
+            // .route("/upload", web::post().to(upload_handler))
     })
         .bind(("0.0.0.0", 8080))?
         .run()

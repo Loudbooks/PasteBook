@@ -19,4 +19,11 @@ impl IPUtils {
     fn extract_first_ip(ip_list: &str) -> String {
         ip_list.split(',').next().unwrap_or("").trim().to_string()
     }
+
+    pub fn extract_ip(req: &HttpRequest) -> String {
+        req.peer_addr()
+            .map(|addr| addr.ip().to_string())
+            .unwrap_or_else(|| "unknown".to_string())
+    }
+    
 }

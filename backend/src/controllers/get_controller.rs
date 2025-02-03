@@ -33,39 +33,6 @@ pub async fn get_metadata_handler(
     }
 }
 
-pub async fn get_content_handler(
-    aws_service: web::Data<Arc<AWSService>>,
-    mongo_service: web::Data<Arc<MongoService>>,
-    request: HttpRequest,
-    path: web::Path<String>,
-    query: web::Query<ContentQuery>,
-) -> impl Responder {
-    let compress = query.compress.unwrap_or(true);
-    let ip = extract_ip(&request);
-
-    if mongo_service.is_user_banned(&ip).await.expect("Failed to check if user is banned") {
-        return HttpResponse::Forbidden().body("Prohibited");
-    }
-
-    mongo_service.increment_requests(&ip).await.expect("Failed to increment requests");
-
-    match aws_service.get_file(&path).await {
-        Ok(data) => {
-            if compress {
-                let compressed = compress_data(&data);
-                HttpResponse::Ok()
-                    .content_type("text/plain; charset=utf-8")
-                    .append_header(("Content-Encoding", "gzip"))
-                    .body(compressed)
-            } else {
-                HttpResponse::Ok()
-                    .content_type("text/plain; charset=utf-8")
-                    .body(data)
-            }
-        }
-        Err(_) => HttpResponse::NotFound().body("File not found"),
-    }
-}
 
 fn compress_data(data: &[u8]) -> Vec<u8> {
     use flate2::write::GzEncoder;

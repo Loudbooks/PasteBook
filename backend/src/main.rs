@@ -7,8 +7,6 @@ mod routes;
 
 use crate::routes::configure_routes;
 use database::aws_service::AWSService;
-use crate::controllers::get_controller::{get_content_handler, get_metadata_handler};
-use crate::controllers::upload_controller::upload_handler;
 use crate::delete_service::DeleteHandler;
 use database::mongodb_service::MongoService;
 use actix_cors::Cors;
@@ -64,8 +62,8 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::PayloadConfig::default().limit(max_payload_size * 1024 * 1024))
             .app_data(web::Data::new(Arc::clone(&aws_service)))
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
-            .configure(configure_routes)
-            // .route("/get/{id}/content", web::get().to(get_content_handler))
+            .configure(configure_routes) // NOTE: this ".configure" method basically? Does a batch .route or .service thing. Im actually not sure if it messes with .app_data or not so please check that.
+            //.route("/get/{id}/content", web::get().to(get_content_handler))
             // .route("/get/{id}/metadata", web::get().to(get_metadata_handler))
             // .route("/upload", web::post().to(upload_handler))
     })
@@ -73,3 +71,5 @@ async fn main() -> std::io::Result<()> {
         .run()
         .await
 }
+// TODO: Move your logic in the above .route() calls to the route files I made in `routes/` im not actually sure if the params/slugs {id} work so id give that a quick test. 
+// I dont have the stuff to test it myself but let me know if you have any issues o7.

@@ -1,18 +1,19 @@
 use crate::database::aws_service::AWSService;
 use crate::models::paste::Paste;
 use crate::database::mongodb_service::MongoService;
-use crate::utils::iputils::IPUtils;
-use actix_web::{web, HttpRequest, HttpResponse, Responder};
-use rand::{distributions::Alphanumeric, thread_rng, Rng};
+use crate::utils::ip::IPUtils;
+use crate::utils::string::StringUtils;
+use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-pub async fn upload_handler(
+#[post("")]
+async fn upload(
     aws_service: web::Data<Arc<AWSService>>,
     mongo_service: web::Data<Arc<MongoService>>,
     req: HttpRequest,
-    body: String,
-) -> impl Responder {
+    body: String
+) -> HttpResponse {
     let title = req
         .headers()
         .get("title")
@@ -60,7 +61,7 @@ pub async fn upload_handler(
         None => return HttpResponse::BadRequest().body("Failed to get IP"),
     };
 
-    let file_id = generate_random_string(5);
+    let file_id = StringUtils::generate_random_string(5);
 
     let paste = Paste {
         id: file_id.clone(),
@@ -92,12 +93,4 @@ pub async fn upload_handler(
     };
 
     HttpResponse::Ok().body(response_body)
-}
-
-fn generate_random_string(length: usize) -> String {
-    thread_rng()
-        .sample_iter(&Alphanumeric)
-        .take(length)
-        .map(char::from)
-        .collect()
 }

@@ -7,7 +7,6 @@ use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-// Unlike typescript, we have to use empty strings instead of a / because stupid (explained in `mod.rs`)
 #[post("")]
 async fn upload(
     aws_service: web::Data<Arc<AWSService>>,

@@ -6,10 +6,6 @@ use crate::database::aws_service::AWSService;
 use crate::database::mongodb_service::MongoService;
 use crate::types::content;
 
-
-// Note this "route" url gets appended after the baseurl specified in `mod.rs` make sure that the URL is correct.
-
-// Prepend the web::scope("/get") -> "/get/{id}/content"
 #[get("/{id}/content")]
 async fn get_content(
     aws_service: web::Data<Arc<AWSService>>,
@@ -45,8 +41,6 @@ async fn get_content(
     }
 }
 
-
-// Prepend the web::scope("/get") -> "/get/{id}/metadata"
 #[get("/{id}/metadata")]
 async fn get_metadata(
     mongo_service: web::Data<Arc<MongoService>>,

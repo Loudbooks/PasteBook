@@ -62,7 +62,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::PayloadConfig::default().limit(max_payload_size * 1024 * 1024))
             .app_data(web::Data::new(Arc::clone(&aws_service)))
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
-            .configure(configure_routes) // NOTE: this ".configure" method basically? Does a batch .route or .service thing. Im actually not sure if it messes with .app_data or not so please check that.
+            .configure(configure_routes)
     })
         .bind(("0.0.0.0", 8080))?
         .run()

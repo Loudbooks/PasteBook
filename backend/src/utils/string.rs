@@ -10,5 +10,4 @@ impl StringUtils {
             .map(char::from)
             .collect()
     }
-    
 }

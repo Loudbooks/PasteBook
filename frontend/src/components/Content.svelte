@@ -257,7 +257,7 @@
 <style lang="scss">
   content-container {
     display: block;
-    background-color: #eeeeee;
+    background-color: #801004;
     width: calc(100% - 20px);
     margin: 10px;
     border-radius: 20px;
@@ -267,11 +267,11 @@
     opacity: 0;
     height: calc(100% - 140px);
     overflow-x: scroll;
-    border: 1px solid #c9c9c9;
+    border: 1px solid #540a02;
 
     :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
+      border: 1px solid #fccd5d;
+      background-color: #fcda8b;
     }
 
     &.new-true {
@@ -301,7 +301,7 @@
     padding: 0;
 
     :global(.dark-mode) & {
-      color: white;
+      color: #b21807;
     }
 
     @media (max-width: 600px) {
@@ -373,7 +373,7 @@
     }
 
     :global(body.dark-mode) & {
-      color: white;
+      color: #b21807;
     }
 
     @media (max-width: 600px) {

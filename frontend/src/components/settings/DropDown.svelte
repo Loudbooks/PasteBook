@@ -26,8 +26,8 @@
     height: 40px;
     
     border: 1px solid #cfcfcf;
-    color: black;
-    font-family: Gabarito, sans-serif;
+    color: #FFE5A8;
+    font-family: Comic Neue, sans-serif;
     
     -webkit-appearance: none;
     float: right;
@@ -38,7 +38,7 @@
       background-color: #cfcfcf;
       
       :global(.dark-mode) & {
-        background-color: #333;
+        background-color: #fccd5d;
       }
     }
     
@@ -51,18 +51,18 @@
     }
 
     :global(.dark-mode) & {
-      color: white;
+      color: #b21807;
       
-      border: 1px solid #333;
+      border: 1px solid #fccd5d;
       
       @media (min-width: 600px) {
-        background: url("$lib/assets/arrow-white.svg") no-repeat right #1a1a1a;
+        background: url("$lib/assets/arrow-white.svg") no-repeat right #fcda8b;
         background-size: 15%;
         background-position-x: 80px;
       }
       
       @media (max-width: 600px) {
-        background: url("$lib/assets/arrow-white.svg") no-repeat right #1a1a1a;
+        background: url("$lib/assets/arrow-white.svg") no-repeat right #fcda8b;
         background-size: 15%;
         background-position-x: 75px;
       }
@@ -76,13 +76,13 @@
     }
 
     @media (min-width: 600px) {
-      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
+      background: url("$lib/assets/arrow.svg") no-repeat right #801004;
       background-size: 15%;
       background-position-x: 80px;
     }
     
     @media (max-width: 600px) {
-      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
+      background: url("$lib/assets/arrow.svg") no-repeat right #801004;
       background-size: 15%;
       background-position-x: 75px;
     }

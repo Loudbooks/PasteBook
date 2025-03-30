@@ -144,24 +144,24 @@
       width: 200px;
       height: 50px;
       border-radius: 17px;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       font-size: 20px;
       font-weight: 800;
       transition:
         opacity 0.5s,
         transform 0.5s,
         background-color 0.5s;
-      background-color: #eeeeee;
-      color: black;
+      background-color: #801004;
+      color: #FFE5A8;
       text-decoration: none;
-      border: 1px solid #c9c9c9;
+      border: 1px solid #540a02;
 
       animation: fadeIn 0.5s forwards;
 
       :global(.dark-mode) & {
-        background-color: #1a1a1a;
-        border: 1px solid #333;
-        color: white;
+        background-color: #fcda8b;
+        border: 1px solid #fccd5d;
+        color: #b21807;
       }
 
       &:global(.loading) {
@@ -177,7 +177,7 @@
         background-color: #cfcfcf;
 
         :global(.dark-mode) & {
-          background-color: #333;
+          background-color: #fccd5d;
         }
 
         cursor: pointer;
@@ -189,7 +189,7 @@
     }
 
     :global(.dark-mode) & {
-      color: white;
+      color: #b21807;
     }
   }
 

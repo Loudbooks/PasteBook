@@ -36,11 +36,11 @@
     margin-right: 10px;
     text-align: left;
     align-self: start;
-    color: black;
-    font-family: Gabarito, sans-serif;
+    color: #FFE5A8;
+    font-family: Comic Neue, sans-serif;
 
     :global(.dark-mode) & {
-      color: white;
+      color: #b21807;
     }
 
     @media (max-width: 768px) {
@@ -53,7 +53,7 @@
     color: #666;
     text-align: left;
     align-self: start;
-    font-family: Gabarito, sans-serif;
+    font-family: Comic Neue, sans-serif;
 
     @media (max-width: 768px) {
       font-size: 0.7em;

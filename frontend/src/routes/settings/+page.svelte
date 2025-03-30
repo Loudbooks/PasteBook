@@ -37,10 +37,10 @@
 
     if (darkMode) {
       document.body.classList.add("dark-mode");
-      document.body.style.background = "#000000";
+      document.body.style.background = "#FFE5A8";
     } else {
       document.body.classList.remove("dark-mode");
-      document.body.style.backgroundColor = "#ffffff";
+      document.body.style.backgroundColor = "#b21807";
     }
   });
 </script>
@@ -59,10 +59,10 @@
             externalHandler={(selected) => {
               if (selected) {
                 document.body.classList.add("dark-mode");
-                document.body.style.background = "#000000";
+                document.body.style.background = "#FFE5A8";
               } else {
                 document.body.classList.remove("dark-mode");
-                document.body.style.backgroundColor = "#ffffff";
+                document.body.style.backgroundColor = "#b21807";
               }
 
               localStorage.setItem("dark-mode", selected.toString());
@@ -134,12 +134,12 @@
 
 <svelte:head>
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="PasteBook Settings" />
-  <meta property="og:site_name" content="PasteBook" />
-  <meta property="og:url" content="https://pastebook.dev/settings" />
+  <meta property="og:title" content="PastaBook Settings" />
+  <meta property="og:site_name" content="PastaBook" />
+  <meta property="og:url" content="https://PastaBook.dev/settings" />
   <meta
     property="og:description"
-    content="Manage your settings for PasteBook."
+    content="Manage your settings for PastaBook."
   />
 </svelte:head>
 
@@ -148,7 +148,7 @@
     transition: all 0.5s ease;
 
     display: block;
-    background-color: #eeeeee;
+    background-color: #801004;
     width: calc(100% - 20px);
     margin: 10px;
     border-radius: 20px;
@@ -156,14 +156,14 @@
     animation-fill-mode: forwards;
     height: calc(100% - 140px);
     overflow-x: scroll;
-    border: 1px solid #c9c9c9;
+    border: 1px solid #540a02;
     box-sizing: border-box;
     padding: 10px 10px 5px;
     opacity: 0;
 
     :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
+      border: 1px solid #fccd5d;
+      background-color: #fcda8b;
     }
 
     animation: fadeIn 0.5s forwards;

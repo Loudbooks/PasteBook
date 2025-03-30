@@ -59,7 +59,7 @@
     }
 
     :global(.dark-mode) & {
-      border: 1px solid #333;
+      border: 1px solid #fccd5d;
     }
 
     :active & {
@@ -76,15 +76,15 @@
     background-color: #cfcfcf;
 
     :global(.dark-mode) & {
-      background-color: #333;
+      background-color: #fccd5d;
     }
   }
 
   :global(.bg-active-false) {
-    background-color: #eeeeee;
+    background-color: #801004;
 
     :global(.dark-mode) & {
-      background-color: #1a1a1a;
+      background-color: #fcda8b;
     }
   }
 
@@ -95,10 +95,10 @@
     width: 35px;
     margin-top: 0;
     border-radius: 50%;
-    background-color: dimgray;
+    background-color: dim#f87162;
 
     :global(.dark-mode) & {
-      background-color: white;
+      background-color: #b21807;
     }
 
     padding: 0;

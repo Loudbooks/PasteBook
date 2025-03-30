@@ -12,10 +12,10 @@
 
     if (darkMode) {
       document.body.classList.add("dark-mode");
-      document.body.style.background = "#000000";
+      document.body.style.background = "#FFE5A8";
     } else {
       document.body.classList.remove("dark-mode");
-      document.body.style.backgroundColor = "#ffffff";
+      document.body.style.backgroundColor = "#b21807";
     }
   });
 
@@ -25,11 +25,11 @@
     if (darkMode) {
       document.body.classList.add("dark-mode");
       localStorage.setItem("dark-mode", "true");
-      document.body.style.background = "#000000";
+      document.body.style.background = "#FFE5A8";
     } else {
       document.body.classList.remove("dark-mode");
       localStorage.setItem("dark-mode", "false");
-      document.body.style.backgroundColor = "#ffffff";
+      document.body.style.backgroundColor = "#b21807";
     }
   }
 </script>
@@ -69,12 +69,12 @@
       right: 30px;
       bottom: 0;
 
-      background: #000000;
-      color: #fff;
+      background: #FFE5A8;
+      color: #b21807;;
 
       :global(body.dark-mode) & {
-        color: black;
-        background: white;
+        color: #FFE5A8;
+        background: #b21807;
       }
 
       padding: 4px 8px;
@@ -83,7 +83,7 @@
       font-size: 12px;
       font-weight: bold;
       z-index: 9999;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       text-decoration: none;
       opacity: 0;
 

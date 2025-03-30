@@ -1,6 +1,6 @@
 FROM node:23-alpine AS build
 
-WORKDIR /pastebook-frontend
+WORKDIR /PastaBook-frontend
 
 ARG COMMIT_HASH
 ENV VITE_COMMIT_HASH=$COMMIT_HASH
@@ -14,9 +14,9 @@ RUN npm run build
 
 FROM node:23-alpine
 
-WORKDIR /pastebook-frontend
+WORKDIR /PastaBook-frontend
 
-COPY --from=build /pastebook-frontend /pastebook-frontend
+COPY --from=build /PastaBook-frontend /PastaBook-frontend
 
 RUN npm install --production
 

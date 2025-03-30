@@ -27,21 +27,21 @@
     h1 {
       text-align: center;
       font-size: 30vw;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       font-weight: 800;
       line-height: 25vw;
       margin: 0;
 
       :global(body.dark-mode) & {
-        color: white;
+        color: #b21807;
       }
     }
 
     p {
       text-align: center;
       font-size: 5vw;
-      font-family: Gabarito, sans-serif;
-      color: gray;
+      font-family: Comic Neue, sans-serif;
+      color: #f87162;
       font-weight: 500;
       margin: 0;
     }

@@ -94,7 +94,7 @@
       bottom: 0;
 
       background: #ffcc00;
-      color: black;
+      color: #FFE5A8;
 
       padding: 4px 8px;
       border-top-left-radius: 5px;
@@ -102,7 +102,7 @@
       font-size: 12px;
       font-weight: bold;
       z-index: 9999;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       text-decoration: none;
       opacity: 0;
 

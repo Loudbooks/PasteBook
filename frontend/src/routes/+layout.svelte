@@ -6,8 +6,8 @@
 
   let { data, children }: { data: any, children: Snippet } = $props();
 
-  const newTitle = data.title || 'PasteBook';
-  const newDescription = data.description || 'PasteBook is an aesthetic, effortless way to share your blocks of text, and respects your privacy by automatically deleting your pastes.';
+  const newTitle = data.title || 'PastaBook';
+  const newDescription = data.description || 'PastaBook is an yummy, tasty way to share your pasta dishes, and respects your privacy by automatically expiring old pasta.';
   const newDisableNew = data.disableNew || false;
   const newFaviconUrl = data.faviconUrl || null;
   const newBackendPort = data.backendPort || 8080;

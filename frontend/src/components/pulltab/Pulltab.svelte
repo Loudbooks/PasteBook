@@ -86,26 +86,26 @@
     left: calc(50% - 70px);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    color: black;
+    color: #FFE5A8;
     z-index: 1003;
 
-    border-left: 1px solid #c9c9c9;
-    border-right: 1px solid #c9c9c9;
-    border-top: 1px solid #c9c9c9;
+    border-left: 1px solid #540a02;
+    border-right: 1px solid #540a02;
+    border-top: 1px solid #540a02;
     border-bottom: none;
 
     animation: fadeIn 0.6s ease;
 
-    background-color: #eeeeee;
+    background-color: #801004;
 
     :global(body.dark-mode) & {
-      border-top: 1px solid #333;
-      border-left: 1px solid #333;
-      border-right: 1px solid #333;
+      border-top: 1px solid #fccd5d;
+      border-left: 1px solid #fccd5d;
+      border-right: 1px solid #fccd5d;
       border-bottom: none;
 
-      background-color: #1a1a1a;
-      color: white;
+      background-color: #fcda8b;
+      color: #b21807;
     }
 
     :hover & {
@@ -127,21 +127,21 @@
     position: fixed;
     top: 120%;
     left: 50%;
-    background-color: #eeeeee;
+    background-color: #801004;
     transition: all 0.5s ease;
 
     
-    border: 1px solid #c9c9c9;
+    border: 1px solid #540a02;
     
     :global(body.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
+      border: 1px solid #fccd5d;
+      background-color: #fcda8b;
     }
     
     border-radius: 20px;
     transform: translate(-50%, -50%);
     padding: 10px;
-    font-family: Gabarito, sans-serif;
+    font-family: Comic Neue, sans-serif;
 
     @media (max-width: 500px) {
       width: 91vw;

@@ -87,14 +87,14 @@
     list-style-type: none;
     border-radius: 15px;
     margin: 10px 10px 10px;
-    color: black;
+    color: #FFE5A8;
     opacity: 0;
 
     animation: fadeIn 0.5s ease-in-out forwards;
     animation-delay: 0.1s;
 
     :global(body.dark-mode) & {
-      color: white;
+      color: #b21807;
     }
 
     li {

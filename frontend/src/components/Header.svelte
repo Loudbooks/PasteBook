@@ -33,7 +33,7 @@
     input {
       display: inline-block;
       font-size: 35px;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       font-weight: 750;
       text-align: left;
       word-break: break-word;
@@ -46,7 +46,7 @@
       animation-fill-mode: forwards;
 
       :global(.dark-mode) & {
-        color: white;
+        color: #b21807;
       }
 
       transition:
@@ -62,7 +62,7 @@
     name {
       display: inline-block;
       font-size: 35px;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       font-weight: 750;
       text-align: left;
       word-break: break-word;
@@ -76,13 +76,13 @@
       transition: color 0.2s ease;
 
       :global(.dark-mode) & {
-        color: white;
+        color: #b21807;
       }
     }
 
     created {
       font-size: 18px;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       text-align: right;
       font-weight: 200;
       opacity: 0;
@@ -101,7 +101,7 @@
       transition: color 0.2s ease;
 
       :global(.dark-mode) & {
-        color: lightgray;
+        color: #f87162;
       }
     }
 

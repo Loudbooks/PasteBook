@@ -13,7 +13,7 @@ install_packages() {
 download_docker_compose() {
     echo
     echo "Downloading docker-compose.yml..."
-    sudo curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/docker-compose.yml -o docker-compose.yml
+    sudo curl -sSL https://raw.githubusercontent.com/Loudbooks/PastaBook/refs/heads/master/docker-compose.yml -o docker-compose.yml
     echo "docker-compose.yml has been created."
 }
 
@@ -21,8 +21,8 @@ create_env_file() {
     echo
     echo "Creating .env file..."
     echo
-    read -p "Enter the title to be used for PasteBook (leave blank for default): " TITLE
-    read -p "Enter the description to be used for the home page of PasteBook (leave blank for default): " DESCRIPTION
+    read -p "Enter the title to be used for PastaBook (leave blank for default): " TITLE
+    read -p "Enter the description to be used for the home page of PastaBook (leave blank for default): " DESCRIPTION
     read -p "Disable new paste creation? (yes/no): " DISABLE_NEW
 
     cat <<EOL > .env
@@ -39,12 +39,12 @@ download_and_configure_nginx() {
     echo "Downloading default Nginx configuration..."
     echo
 
-    sudo curl -sSL https://raw.githubusercontent.com/Loudbooks/PasteBook/refs/heads/master/pastebook.conf -o /etc/nginx/sites-available/pastebook.conf
+    sudo curl -sSL https://raw.githubusercontent.com/Loudbooks/PastaBook/refs/heads/master/PastaBook.conf -o /etc/nginx/sites-available/PastaBook.conf
 
-    read -p "Enter your domain name (e.g., pastebook.dev): " DOMAIN
-    sudo sed -i "s/<DOMAIN>/${DOMAIN}/g" /etc/nginx/sites-available/pastebook.conf
+    read -p "Enter your domain name (e.g., PastaBook.dev): " DOMAIN
+    sudo sed -i "s/<DOMAIN>/${DOMAIN}/g" /etc/nginx/sites-available/PastaBook.conf
 
-    sudo ln -s /etc/nginx/sites-available/pastebook.conf /etc/nginx/sites-enabled/
+    sudo ln -s /etc/nginx/sites-available/PastaBook.conf /etc/nginx/sites-enabled/
     echo
     echo "Nginx configuration completed."
     echo
@@ -63,8 +63,8 @@ download_and_configure_nginx() {
 
 ready() {
     echo
-    echo PasteBook is ready!
-    echo You can start PasteBook by running:
+    echo PastaBook is ready!
+    echo You can start PastaBook by running:
     echo docker compose up -d
     echo
 }

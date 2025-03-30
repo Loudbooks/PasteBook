@@ -50,19 +50,19 @@
       background-color 0.5s ease,
       border 0.5s ease;
 
-    background-color: #eeeeee;
+    background-color: #801004;
     opacity: 0;
 
     
     display: flex;
     justify-content: space-between;
     
-    color: gray;
-    border: 1px solid #c9c9c9;
+    color: #f87162;
+    border: 1px solid #540a02;
     
     :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
+      border: 1px solid #fccd5d;
+      background-color: #fcda8b;
     }
     
     &:active {
@@ -79,9 +79,9 @@
       font-size: 1rem;
       font-weight: 700;
       margin: 0;
-      font-family: Gabarito, sans-serif;
+      font-family: Comic Neue, sans-serif;
       border: none;
-      color: gray;
+      color: #f87162;
       
       margin-left: 20px;
       margin-right: 30px;
@@ -90,7 +90,7 @@
       outline: none;
       
       &:hover {
-        color: darkgray;
+        color: #f87162;
         cursor: pointer;
       }
       

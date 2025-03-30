@@ -50,20 +50,20 @@
     position: absolute;
     top: 0;
     z-index: 998;
-    background-color: white;
+    background-color: #b21807;
 
     :global(.dark-mode) & {
-      background-color: black;
+      background-color: #FFE5A8;
     }
   }
 
   h1 {
     transition: stroke-dasharray 0.5s ease-in-out, stroke-dashoffset 0.5s ease-in-out, fill 0.3s ease-in-out, stroke 0.5s ease-in-out, stroke-opacity 0.5s ease-in-out;
 
-    color: #eeeeee;
+    color: #801004;
     font-size: 150px;
-    font-family: Gabarito, serif;
-    font-weight: 1000;
+    font-family: Comic Neue, serif;
+    font-weight: 700;
     text-align: center;
     position: fixed;
     top: 50%;
@@ -73,7 +73,7 @@
     width: 100vw;
 
     :global(.dark-mode) & {
-      color: #1a1a1a;
+      color: #fcda8b;
     }
 
     animation: blink 2s ease infinite alternate;

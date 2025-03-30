@@ -109,7 +109,7 @@
   }
 
   function loadHandler() {
-    document.title = title + " • PasteBook";
+    document.title = title + " • PastaBook";
   }
 </script>
 
@@ -169,15 +169,12 @@
   }
 
   #hash {
-    transition:
-      transform 0.3s,
-      opacity 0.2s,
-      height 0.3s;
+    transition: transform 0.3s, opacity 0.2s, height 0.3s;
 
     padding-left: 30px;
     margin: 0;
     font-size: 13px;
-    font-family: Gabarito, sans-serif;
+    font-family: Comic Neue, sans-serif;
     color: grey;
     opacity: 0;
     height: 0;
@@ -188,11 +185,11 @@
   }
 
   #expire {
-    color: gray;
+    color: #f87162;
     margin: 0;
     padding: 0 0 10px;
     font-size: 14px;
-    font-family: Gabarito, sans-serif;
+    font-family: Comic Neue, sans-serif;
     text-align: center;
 
     &.extra-padding-true {

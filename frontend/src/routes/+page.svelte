@@ -22,7 +22,7 @@
     </p>
 
     <p class="footer">
-      <a href="https://github.com/Loudbooks/PasteBook" target="_blank" aria-label="button">pastebook</a>@<a href="https://github.com/Loudbooks/PasteBook/commit/{commitHash}" target="_blank" aria-label="button">{commitHash}</a>
+      <a href="https://github.com/Loudbooks/PastaBook" target="_blank" aria-label="button">pastabook</a>@<a href="https://github.com/Loudbooks/PastaBook/commit/{commitHash}" target="_blank" aria-label="button">{commitHash}</a>
     </p>
 
     <Mode></Mode>
@@ -46,22 +46,22 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: white;
+      background-color: #b21807;;
       transition: all 0.5s var(--animation);
       overflow: hidden;
 
       :global(.dark-mode) & {
-        background-color: black;
-        color: white;
+        background-color: #FFE5A8;
+        color: #b21807;;
       }
 
-      color: black;
+      color: #FFE5A8;
 
       h1 {
         margin-top: 0;
         text-align: center;
-        font-family: Gabarito, serif;
-        font-weight: 1000;
+        font-family: Comic Neue, serif;
+        font-weight: 700;
         font-size: 120px;
         margin-bottom: -10px;
         
@@ -75,12 +75,12 @@
       .description {
         text-align: center;
         font-size: 25px;
-        font-family: Gabarito, sans-serif;
+        font-family: Comic Neue, sans-serif;
         margin-top: 0;
         padding-top: 10px;
         padding-left: 15px;
         padding-right: 15px;
-        color: #333333;
+        color: #fccd5d333;
         transition: all 0.5s ease;
         opacity: 0;
         max-width: 800px;
@@ -90,7 +90,7 @@
         animation-fill-mode: forwards;
 
         :global(.dark-mode) & {
-          color: lightgray;
+          color: #f87162;
         }
 
         @media (max-width: 768px) {
@@ -105,7 +105,7 @@
       bottom: 5px;
       font-size: 11px;
       font-family: "Jetbrains Mono", sans-serif;
-      color: gray;
+      color: #f87162;
 
       animation: fadeUp 1s var(--animation) forwards;
       animation-delay: 0.4s;
@@ -116,7 +116,7 @@
       }
 
       a {
-        color: gray;
+        color: #f87162;
         text-decoration: none;
         font-weight: 600;
 

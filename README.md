@@ -42,7 +42,7 @@ All of the following are optional. You can leave it all blank, or not even have 
 Run the following.
 ```bash
 sudo systemctl enable docker
-sudo docker compose up -d
+docker compose up -d
 ```
 
 Awesome! PasteBook is now running.
@@ -58,7 +58,7 @@ In order to run PasteBook under a domain, you will need to use a reverse proxy. 
 Navigate to `/etc/nginx/sites-enabled`.
 
 ## Domain Preparation
-You will need to create a DNS A record pointing to your machine with the root and with the `api.` prefix. I use CloudFlare.
+You will need to create a DNS A record pointing to your machine. I use CloudFlare.
 
 ### Configuration 
 Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/pastebook.conf) and place it in `/etc/nginx/sites-enabled`.
@@ -75,7 +75,7 @@ Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/mas
 ### SSL Configuration
 Run the following, with `<DOMAIN>` changed to your domain.
 ```bash
-sudo certbot certonly --standalone -d <DOMAIN> -d api.<DOMAIN>
+sudo certbot certonly --standalone -d <DOMAIN>
 ```
 ### Committing Changes
 Run the following.

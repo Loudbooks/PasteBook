@@ -84,6 +84,10 @@ systemctl restart nginx
 ```
 
 # Updating PasteBook
+
+> [!NOTE]
+> Make sure that `docker-compose.yml`, `pastebook.conf` and `nginx.conf` are up to date before proceeding.
+
 Run the following commands in succession.
 ```bash
 docker compose stop

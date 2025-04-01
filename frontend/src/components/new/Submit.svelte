@@ -46,14 +46,14 @@
     let domain = window.location.host;
     
     if (domain.includes("localhost")) {
-      xhr.open("POST", `http://localhost:${$backendPort}/upload`);
+      xhr.open("POST", `http://localhost/api/upload`);
     } else {
       if (domain.match(/192\.168\.\d+\.\d+/)) {
         domain = domain.replace(/:\d+/, "");
 
-        xhr.open("POST", `http://${domain}:${$backendPort}/upload`);
+        xhr.open("POST", `http://${domain}/api/upload`);
       } else {
-        xhr.open("POST", `https://api.${domain}/upload`);
+        xhr.open("POST", `https://${domain}/api/upload`);
       }
     }
 

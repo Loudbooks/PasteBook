@@ -19,4 +19,3 @@ export const expire = writable(86400000);
 export const title = writable("");
 export const description = writable("");
 export const disableNew = writable(false);
-export const backendPort = writable(8080);

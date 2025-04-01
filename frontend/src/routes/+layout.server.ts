@@ -6,6 +6,5 @@ export const load: PageServerLoad = async () => {
 		description: process.env.DESCRIPTION,
 		disableNew: process.env.DISABLE_NEW?.toLowerCase() === 'true',
 		faviconUrl: process.env.FAVICON_URL,
-		backendPort: process.env.BACKEND_PORT ? parseInt(process.env.BACKEND_PORT) : 8080,
 	};
 };

@@ -8,13 +8,14 @@ Docker. Both the frontend and backend are to be installed with Docker. You can l
 The following is a guide to get PasteBook running on your system under your domain with SSL. All of this was tested on Ubuntu Linux.
 
 ### Preparation
-Download `docker-compose.yml` [here](https://github.com/Loudbooks/PasteBook/blob/master/docker-compose.yml).
+- Download `docker-compose.yml` [here](https://github.com/Loudbooks/PasteBook/blob/master/docker-compose.yml).
+- Download `nginx.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/nginx.conf).
 
 ### Configuration
 > [!CAUTION]
-> Do not modify `docker-compose.yml`. You will break things.
+> Do not modify `docker-compose.yml` or `nginx.conf`. You will break things.
 
-Create a file by the name of `.env` in the same directory as `docker-compose.yml`. Add the following.
+Create a file by the name of `.env` in the same directory as these other two files. Add the following.
 ```env
 TITLE=
 DESCRIPTION=
@@ -35,14 +36,11 @@ All of the following are optional. You can leave it all blank, or not even have 
 
 `MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
 
-> [!NOTE]
-> If you're testing locally with a numerical IP, you can add the `BACKEND_PORT` field. Please note that running with a numerical IP is NOT supported. You may run into issues.
-
 ### Creation
 Run the following.
 ```bash
 sudo systemctl enable docker
-sudo docker compose up -d
+docker compose up -d
 ```
 
 Awesome! PasteBook is now running.
@@ -58,7 +56,7 @@ In order to run PasteBook under a domain, you will need to use a reverse proxy. 
 Navigate to `/etc/nginx/sites-enabled`.
 
 ## Domain Preparation
-You will need to create a DNS A record pointing to your machine with the root and with the `api.` prefix. I use CloudFlare.
+You will need to create a DNS A record pointing to your machine. I use CloudFlare.
 
 ### Configuration 
 Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/pastebook.conf) and place it in `/etc/nginx/sites-enabled`.
@@ -75,7 +73,7 @@ Download `pastebook.conf` [here](https://github.com/Loudbooks/PasteBook/blob/mas
 ### SSL Configuration
 Run the following, with `<DOMAIN>` changed to your domain.
 ```bash
-sudo certbot certonly --standalone -d <DOMAIN> -d api.<DOMAIN>
+sudo certbot certonly --standalone -d <DOMAIN>
 ```
 ### Committing Changes
 Run the following.

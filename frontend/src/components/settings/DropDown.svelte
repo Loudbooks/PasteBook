@@ -29,6 +29,7 @@
     color: black;
     font-family: Gabarito, sans-serif;
     
+    
     -webkit-appearance: none;
     float: right;
     

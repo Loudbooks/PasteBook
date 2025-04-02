@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { backendPort, expire, wrap, writableTitle } from "$lib/stores.ts";
-  import { writableContent } from "$lib/stores.ts";
+  import { expire, wrap, writableTitle } from "$lib/stores";
+  import { writableContent } from "$lib/stores";
   import { onMount } from "svelte";
 
   onMount(() => {
@@ -44,7 +44,7 @@
     const xhr = new XMLHttpRequest();
 
     let domain = window.location.host;
-    
+
     if (domain.includes("localhost")) {
       xhr.open("POST", `http://localhost/api/upload`);
     } else {
@@ -83,13 +83,18 @@
 
   function allFieldsFilled() {
     let ready = $writableContent !== "";
+    let submitButton = document.querySelector(".submit") as HTMLElement;
+
+    if (!submitButton) {
+      return false;
+    }
 
     if (ready) {
-      document.querySelector(".submit").classList.add("ready");
-      document.querySelector(".submit").classList.remove("not-ready");
+      submitButton.classList.add("ready");
+      submitButton.classList.remove("not-ready");
     } else {
-      document.querySelector(".submit").classList.remove("ready");
-      document.querySelector(".submit").classList.add("not-ready");
+      submitButton.classList.remove("ready");
+      submitButton.classList.add("not-ready");
     }
 
     return ready;

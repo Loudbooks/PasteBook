@@ -22,19 +22,19 @@ DESCRIPTION=
 DISABLE_NEW=
 FAVICON_URL=
 MAX_PAYLOAD_SIZE=
+PORT=
 ```
 
-All of the following are optional. You can leave it all blank, or not even have a `.env` file at all. 
+**All of these options are optional.** You can leave it all blank, or not even have a `.env` file at all. 
 
-`TITLE` - The title to be used around PasteBook.
+By default, PasteBook will run on port 8080.
 
-`DESCRIPTION` - The description to be used in embeds and on the home page of PasteBook.
-
-`DISABLE_NEW` - Disables the new paste page. API is still accessible.
-
-`FAVICON_URL` - The URL that the favicon will be provided with. 
-
-`MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
+- `TITLE` - The title to be used around PasteBook.
+- `DESCRIPTION` - The description to be used in embeds and on the home page of PasteBook.
+- `DISABLE_NEW` - Disables the new paste page. API is still accessible.
+- `FAVICON_URL` - The URL that the favicon will be provided with. 
+- `MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
+- `PORT` - The running port for PasteBook.
 
 ### Creation
 Run the following.

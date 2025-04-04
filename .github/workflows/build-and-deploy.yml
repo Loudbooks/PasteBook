@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       packages: write
     strategy:
@@ -56,6 +56,7 @@ jobs:
           build-args: |
             COMMIT_HASH=${{ env.hash }}
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/loudbooks/pastebook-${{ matrix.component }}:${{ env.tag }}
             ghcr.io/loudbooks/pastebook-${{ matrix.component }}:${{ env.hash }}
@@ -74,6 +75,7 @@ jobs:
           build-args: |
             COMMIT_HASH=${{ env.hash }}
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/pastebook-${{ matrix.component }}:${{ env.tag }}
             ${{ secrets.DOCKER_USERNAME }}/pastebook-${{ matrix.component }}:${{ env.hash }}

@@ -18,6 +18,7 @@ jobs:
     strategy:
       matrix:
         component: [frontend, backend]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -48,6 +49,14 @@ jobs:
             exit 1
           fi
 
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache-${{ matrix.component }}
+          key: ${{ runner.os }}-${{ matrix.component }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.component }}-buildx-
+
       - name: Build and push Docker image to GHCR
         uses: docker/build-push-action@v3
         with:
@@ -57,9 +66,16 @@ jobs:
             COMMIT_HASH=${{ env.hash }}
           push: true
           platforms: linux/amd64,linux/arm64
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ matrix.component }}
+          cache-to: type=local,dest=/tmp/.buildx-cache-${{ matrix.component }}-new
           tags: |
             ghcr.io/loudbooks/pastebook-${{ matrix.component }}:${{ env.tag }}
             ghcr.io/loudbooks/pastebook-${{ matrix.component }}:${{ env.hash }}
+
+      - name: Move updated Docker cache
+        run: |
+          rm -rf /tmp/.buildx-cache-${{ matrix.component }}
+          mv /tmp/.buildx-cache-${{ matrix.component }}-new /tmp/.buildx-cache-${{ matrix.component }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -76,6 +92,8 @@ jobs:
             COMMIT_HASH=${{ env.hash }}
           push: true
           platforms: linux/amd64,linux/arm64
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ matrix.component }}
+          cache-to: type=local,dest=/tmp/.buildx-cache-${{ matrix.component }}-new
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/pastebook-${{ matrix.component }}:${{ env.tag }}
             ${{ secrets.DOCKER_USERNAME }}/pastebook-${{ matrix.component }}:${{ env.hash }}

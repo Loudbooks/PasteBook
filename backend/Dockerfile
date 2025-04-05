@@ -12,7 +12,7 @@ COPY --from=planner /pastebook-backend/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 
 COPY . .
-RUN cargo build --release --locked
+RUN cargo build --release --bin backend
 
 FROM alpine:3.18 AS final
 RUN apk add --no-cache ca-certificates

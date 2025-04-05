@@ -11,7 +11,6 @@ COPY --from=planner /pastebook-backend/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 
 COPY . .
-RUN apk add --no-cache clang lld musl-dev git
 RUN cargo build --release --bin backend
 
 FROM debian:bookworm-slim AS runtime

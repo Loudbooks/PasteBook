@@ -3,7 +3,6 @@ mod utils;
 mod delete_service;
 mod database;
 mod routes;
-mod types;
 
 use crate::routes::configure_routes;
 use database::aws_service::AWSService;

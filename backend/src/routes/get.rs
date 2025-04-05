@@ -4,7 +4,7 @@ use crate::utils::data::DataUtils;
 use crate::utils::ip::IPUtils;
 use crate::database::aws_service::AWSService;
 use crate::database::mongodb_service::MongoService;
-use crate::types::content;
+use crate::models::content_query;
 
 #[get("/{id}/content")]
 async fn get_content(
@@ -12,7 +12,7 @@ async fn get_content(
     mongo_service: web::Data<Arc<MongoService>>,
     request: HttpRequest,
     path: web::Path<String>,
-    query: web::Query<content::ContentQuery>,
+    query: web::Query<content_query::ContentQuery>,
 ) -> impl Responder {
     let compress = query.compress.unwrap_or(true);
     let ip = IPUtils::extract_ip(&request);

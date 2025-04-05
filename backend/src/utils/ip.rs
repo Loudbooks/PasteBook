@@ -25,5 +25,4 @@ impl IPUtils {
             .map(|addr| addr.ip().to_string())
             .unwrap_or_else(|| "unknown".to_string())
     }
-    
 }

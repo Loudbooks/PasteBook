@@ -15,6 +15,5 @@ RUN apk add --no-cache clang lld musl-dev git
 RUN cargo build --release --bin backend
 
 FROM debian:bookworm-slim AS runtime
-RUN apk add --no-cache ca-certificates
 COPY --from=builder /pastebook-backend/target/release/backend /usr/local/bin/backend
 CMD ["/usr/local/bin/backend"]

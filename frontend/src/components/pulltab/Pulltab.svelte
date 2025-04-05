@@ -141,7 +141,7 @@
     border-radius: 20px;
     transform: translate(-50%, -50%);
     padding: 10px;
-    font-family: Gabarito, sans-serif;
+    font-family: var(--font-family), sans-serif;
 
     @media (max-width: 500px) {
       width: 91vw;

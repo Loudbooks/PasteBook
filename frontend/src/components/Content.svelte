@@ -295,7 +295,7 @@
     background-color: transparent;
     color: inherit;
     font-size: 13px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-family-mono), monospace;
     outline: none;
     resize: none;
     margin: 30px;
@@ -331,7 +331,7 @@
     text-align: right;
     padding-right: 20px;
     color: #9999;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-family-mono), monospace;
     font-size: 13px;
     margin: 0;
     opacity: 1;
@@ -364,7 +364,7 @@
 
     font-size: 13px;
     white-space: pre;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-family-mono), monospace;
     margin: 0;
     padding-left: 51px;
     text-indent: -26px;

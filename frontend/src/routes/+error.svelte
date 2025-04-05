@@ -27,7 +27,7 @@
     h1 {
       text-align: center;
       font-size: 30vw;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       font-weight: 800;
       line-height: 25vw;
       margin: 0;
@@ -40,7 +40,7 @@
     p {
       text-align: center;
       font-size: 5vw;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       color: gray;
       font-weight: 500;
       margin: 0;

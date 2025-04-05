@@ -102,7 +102,7 @@
       font-size: 12px;
       font-weight: bold;
       z-index: 9999;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       text-decoration: none;
       opacity: 0;
 

@@ -60,7 +60,7 @@
       h1 {
         margin-top: 0;
         text-align: center;
-        font-family: Gabarito, serif;
+        font-family: var(--font-family), serif;
         font-weight: 1000;
         font-size: 120px;
         margin-bottom: -10px;
@@ -75,7 +75,7 @@
       .description {
         text-align: center;
         font-size: 25px;
-        font-family: Gabarito, sans-serif;
+        font-family: var(--font-family), sans-serif;
         margin-top: 0;
         padding-top: 10px;
         padding-left: 15px;
@@ -104,7 +104,7 @@
       position: fixed;
       bottom: 5px;
       font-size: 11px;
-      font-family: "Jetbrains Mono", sans-serif;
+      font-family: var(--font-family-mono), sans-serif;
       color: gray;
 
       animation: fadeUp 1s var(--animation) forwards;

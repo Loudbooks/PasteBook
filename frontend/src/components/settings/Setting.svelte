@@ -37,7 +37,7 @@
     text-align: left;
     align-self: start;
     color: black;
-    font-family: Gabarito, sans-serif;
+    font-family: var(--font-family), sans-serif;
 
     :global(.dark-mode) & {
       color: white;
@@ -53,7 +53,7 @@
     color: #666;
     text-align: left;
     align-self: start;
-    font-family: Gabarito, sans-serif;
+    font-family: var(--font-family), sans-serif;
 
     @media (max-width: 768px) {
       font-size: 0.7em;

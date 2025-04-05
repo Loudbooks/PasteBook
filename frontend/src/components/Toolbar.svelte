@@ -79,7 +79,7 @@
       font-size: 1rem;
       font-weight: 700;
       margin: 0;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       border: none;
       color: gray;
       

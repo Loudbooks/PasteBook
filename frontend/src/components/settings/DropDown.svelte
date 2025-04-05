@@ -27,7 +27,7 @@
     
     border: 1px solid #cfcfcf;
     color: black;
-    font-family: Gabarito, sans-serif;
+    font-family: var(--font-family), sans-serif;
     
     
     -webkit-appearance: none;

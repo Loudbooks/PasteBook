@@ -62,7 +62,7 @@
 
     color: #eeeeee;
     font-size: 150px;
-    font-family: Gabarito, serif;
+    font-family: var(--font-family), serif;
     font-weight: 1000;
     text-align: center;
     position: fixed;

@@ -177,7 +177,7 @@
     padding-left: 30px;
     margin: 0;
     font-size: 13px;
-    font-family: Gabarito, sans-serif;
+    font-family: var(--font-family), sans-serif;
     color: grey;
     opacity: 0;
     height: 0;
@@ -192,7 +192,7 @@
     margin: 0;
     padding: 0 0 10px;
     font-size: 14px;
-    font-family: Gabarito, sans-serif;
+    font-family: var(--font-family), sans-serif;
     text-align: center;
 
     &.extra-padding-true {

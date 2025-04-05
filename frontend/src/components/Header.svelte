@@ -33,7 +33,7 @@
     input {
       display: inline-block;
       font-size: 35px;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       font-weight: 750;
       text-align: left;
       word-break: break-word;
@@ -62,7 +62,7 @@
     name {
       display: inline-block;
       font-size: 35px;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       font-weight: 750;
       text-align: left;
       word-break: break-word;
@@ -82,7 +82,7 @@
 
     created {
       font-size: 18px;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       text-align: right;
       font-weight: 200;
       opacity: 0;

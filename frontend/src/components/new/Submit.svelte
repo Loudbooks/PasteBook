@@ -149,7 +149,7 @@
       width: 200px;
       height: 50px;
       border-radius: 17px;
-      font-family: Gabarito, sans-serif;
+      font-family: var(--font-family), sans-serif;
       font-size: 20px;
       font-weight: 800;
       transition:

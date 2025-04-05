@@ -69,7 +69,7 @@
     padding-left: 10px;
     padding-right: 10px;
     font-family:
-      "JetBrains Mono",
+      var(--font-family-mono),
       monospace;
 
     display: inline-block;

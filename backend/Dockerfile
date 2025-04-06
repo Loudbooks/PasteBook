@@ -13,6 +13,7 @@ RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .
 RUN cargo build --release --bin backend
 
-FROM debian:bookworm-slim AS runtime
+FROM alpine:3.18 AS final
+RUN apk add --no-cache ca-certificates
 COPY --from=builder /pastebook-backend/target/release/backend /usr/local/bin/backend
 CMD ["/usr/local/bin/backend"]

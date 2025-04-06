@@ -50,6 +50,9 @@
     text-align: left;
     align-self: start;
     font-family: var(--font-family), sans-serif;
+    font-weight: 100;
+
+    transition: all 0.5s ease;
 
     @media (max-width: 768px) {
       font-size: 0.7em;

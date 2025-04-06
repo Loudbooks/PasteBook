@@ -13,7 +13,7 @@
     darkMode = localStorage.getItem("dark-mode") === "true";
 
     if (darkMode) {
-      document.body.classList.add("dark-mode");
+      document.documentElement.setAttribute('data-theme', 'dark');
     }
 
     wrap = localStorage.getItem("wrap") === "true";
@@ -28,7 +28,6 @@
   });
 
   onMount(() => {
-    console.log("aaa");
     if (localStorage.getItem("dark-mode") === null) {
       localStorage.setItem("dark-mode", "true");
     }
@@ -36,11 +35,9 @@
     darkMode = localStorage.getItem("dark-mode") === "true";
 
     if (darkMode) {
-      document.body.classList.add("dark-mode");
-      document.body.style.background = "#000000";
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
-      document.body.classList.remove("dark-mode");
-      document.body.style.backgroundColor = "#ffffff";
+      document.documentElement.setAttribute('data-theme', 'light');
     }
   });
 </script>
@@ -58,11 +55,9 @@
             isSelected={darkMode}
             externalHandler={(selected) => {
               if (selected) {
-                document.body.classList.add("dark-mode");
-                document.body.style.background = "#000000";
+                document.documentElement.setAttribute('data-theme', 'dark');
               } else {
-                document.body.classList.remove("dark-mode");
-                document.body.style.backgroundColor = "#ffffff";
+                document.documentElement.setAttribute('data-theme', 'light');
               }
 
               localStorage.setItem("dark-mode", selected.toString());
@@ -148,7 +143,7 @@
     transition: all 0.5s ease;
 
     display: block;
-    background-color: #eeeeee;
+    background-color: var(--color-background-secondary);
     width: calc(100% - 20px);
     margin: 10px;
     border-radius: 20px;
@@ -156,15 +151,10 @@
     animation-fill-mode: forwards;
     height: calc(100% - 140px);
     overflow-x: scroll;
-    border: 1px solid #c9c9c9;
+    border: var(--border-standard);
     box-sizing: border-box;
     padding: 10px 10px 5px;
     opacity: 0;
-
-    :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
-    }
 
     animation: fadeIn 0.5s forwards;
 

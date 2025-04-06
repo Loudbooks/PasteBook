@@ -56,6 +56,7 @@
 
     :hover & {
       cursor: pointer;
+      filter: var(--button-hover-effect);
     }
 
     :active & {
@@ -94,7 +95,7 @@
   }
 
   .active-false {
-    margin-left: 2px;
+    margin-left: 1px;
 
     @media (max-width: 600px) {
       margin-left: 2px;

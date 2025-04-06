@@ -5,7 +5,7 @@
     </clipPath>
   </defs>
   <g id="Custom_Size_1" data-name="Custom Size – 1" clip-path="url(#clip-Custom_Size_1)">
-    <rect id="Rectangle_1" data-name="Rectangle 1" width="114.033" height="18.245" transform="translate(36.924 58.233) rotate(45)" fill="var(--color-text-primary)"/>
-    <rect id="Rectangle_2" data-name="Rectangle 2" width="114.033" height="18.245" transform="translate(185.977 71.134) rotate(135)" fill="var(--color-text-primary)"/>
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="114.033" height="18.245" transform="translate(36.924 58.233) rotate(45)" fill="transparent"/>
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="114.033" height="18.245" transform="translate(185.977 71.134) rotate(135)" fill="transparent"/>
   </g>  
 </svg>

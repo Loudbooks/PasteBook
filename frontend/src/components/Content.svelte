@@ -362,6 +362,8 @@
     padding-left: 51px;
     text-indent: -26px;
 
+    color: var(--color-text-primary);
+
     @media (max-width: 600px) {
       padding-left: 30px;
       text-indent: -18px;
@@ -370,8 +372,6 @@
     &.wrap-true {
       white-space: break-spaces;
     }
-
-    color: var(--color-text-primary);
 
     @media (max-width: 600px) {
       font-size: 10px;

@@ -25,6 +25,7 @@
     transition:
       background-color 0.5s ease,
       color 0.5s ease,
+      filter 0.5s ease,
       border 0.5s ease;
 
     width: 110px;
@@ -46,7 +47,7 @@
     
     &:hover {
       cursor: pointer;
-      background-color: var(--color-border) !important;
+      filter: var(--button-hover-effect);
     }
     
     &:focus {

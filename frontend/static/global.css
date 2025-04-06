@@ -2,6 +2,12 @@
     --font-family: 'Gabarito', sans-serif;
     --font-family-mono: 'JetBrains Mono', monospace;
     --border-standard: 2px solid var(--color-border);
+    --border-radius: 20px;
+
+    @media screen and (max-width: 768px) {
+        --border-radius: 15px;
+        --border-standard: 1.5px solid var(--color-border);
+    }
 }
 
 :root[data-theme='dark'] {
@@ -15,7 +21,7 @@
 
 :root[data-theme='light'] {
     --color-background: white;
-    --color-text-primary: black;
+    --color-text-primary: #363636;
     --color-text-secondary: rgb(0, 0, 0, 0.5);
     --color-background-secondary: #eeeeee;
     --color-border: #c9c9c9;

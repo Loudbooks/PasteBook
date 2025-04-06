@@ -261,7 +261,7 @@
     background-color: var(--color-background-secondary);
     width: calc(100% - 20px);
     margin: 10px;
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     animation: fadeIn 0.5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;

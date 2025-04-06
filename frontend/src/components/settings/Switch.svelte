@@ -51,7 +51,7 @@
     height: 40px;
     width: 70px;
     margin: 10px;
-    border-radius: 30px;
+    border-radius: var(--border-radius);
     border: var(--border-standard);
 
     :hover & {

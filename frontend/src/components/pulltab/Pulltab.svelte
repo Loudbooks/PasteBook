@@ -122,7 +122,7 @@
 
     border: var(--border-standard);
     
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     transform: translate(-50%, -50%);
     padding: 10px;
     font-family: var(--font-family), sans-serif;

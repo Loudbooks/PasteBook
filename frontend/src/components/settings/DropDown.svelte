@@ -33,7 +33,7 @@
     font-size: 15px;
     margin: 10px;
     line-height: 1;
-    border-radius: 30px;
+    border-radius: var(--border-radius);
     height: 40px;
     
     border: var(--border-standard);

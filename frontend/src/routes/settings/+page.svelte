@@ -146,7 +146,7 @@
     background-color: var(--color-background-secondary);
     width: calc(100% - 20px);
     margin: 10px;
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     height: calc(100% - 140px);

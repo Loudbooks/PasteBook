@@ -299,6 +299,7 @@
 
     @media (max-width: 600px) {
       font-size: 10px;
+      margin: 20px;
     }
   }
 
@@ -316,6 +317,10 @@
     display: block;
     padding: 30px 30px 30px 18px;
     height: calc(100% - 60px);
+
+    @media (max-width: 600px) {
+      padding: 20px 20px 20px 10px;
+    }
   }
 
   .number {
@@ -356,6 +361,11 @@
     margin: 0;
     padding-left: 51px;
     text-indent: -26px;
+
+    @media (max-width: 600px) {
+      padding-left: 30px;
+      text-indent: -18px;
+    }
 
     &.wrap-true {
       white-space: break-spaces;

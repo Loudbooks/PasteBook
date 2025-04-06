@@ -105,8 +105,6 @@
     :hover & {
       &.non-active {
         filter: var(--button-hover-effect);
-
-        // top: -32px;
       }
     }
   }

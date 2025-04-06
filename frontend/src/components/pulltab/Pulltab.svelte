@@ -7,6 +7,10 @@
     let content = document.querySelector("content") as HTMLDivElement;
 
     content.style.top = `calc(100% + ${content.clientHeight / 2 + 1}px)`;
+
+    setTimeout(() => {
+      content.style.transition = "all 0.5s ease";
+    }, 1);
   });
 
   let open = false;
@@ -102,7 +106,7 @@
       &.non-active {
         filter: var(--button-hover-effect);
 
-        top: -32px;
+        // top: -32px;
       }
     }
   }
@@ -114,7 +118,7 @@
     top: 120%;
     left: 50%;
     background-color: var(--color-background-secondary);
-    transition: all 0.5s ease;
+    transition: background-color 0.5s, background-color 0.5s ease;
 
     border: var(--border-standard);
     

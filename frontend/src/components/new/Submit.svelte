@@ -155,6 +155,7 @@
       transition:
         opacity 0.5s,
         transform 0.5s,
+        border 0.5s,
         filter 0.3s,
         background-color 0.5s;
       background-color: var(--color-background-secondary);

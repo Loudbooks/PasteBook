@@ -1,7 +1,7 @@
 :root {
     --font-family: 'Gabarito', sans-serif;
     --font-family-mono: 'JetBrains Mono', monospace;
-    --button-hover-effect: brightness(0.9);
+    --button-hover-effect: brightness(0.82);
     --border-standard: 1px solid var(--color-border);
 }
 

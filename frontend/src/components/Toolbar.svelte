@@ -88,7 +88,6 @@
       
       &:hover {
         filter: var(--button-hover-effect);
-        opacity: 0.8;
 
         cursor: pointer;
       }

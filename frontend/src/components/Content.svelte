@@ -259,7 +259,8 @@
   content-container {
     display: block;
     background-color: var(--color-background-secondary);
-    width: calc(100% - 20px);
+    width: calc(100% - 22px);
+
     margin: 10px;
     border-radius: var(--border-radius);
     animation: fadeIn 0.5s;

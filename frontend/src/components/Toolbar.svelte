@@ -44,7 +44,7 @@
 
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
-    transform: translate(10px, -100%);
+    
     transition:
       opacity 0.5s ease,
       background-color 0.5s ease,

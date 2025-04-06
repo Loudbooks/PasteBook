@@ -50,17 +50,13 @@
     position: absolute;
     top: 0;
     z-index: 998;
-    background-color: white;
-
-    :global(.dark-mode) & {
-      background-color: black;
-    }
+    background-color: var(--color-background);
   }
 
   h1 {
     transition: stroke-dasharray 0.5s ease-in-out, stroke-dashoffset 0.5s ease-in-out, fill 0.3s ease-in-out, stroke 0.5s ease-in-out, stroke-opacity 0.5s ease-in-out;
 
-    color: #eeeeee;
+    color: var(--color-background-secondary);
     font-size: 150px;
     font-family: var(--font-family), serif;
     font-weight: 1000;
@@ -71,10 +67,6 @@
     transform: translate(-50%, -50%);
 
     width: 100vw;
-
-    :global(.dark-mode) & {
-      color: #1a1a1a;
-    }
 
     animation: blink 2s ease infinite alternate;
 

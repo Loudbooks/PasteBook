@@ -45,9 +45,7 @@
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
 
-      :global(.dark-mode) & {
-        color: white;
-      }
+      color: var(--color-text-primary);
 
       transition:
         opacity 0.5s ease,
@@ -75,9 +73,7 @@
       animation-fill-mode: forwards;
       transition: color 0.2s ease;
 
-      :global(.dark-mode) & {
-        color: white;
-      }
+      color: var(--color-text-primary);
     }
 
     created {
@@ -86,7 +82,7 @@
       text-align: right;
       font-weight: 200;
       opacity: 0;
-      color: grey;
+      color: var(--color-text-secondary);
       align-self: end;
 
       padding-right: 30px;
@@ -99,10 +95,6 @@
       animation-fill-mode: forwards;
 
       transition: color 0.2s ease;
-
-      :global(.dark-mode) & {
-        color: lightgray;
-      }
     }
 
     @keyframes fadeIn {

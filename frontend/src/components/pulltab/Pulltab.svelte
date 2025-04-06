@@ -86,37 +86,23 @@
     left: calc(50% - 70px);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    color: black;
+    color: var(--color-text-primary);
     z-index: 1003;
 
-    border-left: 1px solid #c9c9c9;
-    border-right: 1px solid #c9c9c9;
-    border-top: 1px solid #c9c9c9;
+    border-left: var(--border-standard);
+    border-right: var(--border-standard);
+    border-top: var(--border-standard);
     border-bottom: none;
 
     animation: fadeIn 0.6s ease;
 
-    background-color: #eeeeee;
-
-    :global(body.dark-mode) & {
-      border-top: 1px solid #333;
-      border-left: 1px solid #333;
-      border-right: 1px solid #333;
-      border-bottom: none;
-
-      background-color: #1a1a1a;
-      color: white;
-    }
+    background-color: var(--color-background-secondary);
 
     :hover & {
       &.non-active {
-        background-color: rgb(200, 200, 200, 1);
+        filter: var(--button-hover-effect);
 
         top: -32px;
-
-        :global(body.dark-mode) & {
-          background-color: rgb(40, 40, 40, 1);
-        }
       }
     }
   }
@@ -127,16 +113,10 @@
     position: fixed;
     top: 120%;
     left: 50%;
-    background-color: #eeeeee;
+    background-color: var(--color-background-secondary);
     transition: all 0.5s ease;
 
-    
-    border: 1px solid #c9c9c9;
-    
-    :global(body.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
-    }
+    border: var(--border-standard);
     
     border-radius: 20px;
     transform: translate(-50%, -50%);

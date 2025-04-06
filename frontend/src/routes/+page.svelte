@@ -46,16 +46,11 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: white;
+      background-color: var(--color-background);
       transition: all 0.5s var(--animation);
       overflow: hidden;
 
-      :global(.dark-mode) & {
-        background-color: black;
-        color: white;
-      }
-
-      color: black;
+      color: var(--color-text-primary);
 
       h1 {
         margin-top: 0;
@@ -80,7 +75,7 @@
         padding-top: 10px;
         padding-left: 15px;
         padding-right: 15px;
-        color: #333333;
+        color: var(--color-text-secondary);
         transition: all 0.5s ease;
         opacity: 0;
         max-width: 800px;
@@ -88,10 +83,6 @@
         animation: fadeUp 1s var(--animation);
         animation-delay: 0.2s;
         animation-fill-mode: forwards;
-
-        :global(.dark-mode) & {
-          color: lightgray;
-        }
 
         @media (max-width: 768px) {
           font-size: 15px;

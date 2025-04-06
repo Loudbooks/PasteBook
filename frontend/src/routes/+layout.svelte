@@ -24,6 +24,18 @@
       favicon.href = newFaviconUrl;
     }
   });
+
+  let darkMode = false;
+
+  onMount(() => {
+    if (localStorage.getItem("dark-mode") === null) {
+      localStorage.setItem("dark-mode", "true");
+    }
+
+    darkMode = localStorage.getItem("dark-mode") === "true";
+
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+  });
 </script>
 
 <main>

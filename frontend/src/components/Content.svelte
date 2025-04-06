@@ -258,7 +258,7 @@
 <style lang="scss">
   content-container {
     display: block;
-    background-color: #eeeeee;
+    background-color: var(--color-background-secondary);
     width: calc(100% - 20px);
     margin: 10px;
     border-radius: 20px;
@@ -268,12 +268,7 @@
     opacity: 0;
     height: calc(100% - 140px);
     overflow-x: scroll;
-    border: 1px solid #c9c9c9;
-
-    :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
-    }
+    border: var(--border-standard);
 
     &.new-true {
       height: calc(100% - 175px);
@@ -300,10 +295,7 @@
     resize: none;
     margin: 30px;
     padding: 0;
-
-    :global(.dark-mode) & {
-      color: white;
-    }
+    color: var(--color-text-primary);
 
     @media (max-width: 600px) {
       font-size: 10px;
@@ -315,7 +307,7 @@
     margin: 0;
     &:hover {
       .number {
-        color: #919191;
+        filter: var(--button-hover-effect);
       }
     }
   }
@@ -330,7 +322,7 @@
     display: inline-block;
     text-align: right;
     padding-right: 20px;
-    color: #9999;
+    color: var(--color-text-secondary);
     font-family: var(--font-family-mono), monospace;
     font-size: 13px;
     margin: 0;
@@ -340,10 +332,6 @@
 
     &::selection {
       background-color: orange;
-    }
-
-    .dark-mode & {
-      color: #999;
     }
 
     transition:
@@ -373,9 +361,7 @@
       white-space: break-spaces;
     }
 
-    :global(body.dark-mode) & {
-      color: white;
-    }
+    color: var(--color-text-primary);
 
     @media (max-width: 600px) {
       font-size: 10px;

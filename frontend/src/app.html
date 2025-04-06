@@ -36,7 +36,7 @@
   <body
     data-sveltekit-preload-data="hover"
     class="dark-mode"
-    style="background: black"
+    style="background: var(--color-background)"
   >
     <div style="display: contents">%sveltekit.body%</div>
   </body>
@@ -47,6 +47,8 @@
     margin: 0;
     overscroll-behavior-x: none;
     transition: background-color 0.5s;
+
+    background-color: var(--color-background);
   }
 </style>
 

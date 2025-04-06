@@ -155,23 +155,18 @@
       transition:
         opacity 0.5s,
         transform 0.5s,
+        filter 0.3s,
         background-color 0.5s;
-      background-color: #eeeeee;
-      color: black;
+      background-color: var(--color-background-secondary);
+      color: var(--color-text-primary);
       text-decoration: none;
-      border: 1px solid #c9c9c9;
+      border: var(--border-standard);
 
       animation: fadeIn 0.5s forwards;
 
-      :global(.dark-mode) & {
-        background-color: #1a1a1a;
-        border: 1px solid #333;
-        color: white;
-      }
-
       &:global(.loading) {
         animation: blink 3s infinite;
-        color: #999999;
+        color: var(--color-text-secondary);
       }
 
       &:hover:global(.loading) {
@@ -179,11 +174,7 @@
       }
 
       &:hover:not(.loading) {
-        background-color: #cfcfcf;
-
-        :global(.dark-mode) & {
-          background-color: #333;
-        }
+        filter: var(--button-hover-effect);
 
         cursor: pointer;
       }
@@ -191,10 +182,6 @@
       &:active {
         transform: scale(0.96);
       }
-    }
-
-    :global(.dark-mode) & {
-      color: white;
     }
   }
 

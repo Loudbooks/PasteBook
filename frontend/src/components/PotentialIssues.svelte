@@ -87,7 +87,7 @@
     list-style-type: none;
     border-radius: 15px;
     margin: 10px 10px 10px;
-    color: black;
+    color: var(--color-text-primary);
     opacity: 0;
 
     animation: fadeIn 0.5s ease-in-out forwards;

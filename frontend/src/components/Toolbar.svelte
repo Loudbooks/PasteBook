@@ -50,30 +50,27 @@
       background-color 0.5s ease,
       border 0.5s ease;
 
-    background-color: #eeeeee;
+    background-color: var(--color-background-secondary);
     opacity: 0;
 
     
     display: flex;
     justify-content: space-between;
     
-    color: gray;
-    border: 1px solid #c9c9c9;
-    
-    :global(.dark-mode) & {
-      border: 1px solid #333;
-      background-color: #1a1a1a;
-    }
-    
+    color: var(--color-text-primary);
+    border: var(--border-standard);
+
     &:active {
       transform: scale(0.95);
     }
     
     button {
       transition:
-      opacity 0.7s,
+      opacity 0.3s,
       transform 0.5s,
-      color 0.5s;
+      color 0.5s,
+      filter 0.3s;
+
       align-self: center;
       
       font-size: 1rem;
@@ -81,7 +78,7 @@
       margin: 0;
       font-family: var(--font-family), sans-serif;
       border: none;
-      color: gray;
+      color: var(--color-text-secondary);
       
       margin-left: 20px;
       margin-right: 30px;
@@ -90,7 +87,9 @@
       outline: none;
       
       &:hover {
-        color: darkgray;
+        filter: var(--button-hover-effect);
+        opacity: 0.8;
+
         cursor: pointer;
       }
       

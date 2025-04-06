@@ -44,7 +44,7 @@
   .container {
     transition: all 0.5s ease;
     display: block;
-    color: inherit;
+    color: var(--color-text-primary);
     padding: 0;
     font: inherit;
     cursor: pointer;
@@ -52,14 +52,10 @@
     width: 70px;
     margin: 10px;
     border-radius: 30px;
-    border: 1px solid #cfcfcf;
+    border: var(--border-standard);
 
     :hover & {
       cursor: pointer;
-    }
-
-    :global(.dark-mode) & {
-      border: 1px solid #333;
     }
 
     :active & {
@@ -73,19 +69,11 @@
   }
 
   :global(.bg-active-true) {
-    background-color: #cfcfcf;
-
-    :global(.dark-mode) & {
-      background-color: #333;
-    }
+    background-color: var(--color-border);
   }
 
   :global(.bg-active-false) {
-    background-color: #eeeeee;
-
-    :global(.dark-mode) & {
-      background-color: #1a1a1a;
-    }
+    background-color: var(--color-background-secondary);
   }
 
   .circle {
@@ -95,11 +83,7 @@
     width: 35px;
     margin-top: 0;
     border-radius: 50%;
-    background-color: dimgray;
-
-    :global(.dark-mode) & {
-      background-color: white;
-    }
+    background-color: var(--color-text-primary);
 
     padding: 0;
 

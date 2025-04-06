@@ -36,12 +36,8 @@
     margin-right: 10px;
     text-align: left;
     align-self: start;
-    color: black;
+    color: var(--color-text-primary);
     font-family: var(--font-family), sans-serif;
-
-    :global(.dark-mode) & {
-      color: white;
-    }
 
     @media (max-width: 768px) {
       font-size: 1em;
@@ -50,7 +46,7 @@
 
   settingdescription {
     font-size: 1em;
-    color: #666;
+    color: var(--color-text-secondary);
     text-align: left;
     align-self: start;
     font-family: var(--font-family), sans-serif;

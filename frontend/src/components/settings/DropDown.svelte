@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Arrow from "../Arrow.svelte";
+
   export let callback: (value: number) => void;
 
   function handleCallback(event: Event) {
@@ -6,9 +8,17 @@
   }
 </script>
 
-<select on:change={handleCallback}>
-  <slot name="options" />
-</select>
+<div id="dropdown" class="dropdown">
+  <select on:change={handleCallback}>
+    <slot name="options" />
+  </select>
+  
+  <div id="arrow" class="arrow">
+    <Arrow />
+  </div>
+</div>
+
+
 
 <style lang="scss">
   select {
@@ -25,8 +35,8 @@
     border-radius: 30px;
     height: 40px;
     
-    border: 1px solid #cfcfcf;
-    color: black;
+    border: var(--border-standard);
+    color: var(--color-text-primary);
     font-family: var(--font-family), sans-serif;
     
     
@@ -36,56 +46,42 @@
     
     &:hover {
       cursor: pointer;
-      background-color: #cfcfcf;
-      
-      :global(.dark-mode) & {
-        background-color: #333;
-      }
+      background-color: var(--color-border) !important;
     }
     
     &:focus {
       outline: none;
     }
-    
-    &:active {
-      background-color: #cfcfcf;
-    }
 
-    :global(.dark-mode) & {
-      color: white;
-      
-      border: 1px solid #333;
-      
-      @media (min-width: 600px) {
-        background: url("$lib/assets/arrow-white.svg") no-repeat right #1a1a1a;
-        background-size: 15%;
-        background-position-x: 80px;
-      }
-      
-      @media (max-width: 600px) {
-        background: url("$lib/assets/arrow-white.svg") no-repeat right #1a1a1a;
-        background-size: 15%;
-        background-position-x: 75px;
-      }
-    }
+    color: var(--color-text-primary);
+    border: var(--border-standard);
     
     @media (max-width: 600px) {
       height: 25px;
       font-size: 12px;
       padding-left: 10px;
-      width: 100px;
+      width: 90px;
     }
 
     @media (min-width: 600px) {
-      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
+      background: url("$lib/assets/arrow.svg") no-repeat right var(--color-background-secondary);
       background-size: 15%;
       background-position-x: 80px;
     }
     
     @media (max-width: 600px) {
-      background: url("$lib/assets/arrow.svg") no-repeat right #eeeeee;
+      background: url("$lib/assets/arrow.svg") no-repeat right var(--color-background-secondary);
       background-size: 15%;
-      background-position-x: 75px;
+      background-position-x: 65px;
+    }
+  }
+
+  #arrow {
+    position: absolute;
+    transform: translate(92px, 22px);
+
+    @media (max-width: 600px) {
+      transform: translate(76px, 14px);
     }
   }
 </style>

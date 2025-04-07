@@ -144,7 +144,7 @@
 
     display: block;
     background-color: var(--color-background-secondary);
-    width: calc(100% - 20px);
+    width: calc(100% - 16px);
     margin: 10px;
     border-radius: var(--border-radius);
     animation-iteration-count: 1;

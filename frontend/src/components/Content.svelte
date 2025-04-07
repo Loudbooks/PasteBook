@@ -259,7 +259,7 @@
   content-container {
     display: block;
     background-color: var(--color-background-secondary);
-    width: calc(100% - 22px);
+    width: calc(100% - 20px);
 
     margin: 10px;
     border-radius: var(--border-radius);

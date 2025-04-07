@@ -6,7 +6,7 @@
   onMount(() => {
     let content = document.querySelector("content") as HTMLDivElement;
 
-    content.style.top = `calc(100% + ${content.clientHeight / 2 + 1}px)`;
+    content.style.top = `calc(100% + ${content.clientHeight / 2 + 2}px)`;
 
     setTimeout(() => {
       content.style.transition = "all 0.5s ease";
@@ -82,7 +82,7 @@
 
     position: fixed;
     margin: 0;
-    top: -35px;
+    top: -36px;
     height: 35.5px;
     width: 140px;
     bottom: 0;

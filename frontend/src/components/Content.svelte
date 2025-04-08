@@ -159,8 +159,8 @@
         }
       }
 
-      newLineElement.style.marginTop = "20px";
-      newLineElement.style.marginBottom = "20px";
+      newLineElement.style.marginTop = "10px";
+      newLineElement.style.marginBottom = "10px";
       newLineNumberElement.style.fontWeight = "1000";
 
       currentScrolledLine = newLine;
@@ -262,6 +262,8 @@
     width: calc(100% - 20px);
     margin: 10px;
     border-radius: 20px;
+
+    border-radius: var(--border-radius);
     animation: fadeIn 0.5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -278,7 +280,6 @@
 
     @media (max-width: 600px) {
       height: calc(100% - 130px);
-      margin-top: 6px;
     }
   }
 

@@ -29,6 +29,9 @@
   topcontainer {
     display: flex;
     overflow: hidden;
+    width: 100%;
+    padding-top: 7px;
+    padding-bottom: 7px;
 
     input {
       display: inline-block;
@@ -66,7 +69,7 @@
       word-break: break-word;
       align-self: end;
       flex: 70%;
-      padding-left: 30px;
+      padding-left: 20px;
 
       animation: fadeIn ease 0.7s;
       animation-iteration-count: 1;

@@ -28,5 +28,16 @@
 
 <main>
   <Toolbar></Toolbar>
+  <div id="padding-container"></div>
   {@render children()}
 </main>
+
+<style lang="scss">
+  #padding-container {
+    padding-top: 30px;
+
+    @media (max-width: 600px) {
+      padding-top: 20px;
+    }
+  }
+</style>

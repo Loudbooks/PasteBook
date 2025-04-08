@@ -43,9 +43,6 @@
 </script>
 
 <main>
-  <div id="padding-container">
-    <div id="padding"></div>
-  </div>
   <Header title="Settings" created=""></Header>
   <div id="container">
     <div id="settings">
@@ -139,14 +136,26 @@
 </svelte:head>
 
 <style lang="scss">
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--color-background-primary);
+  }
+
   #container {
     transition: all 0.5s ease;
 
     display: block;
     background-color: var(--color-background-secondary);
-    width: calc(100% - 20px);
-    margin: 10px;
-    border-radius: 20px;
+
+    width: calc(100% - 16px);
+    border-radius: var(--border-radius);
+
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     height: calc(100% - 140px);
@@ -161,14 +170,6 @@
     @media (max-width: 600px) {
       height: calc(100% - 130px);
       margin-top: 6px;
-    }
-  }
-
-  #padding {
-    padding-top: 10px + 30px;
-
-    @media (max-width: 600px) {
-      padding-top: 7px + 20px;
     }
   }
 

@@ -7,7 +7,7 @@
   onMount(() => {
     const toolbar = document.querySelector("toolbar") as HTMLElement;
 
-    toolbar.style.transform = "translate(10px, 0)";
+    toolbar.style.transform = "translate(0, 50%)";
     toolbar.style.opacity = "1";
   });
 
@@ -24,21 +24,38 @@
   }
 </script>
 
-<toolbar>
-  <button id="main" on:click={home}>{$title.toUpperCase()}</button>
-  <buttons>
-    {#if !$disableNew}
-      <button on:click={settings}>SETTINGS</button>
-      <button on:click={newPaste}>NEW</button>
-    {/if}
-  </buttons>
-</toolbar>
+<div id="toolbar-container">
+  <toolbar>
+    <button id="main" on:click={home}>{$title.toUpperCase()}</button>
+    <buttons>
+      {#if !$disableNew}
+        <button on:click={settings}>SETTINGS</button>
+        <button on:click={newPaste}>NEW</button>
+      {/if}
+    </buttons>
+  </toolbar>
+</div>
 
 <style lang="scss">
-  toolbar {
-    z-index: 999;
+  #toolbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: max-content;
 
-    position: absolute;
+    z-index: 998;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: transparent;
+  }
+
+  toolbar {
+    position: fixed;
     width: calc(100% - 20px);
     height: 30px;
 

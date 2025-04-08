@@ -83,7 +83,7 @@
 
     position: fixed;
     margin: 0;
-    top: -36px;
+    top: -35.5px;
     height: 35.5px;
     width: 140px;
     bottom: 0;

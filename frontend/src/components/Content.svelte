@@ -259,7 +259,6 @@
   content-container {
     display: block;
     background-color: var(--color-background-secondary);
-    width: 100%;
 
     border-radius: var(--border-radius);
     animation: fadeIn 0.5s;
@@ -272,6 +271,7 @@
 
     &.new-true {
       height: calc(100% - 175px);
+      width: 100%;
     }
 
     transition: all 0.5s ease;
@@ -284,7 +284,6 @@
   .input {
     display: inline-block;
     border: none;
-    width: calc(100% - 60px);
     height: calc(100% - 64px);
     background-color: transparent;
     color: inherit;

@@ -239,7 +239,6 @@
               on:click={clickNumber}
               tabindex="0"
               on:keydown={() => {}}
-              href={"#"}
             >
               <number
                 class="number"

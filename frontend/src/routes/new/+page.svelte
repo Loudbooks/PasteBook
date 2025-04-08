@@ -117,11 +117,8 @@ main {
   justify-content: flex-start;
 }
 
-header, #submit-container, pulltab {
-  flex-shrink: 0;
-}
-
 #submit-container {
+  flex-shrink: 0;
   margin-top: 1rem;
   margin-bottom: 0rem;
 }

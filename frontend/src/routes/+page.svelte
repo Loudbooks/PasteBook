@@ -45,7 +45,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: calc(100vh - 35px);
       background-color: var(--color-background);
       transition: all 0.5s var(--animation);
       overflow: hidden;

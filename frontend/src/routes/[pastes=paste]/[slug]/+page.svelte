@@ -180,12 +180,14 @@
     color: gray;
     margin: 0;
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 14px;
     font-family: var(--font-family), sans-serif;
     text-align: center;
 
     &.extra-padding-true {
-      padding: 0 0 40px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
 
     @media (max-width: 600px) {

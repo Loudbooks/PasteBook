@@ -179,7 +179,7 @@
   #expire {
     color: gray;
     margin: 0;
-    padding: 0 0 10px;
+    margin-top: 10px;
     font-size: 14px;
     font-family: var(--font-family), sans-serif;
     text-align: center;

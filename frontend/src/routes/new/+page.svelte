@@ -27,10 +27,10 @@
 </script>
 
 <main>
-  <div></div>
   <Mode />
-  <Header newReport="true" class="header"></Header>
-  <Content newReport="true"></Content>
+  <Header newReport="true"></Header>
+  
+  <Content newReport={true}></Content>
   <Pulltab title="Upload Options">
     <svelte:fragment slot="content">
       <Setting
@@ -90,7 +90,9 @@
     </svelte:fragment>
   </Pulltab>
 
-  <Submit></Submit>
+  <div id="submit-container">
+    <Submit></Submit>
+  </div>
 </main>
 
 <svelte:head>
@@ -104,20 +106,21 @@
 </svelte:head>
 
 <style lang="scss">
-  div {
-    padding-top: 10px + 30px;
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 35px);
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: flex-start;
+}
 
-    @media (max-width: 600px) {
-      padding-top: 27px;
-    }
-  }
+#submit-container {
+  flex-shrink: 0;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+}
 
-  main {
-    flex-direction: column;
-    justify-content: center;
-    padding: 0;
-    height: calc(100vh - 30px);
-    margin: 0;
-    flex-shrink: inherit;
-  }
 </style>

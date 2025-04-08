@@ -59,7 +59,7 @@
     width: calc(100% - 20px);
     height: 30px;
 
-    box-shadow: 0px 7px 59px 0px rgba(0,0,0,0.75);
+    box-shadow: var(--box-shadow);
 
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);

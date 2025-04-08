@@ -148,7 +148,7 @@
       margin: 0;
       width: 200px;
       height: 50px;
-      border-radius: 17px;
+      border-radius: var(--border-radius);
       font-family: var(--font-family), sans-serif;
       font-size: 20px;
       font-weight: 800;

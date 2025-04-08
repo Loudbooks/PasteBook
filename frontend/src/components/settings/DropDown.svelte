@@ -25,6 +25,7 @@
     transition:
       background-color 0.5s ease,
       color 0.5s ease,
+      filter 0.5s ease,
       border 0.5s ease;
 
     width: 110px;
@@ -32,7 +33,7 @@
     font-size: 15px;
     margin: 10px;
     line-height: 1;
-    border-radius: 30px;
+    border-radius: var(--border-radius);
     height: 40px;
     
     border: var(--border-standard);
@@ -46,7 +47,7 @@
     
     &:hover {
       cursor: pointer;
-      background-color: var(--color-border) !important;
+      filter: var(--button-hover-effect);
     }
     
     &:focus {

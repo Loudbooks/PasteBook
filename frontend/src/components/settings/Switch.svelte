@@ -51,11 +51,12 @@
     height: 40px;
     width: 70px;
     margin: 10px;
-    border-radius: 30px;
+    border-radius: var(--border-radius);
     border: var(--border-standard);
 
     :hover & {
       cursor: pointer;
+      filter: var(--button-hover-effect);
     }
 
     :active & {
@@ -94,7 +95,7 @@
   }
 
   .active-false {
-    margin-left: 2px;
+    margin-left: 1px;
 
     @media (max-width: 600px) {
       margin-left: 2px;

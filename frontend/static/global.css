@@ -1,8 +1,13 @@
 :root {
     --font-family: 'Gabarito', sans-serif;
     --font-family-mono: 'JetBrains Mono', monospace;
-    --button-hover-effect: brightness(0.82);
-    --border-standard: 1px solid var(--color-border);
+    --border-standard: 2px solid var(--color-border);
+    --border-radius: 20px;
+
+    @media screen and (max-width: 768px) {
+        --border-radius: 15px;
+        --border-standard: 1.5px solid var(--color-border);
+    }
 }
 
 :root[data-theme='dark'] {
@@ -11,12 +16,14 @@
     --color-text-secondary: rgb(255, 255, 255, 0.5);
     --color-background-secondary: #1a1a1a;
     --color-border: #333333;
+    --button-hover-effect: brightness(0.82);
 }
 
 :root[data-theme='light'] {
     --color-background: white;
-    --color-text-primary: black;
+    --color-text-primary: #363636;
     --color-text-secondary: rgb(0, 0, 0, 0.5);
     --color-background-secondary: #eeeeee;
     --color-border: #c9c9c9;
+    --button-hover-effect: brightness(0.95);
 }

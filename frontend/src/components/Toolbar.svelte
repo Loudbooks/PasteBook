@@ -59,9 +59,9 @@
     width: calc(100% - 20px);
     height: 30px;
 
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    transform: translate(10px, -100%);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    
     transition:
       opacity 0.5s ease,
       background-color 0.5s ease,
@@ -69,13 +69,13 @@
 
     background-color: var(--color-background-secondary);
     opacity: 0;
-
     
     display: flex;
     justify-content: space-between;
     
     color: var(--color-text-primary);
     border: var(--border-standard);
+    border-top: none;
 
     &:active {
       transform: scale(0.95);

@@ -259,9 +259,7 @@
   content-container {
     display: block;
     background-color: var(--color-background-secondary);
-    width: calc(100% - 20px);
-
-    margin: 10px;
+    width: 100%;
 
     border-radius: var(--border-radius);
     animation: fadeIn 0.5s;
@@ -297,6 +295,7 @@
     margin: 30px;
     padding: 0;
     color: var(--color-text-primary);
+    border-radius: var(--border-radius);
 
     @media (max-width: 600px) {
       font-size: 10px;

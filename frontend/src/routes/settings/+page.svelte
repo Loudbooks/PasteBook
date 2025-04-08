@@ -153,7 +153,8 @@
     display: block;
     background-color: var(--color-background-secondary);
 
-    width: calc(100% - 16px);
+    width: 100%;
+    
     border-radius: var(--border-radius);
 
     animation-iteration-count: 1;

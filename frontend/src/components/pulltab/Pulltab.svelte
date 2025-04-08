@@ -22,7 +22,7 @@
     let tab = document.querySelector(".tab") as HTMLButtonElement;
 
     if (open) {
-      content.style.top = `calc(100% + ${content.clientHeight / 2 + 1}px)`;
+      content.style.top = `calc(100% + ${content.clientHeight / 2 + 2}px)`;
 
       blur.style.backgroundColor = "rgba(0, 0, 0, 0)";
 
@@ -106,6 +106,12 @@
     :hover & {
       &.non-active {
         filter: var(--button-hover-effect);
+      }
+    }
+
+    :active & {
+      &.non-active {
+        top: -32px;
       }
     }
   }

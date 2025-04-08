@@ -68,6 +68,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 1001;
+    left: 0;
     outline: none;
     border: none;
     display: none;

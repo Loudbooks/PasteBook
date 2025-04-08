@@ -295,6 +295,8 @@
     padding: 0;
     color: var(--color-text-primary);
 
+    width: calc(100% - 60px);
+
     @media (max-width: 600px) {
       font-size: 10px;
       margin: 20px;

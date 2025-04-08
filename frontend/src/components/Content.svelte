@@ -294,7 +294,6 @@
     margin: 30px;
     padding: 0;
     color: var(--color-text-primary);
-    border-radius: var(--border-radius);
 
     @media (max-width: 600px) {
       font-size: 10px;

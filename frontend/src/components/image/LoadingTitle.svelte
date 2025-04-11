@@ -7,7 +7,7 @@
   let svgContainer: HTMLElement;
 
   onMount(() => {
-    fullContainer.style.opacity = "1";
+    svgContainer.style.opacity = "1";
 
     loadProgress.subscribe((value) => {
       if (value) {
@@ -43,8 +43,6 @@
     height: 100vh;
     width: 100vw;
     top: 0;
-
-    opacity: 0;
   }
 
   #title-container {
@@ -58,6 +56,8 @@
     top: 0;
     z-index: 998;
     background-color: var(--color-background);
+
+    opacity: 0;
   }
 
   h1 {

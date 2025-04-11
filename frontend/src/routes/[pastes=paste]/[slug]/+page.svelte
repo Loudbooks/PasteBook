@@ -185,6 +185,10 @@
     font-family: var(--font-family), sans-serif;
     text-align: center;
 
+    animation: fadeIn ease 0.7s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
     &.extra-padding-true {
       margin-top: 40px;
       margin-bottom: 40px;
@@ -192,6 +196,15 @@
 
     @media (max-width: 600px) {
       font-size: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   }
 </style>

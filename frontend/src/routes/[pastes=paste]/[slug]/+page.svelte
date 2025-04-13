@@ -179,17 +179,32 @@
   #expire {
     color: gray;
     margin: 0;
-    padding: 0 0 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 14px;
     font-family: var(--font-family), sans-serif;
     text-align: center;
 
+    animation: fadeIn ease 0.7s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
     &.extra-padding-true {
-      padding: 0 0 40px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
 
     @media (max-width: 600px) {
       font-size: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   }
 </style>

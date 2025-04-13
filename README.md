@@ -22,7 +22,6 @@ DESCRIPTION=
 DISABLE_NEW=
 FAVICON_URL=
 MAX_PAYLOAD_SIZE=
-PORT=
 ```
 
 **All of these options are optional.** You can leave it all blank, or not even have a `.env` file at all. 
@@ -34,7 +33,6 @@ By default, PasteBook will run on port 8080.
 - `DISABLE_NEW` - Disables the new paste page. API is still accessible.
 - `FAVICON_URL` - The URL that the favicon will be provided with. 
 - `MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.
-- `PORT` - The running port for PasteBook.
 
 ### Creation
 Run the following.

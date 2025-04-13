@@ -59,6 +59,8 @@
     width: calc(100% - 20px);
     height: 30px;
 
+    box-shadow: var(--box-shadow);
+
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
     

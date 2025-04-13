@@ -42,7 +42,7 @@
       word-break: break-word;
       align-self: end;
       flex: 100%;
-      padding-left: 30px;
+      padding-left: 20px;
 
       animation: fadeIn ease 0.7s;
       animation-iteration-count: 1;

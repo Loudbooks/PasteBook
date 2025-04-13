@@ -239,7 +239,6 @@
               on:click={clickNumber}
               tabindex="0"
               on:keydown={() => {}}
-              href={"#"}
             >
               <number
                 class="number"
@@ -294,7 +293,8 @@
     margin: 30px;
     padding: 0;
     color: var(--color-text-primary);
-    border-radius: var(--border-radius);
+
+    width: calc(100% - 60px);
 
     @media (max-width: 600px) {
       font-size: 10px;

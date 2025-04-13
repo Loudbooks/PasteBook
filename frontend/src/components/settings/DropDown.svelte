@@ -79,6 +79,7 @@
 
   #arrow {
     position: absolute;
+    pointer-events: none;
     transform: translate(92px, 22px);
 
     @media (max-width: 600px) {

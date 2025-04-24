@@ -1,9 +1,9 @@
 upstream backend {
-    server ${BACKEND_HOST:-backend:8080};
+    server ${BACKEND_HOST};
 }
 
 upstream frontend {
-    server ${FRONTEND_HOST:-frontend:3000};
+    server ${FRONTEND_HOST};
 }
 
 server {

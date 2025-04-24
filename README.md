@@ -9,7 +9,6 @@ The following is a guide to get PasteBook running on your system under your doma
 
 ### Preparation
 - Download `docker-compose.yml` [here](https://github.com/Loudbooks/PasteBook/blob/master/docker-compose.yml).
-- Download `nginx.conf` [here](https://github.com/Loudbooks/PasteBook/blob/master/nginx.conf).
 
 ### Configuration
 > [!CAUTION]
@@ -82,7 +81,7 @@ systemctl restart nginx
 # Updating PasteBook
 
 > [!NOTE]
-> Make sure that `docker-compose.yml`, `pastebook.conf` and `nginx.conf` are up to date before proceeding.
+> Make sure that `docker-compose.yml` and `pastebook.conf` are up to date before proceeding.
 
 Run the following commands in succession.
 ```bash

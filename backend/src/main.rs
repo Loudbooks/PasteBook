@@ -64,6 +64,7 @@ async fn main() -> std::io::Result<()> {
             .configure(configure_routes)
     })
         .bind(("0.0.0.0", 8080))?
+        .bind(("::", 8080))?
         .run()
         .await
 }

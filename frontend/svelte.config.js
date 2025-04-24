@@ -13,6 +13,10 @@ const config = {
     adapter: adapter({
       precompress: true,
     })
+  },
+  
+  server: {
+    host: '0.0.0.0',
   }
 };
 

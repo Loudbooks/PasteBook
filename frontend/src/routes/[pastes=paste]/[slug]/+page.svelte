@@ -104,7 +104,7 @@
     let idElement = document.getElementById("hash");
     if (idElement === null) return;
 
-    idElement.style.opacity = 0;
+    idElement.style.opacity = "0";
     idElement.style.height = "0";
   }
 

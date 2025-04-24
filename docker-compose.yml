@@ -34,12 +34,11 @@ services:
     pull_policy: always
 
   nginx:
-    image: nginx:latest
+    image: ghcr.io/loudbooks/pastebook-nginx:latest
+    container_name: pastebook-nginx
     depends_on:
       - backend
       - frontend
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - '${PORT:-8080}:80'
     networks:

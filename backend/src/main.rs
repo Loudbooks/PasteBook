@@ -63,8 +63,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::Data::new(Arc::clone(&mongo_service)))
             .configure(configure_routes)
     })
-        .bind(("0.0.0.0", 8080))?
-        .bind(("::", 8080))?
+        .bind(("::", 8082))?
         .run()
         .await
 }

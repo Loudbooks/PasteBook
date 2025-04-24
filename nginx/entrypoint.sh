@@ -3,7 +3,10 @@
 export BACKEND_HOST="${BACKEND_HOST:-backend:8080}"
 export FRONTEND_HOST="${FRONTEND_HOST:-frontend:3000}"
 
-envsubst '${BACKEND_HOST}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
-envsubst '${FRONTEND_HOST}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
+sed "s|\${BACKEND_HOST}|${BACKEND_HOST}|g" \
+    /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
+
+sed "s|\${FRONTEND_HOST}|${FRONTEND_HOST}|g" \
+    /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
 
 exec "$@"

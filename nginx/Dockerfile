@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+COPY default.conf.template /etc/nginx/templates/default.conf.template
 
 RUN apt-get update && apt-get install -y gettext && rm -rf /var/lib/apt/lists/*
 

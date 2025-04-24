@@ -8,6 +8,7 @@ upstream frontend {
 
 server {
     listen 80;
+    listen [::]:80;
 
     location /api/ {
         proxy_pass http://backend/;

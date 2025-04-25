@@ -20,7 +20,7 @@ impl PostgresService {
         use crate::models::user::Entity as User;
 
         if let Some(user) = User::find_by_id(ip_str).one(&self.db).await? {
-            let mut active_user: user::ActiveModel = user.into();
+            let mut active_user: user::ActiveModel = user.into_active_model();
             let requests = active_user.requests.take().unwrap_or(0);
             active_user.requests = Set(requests + 1);
             
@@ -33,6 +33,7 @@ impl PostgresService {
                 banned: Set(false),
                 requests: Set(1),
             };
+            
             user.insert(&self.db).await?;
         }
         Ok(())

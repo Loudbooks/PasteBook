@@ -4,6 +4,7 @@ use crate::utils::string::StringUtils;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
+use sea_orm::IntoActiveModel;
 use crate::database::postgres_service::PostgresService;
 use crate::models::paste;
 
@@ -73,7 +74,7 @@ async fn upload(
         expires_at: expires,
     };
     
-    let active_paste: paste::ActiveModel = paste.clone().into();
+    let active_paste: paste::ActiveModel = paste.into_active_model();
 
     if let Err(e) = aws_service.put_file(&file_id, body.as_ref()).await {
         return HttpResponse::InternalServerError().body(format!("Failed to upload file: {:?}", e));

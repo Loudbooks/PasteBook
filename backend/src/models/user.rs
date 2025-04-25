@@ -1,7 +1,10 @@
+use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct User {
+#[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "users")]
+pub struct Model {
+    #[sea_orm(primary_key)]
     pub ip: String,
     pub id: String,
     pub requests: u64,
@@ -9,15 +12,12 @@ pub struct User {
     pub banned: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct UserDTO {
-    pub id: String,
-    pub requests: u64,
-    pub created_at: i64,
-    pub banned: bool,
-}
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {}
 
-impl User {
+impl ActiveModelBehavior for ActiveModel {}
+
+impl Model {
     pub fn to_dto(&self) -> UserDTO {
         UserDTO {
             id: self.id.clone(),
@@ -26,4 +26,12 @@ impl User {
             banned: self.banned,
         }
     }
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct UserDTO {
+    pub id: String,
+    pub requests: u64,
+    pub created_at: i64,
+    pub banned: bool,
 }

@@ -7,7 +7,7 @@ mod routes;
 use crate::routes::configure_routes;
 use database::aws_service::AWSService;
 use crate::delete_service::DeleteHandler;
-use database::mongodb_service::MongoService;
+use database::postgres_service::PostgresService;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpServer};
 use std::env;
@@ -23,7 +23,7 @@ async fn main() -> std::io::Result<()> {
     let aws_access_key = env::var("S3_ACCESS_KEY_ID").expect("S3_ACCESS_KEY_ID must be set");
     let aws_secret_key = env::var("S3_SECRET_ACCESS_KEY").expect("S3_SECRET_ACCESS_KEY must be set");
     let bucket_name = env::var("S3_BUCKET").expect("S3_BUCKET must be set");
-    let mongo_url = env::var("SPRING_DATA_MONGODB_URI").expect("SPRING_DATA_MONGODB_URI must be set");
+    let postgres_uri = env::var("POSTGRES_URI").expect("POSTGRES_URI must be set");
     let max_payload_size = env::var("MAX_PAYLOAD_SIZE").unwrap_or("10".to_string()).parse::<usize>().unwrap();
 
     let aws_service = Arc::new(
@@ -39,16 +39,15 @@ async fn main() -> std::io::Result<()> {
 
     aws_service.create_bucket(&bucket_name).await.expect("Failed to create bucket");
 
-    let mongo_service = Arc::new(
-        MongoService::new(
-            &mongo_url,
-            &bucket_name,
+    let postgres_service = Arc::new(
+        PostgresService::new(
+            &postgres_uri,
         )
             .await
-            .expect("Failed to initialize MongoService")
+            .expect("Failed to initialize PostgresService")
     );
 
-    let delete_handler = DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&mongo_service));
+    let delete_handler = DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&postgres_service));
     delete_handler.start_delete_loop();
     
     println!("Pre-bind complete. Starting server...");
@@ -60,7 +59,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(cors)
             .app_data(web::PayloadConfig::default().limit(max_payload_size * 1024 * 1024))
             .app_data(web::Data::new(Arc::clone(&aws_service)))
-            .app_data(web::Data::new(Arc::clone(&mongo_service)))
+            .app_data(web::Data::new(Arc::clone(&postgres_service)))
             .configure(configure_routes)
     })
         .bind(("::", 8080))?

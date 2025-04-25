@@ -1,16 +1,16 @@
 use crate::database::aws_service::AWSService;
-use crate::models::paste::Paste;
-use crate::database::mongodb_service::MongoService;
 use crate::utils::ip::IPUtils;
 use crate::utils::string::StringUtils;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
+use crate::database::postgres_service::PostgresService;
+use crate::models::paste;
 
 #[post("")]
 async fn upload(
     aws_service: web::Data<Arc<AWSService>>,
-    mongo_service: web::Data<Arc<MongoService>>,
+    postgres_service: web::Data<Arc<PostgresService>>,
     req: HttpRequest,
     body: String
 ) -> HttpResponse {
@@ -63,7 +63,7 @@ async fn upload(
 
     let file_id = StringUtils::generate_random_string(5);
 
-    let paste = Paste {
+    let paste = paste::Model {
         id: file_id.clone(),
         title: title.to_string(),
         created: since_the_epoch,
@@ -72,15 +72,17 @@ async fn upload(
         creator_ip: ip.clone(),
         expires_at: expires,
     };
+    
+    let active_paste: paste::ActiveModel = paste.clone().into();
 
     if let Err(e) = aws_service.put_file(&file_id, body.as_ref()).await {
         return HttpResponse::InternalServerError().body(format!("Failed to upload file: {:?}", e));
     }
-    if let Err(e) = mongo_service.put_paste(paste).await {
+    if let Err(e) = postgres_service.put_paste(active_paste).await {
         return HttpResponse::InternalServerError().body(format!("Failed to save to database: {:?}", e));
     }
 
-    mongo_service.increment_requests(&ip).await.expect("Failed to increment requests");
+    postgres_service.increment_requests(&ip).await.expect("Failed to increment requests");
 
     let host_domain = req
         .headers()

@@ -42,13 +42,14 @@ impl DeleteHandler {
         aws_service: &Arc<AWSService>,
         postgres_service: &Arc<PostgresService>,
     ) -> Result<(), String> {
+        println!("Deleting files...");
         let now = Utc::now().timestamp_millis();
         let mut deletable_pastes = Vec::new();
         let mut all_pastes = Vec::new();
 
         if let Ok(pastes) = postgres_service.get_all_pastes_metadata().await {
             for paste in pastes {
-                if paste.expires_at > 0 && paste.expires_at < now as u64 {
+                if paste.expires_at > 0 && paste.expires_at < now {
                     deletable_pastes.push(paste.clone());
                 }
 
@@ -72,7 +73,9 @@ impl DeleteHandler {
 
         if let Ok(file_names) = aws_service.list_files().await {
             for file_name in file_names {
-                if all_pastes.iter().all(|paste| paste.id != file_name) {
+                if all_pastes.iter().all(|paste| {
+                    paste.id.trim() != file_name.trim()
+                }) {
                     if let Err(err) = aws_service.delete_file(&file_name).await {
                         error!("Failed to delete invalid file {}: {}", file_name, err);
                     } else {

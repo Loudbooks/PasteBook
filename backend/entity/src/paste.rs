@@ -1,6 +1,6 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
-use crate::models::user::UserDTO;
+use crate::user::UserDTO;
 
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "pastes")]
@@ -8,11 +8,11 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: String,
     pub title: String,
-    pub created: u64,
+    pub created: i64,
     pub report_book: bool,
     pub wrap: bool,
     pub creator_ip: String,
-    pub expires_at: u64,
+    pub expires_at: i64,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -25,10 +25,10 @@ pub struct PasteDTO {
     pub id: String,
     pub user: UserDTO,
     pub title: String,
-    pub created: u64,
+    pub created: i64,
     pub report_book: bool,
     pub wrap: bool,
-    pub expires_at: u64,
+    pub expires_at: i64,
 }
 
 impl Model {

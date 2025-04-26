@@ -5,8 +5,8 @@ use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 use sea_orm::IntoActiveModel;
+use entity::paste;
 use crate::database::postgres_service::PostgresService;
-use crate::models::paste;
 
 #[post("")]
 async fn upload(
@@ -39,13 +39,13 @@ async fn upload(
     let mut expires = req
         .headers()
         .get("expires")
-        .and_then(|v| v.to_str().ok()?.parse::<u64>().ok())
+        .and_then(|v| v.to_str().ok()?.parse::<i64>().ok())
         .unwrap_or(86_400_000);
 
     let since_the_epoch = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
-        .as_millis() as u64;
+        .as_millis() as i64;
 
     if expires < 60_000 {
         return HttpResponse::BadRequest().body("Expire time too short");
@@ -73,17 +73,25 @@ async fn upload(
         creator_ip: ip.clone(),
         expires_at: expires,
     };
+
+    println!("Uploading paste {}", paste.id);
     
     let active_paste: paste::ActiveModel = paste.into_active_model();
 
+    println!("Created paste");
+
     if let Err(e) = aws_service.put_file(&file_id, body.as_ref()).await {
+        println!("Failed to upload file: {:?}", e);
         return HttpResponse::InternalServerError().body(format!("Failed to upload file: {:?}", e));
     }
     if let Err(e) = postgres_service.put_paste(active_paste).await {
+        println!("Failed to save to database: {:?}", e);
         return HttpResponse::InternalServerError().body(format!("Failed to save to database: {:?}", e));
     }
 
     postgres_service.increment_requests(&ip).await.expect("Failed to increment requests");
+    
+    println!("File uploaded successfully");
 
     let host_domain = req
         .headers()

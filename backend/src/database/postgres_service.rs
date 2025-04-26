@@ -1,8 +1,9 @@
 use sea_orm::*;
 use uuid::Uuid;
 use chrono::Utc;
+use ::entity::{paste, user};
 use log::info;
-use crate::models::{paste, user};
+use migration::{Migrator, MigratorTrait};
 
 pub struct PostgresService {
     db: DatabaseConnection,
@@ -12,12 +13,14 @@ impl PostgresService {
     pub async fn new(uri: &str) -> Result<Self, DbErr> {
         info!("Connecting to PostgreSQL...");
         let db = Database::connect(uri).await?;
+        info!("Running migrations...");
+        Migrator::up(&db, None).await?;
         info!("Connected to PostgreSQL.");
         Ok(Self { db })
     }
 
     pub async fn increment_requests(&self, ip_str: &str) -> Result<(), DbErr> {
-        use crate::models::user::Entity as User;
+        use user::Entity as User;
 
         if let Some(user) = User::find_by_id(ip_str).one(&self.db).await? {
             let mut active_user: user::ActiveModel = user.into_active_model();

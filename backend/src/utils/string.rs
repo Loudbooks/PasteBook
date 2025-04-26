@@ -1,10 +1,11 @@
-use rand::{distributions::Alphanumeric, thread_rng, Rng};
+use rand::distr::Alphanumeric;
+use rand::{rng, Rng};
 
 pub struct StringUtils;
 
 impl StringUtils {
     pub fn generate_random_string(length: usize) -> String {
-        thread_rng()
+        rng()
             .sample_iter(&Alphanumeric)
             .take(length)
             .map(char::from)

@@ -7,7 +7,7 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub ip: String,
     pub id: String,
-    pub requests: u64,
+    pub requests: i64,
     pub created_at: i64,
     pub banned: bool,
 }
@@ -31,7 +31,7 @@ impl Model {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct UserDTO {
     pub id: String,
-    pub requests: u64,
+    pub requests: i64,
     pub created_at: i64,
     pub banned: bool,
 }

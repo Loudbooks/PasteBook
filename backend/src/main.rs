@@ -13,11 +13,19 @@ use actix_web::{web, App, HttpServer};
 use std::env;
 use std::sync::Arc;
 
+#[cfg(feature="local-dev")]
+fn load_env() {
+    dotenv::dotenv().ok();
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     println!("PasteBook backend service starting...");
 
     env_logger::init();
+    
+    #[cfg(feature="local-dev")]
+    load_env();
 
     let database_url = env::var("S3_ENDPOINT").expect("S3_ENDPOINT must be set");
     let aws_access_key = env::var("S3_ACCESS_KEY_ID").expect("S3_ACCESS_KEY_ID must be set");
@@ -47,10 +55,9 @@ async fn main() -> std::io::Result<()> {
             .expect("Failed to initialize PostgresService")
     );
 
-    let delete_handler = DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&postgres_service));
-    delete_handler.start_delete_loop();
+    DeleteHandler::new(Arc::clone(&aws_service), Arc::clone(&postgres_service));
     
-    println!("Pre-bind complete. Starting server...");
+    println!("Pre-bind complete. Starting server.");
     
     HttpServer::new(move || {
         let cors = Cors::permissive();

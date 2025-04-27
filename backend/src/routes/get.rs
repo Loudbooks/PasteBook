@@ -2,13 +2,11 @@ use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 use std::sync::Arc;
 use crate::utils::data::DataUtils;
 use crate::utils::ip::IPUtils;
-use crate::database::aws_service::AWSService;
 use crate::database::postgres_service::PostgresService;
 use crate::models::content_query;
 
 #[get("/{id}/content")]
 async fn get_content(
-    aws_service: web::Data<Arc<AWSService>>,
     postgres_service: web::Data<Arc<PostgresService>>,
     request: HttpRequest,
     path: web::Path<String>,
@@ -23,10 +21,14 @@ async fn get_content(
 
     postgres_service.increment_requests(&ip).await.expect("Failed to increment requests");
 
-    match aws_service.get_file(&path).await {
+    match postgres_service.get_paste_content(&path).await {
         Ok(data) => {
+            if data.is_none() {
+                return HttpResponse::NotFound().body("File not found");
+            }
+            
             if compress {
-                let compressed = DataUtils::compress_data(&data);
+                let compressed = DataUtils::compress_data(&data.unwrap().content.as_bytes());
                 HttpResponse::Ok()
                     .content_type("text/plain; charset=utf-8")
                     .append_header(("Content-Encoding", "gzip"))
@@ -34,7 +36,7 @@ async fn get_content(
             } else {
                 HttpResponse::Ok()
                     .content_type("text/plain; charset=utf-8")
-                    .body(data)
+                    .body(data.unwrap().content)
             }
         }
         Err(_) => HttpResponse::NotFound().body("File not found"),

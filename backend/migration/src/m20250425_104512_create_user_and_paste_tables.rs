@@ -19,7 +19,7 @@ impl MigrationTrait for Migration {
                     .to_owned(),
             )
             .await?;
-
+        
         manager
             .create_table(
                 Table::create()
@@ -34,17 +34,29 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Paste::ExpiresAt).big_unsigned().not_null())
                     .to_owned(),
             )
+            .await?;
+        
+        manager
+            .create_table(
+                Table::create()
+                    .table(PasteContent::Table)
+                    .if_not_exists()
+                    .col(ColumnDef::new(PasteContent::Id).string().not_null().primary_key())
+                    .col(ColumnDef::new(PasteContent::Content).text().not_null())
+                    .to_owned(),
+            )
             .await
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager.drop_table(Table::drop().table(Paste::Table).to_owned()).await?;
-        manager.drop_table(Table::drop().table(User::Table).to_owned()).await
+        manager.drop_table(Table::drop().table(User::Table).to_owned()).await?;
+        manager.drop_table(Table::drop().table(PasteContent::Table).to_owned()).await
     }
 }
 
 #[derive(Iden)]
-#[iden(rename = "users")]
+#[iden(rename = "user_metadata")]
 enum User {
     Table,
     Ip,
@@ -55,7 +67,7 @@ enum User {
 }
 
 #[derive(Iden)]
-#[iden(rename = "pastes")]
+#[iden(rename = "paste_metadata")]
 enum Paste {
     Table,
     Id,
@@ -65,4 +77,12 @@ enum Paste {
     Wrap,
     CreatorIp,
     ExpiresAt,
+}
+
+#[derive(Iden)]
+#[iden(rename = "paste_content")]
+enum PasteContent {
+    Table,
+    Id,
+    Content,
 }

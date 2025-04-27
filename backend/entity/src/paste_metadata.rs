@@ -1,9 +1,9 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
-use crate::user::UserDTO;
+use crate::user_metadata::UserDTO;
 
 #[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "pastes")]
+#[sea_orm(table_name = "paste_metadata")]
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: String,

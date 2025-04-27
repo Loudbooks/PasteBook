@@ -4,18 +4,15 @@ use chrono::Utc;
 use tokio::spawn;
 use tokio::time::interval;
 use log::{error, warn};
-use crate::database::aws_service::AWSService;
 use crate::database::postgres_service::PostgresService;
 
 pub struct DeleteHandler {
-    aws_service: Arc<AWSService>,
     postgres_service: Arc<PostgresService>,
 }
 
 impl DeleteHandler {
-    pub fn new(aws_service: Arc<AWSService>, postgres_service: Arc<PostgresService>) -> Self {
+    pub fn new(postgres_service: Arc<PostgresService>) -> Self {
         let handler = Self {
-            aws_service,
             postgres_service,
         };
 
@@ -24,14 +21,13 @@ impl DeleteHandler {
     }
 
     pub(crate) fn start_delete_loop(&self) {
-        let aws_service = Arc::clone(&self.aws_service);
         let postgres_service = Arc::clone(&self.postgres_service);
 
         spawn(async move {
             let mut interval = interval(Duration::from_secs(600));
             loop {
                 interval.tick().await;
-                if let Err(err) = Self::delete_files(&aws_service, &postgres_service).await {
+                if let Err(err) = Self::delete_files(&postgres_service).await {
                     error!("Error during deletion process: {}", err);
                 }
             }
@@ -39,7 +35,6 @@ impl DeleteHandler {
     }
 
     async fn delete_files(
-        aws_service: &Arc<AWSService>,
         postgres_service: &Arc<PostgresService>,
     ) -> Result<(), String> {
         println!("Deleting files...");
@@ -58,10 +53,6 @@ impl DeleteHandler {
         }
 
         for paste in &deletable_pastes {
-            let paste_id = &paste.id;
-            if let Err(err) = postgres_service.delete_paste(paste_id).await {
-                error!("Failed to delete paste from database: {:?}", err);
-            }
             let id = &paste.id;
 
             if let Err(err) = postgres_service.delete_paste(id).await {
@@ -71,15 +62,15 @@ impl DeleteHandler {
             }
         }
 
-        if let Ok(file_names) = aws_service.list_files().await {
-            for file_name in file_names {
+        if let Ok(pastes) = postgres_service.get_all_pastes_content().await {
+            for file_name in pastes {
                 if all_pastes.iter().all(|paste| {
-                    paste.id.trim() != file_name.trim()
+                    paste.id.trim() != file_name.id.trim()
                 }) {
-                    if let Err(err) = aws_service.delete_file(&file_name).await {
-                        error!("Failed to delete invalid file {}: {}", file_name, err);
+                    if let Err(err) = postgres_service.delete_paste(&file_name.id).await {
+                        error!("Failed to delete invalid file {}: {}", file_name.id, err);
                     } else {
-                        warn!("Deleted invalid file: {}", file_name);
+                        warn!("Deleted invalid file: {}", file_name.id);
                     }
                 }
             }

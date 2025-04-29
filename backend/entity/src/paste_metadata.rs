@@ -1,29 +1,37 @@
+use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
-use crate::models::user::UserDTO;
+use crate::user_metadata::UserDTO;
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Paste {
+#[derive(Debug, Clone, PartialEq, DeriveEntityModel)]
+#[sea_orm(table_name = "paste_metadata")]
+pub struct Model {
+    #[sea_orm(primary_key)]
     pub id: String,
     pub title: String,
-    pub created: u64,
+    pub created: i64,
     pub report_book: bool,
     pub wrap: bool,
     pub creator_ip: String,
-    pub expires_at: u64,
+    pub expires_at: i64,
 }
+
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+pub enum Relation {}
+
+impl ActiveModelBehavior for ActiveModel {}
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PasteDTO {
     pub id: String,
     pub user: UserDTO,
     pub title: String,
-    pub created: u64,
+    pub created: i64,
     pub report_book: bool,
     pub wrap: bool,
-    pub expires_at: u64,
+    pub expires_at: i64,
 }
 
-impl Paste {
+impl Model {
     pub fn to_public_dto(&self, user: UserDTO) -> PasteDTO {
         PasteDTO {
             id: self.id.clone(),

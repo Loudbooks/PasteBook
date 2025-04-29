@@ -1,16 +1,15 @@
-use crate::database::aws_service::AWSService;
-use crate::models::paste::Paste;
-use crate::database::mongodb_service::MongoService;
 use crate::utils::ip::IPUtils;
 use crate::utils::string::StringUtils;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
+use sea_orm::IntoActiveModel;
+use entity::{paste_content, paste_metadata};
+use crate::database::postgres_service::PostgresService;
 
 #[post("")]
 async fn upload(
-    aws_service: web::Data<Arc<AWSService>>,
-    mongo_service: web::Data<Arc<MongoService>>,
+    postgres_service: web::Data<Arc<PostgresService>>,
     req: HttpRequest,
     body: String
 ) -> HttpResponse {
@@ -38,13 +37,13 @@ async fn upload(
     let mut expires = req
         .headers()
         .get("expires")
-        .and_then(|v| v.to_str().ok()?.parse::<u64>().ok())
+        .and_then(|v| v.to_str().ok()?.parse::<i64>().ok())
         .unwrap_or(86_400_000);
 
     let since_the_epoch = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
-        .as_millis() as u64;
+        .as_millis() as i64;
 
     if expires < 60_000 {
         return HttpResponse::BadRequest().body("Expire time too short");
@@ -63,7 +62,7 @@ async fn upload(
 
     let file_id = StringUtils::generate_random_string(5);
 
-    let paste = Paste {
+    let paste = paste_metadata::Model {
         id: file_id.clone(),
         title: title.to_string(),
         created: since_the_epoch,
@@ -72,16 +71,22 @@ async fn upload(
         creator_ip: ip.clone(),
         expires_at: expires,
     };
-
-    if let Err(e) = aws_service.put_file(&file_id, body.as_ref()).await {
-        return HttpResponse::InternalServerError().body(format!("Failed to upload file: {:?}", e));
-    }
-    if let Err(e) = mongo_service.put_paste(paste).await {
+    
+    let paste_content = paste_content::Model {
+        id: file_id.clone(),
+        content: body.clone(),
+    };
+    
+    let active_metadata: paste_metadata::ActiveModel = paste.into_active_model();
+    let active_content: paste_content::ActiveModel = paste_content.into_active_model();
+    
+    if let Err(e) = postgres_service.put_paste(active_metadata, active_content).await {
+        println!("Failed to save to database: {:?}", e);
         return HttpResponse::InternalServerError().body(format!("Failed to save to database: {:?}", e));
     }
 
-    mongo_service.increment_requests(&ip).await.expect("Failed to increment requests");
-
+    postgres_service.increment_requests(&ip).await.expect("Failed to increment requests");
+    
     let host_domain = req
         .headers()
         .get("X-Domain-Name")

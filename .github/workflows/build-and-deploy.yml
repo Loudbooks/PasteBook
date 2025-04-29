@@ -7,6 +7,7 @@ on:
       - frontend/**
       - backend/**
       - nginx/**
+      - migration/**
     branches:
       - master
       - dev
@@ -18,7 +19,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        component: [frontend, backend, nginx]
+        component: [frontend, backend, nginx, migration]
 
     steps:
       - name: Checkout code

@@ -4,12 +4,7 @@ services:
     container_name: pastebook-backend
     restart: always
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/pastebook
-      - SPRING_DATA_MONGODB_DATABASE=pastebook
-      - S3_ACCESS_KEY_ID=minioadmin
-      - S3_SECRET_ACCESS_KEY=minioadmin
-      - S3_BUCKET=pastebook
-      - S3_ENDPOINT=http://minio:9000
+      - POSTGRES_URI=postgres://postgres:postgres@postgres:5432/pastebook
     depends_on:
       minio:
         condition: service_healthy
@@ -43,43 +38,26 @@ services:
       - '${PORT:-8080}:80'
     networks:
       - pastebook-network
-
-  mongo:
-    image: mongo:6.0
-    container_name: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_DATABASE: pastebook
+    
+  postgres:
+    image: postgres:latest
     volumes:
-      - mongo-data:/data/db
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=pastebook
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     networks:
       - pastebook-network
-    pull_policy: always
-    
-  minio:
-    image: quay.io/minio/minio:latest
-    container_name: minio
     restart: always
-    command: server /data/db
-    environment:
-      - MINIO_ROOT_USER=minioadmin
-      - MINIO_ROOT_PASSWORD=minioadmin
-    volumes:
-      - minio-data:/data/db
-    networks:
-      pastebook-network:
-        aliases:
-            - pastebook.minio
-    pull_policy: always
-    healthcheck:                                                                                                                                               
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]                                                                                   
-      interval: 2s                                                                                                                                             
-      timeout: 2s                                                                                                                                              
-      retries: 5 
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
       
 volumes:
-  mongo-data:
-  minio-data:
+  postgres-data:
 
 networks:
   pastebook-network:

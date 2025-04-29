@@ -91,6 +91,6 @@ docker compose up -d
 ```
 
 # Final Notes
-Wow. There was a lot that can go wrong there. I'm not an expert. If you need help, you can email me at contact@loudbook.dev or find me elsewhere.
+Wow. There was a lot that can go wrong there. If you need help, you can email me at contact@loudbook.dev or find me elsewhere.
 
 💜

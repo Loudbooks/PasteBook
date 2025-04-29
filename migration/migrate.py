@@ -28,7 +28,6 @@ pg_conn = psycopg2.connect(
 )
 pg_cur = pg_conn.cursor()
 
-
 s3 = boto3.client(
     's3',
     endpoint_url=S3_ENDPOINT,
@@ -42,7 +41,10 @@ def migrate_user(user_doc):
         return
     pg_cur.execute("SELECT 1 FROM user_metadata WHERE ip = %s", (ip,))
     if pg_cur.fetchone():
+        print(f"Skipping use with IP: {ip}")
         return
+    
+    print(f"Processing user with IP: {ip}")
     pg_cur.execute(
         "INSERT INTO user_metadata (ip, id, requests, created_at, banned) VALUES (%s, %s, %s, %s, %s)",
         (
@@ -56,11 +58,14 @@ def migrate_user(user_doc):
     pg_conn.commit()
 
 def migrate_paste(paste_doc):
-    paste_id = str(paste_doc["_id"])
+    paste_id = str(paste_doc["id"])
     pg_cur.execute("SELECT 1 FROM paste_metadata WHERE id = %s", (paste_id,))
     if pg_cur.fetchone():
-        print(f"Skipping {paste_id}")
+        print(f"Skipping paste with ID: {paste_id}")
         return
+    
+    print(f"Processing paste with ID: {paste_id}")
+
     pg_cur.execute(
         "INSERT INTO paste_metadata (id, title, created, report_book, wrap, creator_ip, expires_at) VALUES (%s, %s, %s, %s, %s, %s, %s)",
         (
@@ -73,15 +78,20 @@ def migrate_paste(paste_doc):
             paste_doc.get("expires_at", 0),
         )
     )
+
     try:
         response = s3.get_object(Bucket=S3_BUCKET, Key=f"{paste_id}")
         content = response['Body'].read().decode('utf-8')
     except Exception as e:
         print(f"Failed to fetch content for {paste_id}: {e}")
+
+    print(f"Processing content for paste with ID: {paste_id}")
+
     pg_cur.execute(
         "INSERT INTO paste_content (id, content) VALUES (%s, %s)",
         (paste_id, content)
     )
+
     pg_conn.commit()
 
 def run_migration():

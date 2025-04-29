@@ -78,8 +78,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 100vw;
-
     animation: blink 2s ease infinite alternate;
 
     @media (max-width: 1000px) {

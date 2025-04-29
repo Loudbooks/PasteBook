@@ -45,6 +45,8 @@ services:
       - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=pastebook
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     networks:
       - pastebook-network
     restart: always

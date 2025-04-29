@@ -2,32 +2,32 @@ import os
 import boto3
 import psycopg2
 from pymongo import MongoClient
+from urllib.parse import urlparse
 
 MONGO_URI = os.environ.get("MONGO_URI", "mongodb://mongo:27017")
-MONGO_DB = os.environ.get("MONGO_DB", "pastebook")
-POSTGRES_DB = os.environ.get("POSTGRES_DB", "pastebook")
-POSTGRES_USER = os.environ.get("POSTGRES_USER", "pastebook")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "pastebook")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST", "postgres")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
+POSTGRES_USER = os.environ.get("POSTGRES_URI", "http://postgres:postgres@postgres:5432")
 S3_ACCESS_KEY = os.environ.get("S3_ACCESS_KEY_ID", "minioadmin")
 S3_SECRET_KEY = os.environ.get("S3_SECRET_ACCESS_KEY", "minioadmin")
 S3_ENDPOINT = os.environ.get("S3_ENDPOINT", "http://minio:9000")
 S3_BUCKET = os.environ.get("S3_BUCKET", "pastebook")
 
 mongo = MongoClient(MONGO_URI)
-db = mongo[MONGO_DB]
+db = mongo["pastebook"]
 users_col = db["users"]
 pastes_col = db["pastes"]
 
+POSTGRES_URI = os.environ.get("POSTGRES_URI", "postgres://pastebook:pastebook@localhost:5432/pastebook")
+parsed = urlparse(POSTGRES_URI)
+
 pg_conn = psycopg2.connect(
-    dbname=POSTGRES_DB,
-    user=POSTGRES_USER,
-    password=POSTGRES_PASSWORD,
-    host=POSTGRES_HOST,
-    port=POSTGRES_PORT
+    dbname=parsed.path.lstrip("/"),
+    user=parsed.username,
+    password=parsed.password,
+    host=parsed.hostname,
+    port=parsed.port or 5432
 )
 pg_cur = pg_conn.cursor()
+
 
 s3 = boto3.client(
     's3',
@@ -59,6 +59,7 @@ def migrate_paste(paste_doc):
     paste_id = str(paste_doc["_id"])
     pg_cur.execute("SELECT 1 FROM paste_metadata WHERE id = %s", (paste_id,))
     if pg_cur.fetchone():
+        print(f"Skipping {paste_id}")
         return
     pg_cur.execute(
         "INSERT INTO paste_metadata (id, title, created, report_book, wrap, creator_ip, expires_at) VALUES (%s, %s, %s, %s, %s, %s, %s)",
@@ -75,8 +76,8 @@ def migrate_paste(paste_doc):
     try:
         response = s3.get_object(Bucket=S3_BUCKET, Key=f"{paste_id}")
         content = response['Body'].read().decode('utf-8')
-    except Exception:
-        content = paste_doc.get("content", "")
+    except Exception as e:
+        print(f"Failed to fetch content for {paste_id}: {e}")
     pg_cur.execute(
         "INSERT INTO paste_content (id, content) VALUES (%s, %s)",
         (paste_id, content)
@@ -90,4 +91,6 @@ def run_migration():
         migrate_paste(paste_doc)
 
 if __name__ == "__main__":
+    print("Beginning MongoDB -> Postgres migration")
     run_migration()
+    print("Migration completed")

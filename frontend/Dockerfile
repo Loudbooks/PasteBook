@@ -5,9 +5,8 @@ WORKDIR /pastebook-frontend
 ARG COMMIT_HASH
 ARG RAILWAY_GIT_COMMIT_SHA
 
-ENV VITE_COMMIT_HASH=${COMMIT_HASH:-${RAILWAY_GIT_COMMIT_SHA}}
-
-RUN echo "VITE_COMMIT_HASH=$VITE_COMMIT_HASH" >> .env
+RUN SHORT_HASH=$(echo "${COMMIT_HASH:-$RAILWAY_GIT_COMMIT_SHA}" | cut -c1-7) && \
+    if [ -n "$SHORT_HASH" ]; then echo "VITE_COMMIT_HASH=$SHORT_HASH" > .env; fi
 
 COPY package*.json ./
 RUN npm install

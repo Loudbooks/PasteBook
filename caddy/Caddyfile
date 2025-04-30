@@ -1,0 +1,65 @@
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	log {
+		format json
+	}
+
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+(lb_settings) {
+	lb_policy round_robin
+	lb_retries 100
+	lb_try_duration 10s
+	lb_try_interval 250ms
+}
+
+(passive_health_checks) {
+	fail_duration 60s
+	max_fails 300
+	unhealthy_latency 5s
+	unhealthy_request_count 200
+}
+
+:{$PORT} {
+	log {
+		format json
+	}
+
+	reverse_proxy {
+		dynamic a {
+			name {$FRONTEND_DOMAIN}
+			port {$FRONTEND_PORT}
+			refresh 1s
+			dial_timeout 30s
+			versions ipv4 ipv6
+		}
+
+		import lb_settings
+		import passive_health_checks
+
+		header_up Host {upstream_hostport}
+	}
+
+	handle_path {$BACKEND_PATH:/api}/* {
+		reverse_proxy {
+			dynamic a {
+				name {$BACKEND_DOMAIN}
+				port {$BACKEND_PORT}
+				refresh 1s
+				dial_timeout 30s
+				versions ipv4 ipv6
+			}
+
+			import lb_settings
+			import passive_health_checks
+
+			header_up Host {upstream_hostport}
+		}
+	}
+}

@@ -41,7 +41,7 @@ def migrate_user(user_doc):
         return
     pg_cur.execute("SELECT 1 FROM user_metadata WHERE ip = %s", (ip,))
     if pg_cur.fetchone():
-        print(f"Skipping use with IP: {ip}")
+        print(f"Skipping user with IP: {ip}")
         return
     
     print(f"Processing user with IP: {ip}")

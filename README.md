@@ -1,18 +1,18 @@
-# PasteBook 
+# PasteBook
 An easy on the eyes, portable, lightning fast pastebin written in Svelte and Rust.
 
-### Prerequisites
-Docker. Both the frontend and backend are to be installed with Docker. You can learn more [here](https://www.docker.com).
-
 ## Installation
-The following is a guide to get PasteBook running on your system under your domain with SSL. All of this was tested on Ubuntu Linux.
+> [!NOTE]
+> If you'd like to host on [Railway](https://railway.com), you can find the template [here](https://railway.com/template/l9KAFW?referralCode=nKtvYz). Otherwise, follow the instructions below for selfhosting.
+
+The following is a guide to get PasteBook running on your system under your domain with SSL. All of this was tested on Ubuntu Linux, and [Docker](https://docker.com) is required.
 
 ### Preparation
 - Download `docker-compose.yml` [here](https://github.com/Loudbooks/PasteBook/blob/master/docker-compose.yml).
 
 ### Configuration
 > [!CAUTION]
-> Do not modify `docker-compose.yml` or `nginx.conf`. You will break things.
+> Do not modify `docker-compose.yml`. You will break things.
 
 Create a file by the name of `.env` in the same directory as these other two files. Add the following.
 ```env

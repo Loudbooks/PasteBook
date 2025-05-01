@@ -84,12 +84,9 @@ def migrate_paste(paste_doc):
         content = response['Body'].read().decode('utf-8')
     except Exception as e:
         print(f"Failed to fetch content for {paste_id}: {e}")
+        return
 
     print(f"Processing content for paste with ID: {paste_id}")
-
-    if not content:
-        print(f"No content found for paste ID: {paste_id}")
-        return
 
     pg_cur.execute(
         "INSERT INTO paste_content (id, content) VALUES (%s, %s)",

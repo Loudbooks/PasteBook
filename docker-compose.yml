@@ -5,9 +5,6 @@ services:
     restart: always
     environment:
       - POSTGRES_URI=postgres://postgres:postgres@postgres:5432/pastebook
-    depends_on:
-      minio:
-        condition: service_healthy
     networks:
       - pastebook-network
 

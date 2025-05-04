@@ -135,7 +135,8 @@
         <strong>{untilExpire}</strong>
       </p>
     {/if}
-    <p>Failed to fetch paste: {e}</p>
+  {:catch e}
+  <p>Failed to fetch paste: {e}</p>
   {/await}
 </main>
 

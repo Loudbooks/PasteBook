@@ -67,12 +67,11 @@ def migrate_paste(paste_doc):
     print(f"Processing paste with ID: {paste_id}")
 
     pg_cur.execute(
-        "INSERT INTO paste_metadata (id, title, created, report_book, wrap, creator_ip, expires_at) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+        "INSERT INTO paste_metadata (id, title, created, wrap, creator_ip, expires_at) VALUES (%s, %s, %s, %s, %s, %s, %s)",
         (
             paste_id,
             paste_doc.get("title", ""),
             paste_doc.get("created", 0),
-            paste_doc.get("report_book", False),
             paste_doc.get("wrap", False),
             paste_doc.get("creator_ip", ""),
             paste_doc.get("expires_at", 0),

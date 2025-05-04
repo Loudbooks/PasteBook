@@ -13,25 +13,11 @@
   import { pushState } from "$app/navigation";
 
   export let content: string = "No content provided";
-  export let reportBook: boolean = false;
   export let newReport: boolean = false;
   export let wrapPre: boolean = false;
-  export let inspect: boolean = false;
-
-  const results: Issue[] = detection.map(
-    ({ filename, visual, description, severity }) => ({
-      id: filename,
-      visual,
-      description,
-      severity,
-    }),
-  );
 
   let currentScrolledLine = 0;
   let contentLines = content.split("\n");
-
-  const warn: Issue[] = [];
-  const severe: Issue[] = [];
 
   onMount(() => {
     const wrapValue = localStorage.getItem("wrap");
@@ -54,71 +40,6 @@
       scrollToLine(lineNumber);
     }
   });
-
-  if (inspect) {
-    inspectContent(contentLines);
-    warnings.set(warn);
-    severes.set(severe);
-  }
-
-  if (canScan(contentLines)) {
-    validScan.set(true);
-  }
-
-  function inspectContent(lines: string[]) {
-    for (const line of lines) {
-      if (!reportBook) continue;
-
-      for (const result of results) {
-        if (line.toLowerCase().includes(result.id.toLowerCase())) {
-          result.severity === 1 ? warn.push(result) : severe.push(result);
-        }
-      }
-    }
-  }
-
-  function canScan(lines: string[]): boolean {
-    return lines.some((line) => {
-      return (
-        getLineSeverity(line) !== 0 ||
-        (reportBook &&
-          results.some((result) =>
-            line.toLowerCase().includes(result.id.toLowerCase()),
-          ))
-      );
-    });
-  }
-
-  function getLineSeverity(line: string): number {
-    const trimmed = line.trim().toLowerCase();
-    const lowerCase = line.toLowerCase();
-    if (trimmed.includes("[warn") || trimmed.includes("/warn]")) return 1;
-    if (
-      trimmed.includes("[severe]") ||
-      trimmed.includes("[error") ||
-      trimmed.includes("/error]") ||
-      trimmed.startsWith("caused by:") ||
-      lowerCase.startsWith("\tat") ||
-      (trimmed.includes("exception") && trimmed.includes("provided by"))
-    ) {
-      return 2;
-    }
-    return 0;
-  }
-
-  function scanContent(line: string): number {
-    if (!inspect) return 0;
-    if (!reportBook) return getLineSeverity(line);
-
-    const result = results.find((result) =>
-      line.toLowerCase().includes(result.id.toLowerCase()),
-    );
-    return result ? result.severity : 0;
-  }
-
-  function onInput(event: InputEvent) {
-    writableContent.set((event.target as HTMLInputElement).value);
-  }
 
   function getIndex(index: number): string {
     return index
@@ -172,20 +93,6 @@
     return lineParam ? parseInt(lineParam, 10) : null;
   }
 
-  function removeCurrentScrolledLine() {
-    const currentLineElement = document.getElementById(
-      `line-container-${currentScrolledLine}`,
-    );
-    const currentLineNumberElement = document.getElementById(
-      `line-number-${currentScrolledLine}`,
-    );
-    if (currentLineElement && currentLineNumberElement) {
-      currentLineElement.style.marginTop = "0px";
-      currentLineElement.style.marginBottom = "0px";
-      currentLineNumberElement.style.fontWeight = "normal";
-    }
-  }
-
   function clickNumber(event: MouseEvent) {
     const element = event.currentTarget as HTMLElement;
     const id = parseInt(element.id.replace("line-", ""), 10);
@@ -222,6 +129,10 @@
   function removeSpaces(line: string): string {
     return line.replace(/\s/g, "");
   }
+
+  function onInput(event: InputEvent) {
+    writableContent.set((event.target as HTMLInputElement).value);
+  }
 </script>
 
 <content-container class="new-{newReport}">
@@ -245,7 +156,7 @@
                 id="line-number-{removeSpaces(getIndex(index + 1))}"
               >
                 {getIndex(index + 1)}
-              </number></a><line-content-container class="severity-{scanContent(line)}">{line}</line-content-container></linecontainer>
+              </number></a><line-content-container>{line}</line-content-container></linecontainer>
         {/each}
       </lines>
     </div>
@@ -376,16 +287,6 @@
       font-size: 10px;
       padding-left: 30px;
       text-indent: -18px;
-    }
-  }
-
-  line-content-container {
-    &.severity-1 {
-      background-color: rgb(255, 165, 0, 0.7);
-    }
-
-    &.severity-2 {
-      background-color: rgb(255, 0, 0, 0.6);
     }
   }
 

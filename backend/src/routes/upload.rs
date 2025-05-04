@@ -22,12 +22,6 @@ async fn upload(
         return HttpResponse::BadRequest().body("Title is required");
     }
 
-    let report_book = req
-        .headers()
-        .get("reportBook")
-        .map(|v| v.to_str().unwrap_or("false") == "true")
-        .unwrap_or(false);
-
     let wrap = req
         .headers()
         .get("wrap")
@@ -66,7 +60,6 @@ async fn upload(
         id: file_id.clone(),
         title: title.to_string(),
         created: since_the_epoch,
-        report_book,
         wrap,
         creator_ip: ip.clone(),
         expires_at: expires,

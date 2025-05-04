@@ -9,7 +9,6 @@ pub struct Model {
     pub id: String,
     pub title: String,
     pub created: i64,
-    pub report_book: bool,
     pub wrap: bool,
     pub creator_ip: String,
     pub expires_at: i64,
@@ -26,7 +25,6 @@ pub struct PasteDTO {
     pub user: UserDTO,
     pub title: String,
     pub created: i64,
-    pub report_book: bool,
     pub wrap: bool,
     pub expires_at: i64,
 }
@@ -38,7 +36,6 @@ impl Model {
             user,
             title: self.title.clone(),
             created: self.created,
-            report_book: self.report_book,
             wrap: self.wrap,
             expires_at: self.expires_at,
         }

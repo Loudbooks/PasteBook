@@ -4,11 +4,11 @@
   import { disableNew } from "$lib/stores";
   import { goto } from "$app/navigation";
 
-  onMount(() => {
-    const toolbar = document.querySelector("toolbar") as HTMLElement;
+  let navbar: HTMLElement;
 
-    toolbar.style.transform = "translate(0, 50%)";
-    toolbar.style.opacity = "1";
+  onMount(() => {
+    navbar.style.transform = "translate(0, 50%)";
+    navbar.style.opacity = "1";
   });
 
   function newPaste() {
@@ -24,8 +24,8 @@
   }
 </script>
 
-<div id="toolbar-container">
-  <toolbar>
+<div id="navbar-container">
+  <div id="navbar" bind:this={navbar}>
     <button id="main" on:click={home}>{$title.toUpperCase()}</button>
     <buttons>
       {#if !$disableNew}
@@ -33,11 +33,11 @@
         <button on:click={newPaste}>NEW</button>
       {/if}
     </buttons>
-  </toolbar>
+  </div>
 </div>
 
 <style lang="scss">
-  #toolbar-container {
+  #navbar-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -54,7 +54,7 @@
     background-color: transparent;
   }
 
-  toolbar {
+  #navbar {
     position: fixed;
     width: calc(100% - 20px);
     height: 30px;
@@ -67,7 +67,8 @@
     transition:
       opacity 0.5s ease,
       background-color 0.5s ease,
-      border 0.5s ease;
+      border 0.5s ease,
+      box-shadow 0.5s ease;
 
     background-color: var(--color-background-secondary);
     opacity: 0;

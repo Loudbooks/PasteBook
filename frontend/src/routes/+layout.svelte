@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Toolbar from "../components/Toolbar.svelte";
+  import Navbar from "../components/Navbar.svelte";
   import { title, description, disableNew } from "$lib/stores";
   import { onMount } from "svelte";
   import type { Snippet } from "svelte";
@@ -27,7 +27,7 @@
 </script>
 
 <main>
-  <Toolbar></Toolbar>
+  <Navbar></Navbar>
   <div id="padding-container"></div>
   {@render children()}
 </main>

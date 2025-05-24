@@ -16,6 +16,10 @@
         width: 100%;
         background-color: var(--color-primary);
         border-radius: 15px;
+
+        transition: background-color 0.3s ease,
+            transform 0.2s ease,
+            filter 0.2s ease;
     }
 
     svg {
@@ -38,6 +42,14 @@
         align-items: center;
         gap: 0.8rem;
         border-radius: 15px;
+    }
+
+    #new-paste:hover {
+        filter: brightness(0.9);
+    }
+
+    #new-paste:active {
+        transform: scale(0.98);
     }
 
 </style>

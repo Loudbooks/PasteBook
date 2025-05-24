@@ -1,11 +1,22 @@
 <script>
+	import Checkbox from "./setting/Checkbox.svelte";
 	import MultiSelect from "./setting/MultiSelect.svelte";
-	import SettingHeader from "./setting/SettingHeader.svelte";
 
 </script>
 <div id="settings">
-    <SettingHeader title="Expiration" />
     <MultiSelect selected="24h" values={["1h", "24h", "7d", "31d"]} onChange={() => {}}/>
+    <Checkbox
+        title="Text Wrap"
+        checked={true}
+        onChange={() => {}}
+        description="Wrap the contents of this paste."
+    />
+    <Checkbox
+        title="Burn"
+        checked={true}
+        onChange={() => {}}
+        description="Burn this paste after it has been viewed."
+    />
 </div>
 
 <style lang="scss">

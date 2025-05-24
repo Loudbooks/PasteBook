@@ -21,7 +21,7 @@
 		height: 50px;
 		background-color: var(--color-primary);
 		border-radius: 15px;
-		width: 300px;
+		width: 400px;
 
 		color: var(--color-text);
 		border: none;
@@ -33,6 +33,16 @@
 		font-weight: 600;
 		gap: 0.8rem;
 		border-radius: 15px;
-		transition: background-color 0.3s ease;
+		transition: background-color 0.3s ease,
+            transform 0.2s ease,
+            filter 0.2s ease;
 	}
+
+    .submit-button:hover {
+        filter: brightness(0.9);
+    }
+
+    .submit-button:active {
+        transform: scale(0.98);
+    }
 </style>

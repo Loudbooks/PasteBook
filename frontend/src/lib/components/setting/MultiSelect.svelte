@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import SettingHeader from "./SettingHeader.svelte";
 
 	let { values, selected, onChange } = $props();
 
@@ -15,21 +16,24 @@
     }
 </script>
 
-<div id="multi-select">
-	<div
-		id="selection"
-		style="width: calc(calc(100% - 0.8rem) / {values.length}); transform: translateX(calc({selectedIndex} * 100%));"
-	></div>
+<div>
+    <SettingHeader title="Expiration" />
+    <div id="multi-select">
+        <div
+            id="selection"
+            style="width: calc(calc(100% - 0.8rem) / {values.length}); transform: translateX(calc({selectedIndex} * 100%));"
+        ></div>
 
-	{#each values as value}
-		<div
-			class="multi-select-option selected-{selected === value}"
-            style="color: {values[selectedIndex] == value ? 'var(--color-background)' : 'var(--color-primary)'}; font-weight: {values[selectedIndex] == value ? 'bold' : 'normal'}"
-			on:click={() => updateSelectedIndex(value)}
-		>
-			<label for={value}>{value}</label>
-		</div>
-	{/each}
+        {#each values as value}
+            <div
+                class="multi-select-option selected-{selected === value}"
+                style="color: {values[selectedIndex] == value ? 'var(--color-background)' : 'var(--color-primary)'}; font-weight: {values[selectedIndex] == value ? 'bold' : 'normal'}"
+                on:click={() => updateSelectedIndex(value)}
+            >
+                <label for={value}>{value}</label>
+            </div>
+        {/each}
+    </div>
 </div>
 
 <style lang="scss">
@@ -47,6 +51,7 @@
 		overflow: hidden;
         padding-left: 0.4rem;
         padding-right: 0.4rem;
+        margin-top: .3rem;
 	}
 
 	.multi-select-option {

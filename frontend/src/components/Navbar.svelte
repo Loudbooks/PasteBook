@@ -9,6 +9,14 @@
   onMount(() => {
     navbar.style.transform = "translate(0, 50%)";
     navbar.style.opacity = "1";
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        navbar.style.boxShadow = "var(--box-shadow)";
+      } else {
+        navbar.style.boxShadow = "none";
+      }
+    });
   });
 
   function newPaste() {
@@ -59,7 +67,7 @@
     width: calc(100% - 20px);
     height: 30px;
 
-    box-shadow: var(--box-shadow);
+    box-shadow: none;
 
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);

@@ -58,7 +58,7 @@ async fn get_metadata(
         Ok(Some(metadata)) => {
             let user = postgres_service.get_user(&metadata.creator_ip).await.unwrap();
 
-            let public_dto = metadata.to_public_dto(user.unwrap().to_dto());
+            let public_dto = metadata.to_public_dto(user.to_dto());
             HttpResponse::Ok().json(public_dto)
         }
         Ok(None) => HttpResponse::NotFound().body("Not Found"),

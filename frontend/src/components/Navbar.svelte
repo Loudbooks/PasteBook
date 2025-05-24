@@ -103,13 +103,10 @@
       
       font-size: 1rem;
       font-weight: 700;
-      margin: 0;
       font-family: var(--font-family), sans-serif;
       border: none;
       color: var(--color-text-secondary);
       
-      margin-left: 20px;
-      margin-right: 30px;
       padding: 0;
       background-color: transparent;
       outline: none;
@@ -126,16 +123,20 @@
       
       @media (max-width: 600px) {
         font-size: 0.6rem;
-        margin: 0 0 0 20px;
       }
     }
     
     buttons {
       display: flex;
+      gap: 40px;
+      margin-right: 20px;
+      margin-left: 20px;
       
       @media (max-width: 600px) {
         font-size: 0.6rem;
-        margin-right: 20px;
+        gap: 20px;
+        margin-right: 15px;
+        margin-left: 15px;
       }
     }
 
@@ -145,10 +146,10 @@
   }
 
   #main {
-    margin-left: 30px;
+    margin-left: 20px;
 
     @media (max-width: 600px) {
-      margin-left: 20px;
+      margin-left: 15px;
     }
   }
 </style>

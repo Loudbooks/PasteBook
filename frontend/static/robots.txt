@@ -1,4 +1,0 @@
-User-Agent: Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)
-Disallow: /pastes/
-Disallow: /paste/
-Disallow: /p/

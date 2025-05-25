@@ -6,3 +6,5 @@ export const burn = writable(false);
 
 export const writableContent = writable("");
 export const writableTitle = writable("");
+
+export const disableNew = writable(false);

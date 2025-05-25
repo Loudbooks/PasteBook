@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NewPaste from './button/NewPaste.svelte';
-    import { writableTitle } from '$lib/stores';
+    import { disableNew, writableTitle } from '$lib/stores';
 	import { onMount } from 'svelte';
 
     let titleElement: HTMLInputElement | null = $state(null);
@@ -48,11 +48,13 @@
 			{/if}
 		</div>
 	{/if}
+    {#if !$disableNew}
 	<div id="buttons">
 		<div id="new">
 			<NewPaste />
 		</div>
 	</div>
+    {/if}
 </div>
 
 <style lang="scss">

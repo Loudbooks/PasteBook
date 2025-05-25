@@ -106,7 +106,7 @@
 		background-color: var(--color-background);
 		color: var(--color-primary);
 		font-size: 1rem;
-		font-family: var(--font-family);
+		font-family: var(--font-family-mono);
 		border: none;
 		font-weight: 400;
 		text-wrap: nowrap;

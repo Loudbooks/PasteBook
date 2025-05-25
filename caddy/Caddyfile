@@ -44,6 +44,7 @@
 		import passive_health_checks
 
 		header_up Host {upstream_hostport}
+		header_up X-Real-IP {http.request.remote.host}
 	}
 
 	handle_path {$BACKEND_PATH:/api}/* {
@@ -60,6 +61,7 @@
 			import passive_health_checks
 
 			header_up Host {upstream_hostport}
+			header_up X-Real-IP {http.request.remote.host}
 		}
 	}
 }

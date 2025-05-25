@@ -32,7 +32,6 @@
 	}
 
 	reverse_proxy {
-		header_up Host {upstream_hostport}
 		header_up X-Real-IP {http.request.remote.host}
 
 		dynamic a {
@@ -49,7 +48,6 @@
 
 	handle_path {$BACKEND_PATH:/api}/* {
 		reverse_proxy {
-			header_up Host {upstream_hostport}
 			header_up X-Real-IP {http.request.remote.host}
 
 			dynamic a {

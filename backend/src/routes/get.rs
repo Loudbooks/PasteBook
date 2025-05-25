@@ -13,7 +13,7 @@ async fn get_content(
     query: web::Query<content_query::ContentQuery>,
 ) -> impl Responder {
     let compress = query.compress.unwrap_or(true);
-    let ip = IPUtils::extract_ip(&request);
+    let ip = IPUtils::get_ip_from_request(&request).unwrap_or("Unknown".to_string());
 
     if postgres_service.is_user_banned(&ip).await.expect("Failed to check if user is banned") {
         return HttpResponse::Forbidden().body("Prohibited");
@@ -56,7 +56,7 @@ async fn get_metadata(
     request: HttpRequest,
     path: web::Path<String>,
 ) -> impl Responder {
-    let ip = IPUtils::extract_ip(&request);
+    let ip = IPUtils::get_ip_from_request(&request).unwrap_or("Unknown".to_string());
     if postgres_service.is_user_banned(&ip).await.expect("Failed to check if user is banned") {
         return HttpResponse::Forbidden().body("Prohibited");
     }

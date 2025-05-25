@@ -4,6 +4,7 @@
 
 	let { title, description, checked, onChange } = $props();
 
+    let checkState = $state(checked);
 	let checkboxId = $state('');
 
 	onMount(() => {
@@ -13,7 +14,7 @@
 
 <div id="checkbox">
 	<div id="checkbox-description" onclick="{() => {
-        onChange?.(checked); checked = !checked
+        onChange?.(checked); checkState = !checkState
     }}">
 		<SettingHeader {title} />
 		{#if description}
@@ -24,7 +25,7 @@
 		<input
 			type="checkbox"
 			id={checkboxId}
-			bind:checked
+			bind:checked={checkState}
 			onchange={onChange}
 		/>
 

@@ -1,6 +1,10 @@
-<script>
-	import Submit from "$lib/components/button/Submit.svelte";
+<script lang="ts">
+	import Content from "$lib/components/Content.svelte";
 	import Floater from "$lib/components/Floater.svelte";
+	import Spacer from "$lib/components/Spacer.svelte";
 
+    let floater: Floater;
 </script>
-<Floater />
+<Spacer />
+<Floater bind:this={floater} />
+<Content />

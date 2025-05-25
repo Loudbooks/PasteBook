@@ -1,3 +1,4 @@
+use std::fs::metadata;
 use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 use std::sync::Arc;
 use crate::utils::data::DataUtils;
@@ -19,7 +20,14 @@ async fn get_content(
         return HttpResponse::Forbidden().body("Prohibited");
     }
 
-    postgres_service.increment_requests(&ip).await.expect("Failed to increment requests");
+    let postgres_service_clone = Arc::clone(&postgres_service);
+    let path = path.into_inner();
+    let ip = ip.clone();
+    tokio::spawn(async move {
+        if let Err(err) = postgres_service_clone.increment_requests(&ip).await {
+            log::error!("Failed to increment requests: {}", err);
+        }
+    });
 
     match postgres_service.get_paste_content(&path).await {
         Ok(data) => {
@@ -57,6 +65,16 @@ async fn get_metadata(
     match postgres_service.get_paste_metadata(&path).await {
         Ok(Some(metadata)) => {
             let user = postgres_service.get_user(&metadata.creator_ip).await.unwrap();
+            
+            if user.ip != ip && metadata.burn {
+                let postgres_service_clone = Arc::clone(&postgres_service);
+                let id = metadata.id.clone();
+                tokio::spawn(async move {
+                    if let Err(err) = postgres_service_clone.delete_paste(&id).await {
+                        log::error!("Failed to burn paste: {}", err);
+                    }
+                });
+            }
 
             let public_dto = metadata.to_public_dto(user.to_dto());
             HttpResponse::Ok().json(public_dto)

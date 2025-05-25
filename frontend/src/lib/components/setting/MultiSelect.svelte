@@ -1,14 +1,9 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import SettingHeader from "./SettingHeader.svelte";
 
 	let { values, selected, onChange } = $props();
 
 	let selectedIndex = $state(values.indexOf(selected));
-
-    onMount(() => {
-        console.log("Selected index:", values[selectedIndex]);
-    });
 
     function updateSelectedIndex(value: string) {
         selectedIndex = values.indexOf(value);
@@ -62,7 +57,6 @@
 		text-align: center;
 		padding: 0.75rem;
 		cursor: pointer;
-        text-align: center;
 		z-index: 2;
 		position: relative;
         transition: color 0.2s ease-in-out,

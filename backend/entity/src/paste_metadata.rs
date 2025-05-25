@@ -7,11 +7,11 @@ use crate::user_metadata::UserDTO;
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: String,
-    pub title: String,
     pub created: i64,
     pub wrap: bool,
     pub creator_ip: String,
     pub expires_at: i64,
+    pub burn: bool,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -23,10 +23,10 @@ impl ActiveModelBehavior for ActiveModel {}
 pub struct PasteDTO {
     pub id: String,
     pub user: UserDTO,
-    pub title: String,
     pub created: i64,
     pub wrap: bool,
     pub expires_at: i64,
+    pub burn: bool,
 }
 
 impl Model {
@@ -34,10 +34,10 @@ impl Model {
         PasteDTO {
             id: self.id.clone(),
             user,
-            title: self.title.clone(),
             created: self.created,
             wrap: self.wrap,
             expires_at: self.expires_at,
+            burn: false,
         }
     }
 }

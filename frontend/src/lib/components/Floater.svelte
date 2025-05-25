@@ -1,7 +1,6 @@
-<script>
+<script lang="ts">
 	import Submit from "./button/Submit.svelte";
 	import Settings from "./Settings.svelte";
-
 </script>
 <div id="floater">
     <Settings />

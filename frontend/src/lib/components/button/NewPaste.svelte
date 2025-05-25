@@ -1,5 +1,9 @@
+<script>
+	import { goto } from "$app/navigation";
+
+</script>
 <div id="new-paste">
-    <button class="new-paste-button" on:click={createNewPaste}>
+    <button class="new-paste-button" on:click={() => {goto("/new")}}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12H20M12 4V20" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -23,8 +27,8 @@
     }
 
     svg {
-        width: .8rem;
-        height: .8rem;
+        width: .75rem;
+        height: .75rem;
     }
 
     .new-paste-button {
@@ -36,7 +40,6 @@
         font-size: 1.05rem;
         padding: 0.5rem 1.2rem;
         font-family: var(--font-family);
-        line-height: 1;
         font-weight: 600;
         display: flex;
         align-items: center;

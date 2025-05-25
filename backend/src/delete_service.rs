@@ -62,20 +62,7 @@ impl DeleteHandler {
                 warn!("Deleted paste file: {}", id);
             }}
         }
-
-        if let Ok(pastes) = postgres_service.get_all_pastes_content().await {
-            for file_name in pastes {
-                if all_pastes.iter().all(|paste| {
-                    paste.id.trim() != file_name.id.trim()
-                }) {
-                    match postgres_service.delete_paste(&file_name.id).await { Err(err) => {
-                        error!("Failed to delete invalid file {}: {}", file_name.id, err);
-                    } _ => {
-                        warn!("Deleted invalid file: {}", file_name.id);
-                    }}
-                }
-            }
-        }
+        
         Ok(())
     }
 }

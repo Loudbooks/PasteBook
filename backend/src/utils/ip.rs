@@ -4,6 +4,10 @@ pub struct IPUtils;
 
 impl IPUtils {
     pub fn get_ip_from_request(req: &HttpRequest) -> Option<String> {
+        for (key, value) in req.headers() {
+            println!("{}: {:?}", key, value);
+        }
+        
         if let Some(ip) = req.headers().get("X-Real-Ip").and_then(|v| v.to_str().ok()) {
             return Some(Self::extract_first_ip(ip));
         }

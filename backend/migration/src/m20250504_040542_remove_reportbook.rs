@@ -13,7 +13,14 @@ impl MigrationTrait for Migration {
                     .drop_column(Paste::ReportBook)
                     .to_owned(),
             )
-            .await
+            .await?;
+        
+        manager.alter_table(
+            Table::alter()
+                .drop_column(
+                    Paste::Title
+                ).to_owned()
+        ).await
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
@@ -38,4 +45,5 @@ impl MigrationTrait for Migration {
 enum Paste {
     Table,
     ReportBook,
+    Title
 }

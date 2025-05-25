@@ -8,7 +8,6 @@
 
 	onMount(() => {
 		writableContent.subscribe((content) => {
-            console.log('content', content);
 			if (content.length > 0 && $writableTitle.length > 0) {
 				submitElement.classList.remove('disabled');
 			} else {
@@ -17,7 +16,6 @@
 		});
 
         writableTitle.subscribe((title) => {
-            console.log('title', title);
             if (title.length > 0 && $writableContent.length > 0) {
                 submitElement.classList.remove('disabled');
             } else {
@@ -54,8 +52,6 @@
 
         let expire;
 
-        console.log('time', $time);
-
         if ($time == "1h") {
             expire = 3600000;
         } else if ($time == "24h") {
@@ -67,7 +63,6 @@
         } else {
             expire = 3600000;
         }
-        console.log('expire', expire);
 
 		xhr.setRequestHeader('Content-Type', 'plain/text');
 		xhr.setRequestHeader('access-control-allow-methods', 'POST');

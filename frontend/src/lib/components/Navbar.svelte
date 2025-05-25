@@ -8,8 +8,8 @@
 	let {
 		title = null,
 		editable = false,
-		createdAt = 'Created 12 hours ago',
-		expiresAt = 'Expires in 12 hours',
+		createdAt = null,
+		expiresAt = null,
 		burn = null
 	} = $props();
 
@@ -32,8 +32,13 @@
 			{#if title}
 				<div id="title-container">
 					<h1 id="title">{title}</h1>
-					{#if burn}
-						<p>Created {createdAt} • Expires in {expiresAt} • <strong>Burn Enabled</strong></p>
+                    {#if burn == true}
+                        {#if window.innerWidth < 650}
+                            <p>Created {createdAt} • Expires in {expiresAt}</p>
+                            <p><strong>Burn Enabled</strong></p>
+                        {:else}
+						    <p>Created {createdAt} • Expires in {expiresAt} • <strong>Burn Enabled</strong></p>
+                        {/if}
 					{:else}
 						<p>Created {createdAt} • Expires in {expiresAt}</p>
 					{/if}
@@ -98,7 +103,7 @@
 	width: calc(100% - 2.8rem);
 
     @media (max-width: 650px) {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 }
 

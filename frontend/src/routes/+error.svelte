@@ -24,7 +24,7 @@
         font-family: var(--font-family);
         margin: 0;
         font-weight: 800;
-        font-size: 20vw;
+        font-size: 25vw;
         line-height: .8;
     }
 
@@ -33,6 +33,6 @@
         font-family: var(--font-family);
         margin: 0;
         font-weight: 200;
-        font-size: 2vw;
+        font-size: 3vw;
     }
 </style>

@@ -34,7 +34,7 @@
 </script>
 
 {#await content then response}
-    <Navbar editable={false} title={title} createdAt={timeSinceStr} expiresAt={untilExpire} burn={burn} />
+    <Navbar editable={false} title={title} createdAt={timeSinceStr} expiresAt={untilExpire} burn={$burn} />
 	<Content content={response} />
 {:catch error}
 	<div class="error">

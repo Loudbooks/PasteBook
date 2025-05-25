@@ -19,7 +19,6 @@
 
         if (textArea) {
             textArea.addEventListener('input', () => {
-                console.log('textArea.value', textArea.value);
                 writableContent.set(textArea.value);
             });
         }

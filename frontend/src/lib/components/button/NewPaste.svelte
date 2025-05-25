@@ -27,7 +27,7 @@
 
         @media (max-width: 650px) {
             width: 100%;
-            height: 40px;
+            height: 38px;
         }
     }
 
@@ -53,10 +53,10 @@
 
         @media (max-width: 650px) {
             font-size: 0.9rem;
-            padding: 0.5rem 1rem;
+            padding: 0.3rem 1rem;
             height: 35px;
             border-radius: 10px;
-            gap: 0.5rem;
+            gap: 0.3rem;
         }
     }
 

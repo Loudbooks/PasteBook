@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import Content from "$lib/components/Content.svelte";
+	import Floater from "$lib/components/Floater.svelte";
+	import Navbar from "$lib/components/Navbar.svelte";
+
+    let floater: Floater;
+</script>
+
+<Navbar editable={true} />
+<Content />
+<Floater bind:this={floater} />

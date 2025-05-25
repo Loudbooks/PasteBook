@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Content from '$lib/components/Content.svelte';
-	import Spacer from '$lib/components/Spacer.svelte';
 	import { formatTimeSince, formatTimeUntil } from '$lib/timehandler.js';
     import { wrap, burn } from '$lib/stores';
+	import Navbar from '$lib/components/Navbar.svelte';
 
 	export let data;
 
@@ -12,11 +12,13 @@
 	let created = new Date();
 	let expires = new Date();
 	let untilExpire = '';
+    let title = '';
 
 	metadata.then((data) => {
 		created = new Date(data.created);
 		$wrap = data.wrap;
         $burn = data.burn;
+        title = data.title;
 		expires = new Date(data.expires_at);
 
 		const reloadTime = () => {
@@ -31,9 +33,8 @@
 	});
 </script>
 
-<Spacer />
-
 {#await content then response}
+    <Navbar editable={false} title={title} createdAt={timeSinceStr} expiresAt={untilExpire} burn={burn} />
 	<Content content={response} />
 {:catch error}
 	<div class="error">

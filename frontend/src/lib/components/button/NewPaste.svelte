@@ -3,7 +3,7 @@
 
 </script>
 <div id="new-paste">
-    <button class="new-paste-button" on:click={() => {goto("/new")}}>
+    <button class="new-paste-button" on:click={() => {goto("/")}}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12H20M12 4V20" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -24,6 +24,11 @@
         transition: background-color 0.3s ease,
             transform 0.2s ease,
             filter 0.2s ease;
+
+        @media (max-width: 650px) {
+            width: 100%;
+            height: 40px;
+        }
     }
 
     svg {
@@ -45,6 +50,14 @@
         align-items: center;
         gap: 0.8rem;
         border-radius: 15px;
+
+        @media (max-width: 650px) {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            height: 35px;
+            border-radius: 10px;
+            gap: 0.5rem;
+        }
     }
 
     #new-paste:hover {

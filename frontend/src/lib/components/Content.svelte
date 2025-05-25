@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scrollToMiddle } from '$lib/scrolltomiddle';
-	import { wrap } from '$lib/stores';
+	import { wrap, writableContent } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	// svelte-ignore non_reactive_update
@@ -16,6 +16,13 @@
 		}
 
 		const hash = window.location.hash;
+
+        if (textArea) {
+            textArea.addEventListener('input', () => {
+                console.log('textArea.value', textArea.value);
+                writableContent.set(textArea.value);
+            });
+        }
 
 		if (contentContainer && hash) {
 			const id = hash.substring(1);
@@ -86,6 +93,11 @@
 		padding: 1.6rem;
 		background-color: var(--color-background);
 		border-radius: 0.5rem;
+
+        @media (max-width: 650px) {
+            padding: 1rem;
+            padding-bottom: 0;
+        }
 	}
 
 	#input-textarea {
@@ -99,6 +111,10 @@
 		border: none;
 		font-weight: 400;
 		text-wrap: nowrap;
+
+        @media (max-width: 650px) {
+            font-size: 0.9rem;
+        }
 	}
 
 	#input-textarea::placeholder {
@@ -119,7 +135,6 @@
 		background-color: var(--color-background);
 		border-radius: 0.5rem;
 		overflow: auto;
-		padding-top: 7rem;
 	}
 
 	#content #line {
@@ -129,6 +144,10 @@
 		font-weight: 400;
 		margin: 0;
 		display: inline-block;
+
+        @media (max-width: 650px) {
+            font-size: 0.9rem;
+        }
 	}
 
 	#content #line::selection {
@@ -145,9 +164,7 @@
 
 	.number {
 		font-size: 1rem;
-		color: var(--color-primary);
 		font-family: var(--font-family-mono);
-		font-weight: 400;
 		display: inline-block;
 		margin: 0;
 		color: var(--color-text-secondary);
@@ -155,5 +172,9 @@
 		user-select: none;
 		-webkit-user-select: none;
 		cursor: pointer;
+
+        @media (max-width: 650px) {
+            font-size: 0.9rem;
+        }
 	}
 </style>

@@ -6,7 +6,6 @@
 </script>
 
 <div id="layout">
-    <Navbar />
     {@render children()}
 </div>
 

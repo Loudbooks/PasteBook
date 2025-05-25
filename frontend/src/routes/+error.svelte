@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
+<Navbar />
 <div id="error-page">
     <h1>{page.status}</h1>
     <p>{page.error.message}</p>

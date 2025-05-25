@@ -1,4 +1,3 @@
-use std::fs::metadata;
 use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 use std::sync::Arc;
 use crate::utils::data::DataUtils;

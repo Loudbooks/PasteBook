@@ -40,41 +40,24 @@ export function formatTimeSince(created: number): string {
 }
 
 export function formatTimeUntil(targetTime: number) {
-  const currentTime = new Date();
-  const timeDifference = targetTime - currentTime;
-  const seconds = Math.floor(timeDifference / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  let formattedTime = "";
-  if (days > 0) {
-    if (days === 1) {
-      formattedTime += days + " day ";
-    } else {
-      formattedTime += days + " days ";
-    }
-  }
-  if (hours % 24 > 0) {
-    if (hours % 24 === 1) {
-      formattedTime += (hours % 24) + " hour ";
-    } else {
-      formattedTime += (hours % 24) + " hours ";
-    }
-  }
-  if (minutes % 60 > 0) {
-    if (minutes % 60 === 1) {
-      formattedTime += (minutes % 60) + " minute ";
-    } else {
-      formattedTime += (minutes % 60) + " minutes ";
-    }
-  }
-  if (seconds % 60 > 0) {
-    if (seconds % 60 === 1) {
-      formattedTime += (seconds % 60) + " second ";
-    } else {
-      formattedTime += (seconds % 60) + " seconds";
-    }
-  }
+  const currentTime = new Date().getTime();
+  let timeDifference = targetTime - currentTime;
 
-  return formattedTime;
+  if (timeDifference <= 0) return "0 seconds";
+
+  const seconds = Math.ceil(timeDifference / 1000);
+  const minutes = Math.ceil(seconds / 60);
+  const hours = Math.ceil(minutes / 60);
+  const days = Math.ceil(hours / 24);
+
+  if (days >= 1) {
+    return days === 1 ? "1 day" : `${days} days`;
+  } else if (hours >= 1) {
+    return hours === 1 ? "1 hour" : `${hours} hours`;
+  } else if (minutes >= 1) {
+    return minutes === 1 ? "1 minute" : `${minutes} minutes`;
+  } else {
+    return seconds === 1 ? "1 second" : `${seconds} seconds`;
+  }
 }
+

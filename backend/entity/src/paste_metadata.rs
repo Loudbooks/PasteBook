@@ -40,7 +40,7 @@ impl Model {
             created: self.created,
             wrap: self.wrap,
             expires_at: self.expires_at,
-            burn: false,
+            burn: self.burn,
         }
     }
 }

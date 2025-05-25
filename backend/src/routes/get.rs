@@ -65,6 +65,7 @@ async fn get_metadata(
         Ok(Some(metadata)) => {
             let user = postgres_service.get_user(&metadata.creator_ip).await.unwrap();
             
+            println!("User IP: {}", user.ip);
             if user.ip != ip && metadata.burn {
                 let postgres_service_clone = Arc::clone(&postgres_service);
                 let id = metadata.id.clone();

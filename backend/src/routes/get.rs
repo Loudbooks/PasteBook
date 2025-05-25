@@ -35,7 +35,7 @@ async fn get_content(
             }
             
             if compress {
-                let compressed = DataUtils::compress_data(&data.unwrap().content.as_bytes());
+                let compressed = DataUtils::compress_data(data.unwrap().content.as_bytes());
                 HttpResponse::Ok()
                     .content_type("text/plain; charset=utf-8")
                     .append_header(("Content-Encoding", "gzip"))
@@ -66,6 +66,7 @@ async fn get_metadata(
             let user = postgres_service.get_user(&metadata.creator_ip).await.unwrap();
             
             if user.ip != ip && metadata.burn {
+                log::trace!("Burning paste: {}", metadata.id);
                 let postgres_service_clone = Arc::clone(&postgres_service);
                 let id = metadata.id.clone();
                 tokio::spawn(async move {

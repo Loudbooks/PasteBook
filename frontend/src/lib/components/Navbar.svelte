@@ -144,9 +144,11 @@
 		flex-shrink: 0;
 		justify-content: flex-end;
 		align-items: center;
+		padding-left: 1.6rem;
 
 		@media (max-width: 650px) {
 			gap: 1.2rem;
+			padding-left: 1.2rem;
 		}
 	}
 

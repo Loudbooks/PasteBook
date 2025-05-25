@@ -7,6 +7,7 @@ use crate::user_metadata::UserDTO;
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: String,
+    pub title: String,
     pub created: i64,
     pub wrap: bool,
     pub creator_ip: String,
@@ -22,6 +23,7 @@ impl ActiveModelBehavior for ActiveModel {}
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PasteDTO {
     pub id: String,
+    pub title: String,
     pub user: UserDTO,
     pub created: i64,
     pub wrap: bool,
@@ -33,6 +35,7 @@ impl Model {
     pub fn to_public_dto(&self, user: UserDTO) -> PasteDTO {
         PasteDTO {
             id: self.id.clone(),
+            title: self.title.clone(),
             user,
             created: self.created,
             wrap: self.wrap,

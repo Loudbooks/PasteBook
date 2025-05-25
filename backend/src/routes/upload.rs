@@ -13,12 +13,19 @@ async fn upload(
     req: HttpRequest,
     body: String
 ) -> HttpResponse {
+    let title = req
+        .headers()
+        .get("title")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("Untitled")
+        .to_string();
+    
     let wrap = req
         .headers()
         .get("wrap")
         .map(|v| v.to_str().unwrap_or("false") == "true")
         .unwrap_or(false);
-    
+
     let burn = req
         .headers()
         .get("burn")
@@ -55,6 +62,7 @@ async fn upload(
 
     let paste = paste_metadata::Model {
         id: file_id.clone(),
+        title: title.clone(),
         created: since_the_epoch,
         wrap,
         creator_ip: ip.clone(),

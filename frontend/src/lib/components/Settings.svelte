@@ -35,12 +35,4 @@
         background-color: var(--color-background-secondary);
         border-radius: 15px;
     }
-
-    h1 {
-        font-size: 3rem;
-        color: var(--color-primary);
-        margin: 0;
-        font-family: var(--font-family);
-        font-weight: 800;
-    }
 </style>

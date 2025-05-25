@@ -1,0 +1,16 @@
+<script lang="ts">
+    let { title } = $props();
+</script>
+<div id="setting-header">
+    <h1 id="setting-header-title">{title}</h1>
+</div>
+
+<style lang="scss">
+    #setting-header-title {
+        font-size: 1.1rem;
+        color: var(--color-primary);
+        margin: 0;
+        font-family: var(--font-family);
+        font-weight: 800;
+    }
+</style>

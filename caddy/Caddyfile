@@ -2,6 +2,7 @@
 	admin off
 	persist_config off
 	auto_https off
+	debug
 
 	log {
 		format json
@@ -32,6 +33,8 @@
 	}
 
 	reverse_proxy {
+		header_up X-Real-IP {http.request.remote.host}
+
 		dynamic a {
 			name {$FRONTEND_DOMAIN}
 			port {$FRONTEND_PORT}
@@ -42,12 +45,12 @@
 
 		import lb_settings
 		import passive_health_checks
-
-		header_up Host {upstream_hostport}
 	}
 
 	handle_path {$BACKEND_PATH:/api}/* {
 		reverse_proxy {
+			header_up X-Real-IP {http.request.remote.host}
+
 			dynamic a {
 				name {$BACKEND_DOMAIN}
 				port {$BACKEND_PORT}
@@ -58,8 +61,6 @@
 
 			import lb_settings
 			import passive_health_checks
-
-			header_up Host {upstream_hostport}
 		}
 	}
 }

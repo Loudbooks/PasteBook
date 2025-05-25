@@ -12,6 +12,7 @@ pub struct Model {
     pub wrap: bool,
     pub creator_ip: String,
     pub expires_at: i64,
+    pub burn: bool,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -22,22 +23,24 @@ impl ActiveModelBehavior for ActiveModel {}
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PasteDTO {
     pub id: String,
-    pub user: UserDTO,
     pub title: String,
+    pub user: UserDTO,
     pub created: i64,
     pub wrap: bool,
     pub expires_at: i64,
+    pub burn: bool,
 }
 
 impl Model {
     pub fn to_public_dto(&self, user: UserDTO) -> PasteDTO {
         PasteDTO {
             id: self.id.clone(),
-            user,
             title: self.title.clone(),
+            user,
             created: self.created,
             wrap: self.wrap,
             expires_at: self.expires_at,
+            burn: self.burn,
         }
     }
 }

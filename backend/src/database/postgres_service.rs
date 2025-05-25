@@ -36,7 +36,7 @@ impl PostgresService {
         paste_content.insert(&self.db).await?;
         Ok(())
     }
-    
+
     pub async fn get_paste_content(&self, id_str: &str) -> Result<Option<paste_content::Model>, DbErr> {
         paste_content::Entity::find_by_id(id_str).one(&self.db).await
     }

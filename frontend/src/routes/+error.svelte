@@ -1,49 +1,38 @@
-<script>
-  import { page } from "$app/stores";
-  import Mode from "../components/Mode.svelte";
+<script lang="ts">
+	import { page } from '$app/state';
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
-<error>
-  <h1>{$page.status}</h1>
-  <p>{$page.error.message}</p>
-  <Mode></Mode>
-</error>
-
-<svelte:head>
-  <title>Error</title>
-  <meta name="description" content="Paste not found." />
-  <meta name="theme-color" content="#EE4B2B" />
-</svelte:head>
+<Navbar />
+<div id="error-page">
+    <h1>{page.status}</h1>
+    <p>{page.error.message}</p>
+</div>
 
 <style lang="scss">
-  error {
-    overflow: hidden;
-    overscroll-behavior: none;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
+    #error-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: var(--color-background);
+    }
 
     h1 {
-      text-align: center;
-      font-size: 30vw;
-      font-family: var(--font-family), sans-serif;
-      font-weight: 800;
-      line-height: 25vw;
-      margin: 0;
-
-      :global(body.dark-mode) & {
-        color: white;
-      }
+        color: var(--color-primary);
+        font-family: var(--font-family);
+        margin: 0;
+        font-weight: 800;
+        font-size: 25vw;
+        line-height: .8;
     }
 
     p {
-      text-align: center;
-      font-size: 5vw;
-      font-family: var(--font-family), sans-serif;
-      color: gray;
-      font-weight: 500;
-      margin: 0;
+        color: var(--color-secondary);
+        font-family: var(--font-family);
+        margin: 0;
+        font-weight: 200;
+        font-size: 3vw;
     }
-  }
 </style>

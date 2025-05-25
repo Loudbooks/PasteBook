@@ -40,6 +40,5 @@ export async function load({ params, cookies }) {
           return response.text();
         },
       ),
-    inspect: cookies.get("inspect") === "true",
   };
 }

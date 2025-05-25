@@ -1,8 +1,15 @@
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
 	import { onMount, type Snippet } from 'svelte';
+	import { writableContent, writableTitle } from '../lib/stores';
 
 	let { data, children }: { data: any, children: Snippet } = $props();
     let { title, faviconUrl } = data;
+
+    afterNavigate(() => {
+        writableTitle.set("");
+        writableContent.set("");
+    });
 
 	onMount(() => {
 		document.title = title ? title : 'PasteBook';

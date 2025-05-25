@@ -8,3 +8,4 @@ export const writableContent = writable("");
 export const writableTitle = writable("");
 
 export const disableNew = writable(false);
+export const title = writable("");

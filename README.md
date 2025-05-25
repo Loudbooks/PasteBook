@@ -17,6 +17,7 @@ The following is a guide to get PasteBook running on your system under your doma
 Create a file by the name of `.env` in the same directory as these other two files. Add the following.
 ```env
 TITLE=
+DESCRIPTION=
 DISABLE_NEW=
 FAVICON_URL=
 MAX_PAYLOAD_SIZE=
@@ -27,6 +28,7 @@ MAX_PAYLOAD_SIZE=
 By default, PasteBook will run on port 8080.
 
 - `TITLE` - The title to be used in the browser tab.
+- `DESCRIPTION` - The blurb to be used on the about page.
 - `DISABLE_NEW` - Disables the new paste page. API is still accessible.
 - `FAVICON_URL` - The URL that the favicon will be provided with. 
 - `MAX_PAYLOAD_SIZE` - The maximum paste size in megabytes.

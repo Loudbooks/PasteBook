@@ -16,7 +16,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 50px;
+        height: 45px;
         width: 100%;
         background-color: var(--color-primary);
         border-radius: 15px;

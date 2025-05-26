@@ -7,19 +7,38 @@
 	let submitElement: HTMLButtonElement;
 
 	onMount(() => {
+		let element = document.getElementById('submit-button');
+
+		if (element) {
+			submitElement = element as HTMLButtonElement;
+		} else {
+			console.error('Submit button element not found.');
+			return;
+		}
+
 		writableContent.subscribe((content) => {
+			if (!element) {
+				console.error('Submit button element is not defined.');
+				return;
+			}
+
 			if (content.length > 0 && $writableTitle.length > 0) {
-				submitElement.classList.remove('disabled');
+				element.classList.remove('disabled');
 			} else {
-				submitElement.classList.add('disabled');
+				element.classList.add('disabled');
 			}
 		});
 
         writableTitle.subscribe((title) => {
+			if (!element) {
+				console.error('Submit button element is not defined.');
+				return;
+			}
+
             if (title.length > 0 && $writableContent.length > 0) {
-                submitElement.classList.remove('disabled');
+                element.classList.remove('disabled');
             } else {
-                submitElement.classList.add('disabled');
+                element.classList.add('disabled');
             }
         });
 	});
@@ -89,8 +108,8 @@
 <div id="submit">
 	<button
 		class="submit-button disabled"
-		on:click={onClick}
-		bind:this={submitElement}
+		onclick={onClick}
+		id="submit-button"
 		disabled={alreadyUploading}
 	>
 		<svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">

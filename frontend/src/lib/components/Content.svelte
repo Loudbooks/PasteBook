@@ -1,50 +1,17 @@
 <script lang="ts">
 	import { scrollToMiddle } from '$lib/scrolltomiddle';
 	import { wrap, writableContent } from '$lib/stores';
-	import { onMount } from 'svelte';
+    import { onMount } from 'svelte';
 
-	// svelte-ignore non_reactive_update
-    let textArea: HTMLTextAreaElement;
-    // svelte-ignore non_reactive_update
-    let contentContainer: HTMLElement;
+	let textArea = $state<HTMLTextAreaElement | null>(null);
+	let contentContainer = $state<HTMLElement | null>(null);
 
-	onMount(() => {
-		if (textArea) {
-			wrap.subscribe((value) => {
-				textArea.style.textWrap = value ? 'normal' : 'nowrap';
-			});
-		}
-
-		const hash = window.location.hash;
-
-        if (textArea) {
-            textArea.addEventListener('input', () => {
-                writableContent.set(textArea.value);
-            });
-        }
-
-		if (contentContainer && hash) {
-			const id = hash.substring(1);
-			const element = document.getElementById(id);
-
-			if (element) {
-                setTimeout(() => {
-				    scrollElementToMiddleInContainer(contentContainer, element);
-                })
-			} else {
-                console.error(`Element with id ${id} not found.`);
-            }
-		}
-	});
-
-	let { content = null } = $props();
+	const { content = null } = $props();
 
 	function padIndex(index: number): string {
-		let lineNumbers = content.split('\n').length;
+		let lineNumbers = content?.split('\n').length ?? 0;
 		let padding = Math.ceil(Math.log10(lineNumbers));
-		let paddedIndex = index.toString().padStart(padding, '0');
-
-		return paddedIndex;
+		return index.toString().padStart(padding, '0');
 	}
 
 	function scrollElementToMiddleInContainer(container: HTMLElement, element: HTMLElement): void {
@@ -59,7 +26,37 @@
 			behavior: 'smooth'
 		});
 	}
+
+	$effect(() => {
+		if (textArea) {
+			textArea.style.textWrap = $wrap ? 'normal' : 'nowrap';
+		}
+	});
+
+	onMount(() => {
+		if (textArea) {
+			textArea.addEventListener('input', () => {
+				writableContent.set((textArea as HTMLTextAreaElement).value);
+			});
+		}
+
+		const hash = window.location.hash;
+
+		if (contentContainer && hash) {
+			const id = hash.substring(1);
+			const element = document.getElementById(id);
+			if (element) {
+				setTimeout(() => {
+					scrollElementToMiddleInContainer(contentContainer as HTMLElement, element);
+				});
+			} else {
+				console.error(`Element with id ${id} not found.`);
+			}
+		}
+	});
 </script>
+
+
 
 {#if content}
 	<div id="content" bind:this={contentContainer}>
@@ -82,6 +79,7 @@
 		></textarea>
 	</div>
 {/if}
+
 
 <style lang="scss">
 	#input {

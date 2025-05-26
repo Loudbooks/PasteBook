@@ -80,8 +80,4 @@ impl PostgresService {
     pub async fn get_all_pastes_metadata(&self) -> Result<Vec<paste_metadata::Model>, DbErr> {
         paste_metadata::Entity::find().all(&self.db).await
     }
-    
-    pub async fn get_all_pastes_content(&self) -> Result<Vec<paste_content::Model>, DbErr> {
-        paste_content::Entity::find().all(&self.db).await
-    }
 }

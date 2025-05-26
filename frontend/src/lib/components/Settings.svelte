@@ -5,7 +5,7 @@
 
 </script>
 <div id="settings">
-    <MultiSelect selected="24h" values={["1h", "24h", "7d", "31d"]} onChange={(value: string) => {
+    <MultiSelect selected="{$time}" values={["1h", "24h", "7d", "31d"]} onChange={(value: string) => {
         $time = value;
     }}/>
     <Checkbox

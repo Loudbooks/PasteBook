@@ -90,6 +90,7 @@
 
 	input {
 		padding: 0;
+		height: 38px;
 	}
 
 	#content {

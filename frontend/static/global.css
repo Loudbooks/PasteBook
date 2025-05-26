@@ -8,3 +8,18 @@
     --font-family: 'Bricolage Grotesque', sans-serif;
     --font-family-mono: 'Space Mono', 'Courier New', monospace;
 }
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+*:not(html) {
+    opacity: 0;
+    animation: fadein 0.3s ease forwards;
+}

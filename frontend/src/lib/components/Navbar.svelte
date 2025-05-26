@@ -72,6 +72,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		justify-content: center;
 		padding: 1.4rem;
 		width: calc(100% - 2.8rem);
 		padding-bottom: 1.6rem;
@@ -84,13 +85,11 @@
 		@media (max-width: 650px) {
 			padding: 1rem;
 			width: calc(100% - 2rem);
-			padding-bottom: 1.2rem;
 		}
 	}
 
 	input {
 		padding: 0;
-		height: 38px;
 	}
 
 	#content {
@@ -118,6 +117,7 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		width: calc(100% - 2.8rem);
+		align-content: center;
 
 		@media (max-width: 650px) {
 			font-size: 2.2rem;

@@ -82,7 +82,14 @@
 			disabled = false;
 
 			console.error('Upload failed:', xhr.statusText);
-			error = 'Failed to upload paste. Please try again.';
+			if (xhr.status == 413) {
+				error = 'Paste too large. Please reduce the size and try again.';
+			} else if (xhr.status == 400) {
+				error = 'Invalid request. Please check your input.';
+			} else {
+				error = 'Failed to upload paste. Please try again.';
+			}
+
 			uploadProgress = 0;
 		};
 
@@ -100,7 +107,14 @@
 				alreadyUploading = false;
 				disabled = false;
 				console.error('Upload failed with status:', xhr.status, xhr.statusText);
-				error = 'Failed to upload paste. Please try again.';
+				if (xhr.status == 413) {
+					error = 'Paste too large. Please reduce the size and try again.';
+				} else if (xhr.status == 400) {
+					error = 'Invalid request. Please check your input.';
+				} else {
+					error = 'Failed to upload paste. Please try again.';
+				}
+
 				uploadProgress = 0;
 
 				return;

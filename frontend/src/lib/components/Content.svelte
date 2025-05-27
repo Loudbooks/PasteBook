@@ -141,6 +141,7 @@
 		font-weight: 400;
 		margin: 0;
 		display: inline-block;
+		white-space: pre-wrap;
 
         @media (max-width: 650px) {
             font-size: 0.9rem;

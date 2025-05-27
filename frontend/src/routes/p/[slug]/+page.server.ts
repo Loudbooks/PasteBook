@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 
-export async function load({ params, cookies }) {
+export async function load({ params }) {
   let path = params.slug;
 
   let response = await fetch(

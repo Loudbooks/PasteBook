@@ -67,7 +67,7 @@
             expire = 3600000;
         }
 
-		let languageHeader = $language === 'None' ? null : $language;
+		let languageHeader = $language.toLowerCase() == 'none' ? null : $language;
 
 		xhr.setRequestHeader('Content-Type', 'plain/text');
 		xhr.setRequestHeader('access-control-allow-methods', 'POST');

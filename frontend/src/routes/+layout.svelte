@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { onMount, type Snippet } from 'svelte';
-	import { writableContent, writableTitle } from '../lib/stores';
+	import { language, writableContent, writableTitle } from '../lib/stores';
 
 	let { data, children }: { data: any, children: Snippet } = $props();
     let { title, faviconUrl } = data;
@@ -9,6 +9,7 @@
     afterNavigate(() => {
         writableTitle.set("");
         writableContent.set("");
+		language.set("none");
     });
 
 	onMount(() => {

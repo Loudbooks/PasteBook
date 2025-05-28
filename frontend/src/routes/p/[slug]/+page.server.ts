@@ -1,4 +1,5 @@
 import { error } from "@sveltejs/kit";
+import { codeToTokens } from 'shiki'
 
 export async function load({ params }) {
   let path = params.slug;
@@ -32,13 +33,28 @@ export async function load({ params }) {
   }
 
   let metadataPromise = response.json();
+  let contentPromise = fetch("http://backend:8080/get/" + path + "/content").then(
+    (response) => {
+      return response.text();
+    }
+  );
+
+  let highlighterPromise = Promise.all([metadataPromise, contentPromise]).then(async ([metadata, content]) => {
+    if (!metadata.language) {
+      return null;
+    }
+
+    const tokenLines = await codeToTokens(content, {
+      lang: metadata.language.toLowerCase(),
+      theme: "ayu-dark",
+    });
+
+    return tokenLines.tokens;
+  })
 
   return {
     metadata: metadataPromise,
-    content: fetch("http://backend:8080/get/" + path + "/content").then(
-        (response) => {
-          return response.text();
-        },
-      ),
+    content: contentPromise,
+    highlightedContent: highlighterPromise,
   };
 }

@@ -3,6 +3,7 @@ import { writable } from "svelte/store";
 export const wrap = writable(false);
 export const time = writable("24h");
 export const burn = writable(false);
+export const language = writable("none");
 
 export const writableContent = writable("");
 export const writableTitle = writable("");

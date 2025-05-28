@@ -13,6 +13,7 @@ pub struct Model {
     pub creator_ip: String,
     pub expires_at: i64,
     pub burn: bool,
+    pub language: Option<String>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -29,6 +30,7 @@ pub struct PasteDTO {
     pub wrap: bool,
     pub expires_at: i64,
     pub burn: bool,
+    pub language: Option<String>,
 }
 
 impl Model {
@@ -41,6 +43,7 @@ impl Model {
             wrap: self.wrap,
             expires_at: self.expires_at,
             burn: self.burn,
+            language: self.language.clone(),
         }
     }
 }

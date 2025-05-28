@@ -31,6 +31,12 @@ async fn upload(
         .get("burn")
         .map(|v| v.to_str().unwrap_or("false") == "true")
         .unwrap_or(false);
+    
+    let lang = req
+        .headers()
+        .get("lang")
+        .and_then(|v| v.to_str().ok())
+        .map(|s| s.to_string());
 
     let mut expires = req
         .headers()
@@ -67,7 +73,8 @@ async fn upload(
         wrap,
         creator_ip: ip.clone(),
         expires_at: expires,
-        burn
+        burn,
+        language: lang.clone(),
     };
     
     let paste_content = paste_content::Model {

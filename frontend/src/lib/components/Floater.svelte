@@ -19,6 +19,7 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        width: 25rem;
 
         @media (max-width: 650px) {
             position: relative;

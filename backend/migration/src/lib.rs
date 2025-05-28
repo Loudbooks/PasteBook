@@ -4,6 +4,7 @@ mod m20250425_104512_create_user_and_paste_tables;
 mod m20250504_040542_remove_reportbook;
 mod m20250525_002244_create_index;
 mod m20250525_013131_pastebook_redesign;
+mod m20250528_133430_create_language;
 
 pub struct Migrator;
 
@@ -15,6 +16,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20250504_040542_remove_reportbook::Migration),
             Box::new(m20250525_002244_create_index::Migration),
             Box::new(m20250525_013131_pastebook_redesign::Migration),
+            Box::new(m20250528_133430_create_language::Migration),
         ]
     }
 }

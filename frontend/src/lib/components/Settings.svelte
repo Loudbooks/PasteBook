@@ -1,13 +1,22 @@
 <script lang="ts">
 	import Checkbox from "./setting/Checkbox.svelte";
 	import MultiSelect from "./setting/MultiSelect.svelte";
-    import { wrap, burn, time } from "$lib/stores";
+    import { wrap, burn, time, language } from "$lib/stores";
+    import Dropdown from "./setting/Dropdown.svelte";
 
 </script>
 <div id="settings">
     <MultiSelect selected="{$time}" values={["1h", "24h", "7d", "31d"]} onChange={(value: string) => {
         $time = value;
     }}/>
+    <Dropdown
+        title="Language"
+        description="Syntax highlighting language."
+        options={["None", "JavaScript", "Python", "Java", "C++", "C#", "Go", "Rust", "HTML", "CSS"]}
+        onChange={(value: string) => {
+            $language = value;
+        }}
+    />
     <Checkbox
         title="Text Wrap"
         checked={$wrap}
@@ -30,8 +39,8 @@
     #settings {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        padding: 1.4rem;
+        gap: 1.4rem;
+        padding: 1.6rem;
         background-color: var(--color-background-secondary);
         border-radius: 15px;
     }

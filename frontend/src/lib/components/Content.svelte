@@ -1,41 +1,52 @@
 <script lang="ts">
-	import { scrollToMiddle } from '$lib/scrolltomiddle';
-	import { wrap, writableContent } from '$lib/stores';
-    import { onMount } from 'svelte';
+	import { scrollToMiddle } from "$lib/scrolltomiddle";
+	import { wrap, writableContent } from "$lib/stores";
+	import { onMount } from "svelte";
 
 	let textArea = $state<HTMLTextAreaElement | null>(null);
 	let contentContainer = $state<HTMLElement | null>(null);
 
-	const { content = null } = $props();
+	const { content = null, tokenLines = null } = $props();
 
 	function padIndex(index: number): string {
-		let lineNumbers = content?.split('\n').length ?? 0;
-		let padding = Math.ceil(Math.log10(lineNumbers));
-		return index.toString().padStart(padding, '0');
+		let length = content
+			? content.split("\n").length
+			: tokenLines
+				? tokenLines.length
+				: 0;
+		length++;
+		
+		let padding = Math.ceil(Math.log10(length));
+		return index.toString().padStart(padding, "0");
 	}
 
-	function scrollElementToMiddleInContainer(container: HTMLElement, element: HTMLElement): void {
+	function scrollElementToMiddleInContainer(
+		container: HTMLElement,
+		element: HTMLElement,
+	): void {
 		const containerRect = container.getBoundingClientRect();
 		const elementRect = element.getBoundingClientRect();
 
-		const offsetTop = elementRect.top - containerRect.top + container.scrollTop;
-		const scrollTo = offsetTop - container.clientHeight / 2 + elementRect.height / 2;
+		const offsetTop =
+			elementRect.top - containerRect.top + container.scrollTop;
+		const scrollTo =
+			offsetTop - container.clientHeight / 2 + elementRect.height / 2;
 
 		container.scrollTo({
 			top: scrollTo,
-			behavior: 'smooth'
+			behavior: "smooth",
 		});
 	}
 
 	$effect(() => {
 		if (textArea) {
-			textArea.style.textWrap = $wrap ? 'normal' : 'nowrap';
+			textArea.style.textWrap = $wrap ? "normal" : "nowrap";
 		}
 	});
 
-	onMount(() => {
+	onMount(async () => {
 		if (textArea) {
-			textArea.addEventListener('input', () => {
+			textArea.addEventListener("input", () => {
 				writableContent.set((textArea as HTMLTextAreaElement).value);
 			});
 		}
@@ -47,7 +58,10 @@
 			const element = document.getElementById(id);
 			if (element) {
 				setTimeout(() => {
-					scrollElementToMiddleInContainer(contentContainer as HTMLElement, element);
+					scrollElementToMiddleInContainer(
+						contentContainer as HTMLElement,
+						element,
+					);
 				});
 			} else {
 				console.error(`Element with id ${id} not found.`);
@@ -56,18 +70,49 @@
 	});
 </script>
 
-
-
-{#if content}
+{#if content || tokenLines}
 	<div id="content" bind:this={contentContainer}>
-		{#each content.split('\n') as line, index}
-			<div id="line-container">
-				<p class="number" id={(index + 1).toString()} use:scrollToMiddle>
-					{padIndex(index + 1)}
-				</p>
-				<p id="line" style="text-wrap: {$wrap ? 'initial' : 'nowrap'}">{line}</p>
-			</div>
-		{/each}
+		{#if tokenLines}
+			{#each tokenLines as line, index}
+				<div id="line-container">
+					<p
+						class="number"
+						id={(index + 1).toString()}
+						use:scrollToMiddle
+					>
+						{padIndex(index + 1)}
+					</p>
+					<p
+						id="line"
+						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+					>
+						{#each line as token}
+							<span style="color: {token.color}"
+								>{token.content}</span
+							>
+						{/each}
+					</p>
+				</div>
+			{/each}
+		{:else}
+			{#each content.split("\n") as line, index}
+				<div id="line-container">
+					<p
+						class="number"
+						id={(index + 1).toString()}
+						use:scrollToMiddle
+					>
+						{padIndex(index + 1)}
+					</p>
+					<p
+						id="line"
+						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+					>
+						{line}
+					</p>
+				</div>
+			{/each}
+		{/if}
 	</div>
 {:else}
 	<div id="input">
@@ -80,7 +125,6 @@
 	</div>
 {/if}
 
-
 <style lang="scss">
 	#input {
 		flex: 1;
@@ -91,10 +135,10 @@
 		background-color: var(--color-background);
 		border-radius: 0.5rem;
 
-        @media (max-width: 650px) {
-            padding: 1rem;
-            padding-bottom: 0;
-        }
+		@media (max-width: 650px) {
+			padding: 1rem;
+			padding-bottom: 0;
+		}
 	}
 
 	#input-textarea {
@@ -109,9 +153,9 @@
 		font-weight: 400;
 		text-wrap: nowrap;
 
-        @media (max-width: 650px) {
-            font-size: 0.9rem;
-        }
+		@media (max-width: 650px) {
+			font-size: 0.9rem;
+		}
 	}
 
 	#input-textarea::placeholder {
@@ -143,9 +187,9 @@
 		display: inline-block;
 		white-space: pre-wrap;
 
-        @media (max-width: 650px) {
-            font-size: 0.9rem;
-        }
+		@media (max-width: 650px) {
+			font-size: 0.9rem;
+		}
 	}
 
 	#content #line::selection {
@@ -171,8 +215,17 @@
 		-webkit-user-select: none;
 		cursor: pointer;
 
-        @media (max-width: 650px) {
-            font-size: 0.9rem;
-        }
+		@media (max-width: 650px) {
+			font-size: 0.9rem;
+		}
+	}
+
+	:global(span) {
+		font-family: var(--font-family-mono);
+		width: fit-content;
+	}
+
+	p {
+		margin: 0;
 	}
 </style>

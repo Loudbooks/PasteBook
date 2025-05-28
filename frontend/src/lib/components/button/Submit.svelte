@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-	import { wrap, burn, writableTitle, writableContent, time } from '$lib/stores';
+	import { wrap, burn, writableTitle, writableContent, time, language } from '$lib/stores';
 	import { onMount } from 'svelte';
 
 	let alreadyUploading = false;
@@ -67,12 +67,17 @@
             expire = 3600000;
         }
 
+		let languageHeader = $language === 'None' ? null : $language;
+
 		xhr.setRequestHeader('Content-Type', 'plain/text');
 		xhr.setRequestHeader('access-control-allow-methods', 'POST');
 		xhr.setRequestHeader('wrap', String($wrap));
 		xhr.setRequestHeader('burn', String($burn));
 		xhr.setRequestHeader('title', $writableTitle);
         xhr.setRequestHeader('expires', String(expire));
+		if (languageHeader) {
+			xhr.setRequestHeader('lang', languageHeader);
+		}
 
 		xhr.send($writableContent);
 		xhr.responseType = 'text';
@@ -172,13 +177,13 @@
 		height: 65px;
 		background-color: var(--color-primary);
 		border-radius: 15px;
-		width: 400px;
+		width: 100%;
 		position: relative;
 
 		color: var(--color-text);
 		border: none;
 		cursor: pointer;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		padding: 0.5rem 1.2rem;
 		font-family: var(--font-family);
 		line-height: 1;

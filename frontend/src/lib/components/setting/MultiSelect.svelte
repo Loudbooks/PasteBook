@@ -11,7 +11,7 @@
     }
 </script>
 
-<div>
+<div id="multi-select-container">
     <SettingHeader title="Expiration" />
     <div id="multi-select">
         <div
@@ -22,7 +22,7 @@
         {#each values as value}
             <div
                 class="multi-select-option selected-{selected === value}"
-                style="color: {values[selectedIndex] == value ? 'var(--color-background)' : 'var(--color-primary)'}; font-weight: {values[selectedIndex] == value ? 'bold' : 'normal'}"
+                style="color: {values[selectedIndex] == value ? 'var(--color-background)' : 'var(--color-primary)'}; font-weight: {values[selectedIndex] == value ? '500' : 'normal'}"
                 on:click={() => updateSelectedIndex(value)}
             >
                 <label for={value}>{value}</label>
@@ -32,6 +32,12 @@
 </div>
 
 <style lang="scss">
+	#multi-select-container {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
 	#multi-select {
 		display: flex;
 		flex-direction: row;
@@ -59,6 +65,7 @@
 		cursor: pointer;
 		z-index: 2;
 		position: relative;
+		font-size: 1rem;
         transition: color 0.2s ease-in-out,
             font-weight 0.2s ease-in-out;
 	}

@@ -7,10 +7,11 @@
 
 <style lang="scss">
     #setting-header-title {
-        font-size: 1.1rem;
+		font-size: 1.2rem;
         color: var(--color-primary);
         margin: 0;
         font-family: var(--font-family);
-        font-weight: 800;
+        font-weight: 600;
+        line-height: .9;
     }
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import SettingHeader from './SettingHeader.svelte';
+    import InlineSetting from './InlineSetting.svelte';
 
 	let { title, description, checked, onChange } = $props();
 
@@ -12,15 +12,7 @@
 	});
 </script>
 
-<div id="checkbox">
-	<div id="checkbox-description" onclick="{() => {
-        onChange?.(checked); checkState = !checkState
-    }}">
-		<SettingHeader {title} />
-		{#if description}
-			<p>{description}</p>
-		{/if}
-	</div>
+<InlineSetting {title} {description}>
 	<div class="checkbox-toggle">
 		<input
 			type="checkbox"
@@ -41,18 +33,9 @@
 			</svg>
 		</label>
 	</div>
-</div>
+</InlineSetting>
 
 <style lang="scss">
-	p {
-		font-size: 0.8rem;
-		color: var(--color-text-secondary);
-		width: 100%;
-		margin: 0;
-		font-family: var(--font-family);
-		font-weight: 200;
-	}
-
     #checkbox-description {
         cursor: pointer;
     }

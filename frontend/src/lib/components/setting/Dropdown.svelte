@@ -114,7 +114,7 @@
     input {
         height: 40px;
         padding: 0 14px;
-        width: calc(100% - 24px);
+        width: calc(100% - 28px);
         line-height: 1;
         border-radius: 10px;
         border: none;

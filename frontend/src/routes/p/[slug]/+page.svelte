@@ -33,7 +33,7 @@
 	});
 </script>
 
-{#await content then response}
+{#await metadata then}
 	<Navbar
 		editable={false}
 		{title}
@@ -41,6 +41,8 @@
 		expiresAt={untilExpire}
 		burn={$burn}
 	/>
+{/await}
+{#await content then response}
 	{#await highlightedContent then highlightedResponse}
 		{#if highlightedResponse}
 			<Content tokenLines={highlightedResponse} />

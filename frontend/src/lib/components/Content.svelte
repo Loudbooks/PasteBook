@@ -111,7 +111,7 @@
 		{#if tokenLines}
 			{#each tokenLines as line, index}
 				<div id="line-container">
-					<p
+					<span
 						class="number"
 						id={(index + 1).toString()}
 						onclick={() => {
@@ -127,23 +127,27 @@
 						}}
 					>
 						{padIndex(index + 1)}
-					</p>
-					<p
+					</span>
+					<span
 						id="line"
 						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
 					>
+						{#if line.length === 0}
+							<span style="color: transparent;">{"\u200B"}</span>
+						{:else}
 						{#each line as token}
 							<span style="color: {token.color}"
 								>{token.content}</span
 							>
 						{/each}
-					</p>
+						{/if}
+				</span>
 				</div>
 			{/each}
 		{:else}
 			{#each content.split("\n") as line, index}
 				<div id="line-container">
-					<p
+					<span
 						class="number"
 						id={(index + 1).toString()}
 						onclick={() => {
@@ -159,13 +163,13 @@
 						}}
 					>
 						{padIndex(index + 1)}
-					</p>
-					<p
+					</span>
+					<span
 						id="line"
 						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
 					>
-						{line}
-					</p>
+						{line == "" ? "\u200B" : line}
+				</span>
 				</div>
 			{/each}
 		{/if}
@@ -281,8 +285,9 @@
 		width: fit-content;
 	}
 
-	p {
+	span {
 		margin: 0;
-		white-space:pre;
+		padding: 0;
+		white-space: pre;
 	}
 </style>

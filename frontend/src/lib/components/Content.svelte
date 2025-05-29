@@ -67,6 +67,43 @@
 			}
 		}
 	});
+
+	function selectAllContentInContainer(container: HTMLElement) {
+		const range = document.createRange();
+		range.selectNodeContents(container);
+
+		const selection = window.getSelection();
+		if (!selection) return;
+
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
+
+	let isFocused = false;
+
+	onMount(() => {
+		if (contentContainer) {
+			contentContainer.addEventListener("click", () => {
+				isFocused = true;
+			});
+		}
+
+		document.addEventListener("click", (e) => {
+			if (!contentContainer?.contains(e.target as Node)) {
+				isFocused = false;
+			}
+		});
+
+		document.addEventListener("keydown", (e) => {
+			const isSelectAll =
+				(e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a";
+
+			if (isFocused && isSelectAll) {
+				e.preventDefault();
+				selectAllContentInContainer(contentContainer as HTMLElement);
+			}
+		});
+	});
 </script>
 
 {#if content || tokenLines}

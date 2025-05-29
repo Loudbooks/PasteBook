@@ -176,7 +176,6 @@
     }
 
     .suggestions .hovered-true {
-        filter: brightness(0.9);
         background-color: var(--color-primary);
         color: var(--color-background);
     }

@@ -15,6 +15,7 @@
             $time = value;
         }}
     />
+    <div id="dropdown-container">
     <Dropdown
         title="Language"
         description="Syntax highlighting language."
@@ -23,6 +24,8 @@
             $language = value;
         }}
     />
+    </div>
+
     <Checkbox
         title="Text Wrap"
         checked={$wrap}
@@ -49,5 +52,9 @@
         padding: 1.6rem;
         background-color: var(--color-background-secondary);
         border-radius: 15px;
+    }
+
+    #dropdown-container {
+        z-index: 10;
     }
 </style>

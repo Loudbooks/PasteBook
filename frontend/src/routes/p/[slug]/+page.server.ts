@@ -10,42 +10,43 @@ export async function load({ params }: { params: { slug: string } }) {
     backendHost = "http://localhost:8080";
   }
 
-  let response = await fetch(
+  let metadata = await fetch(
     `${backendHost}/get/${path}/metadata`
   );
-
-  if (response.status === 404) {
+  if (metadata.status === 404) {
     error(404, {
-      message: "Content Not Found",
-    });
+      code: 404,
+      message: "Metadata Not Found",
+    } satisfies App.Error);
   }
-
-  if (response.status === 403) {
+  if (metadata.status === 403) {
     error(403, {
+      code: 403,
       message: "Forbidden",
-    });
+    } satisfies App.Error);
   }
-
-  if (response.status === 500) {
+  if (metadata.status === 500) {
     error(500, {
+      code: 500,
       message: "Server Error",
-    });
+    } satisfies App.Error);
   }
-
-  if (response.status === 429) {
+  if (metadata.status === 429) {
     error(429, {
+      code: 429,
       message: "Rate Limited",
-    });
+    } satisfies App.Error);
   }
 
-  let metadataPromise = response.json();
-  let contentPromise = fetch(`${backendHost}/get/${path}/content`).then(
-    (response) => {
-      return response.text();
-    }
-  );
+  let metadataPromise = metadata.json();
 
-  let highlighterPromise = Promise.all([metadataPromise, contentPromise]).then(async ([metadata, content]) => {
+  let contentFetch = fetch(
+    `${backendHost}/get/${path}/content`
+  ).then((response) => {
+    return response.text() as Promise<any>
+  });
+
+  let highlighterPromise = Promise.all([metadataPromise, contentFetch]).then(async ([metadata, content]) => {
     if (!metadata.language) {
       return null;
     }
@@ -60,7 +61,7 @@ export async function load({ params }: { params: { slug: string } }) {
 
   return {
     metadata: metadataPromise,
-    content: contentPromise,
+    content: contentFetch,
     highlightedContent: highlighterPromise,
   };
 }

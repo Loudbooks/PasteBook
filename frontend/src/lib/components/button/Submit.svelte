@@ -45,7 +45,7 @@
 		if (dev) {
 			xhr.open('POST', `http://localhost:8080/upload`);
 		} else if (domain.includes('localhost')) {
-			xhr.open('POST', `http://backend:8080/api/upload`);
+			xhr.open('POST', `http://localhost/api/upload`);
 		} else if (domain.match(/192\.168\.\d+\.\d+/)) {
 			domain = domain.replace(/:\d+/, '');
 

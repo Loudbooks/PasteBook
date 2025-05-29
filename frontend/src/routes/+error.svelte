@@ -6,7 +6,7 @@
 <Navbar />
 <div id="error-page">
     <h1 id="error-title">{page.status}</h1>
-    <p id="error-description">{page.error.message}</p>
+    <p id="error-description">{page.error?.message}</p>
 </div>
 
 <style lang="scss">

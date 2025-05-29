@@ -212,6 +212,7 @@
 		border: none;
 		font-weight: 400;
 		text-wrap: nowrap;
+		font-variant-ligatures: none !important;
 
 		@media (max-width: 650px) {
 			font-size: 0.9rem;

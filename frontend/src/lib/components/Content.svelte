@@ -136,7 +136,7 @@
 							<span style="color: transparent;">{"\u200B"}</span>
 						{:else}
 						{#each line as token}
-							<span style="color: {token.color}"
+							<span style="color: {token.color}; text-wrap: {$wrap ? 'initial' : 'nowrap'}"
 								>{token.content}</span
 							>
 						{/each}

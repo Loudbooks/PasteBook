@@ -7,6 +7,8 @@
     --color-border: #2F2F2F;
     --font-family: 'Bricolage Grotesque', sans-serif;
     --font-family-mono: 'Space Mono', 'Courier New', monospace;
+
+    font-variant-ligatures: none;
 }
 
 @keyframes fadein {

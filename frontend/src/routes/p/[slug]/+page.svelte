@@ -13,6 +13,7 @@
 	let expires = new Date();
 	let untilExpire = "";
 	let title = "";
+	let language = "";
 
 	metadata.then((data) => {
 		created = new Date(data.created);
@@ -20,6 +21,7 @@
 		$burn = data.burn;
 		title = data.title;
 		expires = new Date(data.expires_at);
+		language = data.language;
 
 		const reloadTime = () => {
 			timeSinceStr = formatTimeSince(created as unknown as number);
@@ -40,6 +42,7 @@
 		createdAt={timeSinceStr}
 		expiresAt={untilExpire}
 		burn={$burn}
+		language={language}
 	/>
 {/await}
 {#await content then response}

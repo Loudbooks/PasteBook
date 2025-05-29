@@ -16,7 +16,7 @@
 		length++;
 
 		let padding = Math.ceil(Math.log10(length));
-		return index.toString().padStart(padding, "0");
+		return index.toString().padStart(padding, " ");
 	}
 
 	function scrollElementToMiddleInContainer(
@@ -283,5 +283,6 @@
 
 	p {
 		margin: 0;
+		white-space:pre;
 	}
 </style>

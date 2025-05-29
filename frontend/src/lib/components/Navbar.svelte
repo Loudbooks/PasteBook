@@ -11,6 +11,7 @@
 		createdAt = null,
 		expiresAt = null,
 		burn = null,
+		language = null,
 	} = $props();
 
 	onMount(() => {
@@ -40,16 +41,16 @@
 					<h1 id="title">{title}</h1>
 					{#if burn == true}
 						{#if window.innerWidth < 650}
-							<p>Created {createdAt} • Expires in {expiresAt}</p>
+							<p>Created {createdAt} • Expires in {expiresAt}{language ? " • " + language : ""}</p>
 							<p><strong>Burn Enabled</strong></p>
 						{:else}
 							<p>
 								Created {createdAt} • Expires in {expiresAt} •
-								<strong>Burn Enabled</strong>
+								<strong>Burn Enabled</strong>{language ? " • " + language : ""}
 							</p>
 						{/if}
 					{:else}
-						<p>Created {createdAt} • Expires in {expiresAt}</p>
+						<p>Created {createdAt} • Expires in {expiresAt}{language ? " • " + language : ""}</p>
 					{/if}
 				</div>
 			{:else}

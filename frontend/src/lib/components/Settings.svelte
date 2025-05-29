@@ -1,18 +1,24 @@
 <script lang="ts">
-	import Checkbox from "./setting/Checkbox.svelte";
-	import MultiSelect from "./setting/MultiSelect.svelte";
+    import Checkbox from "./setting/Checkbox.svelte";
+    import MultiSelect from "./setting/MultiSelect.svelte";
     import { wrap, burn, time, language } from "$lib/stores";
     import Dropdown from "./setting/Dropdown.svelte";
 
+    const { loadedLanguages } = $props();
 </script>
+
 <div id="settings">
-    <MultiSelect selected="{$time}" values={["1h", "24h", "7d", "31d"]} onChange={(value: string) => {
-        $time = value;
-    }}/>
+    <MultiSelect
+        selected={$time}
+        values={["1h", "24h", "7d", "31d"]}
+        onChange={(value: string) => {
+            $time = value;
+        }}
+    />
     <Dropdown
         title="Language"
         description="Syntax highlighting language."
-        options={["None", "JavaScript", "Python", "Java", "C++", "C#", "Go", "Rust", "HTML", "CSS"]}
+        options={loadedLanguages}
         onChange={(value: string) => {
             $language = value;
         }}

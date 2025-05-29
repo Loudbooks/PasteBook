@@ -4,16 +4,15 @@
 	import { wrap, burn } from "$lib/stores";
 	import Navbar from "$lib/components/Navbar.svelte";
 
-	export let data;
-
+	const { data } = $props();
 	const { metadata, content, highlightedContent } = data;
 
-	let timeSinceStr = "";
-	let created = new Date();
-	let expires = new Date();
-	let untilExpire = "";
-	let title = "";
-	let language = "";
+	let timeSinceStr = $state("");
+	let created = $state<Date | null>(null);
+	let expires = $state<Date | null>(null);
+	let untilExpire = $state("");
+	let title = $state("");
+	let language = $state("none");
 
 	metadata.then((data) => {
 		created = new Date(data.created);

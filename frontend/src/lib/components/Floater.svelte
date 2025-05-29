@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Submit from "./button/Submit.svelte";
 	import Settings from "./Settings.svelte";
+
+    let { loadedLanguages } = $props();
 </script>
 <div id="floater-container">
 <div id="floater">
-    <Settings />
+    <Settings loadedLanguages={loadedLanguages} />
     <Submit />
 </div>
 </div>

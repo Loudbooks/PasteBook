@@ -1,11 +1,17 @@
+import { dev } from "$app/environment";
 import { error } from "@sveltejs/kit";
 import { codeToTokens } from 'shiki'
 
-export async function load({ params }) {
+export async function load({ params }: { params: { slug: string } }) {
   let path = params.slug;
 
+  let backendHost = "backend:8080";
+  if (dev) {
+    backendHost = "http://localhost:8080";
+  }
+
   let response = await fetch(
-    "http://backend:8080/get/" + path + "/metadata",
+    `${backendHost}/get/${path}/metadata`
   );
 
   if (response.status === 404) {
@@ -33,7 +39,7 @@ export async function load({ params }) {
   }
 
   let metadataPromise = response.json();
-  let contentPromise = fetch("http://backend:8080/get/" + path + "/content").then(
+  let contentPromise = fetch(`${backendHost}/get/${path}/content`).then(
     (response) => {
       return response.text();
     }

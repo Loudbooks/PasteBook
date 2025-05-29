@@ -5,8 +5,8 @@
 
 <Navbar />
 <div id="error-page">
-    <h1>{page.status}</h1>
-    <p>{page.error.message}</p>
+    <h1 id="error-title">{page.status}</h1>
+    <p id="error-description">{page.error.message}</p>
 </div>
 
 <style lang="scss">
@@ -19,7 +19,7 @@
         background-color: var(--color-background);
     }
 
-    h1 {
+    #error-title {
         color: var(--color-primary);
         font-family: var(--font-family);
         margin: 0;
@@ -28,7 +28,7 @@
         line-height: .8;
     }
 
-    p {
+    #error-description {
         color: var(--color-secondary);
         font-family: var(--font-family);
         margin: 0;

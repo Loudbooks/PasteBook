@@ -23,7 +23,7 @@
             <div
                 class="multi-select-option selected-{selected === value}"
                 style="color: {values[selectedIndex] == value ? 'var(--color-background)' : 'var(--color-primary)'}; font-weight: {values[selectedIndex] == value ? '500' : 'normal'}"
-                on:click={() => updateSelectedIndex(value)}
+                onclick={() => updateSelectedIndex(value)}
             >
                 <label for={value}>{value}</label>
             </div>

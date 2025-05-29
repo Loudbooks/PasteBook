@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { dev } from '$app/environment';
     import { goto } from '$app/navigation';
 	import { wrap, burn, writableTitle, writableContent, time, language } from '$lib/stores';
 	import { onMount } from 'svelte';
@@ -9,7 +10,7 @@
 	let uploadProgress = 0;
 
 	onMount(() => {
-		writableContent.subscribe((content) => {
+		writableContent.subscribe((content: string) => {
 			if (content.length > 0 && $writableTitle.length > 0) {
 				disabled = false;
 			} else {
@@ -17,7 +18,7 @@
 			}
 		});
 
-        writableTitle.subscribe((title) => {
+        writableTitle.subscribe((title: string) => {
             if (title.length > 0 && $writableContent.length > 0) {
 				disabled = false;
 			} else {
@@ -41,16 +42,16 @@
 
 		let domain = window.location.host;
 
-		if (domain.includes('localhost')) {
+		if (dev) {
+			xhr.open('POST', `http://localhost:8080/upload`);
+		} else if (domain.includes('localhost')) {
 			xhr.open('POST', `http://backend:8080/api/upload`);
-		} else {
-			if (domain.match(/192\.168\.\d+\.\d+/)) {
-				domain = domain.replace(/:\d+/, '');
+		} else if (domain.match(/192\.168\.\d+\.\d+/)) {
+			domain = domain.replace(/:\d+/, '');
 
-				xhr.open('POST', `http://${domain}/api/upload`);
-			} else {
-				xhr.open('POST', `https://${domain}/api/upload`);
-			}
+			xhr.open('POST', `http://${domain}/api/upload`);
+		} else {
+			xhr.open('POST', `https://${domain}/api/upload`);
 		}
 
         let expire;

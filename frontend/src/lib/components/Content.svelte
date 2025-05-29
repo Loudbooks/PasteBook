@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { scrollToMiddle } from "$lib/scrolltomiddle";
 	import { wrap, writableContent } from "$lib/stores";
 	import { onMount } from "svelte";
 
@@ -15,7 +14,7 @@
 				? tokenLines.length
 				: 0;
 		length++;
-		
+
 		let padding = Math.ceil(Math.log10(length));
 		return index.toString().padStart(padding, "0");
 	}
@@ -78,7 +77,17 @@
 					<p
 						class="number"
 						id={(index + 1).toString()}
-						use:scrollToMiddle
+						onclick={() => {
+							const element = document.getElementById(
+								(index + 1).toString(),
+							);
+							if (element) {
+								scrollElementToMiddleInContainer(
+									contentContainer as HTMLElement,
+									element,
+								);
+							}
+						}}
 					>
 						{padIndex(index + 1)}
 					</p>
@@ -100,7 +109,17 @@
 					<p
 						class="number"
 						id={(index + 1).toString()}
-						use:scrollToMiddle
+						onclick={() => {
+							const element = document.getElementById(
+								(index + 1).toString(),
+							);
+							if (element) {
+								scrollElementToMiddleInContainer(
+									contentContainer as HTMLElement,
+									element,
+								);
+							}
+						}}
 					>
 						{padIndex(index + 1)}
 					</p>

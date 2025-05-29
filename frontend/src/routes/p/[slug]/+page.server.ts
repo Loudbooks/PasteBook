@@ -5,7 +5,7 @@ import { codeToTokens } from 'shiki'
 export async function load({ params }: { params: { slug: string } }) {
   let path = params.slug;
 
-  let backendHost = "backend:8080";
+  let backendHost = "http://backend:8080";
   if (dev) {
     backendHost = "http://localhost:8080";
   }

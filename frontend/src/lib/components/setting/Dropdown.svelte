@@ -113,7 +113,7 @@
 
     input {
         height: 40px;
-        padding: 0 12px;
+        padding: 0 14px;
         width: calc(100% - 24px);
         line-height: 1;
         border-radius: 10px;
@@ -165,7 +165,10 @@
     }
 
     .suggestions li {
-        padding: 8px 10px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
         cursor: pointer;
         color: var(--color-primary);
         font-family: var(--font-family);

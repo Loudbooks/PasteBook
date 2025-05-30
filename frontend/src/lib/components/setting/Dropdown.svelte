@@ -50,6 +50,12 @@
 
     function fillOptions() {
         filteredOptions = options.map((option: any) => option.name);
+        if (selected !== "") {
+            filteredOptions = filteredOptions.filter((option: string) =>
+                option.toLowerCase().includes(selected.toLowerCase())
+            );
+        }
+        
         filteredOptions.sort((a, b) => {
             const optionA = options.find((option: any) => option.name === a);
             const optionB = options.find((option: any) => option.name === b);

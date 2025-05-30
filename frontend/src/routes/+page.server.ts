@@ -10,12 +10,17 @@ export async function load({ }) {
 
     let loadedLanguages = [
         { name: "Angular", priority: 7 },
+        { name: "Batch", priority: 6 },
         { name: "C", priority: 6 },
         { name: "C#", priority: 7 },
         { name: "C++", priority: 7 },
+        { name: "Dockerfile", priority: 6 },
+        { name: "Dotenv", priority: 5 },
         { name: "CSS", priority: 9 },
+        { name: "F#", priority: 5 },
         { name: "Go", priority: 7 },
         { name: "HTML", priority: 10 },
+        { name: "Haskell", priority: 5 },
         { name: "Java", priority: 8 },
         { name: "JavaScript", priority: 10 },
         { name: "JSX", priority: 8 },
@@ -41,6 +46,7 @@ export async function load({ }) {
         { name: "JSON", priority: 9 },
         { name: "Handlebars", priority: 4 },
         { name: "Less", priority: 4 },
+        { name: "Log", priority: 5 },
         { name: "Zig", priority: 3 }
     ]
 

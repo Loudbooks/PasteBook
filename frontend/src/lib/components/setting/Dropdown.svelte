@@ -26,7 +26,6 @@
         });
 
         showSuggestions = filteredOptions.length > 0;
-        console.log(filteredOptions[0]);
         onChange?.(input);
 
         hoveredIndex = 0;
@@ -55,7 +54,7 @@
                 option.toLowerCase().includes(selected.toLowerCase())
             );
         }
-        
+
         filteredOptions.sort((a, b) => {
             const optionA = options.find((option: any) => option.name === a);
             const optionB = options.find((option: any) => option.name === b);

@@ -12,6 +12,7 @@
 		expiresAt = null,
 		burn = null,
 		language = null,
+		loadingPromise = null,
 	} = $props();
 
 	onMount(() => {
@@ -39,19 +40,34 @@
 			{#if title}
 				<div id="title-container">
 					<h1 id="title">{title}</h1>
-					{#if burn == true}
-						{#if window.innerWidth < 650}
-							<p>Created {createdAt} • Expires in {expiresAt}{language ? " • " + language : ""}</p>
-							<p><strong>Burn Enabled</strong></p>
+					{#await loadingPromise}
+						<p>Loading...</p>
+					{:then}
+						{#if burn == true}
+							{#if window.innerWidth < 650}
+								<p>
+									Created {createdAt} • Expires in {expiresAt}{language
+										? " • " + language
+										: ""}
+								</p>
+								<p><strong>Burn Enabled</strong></p>
+							{:else}
+								<p>
+									Created {createdAt} • Expires in {expiresAt}
+									•
+									<strong>Burn Enabled</strong>{language
+										? " • " + language
+										: ""}
+								</p>
+							{/if}
 						{:else}
 							<p>
-								Created {createdAt} • Expires in {expiresAt} •
-								<strong>Burn Enabled</strong>{language ? " • " + language : ""}
+								Created {createdAt} • Expires in {expiresAt}{language
+									? " • " + language
+									: ""}
 							</p>
 						{/if}
-					{:else}
-						<p>Created {createdAt} • Expires in {expiresAt}{language ? " • " + language : ""}</p>
-					{/if}
+					{/await}
 				</div>
 			{:else}
 				<h1 id="title">PasteBook</h1>

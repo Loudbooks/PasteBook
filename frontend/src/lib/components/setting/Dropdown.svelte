@@ -19,6 +19,9 @@
         );
 
         filteredOptions.sort((a, b) => {
+            if (input.toLowerCase() == a.toLowerCase()) return -1;
+            if (input.toLowerCase() == b.toLowerCase()) return 1;
+
             const optionA = options.find((option: any) => option.name === a);
             const optionB = options.find((option: any) => option.name === b);
 

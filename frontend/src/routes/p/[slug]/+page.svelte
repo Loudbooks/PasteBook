@@ -42,6 +42,7 @@
 		expiresAt={untilExpire}
 		burn={$burn}
 		language={language}
+		loadingPromise={highlightedContent}
 	/>
 {/await}
 {#await content then response}

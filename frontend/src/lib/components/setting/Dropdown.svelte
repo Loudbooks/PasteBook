@@ -101,6 +101,10 @@
                 }
             }}
             placeholder="Search..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
         />
         {#if showSuggestions}
         <div id="suggestions-container" class={showSuggestions ? "visible" : "hidden"}>

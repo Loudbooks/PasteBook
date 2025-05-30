@@ -1,6 +1,6 @@
 import { dev } from "$app/environment";
 import { error } from "@sveltejs/kit";
-import { bundledLanguages, codeToTokens, toArray } from 'shiki'
+import { bundledLanguages, codeToTokens } from 'shiki'
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ request, params }) => {

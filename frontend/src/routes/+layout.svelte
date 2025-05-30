@@ -20,6 +20,13 @@
 			// @ts-ignore
 			favicon.href = newFaviconUrl;
 		}
+
+		window.addEventListener("keydown", (event) => {
+			if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key.toLowerCase() === 'p') {
+				event.preventDefault();
+				window.location.href = '/';
+			}
+		})
 	});
 </script>
 

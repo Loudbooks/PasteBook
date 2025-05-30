@@ -25,6 +25,13 @@
 				disabled = true;
 			}
         });
+
+		window.addEventListener('keydown', (event: KeyboardEvent) => {
+			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'enter') {
+				event.preventDefault();
+				onClick();
+			}
+		});
 	});
 
 	function onClick() {

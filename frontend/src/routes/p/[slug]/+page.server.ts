@@ -1,6 +1,6 @@
 import { dev } from "$app/environment";
 import { error } from "@sveltejs/kit";
-import { codeToTokens } from 'shiki'
+import { bundledLanguages, codeToTokens, toArray } from 'shiki'
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ request, params }) => {
@@ -61,6 +61,11 @@ export const load: PageServerLoad = async ({ request, params }) => {
 
   let highlighterPromise = Promise.all([metadataPromise, contentFetch]).then(async ([metadata, content]) => {
     if (!metadata.language) {
+      return null;
+    }
+
+    if (toArray(bundledLanguages).find(lang => lang == metadata.language.toLowerCase()) === undefined) {
+      metadata.language = null;
       return null;
     }
 

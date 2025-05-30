@@ -75,6 +75,7 @@
             onkeydown={(event: KeyboardEvent) => {
                 if (event.key === "Enter" && filteredOptions.length > 0) {
                     selectOption(filteredOptions[hoveredIndex]);
+                    (event.target as HTMLInputElement).blur();
                 } else if (event.key === "ArrowDown") {
                     hoveredIndex = Math.min(hoveredIndex + 1, filteredOptions.length - 1);
                     event.preventDefault();
@@ -91,7 +92,7 @@
                     event.preventDefault();
                 }
             }}
-            placeholder="Type to search..."
+            placeholder="Search..."
         />
         {#if showSuggestions}
         <div id="suggestions-container" class={showSuggestions ? "visible" : "hidden"}>

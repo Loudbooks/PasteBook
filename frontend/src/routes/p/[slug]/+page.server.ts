@@ -1,8 +1,9 @@
 import { dev } from "$app/environment";
 import { error } from "@sveltejs/kit";
 import { codeToTokens } from 'shiki'
+import type { PageServerLoad } from "./$types";
 
-export async function load({ params }: { params: { slug: string } }) {
+export const load: PageServerLoad = async ({ request, params }) => {
   let path = params.slug;
 
   let backendHost = "http://backend:8080";
@@ -10,9 +11,16 @@ export async function load({ params }: { params: { slug: string } }) {
     backendHost = "http://localhost:8080";
   }
 
+  let ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Real-IP") || request.headers.get("X-Forwarded-For") || request.headers.get("X-Forwarded") || "Unknown";
+
   let metadata = await fetch(
-    `${backendHost}/get/${path}/metadata`
+    `${backendHost}/get/${path}/metadata`, {
+    headers: {
+      "X-Real-IP": ip,
+    }
+  }
   );
+
   if (metadata.status === 404) {
     error(404, {
       code: 404,
@@ -41,7 +49,12 @@ export async function load({ params }: { params: { slug: string } }) {
   let metadataPromise = metadata.json();
 
   let contentFetch = fetch(
-    `${backendHost}/get/${path}/content`
+    `${backendHost}/get/${path}/content`,
+    {
+      headers: {
+        "X-Real-IP": ip,
+      }
+    }
   ).then((response) => {
     return response.text() as Promise<any>
   });

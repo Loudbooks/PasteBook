@@ -64,7 +64,7 @@ export const load: PageServerLoad = async ({ request, params }) => {
       return null;
     }
 
-    if (toArray(bundledLanguages).find(lang => lang == metadata.language.toLowerCase()) === undefined) {
+    if (Object.keys(bundledLanguages).find(lang => lang == metadata.language.toLowerCase()) == undefined) {
       metadata.language = null;
       return null;
     }

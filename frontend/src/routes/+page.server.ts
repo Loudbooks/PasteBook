@@ -9,7 +9,7 @@ export async function load({ }) {
     }
 
     let loadedLanguages = [
-        { name: "Angular", priority: 7 },
+
         { name: "Batch", priority: 6 },
         { name: "C", priority: 6 },
         { name: "C#", priority: 7 },

@@ -1,35 +1,23 @@
 <script lang="ts">
 	import { pushState } from "$app/navigation";
-	import { language, wrap, writableContent } from "$lib/stores";
-	import { codeToTokens } from "shiki";
+	import { wrap, writableContent } from "$lib/stores";
 	import { onMount } from "svelte";
 
 	let textArea = $state<HTMLTextAreaElement | null>(null);
 	let contentContainer = $state<HTMLElement | null>(null);
 
 	let { content = "", tokenLines = null, newPaste = false } = $props();
-	let currentLanguage = $state<string | null>(null);
+	let length = $state(0);
 
 	function padIndex(index: number): string {
-		let length = content
-			? content.split("\n").length
-			: tokenLines
-				? tokenLines.length
-				: 0;
-		length++;
+		let useLength = length + 1;
 
-		let padding = Math.ceil(Math.log10(length));
+		let padding = Math.ceil(Math.log10(useLength));
 		return index.toString().padStart(padding, " ");
 	}
 
 	function getLeftInputPadding(): string {
-		let lineCount = content
-			? content.split("\n").length
-			: tokenLines
-				? tokenLines.length
-				: 0;
-
-		let padding = Math.ceil(Math.log10(lineCount + 1));
+		let padding = Math.ceil(Math.log10(length + 1));
 
 		if (padding < 1) {
 			padding = 1;
@@ -46,14 +34,16 @@
 		let characterWidth = 0;
 		if (content) {
 			characterWidth = Math.max(
-				...content.split("\n").map((line) => line.length),
+				...content.split("\n").map((line: string) => line.length),
 			);
 		} else if (tokenLines) {
 			let rawLines = tokenLines.map((line: any) =>
-				line.map((token: any) => token.content).join("")
+				line.map((token: any) => token.content).join(""),
 			);
 
-			characterWidth = Math.max(...rawLines.map((line: string) => line.length));
+			characterWidth = Math.max(
+				...rawLines.map((line: string) => line.length),
+			);
 		}
 
 		if (characterWidth > 0) {
@@ -64,17 +54,11 @@
 	}
 
 	function getHeight(): string {
-		let lineCount = content
-			? content.split("\n").length
-			: tokenLines
-				? tokenLines.length
-				: 0;
-
-		if (lineCount > 0) {
-			return `${lineCount * 1.5}rem`;
+		if (length > 0) {
+			return `${length * 1.5}rem`;
 		}
 
-		return "1.2rem";
+		return "1.5rem";
 	}
 
 	function scrollElementToMiddleInContainer(
@@ -103,42 +87,21 @@
 		}
 	});
 
-	language.subscribe((lang) => {
-		if (lang != currentLanguage && lang != "none") {
-			currentLanguage = lang;
+	async function updateContent(newContent: string) {
+		length = newContent.split("\n").length;
 
-			updateContent(content, lang);
-		}
-	});
-
-	async function updateContent(
-		newContent: string,
-		newLanguage: string | null = null,
-	) {
-		writableContent.set((textArea as HTMLTextAreaElement).value);
-
-		if (newLanguage == null) {
-			newLanguage = $language;
-		}
-
-		if (newLanguage != "" && newLanguage != "none") {
-			let newTokenLines = await codeToTokens(newContent, {
-				lang: newLanguage.toLowerCase() || "plaintext" as any,
-				theme: "ayu-dark",
-			});
-
-			tokenLines = newTokenLines.tokens;
-			content = "";
-		} else {
-			tokenLines = null;
-			content = newContent;
-		}
-
+		content = newContent;
 		writableContent.set(newContent);
 	}
 
 	onMount(async () => {
 		const hash = window.location.hash;
+
+		length = content
+			? content.split("\n").length
+			: tokenLines
+				? tokenLines.length
+				: 0;
 
 		if (contentContainer && hash) {
 			const id = hash.substring(1);
@@ -191,10 +154,10 @@
 <div id="content" bind:this={contentContainer}>
 	{#if newPaste}
 		<textarea
-			oninput={() => {
-				if (textArea) {
-					updateContent(textArea.value);
-				}
+			oninput={(event) => {
+				if (!textArea) return;
+				const newContent = (event.target as HTMLTextAreaElement).value;
+				updateContent(newContent);
 			}}
 			onkeydown={(event) => {
 				if (event.key === "Enter") {
@@ -206,7 +169,9 @@
 			}}
 			id="input-textarea"
 			placeholder="Paste your content here..."
-			style="text-wrap: {$wrap ? 'initial' : 'nowrap'}; left: {getLeftInputPadding()}; width: {getWidth()}; height: {getHeight()};"
+			style="text-wrap: {$wrap
+				? 'initial'
+				: 'nowrap'}; left: {getLeftInputPadding()}; width: {getWidth()}; height: {getHeight()};"
 			bind:this={textArea}
 		></textarea>
 	{/if}
@@ -239,7 +204,7 @@
 					{:else}
 						{#each line as token}
 							<span
-								class="{$wrap ? 'wrap' : ''}"
+								class={$wrap ? "wrap" : ""}
 								style="color: {token.color}; text-wrap: {$wrap
 									? 'initial'
 									: 'nowrap'}">{token.content}</span
@@ -271,7 +236,7 @@
 				</span>
 				<span
 					id="line"
-					class="{$wrap ? 'wrap' : ''}"
+					class={$wrap ? "wrap" : ""}
 					style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
 				>
 					{line == "" ? "\u200B" : line}
@@ -390,7 +355,6 @@
 
 		&.wrap {
 			display: inline-block;
-			white-space: normal;
 			overflow-wrap: anywhere;
 			word-break: normal;
 		}

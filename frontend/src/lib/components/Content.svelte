@@ -47,18 +47,10 @@
 		}
 
 		if (characterWidth > 0) {
-			return `${characterWidth + 3}ch`;
+			return `${characterWidth + 2}ch`;
 		}
 
 		return 0 + "ch";
-	}
-
-	function getHeight(): string {
-		if (length > 0) {
-			return `${length * 1.5}rem`;
-		}
-
-		return "1.5rem";
 	}
 
 	function scrollElementToMiddleInContainer(
@@ -151,100 +143,109 @@
 	});
 </script>
 
-<div id="content" bind:this={contentContainer}>
-	{#if newPaste}
-		<textarea
-			oninput={(event) => {
-				if (!textArea) return;
-				const newContent = (event.target as HTMLTextAreaElement).value;
-				updateContent(newContent);
-			}}
-			onkeydown={(event) => {
-				if (event.key === "Enter") {
-					const newContent = textArea.value + "\n";
-					window.scrollTo({
-						left: 0,
-						behavior: "smooth",
-					});
-				}
-			}}
-			id="input-textarea"
-			placeholder="Paste your content here..."
-			style="text-wrap: {$wrap
-				? 'initial'
-				: 'nowrap'}; left: {getLeftInputPadding()}; width: {getWidth()}; height: {getHeight()};"
-			bind:this={textArea}
-		></textarea>
-	{/if}
-	{#if tokenLines}
-		{#each tokenLines as line, index}
-			<div id="line-container">
-				<span
-					class="number"
-					id={(index + 1).toString()}
-					onclick={() => {
-						const element = document.getElementById(
-							(index + 1).toString(),
-						);
-						if (element) {
-							scrollElementToMiddleInContainer(
-								contentContainer as HTMLElement,
-								element,
+<div
+	id="content-container"
+	onclick={() => {
+		if (textArea && !isFocused) {
+			textArea.focus();
+		}
+	}}
+>
+	<div id="content" bind:this={contentContainer}>
+		{#if newPaste}
+			<textarea
+				oninput={(event) => {
+					if (!textArea) return;
+					const newContent = (event.target as HTMLTextAreaElement)
+						.value;
+					updateContent(newContent);
+				}}
+				onkeydown={(event) => {
+					if (event.key === "Enter") {
+						window.scrollTo({
+							left: 0,
+							behavior: "smooth",
+						});
+					}
+				}}
+				id="input-textarea"
+				placeholder="Paste your content here..."
+				style="text-wrap: {$wrap
+					? 'initial'
+					: 'nowrap'}; left: {getLeftInputPadding()}; width: {getWidth()};"
+				bind:this={textArea}
+			></textarea>
+		{/if}
+		{#if tokenLines}
+			{#each tokenLines as line, index}
+				<div class="line-container">
+					<span
+						class="number"
+						id={(index + 1).toString()}
+						onclick={() => {
+							const element = document.getElementById(
+								(index + 1).toString(),
 							);
-						}
-					}}
-				>
-					{padIndex(index + 1)}
-				</span>
-				<span
-					id="line"
-					style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
-				>
-					{#if line.length === 0}
-						<span style="color: transparent;">{"\u200B"}</span>
-					{:else}
-						{#each line as token}
-							<span
-								class={$wrap ? "wrap" : ""}
-								style="color: {token.color}; text-wrap: {$wrap
-									? 'initial'
-									: 'nowrap'}">{token.content}</span
-							>
-						{/each}
-					{/if}
-				</span>
-			</div>
-		{/each}
-	{:else}
-		{#each content.split("\n") as line, index}
-			<div id="line-container">
-				<span
-					class="number"
-					id={(index + 1).toString()}
-					onclick={() => {
-						const element = document.getElementById(
-							(index + 1).toString(),
-						);
-						if (element) {
-							scrollElementToMiddleInContainer(
-								contentContainer as HTMLElement,
-								element,
+							if (element) {
+								scrollElementToMiddleInContainer(
+									contentContainer as HTMLElement,
+									element,
+								);
+							}
+						}}
+					>
+						{padIndex(index + 1)}
+					</span>
+					<span
+						id="line"
+						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+					>
+						{#if line.length === 0}
+							<span style="color: transparent;">{"\u200B"}</span>
+						{:else}
+							{#each line as token}
+								<span
+									class={$wrap ? "wrap" : ""}
+									style="color: {token.color}; text-wrap: {$wrap
+										? 'initial'
+										: 'nowrap'}">{token.content}</span
+								>
+							{/each}
+						{/if}
+					</span>
+				</div>
+			{/each}
+		{:else}
+			{#each content.split("\n") as line, index}
+				<div class="line-container">
+					<span
+						class="number"
+						id={(index + 1).toString()}
+						onclick={() => {
+							const element = document.getElementById(
+								(index + 1).toString(),
 							);
-						}
-					}}
-				>
-					{padIndex(index + 1)}
-				</span>
-				<span
-					id="line"
-					class={$wrap ? "wrap" : ""}
-					style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
-				>
-					{line == "" ? "\u200B" : line}
-				</span>
-			</div>
-		{/each}
-	{/if}
+							if (element) {
+								scrollElementToMiddleInContainer(
+									contentContainer as HTMLElement,
+									element,
+								);
+							}
+						}}
+					>
+						{padIndex(index + 1)}
+					</span>
+					<span
+						id="line"
+						class={$wrap ? "wrap" : ""}
+						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+					>
+						{line == "" ? "\u200B" : line}
+					</span>
+				</div>
+			{/each}
+		{/if}
+	</div>
 </div>
 
 <style lang="scss">
@@ -271,8 +272,8 @@
 		padding: 1.6rem;
 		user-select: text;
 		-webkit-user-select: text;
-		min-width: calc(100% - 3.2rem - 5ch);
-		min-height: calc(100% - 3.2rem);
+		min-width: calc(100% - 3.2rem - 5.6ch);
+		height: calc(100% - 3.2rem);
 
 		@media (max-width: 650px) {
 			font-size: 0.9rem;
@@ -296,9 +297,14 @@
 		padding: 1.6rem;
 		background-color: var(--color-background);
 		border-radius: 0.5rem;
-		overflow: auto;
-		height: 100%;
 		position: relative;
+	}
+
+	#content-container {
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
+		cursor: text;
 	}
 
 	#content #line {
@@ -321,7 +327,7 @@
 		color: var(--color-background);
 	}
 
-	#line-container {
+	.line-container {
 		display: flex;
 		flex-direction: row;
 		gap: 2ch;
@@ -354,7 +360,6 @@
 			to {
 				opacity: 1;
 			}
-			
 		}
 	}
 

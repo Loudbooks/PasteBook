@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { pushState } from "$app/navigation";
 	import { wrap, writableContent } from "$lib/stores";
 	import { onMount } from "svelte";
 
@@ -30,6 +31,11 @@
 			elementRect.top - containerRect.top + container.scrollTop;
 		const scrollTo =
 			offsetTop - container.clientHeight / 2 + elementRect.height / 2;
+
+		pushState(
+			`#${element.id}`,
+			{},	
+		);
 
 		container.scrollTo({
 			top: scrollTo,

@@ -1,6 +1,4 @@
-import { error } from '@sveltejs/kit';
-
-export async function load({ params, cookies }) {
+export async function load({ }) {
     return {
         title: process.env.TITLE || "PasteBook",
         description: process.env.DESCRIPTION || "An easy on the eyes, portable, lightning fast pastebin built with Svelte and Rust.",

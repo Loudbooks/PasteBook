@@ -27,10 +27,6 @@
 	}
 
 	function getWidth(): string {
-		if ($wrap) {
-			return "initial";
-		}
-
 		let characterWidth = 0;
 		if (content) {
 			characterWidth = Math.max(
@@ -44,6 +40,10 @@
 			characterWidth = Math.max(
 				...rawLines.map((line: string) => line.length),
 			);
+		}
+
+		if ($wrap) {
+			return `calc(100% - 3.2rem - 5.6ch - ${getLeftInputPadding() + 3}ch)`;
 		}
 
 		if (characterWidth > 0) {
@@ -159,6 +159,7 @@
 					const newContent = (event.target as HTMLTextAreaElement)
 						.value;
 					updateContent(newContent);
+					textArea.style.width = getWidth();
 				}}
 				onkeydown={(event) => {
 					if (event.key === "Enter") {
@@ -172,7 +173,7 @@
 				placeholder="Paste your content here..."
 				style="text-wrap: {$wrap
 					? 'initial'
-					: 'nowrap'}; left: {getLeftInputPadding()}; width: {getWidth()};"
+					: 'nowrap'}; left: {getLeftInputPadding()};"
 				bind:this={textArea}
 			></textarea>
 		{/if}
@@ -272,7 +273,6 @@
 		padding: 1.6rem;
 		user-select: text;
 		-webkit-user-select: text;
-		min-width: calc(100% - 3.2rem - 5.6ch);
 		height: calc(100% - 3.2rem);
 
 		@media (max-width: 650px) {

@@ -115,6 +115,8 @@
 		newContent: string,
 		newLanguage: string | null = null,
 	) {
+		writableContent.set((textArea as HTMLTextAreaElement).value);
+
 		if (newLanguage == null) {
 			newLanguage = $language;
 		}
@@ -136,12 +138,6 @@
 	}
 
 	onMount(async () => {
-		if (textArea) {
-			textArea.addEventListener("input", () => {
-				writableContent.set((textArea as HTMLTextAreaElement).value);
-			});
-		}
-
 		const hash = window.location.hash;
 
 		if (contentContainer && hash) {
@@ -197,8 +193,15 @@
 		<textarea
 			oninput={() => {
 				if (textArea) {
-					console.log("New input:", textArea.value);
 					updateContent(textArea.value);
+				}
+			}}
+			onkeydown={(event) => {
+				if (event.key === "Enter") {
+					window.scrollTo({
+						left: 0,
+						behavior: "smooth",
+					});
 				}
 			}}
 			id="input-textarea"

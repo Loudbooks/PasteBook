@@ -309,6 +309,7 @@
 		margin: 0;
 		display: inline-block;
 		white-space: pre-wrap;
+		animation: none;
 
 		@media (max-width: 650px) {
 			font-size: 0.9rem;
@@ -326,6 +327,8 @@
 		gap: 2ch;
 		font-family: var(--font-family-mono);
 		padding-right: 1.6rem;
+		animation: none;
+		opacity: 1;
 	}
 
 	.number {
@@ -338,9 +341,20 @@
 		user-select: none;
 		-webkit-user-select: none;
 		cursor: pointer;
+		animation: fadeIn 0.2s ease-in-out;
 
 		@media (max-width: 650px) {
 			font-size: 0.9rem;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+			
 		}
 	}
 

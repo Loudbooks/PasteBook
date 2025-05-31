@@ -1,12 +1,14 @@
 <script lang="ts">
-    import { pushState } from "$app/navigation";
-	import { wrap, writableContent } from "$lib/stores";
+	import { pushState } from "$app/navigation";
+	import { language, wrap, writableContent } from "$lib/stores";
+	import { codeToTokens } from "shiki";
 	import { onMount } from "svelte";
 
 	let textArea = $state<HTMLTextAreaElement | null>(null);
 	let contentContainer = $state<HTMLElement | null>(null);
 
-	const { content = null, tokenLines = null } = $props();
+	let { content = "", tokenLines = null, newPaste = false } = $props();
+	let currentLanguage = $state<string | null>(null);
 
 	function padIndex(index: number): string {
 		let length = content
@@ -18,6 +20,61 @@
 
 		let padding = Math.ceil(Math.log10(length));
 		return index.toString().padStart(padding, " ");
+	}
+
+	function getLeftInputPadding(): string {
+		let lineCount = content
+			? content.split("\n").length
+			: tokenLines
+				? tokenLines.length
+				: 0;
+
+		let padding = Math.ceil(Math.log10(lineCount + 1));
+
+		if (padding < 1) {
+			padding = 1;
+		}
+
+		return `${padding + 2}ch`;
+	}
+
+	function getWidth(): string {
+		if ($wrap) {
+			return "initial";
+		}
+
+		let characterWidth = 0;
+		if (content) {
+			characterWidth = Math.max(
+				...content.split("\n").map((line) => line.length),
+			);
+		} else if (tokenLines) {
+			let rawLines = tokenLines.map((line: any) =>
+				line.map((token: any) => token.content).join("")
+			);
+
+			characterWidth = Math.max(...rawLines.map((line: string) => line.length));
+		}
+
+		if (characterWidth > 0) {
+			return `${characterWidth + 3}ch`;
+		}
+
+		return 0 + "ch";
+	}
+
+	function getHeight(): string {
+		let lineCount = content
+			? content.split("\n").length
+			: tokenLines
+				? tokenLines.length
+				: 0;
+
+		if (lineCount > 0) {
+			return `${lineCount * 1.5}rem`;
+		}
+
+		return "1.2rem";
 	}
 
 	function scrollElementToMiddleInContainer(
@@ -32,10 +89,7 @@
 		const scrollTo =
 			offsetTop - container.clientHeight / 2 + elementRect.height / 2;
 
-		pushState(
-			`#${element.id}`,
-			{},	
-		);
+		pushState(`#${element.id}`, {});
 
 		container.scrollTo({
 			top: scrollTo,
@@ -48,6 +102,38 @@
 			textArea.style.textWrap = $wrap ? "normal" : "nowrap";
 		}
 	});
+
+	language.subscribe((lang) => {
+		if (lang != currentLanguage && lang != "none") {
+			currentLanguage = lang;
+
+			updateContent(content, lang);
+		}
+	});
+
+	async function updateContent(
+		newContent: string,
+		newLanguage: string | null = null,
+	) {
+		if (newLanguage == null) {
+			newLanguage = $language;
+		}
+
+		if (newLanguage != "" && newLanguage != "none") {
+			let newTokenLines = await codeToTokens(newContent, {
+				lang: newLanguage.toLowerCase() || "plaintext" as any,
+				theme: "ayu-dark",
+			});
+
+			tokenLines = newTokenLines.tokens;
+			content = "";
+		} else {
+			tokenLines = null;
+			content = newContent;
+		}
+
+		writableContent.set(newContent);
+	}
 
 	onMount(async () => {
 		if (textArea) {
@@ -72,18 +158,22 @@
 				console.error(`Element with id ${id} not found.`);
 			}
 		}
+
+		textArea?.addEventListener("keydown", (event) => {
+			if (!textArea) return;
+
+			if (event.key === "Tab") {
+				event.preventDefault();
+
+				textArea.setRangeText(
+					"\t",
+					textArea.selectionStart,
+					textArea.selectionEnd,
+					"end",
+				);
+			}
+		});
 	});
-
-	function selectAllContentInContainer(container: HTMLElement) {
-		const range = document.createRange();
-		range.selectNodeContents(container);
-
-		const selection = window.getSelection();
-		if (!selection) return;
-
-		selection.removeAllRanges();
-		selection.addRange(range);
-	}
 
 	let isFocused = false;
 
@@ -99,126 +189,121 @@
 				isFocused = false;
 			}
 		});
-
-		document.addEventListener("keydown", (e) => {
-			const isSelectAll =
-				(e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a";
-
-			if (isFocused && isSelectAll) {
-				e.preventDefault();
-				selectAllContentInContainer(contentContainer as HTMLElement);
-			}
-		});
 	});
 </script>
 
-{#if content || tokenLines}
-	<div id="content" bind:this={contentContainer}>
-		{#if tokenLines}
-			{#each tokenLines as line, index}
-				<div id="line-container">
-					<span
-						class="number"
-						id={(index + 1).toString()}
-						onclick={() => {
-							const element = document.getElementById(
-								(index + 1).toString(),
-							);
-							if (element) {
-								scrollElementToMiddleInContainer(
-									contentContainer as HTMLElement,
-									element,
-								);
-							}
-						}}
-					>
-						{padIndex(index + 1)}
-					</span>
-					<span
-						id="line"
-						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
-					>
-						{#if line.length === 0}
-							<span style="color: transparent;">{"\u200B"}</span>
-						{:else}
-						{#each line as token}
-							<span style="color: {token.color}; text-wrap: {$wrap ? 'initial' : 'nowrap'}"
-								>{token.content}</span
-							>
-						{/each}
-						{/if}
-				</span>
-				</div>
-			{/each}
-		{:else}
-			{#each content.split("\n") as line, index}
-				<div id="line-container">
-					<span
-						class="number"
-						id={(index + 1).toString()}
-						onclick={() => {
-							const element = document.getElementById(
-								(index + 1).toString(),
-							);
-							if (element) {
-								scrollElementToMiddleInContainer(
-									contentContainer as HTMLElement,
-									element,
-								);
-							}
-						}}
-					>
-						{padIndex(index + 1)}
-					</span>
-					<span
-						id="line"
-						style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
-					>
-						{line == "" ? "\u200B" : line}
-				</span>
-				</div>
-			{/each}
-		{/if}
-	</div>
-{:else}
-	<div id="input">
+<div id="content" bind:this={contentContainer}>
+	{#if newPaste}
 		<textarea
+			oninput={() => {
+				if (textArea) {
+					console.log("New input:", textArea.value);
+					updateContent(textArea.value);
+				}
+			}}
 			id="input-textarea"
 			placeholder="Paste your content here..."
-			style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+			style="text-wrap: {$wrap ? 'initial' : 'nowrap'}; left: {getLeftInputPadding()}; width: {getWidth()}; height: {getHeight()};"
 			bind:this={textArea}
 		></textarea>
-	</div>
-{/if}
+	{/if}
+	{#if tokenLines}
+		{#each tokenLines as line, index}
+			<div id="line-container">
+				<span
+					class="number"
+					id={(index + 1).toString()}
+					onclick={() => {
+						const element = document.getElementById(
+							(index + 1).toString(),
+						);
+						if (element) {
+							scrollElementToMiddleInContainer(
+								contentContainer as HTMLElement,
+								element,
+							);
+						}
+					}}
+				>
+					{padIndex(index + 1)}
+				</span>
+				<span
+					id="line"
+					style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+				>
+					{#if line.length === 0}
+						<span style="color: transparent;">{"\u200B"}</span>
+					{:else}
+						{#each line as token}
+							<span
+								class="{$wrap ? 'wrap' : ''}"
+								style="color: {token.color}; text-wrap: {$wrap
+									? 'initial'
+									: 'nowrap'}">{token.content}</span
+							>
+						{/each}
+					{/if}
+				</span>
+			</div>
+		{/each}
+	{:else}
+		{#each content.split("\n") as line, index}
+			<div id="line-container">
+				<span
+					class="number"
+					id={(index + 1).toString()}
+					onclick={() => {
+						const element = document.getElementById(
+							(index + 1).toString(),
+						);
+						if (element) {
+							scrollElementToMiddleInContainer(
+								contentContainer as HTMLElement,
+								element,
+							);
+						}
+					}}
+				>
+					{padIndex(index + 1)}
+				</span>
+				<span
+					id="line"
+					class="{$wrap ? 'wrap' : ''}"
+					style="text-wrap: {$wrap ? 'initial' : 'nowrap'}"
+				>
+					{line == "" ? "\u200B" : line}
+				</span>
+			</div>
+		{/each}
+	{/if}
+</div>
 
 <style lang="scss">
-	#input {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		padding: 1.6rem;
-		background-color: var(--color-background);
-		border-radius: 0.5rem;
-
-		@media (max-width: 650px) {
-			padding: 1rem;
-			padding-bottom: 0;
-		}
-	}
-
 	#input-textarea {
 		flex: 1;
 		resize: none;
 		border-radius: 0.5rem;
-		background-color: var(--color-background);
 		color: var(--color-primary);
+		background: transparent;
 		font-size: 1rem;
 		font-family: var(--font-family-mono);
 		border: none;
 		font-weight: 400;
 		text-wrap: nowrap;
 		font-variant-ligatures: none !important;
+		-webkit-text-fill-color: transparent;
+		z-index: 2;
+		border: 1x solid green;
+		position: absolute;
+		top: 0;
+		left: 3ch;
+		right: 3ch;
+		bottom: 0;
+		padding: 1.6rem;
+		user-select: text;
+		-webkit-user-select: text;
+		min-width: calc(100% - 3.2rem - 6ch);
+		min-height: calc(100% - 3.2rem);
 
 		@media (max-width: 650px) {
 			font-size: 0.9rem;
@@ -243,6 +328,8 @@
 		background-color: var(--color-background);
 		border-radius: 0.5rem;
 		overflow: auto;
+		height: 100%;
+		position: relative;
 	}
 
 	#content #line {
@@ -267,7 +354,8 @@
 	#line-container {
 		display: flex;
 		flex-direction: row;
-		gap: 1.5rem;
+		gap: 2ch;
+		font-family: var(--font-family-mono);
 		padding-right: 1rem;
 	}
 
@@ -296,5 +384,12 @@
 		margin: 0;
 		padding: 0;
 		white-space: pre;
+
+		&.wrap {
+			display: inline-block;
+			white-space: normal;
+			overflow-wrap: anywhere;
+			word-break: normal;
+		}
 	}
 </style>

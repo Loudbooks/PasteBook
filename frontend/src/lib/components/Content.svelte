@@ -161,6 +161,7 @@
 			}}
 			onkeydown={(event) => {
 				if (event.key === "Enter") {
+					const newContent = textArea.value + "\n";
 					window.scrollTo({
 						left: 0,
 						behavior: "smooth",
@@ -324,7 +325,7 @@
 		flex-direction: row;
 		gap: 2ch;
 		font-family: var(--font-family-mono);
-		padding-right: 1rem;
+		padding-right: 1.6rem;
 	}
 
 	.number {

@@ -271,7 +271,7 @@
 		padding: 1.6rem;
 		user-select: text;
 		-webkit-user-select: text;
-		min-width: calc(100% - 3.2rem - 6ch);
+		min-width: calc(100% - 3.2rem - 5ch);
 		min-height: calc(100% - 3.2rem);
 
 		@media (max-width: 650px) {
@@ -353,11 +353,14 @@
 		margin: 0;
 		padding: 0;
 		white-space: pre;
+		position: relative;
 
 		&.wrap {
 			display: inline-block;
 			overflow-wrap: anywhere;
 			word-break: normal;
+			white-space: pre-wrap;
+			width: calc(100% - 3ch);
 		}
 	}
 </style>

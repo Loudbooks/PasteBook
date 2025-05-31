@@ -42,15 +42,7 @@
 			);
 		}
 
-		if ($wrap) {
-			return `calc(100% - 3.2rem - 5.6ch - ${getLeftInputPadding() + 3}ch)`;
-		}
-
-		if (characterWidth > 0) {
-			return `${characterWidth + 2}ch`;
-		}
-
-		return 0 + "ch";
+		return `calc(100% - 3.2rem - 5.6ch - ${getLeftInputPadding() + 3}ch)`;
 	}
 
 	function scrollElementToMiddleInContainer(

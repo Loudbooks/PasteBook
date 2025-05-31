@@ -264,7 +264,6 @@
 		font-variant-ligatures: none !important;
 		-webkit-text-fill-color: transparent;
 		z-index: 2;
-		border: 1x solid green;
 		position: absolute;
 		top: 0;
 		left: 3ch;

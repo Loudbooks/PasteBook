@@ -116,7 +116,26 @@
 				);
 			}
 		});
+
+		contentContainer?.addEventListener("keydown", (event) => {
+			if ((event.metaKey || event.ctrlKey) && event.key == "a") {
+				console.log("Select all triggered");
+				event.preventDefault();
+				contentContainer?.focus();
+			}
+		});
 	});
+
+	function selectAllContentInContainer(container: HTMLElement) {
+		const range = document.createRange();
+		range.selectNodeContents(container);
+
+		const selection = window.getSelection();
+		if (!selection) return;
+
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
 
 	let isFocused = false;
 
@@ -130,6 +149,16 @@
 		document.addEventListener("click", (e) => {
 			if (!contentContainer?.contains(e.target as Node)) {
 				isFocused = false;
+			}
+		});
+
+		document.addEventListener("keydown", (e) => {
+			const isSelectAll =
+				(e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a";
+
+			if (isFocused && isSelectAll) {
+				e.preventDefault();
+				selectAllContentInContainer(contentContainer as HTMLElement);
 			}
 		});
 	});
@@ -370,7 +399,11 @@
 			overflow-wrap: anywhere;
 			word-break: normal;
 			white-space: pre-wrap;
-			width: calc(100% - 3ch);
 		}
+	}
+
+	span::selection {
+		background-color: var(--color-primary);
+		color: var(--color-background);
 	}
 </style>

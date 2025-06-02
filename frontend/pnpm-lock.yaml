@@ -13,41 +13,41 @@ importers:
         version: 3.4.2
     devDependencies:
       '@sveltejs/adapter-auto':
-        specifier: ^6.0.0
-        version: 6.0.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))
+        specifier: ^6.0.1
+        version: 6.0.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))
       '@sveltejs/adapter-node':
         specifier: ^5.2.12
-        version: 5.2.12(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))
+        version: 5.2.12(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))
       '@sveltejs/kit':
-        specifier: ^2.16.0
-        version: 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+        specifier: ^2.21.1
+        version: 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.0.0
-        version: 5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+        specifier: ^5.0.3
+        version: 5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
       '@types/node':
-        specifier: ^22.15.21
-        version: 22.15.24
+        specifier: ^22.15.29
+        version: 22.15.29
       prettier:
-        specifier: ^3.4.2
+        specifier: ^3.5.3
         version: 3.5.3
       prettier-plugin-svelte:
-        specifier: ^3.3.3
-        version: 3.4.0(prettier@3.5.3)(svelte@5.33.6)
+        specifier: ^3.4.0
+        version: 3.4.0(prettier@3.5.3)(svelte@5.33.14)
       sass-embedded:
-        specifier: ^1.89.0
-        version: 1.89.0
+        specifier: ^1.89.1
+        version: 1.89.1
       svelte:
-        specifier: ^5.0.0
-        version: 5.33.6
+        specifier: ^5.33.14
+        version: 5.33.14
       svelte-check:
-        specifier: ^4.0.0
-        version: 4.2.1(picomatch@4.0.2)(svelte@5.33.6)(typescript@5.8.3)
+        specifier: ^4.2.1
+        version: 4.2.1(picomatch@4.0.2)(svelte@5.33.14)(typescript@5.8.3)
       typescript:
-        specifier: ^5.0.0
+        specifier: ^5.8.3
         version: 5.8.3
       vite:
-        specifier: ^6.2.6
-        version: 6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)
+        specifier: ^6.3.5
+        version: 6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)
 
 packages:
 
@@ -437,8 +437,8 @@ packages:
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
-  '@types/node@22.15.24':
-    resolution: {integrity: sha512-w9CZGm9RDjzTh/D+hFwlBJ3ziUaVw7oufKA3vOFSOZlzmW9AkZnfjPb+DLnrV6qtgL/LNmP0/2zBNCFHL3F0ng==}
+  '@types/node@22.15.29':
+    resolution: {integrity: sha512-LNdjOkUDlU1RZb8e1kOIUpN1qQUlzGkEtbVNo53vbrwDg5om6oduhm4SiUaPW5ASTXhAiP0jInWG8Qx9fVlOeQ==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -641,8 +641,8 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
-  postcss@8.5.3:
-    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
+  postcss@8.5.4:
+    resolution: {integrity: sha512-QSa9EBe+uwlGTFmHsPKokv3B/oEMQZxfqW0QqNCyhpa6mB1afzulwn8hihglqAb2pOw+BJgNlmXQ8la2VeHB7w==}
     engines: {node: ^10 || ^12 || >=14}
 
   prettier-plugin-svelte@3.4.0:
@@ -689,128 +689,104 @@ packages:
     resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
     engines: {node: '>=6'}
 
-  sass-embedded-android-arm64@1.89.0:
-    resolution: {integrity: sha512-pr4R3p5R+Ul9ZA5nzYbBJQFJXW6dMGzgpNBhmaToYDgDhmNX5kg0mZAUlGLHvisLdTiR6oEfDDr9QI6tnD2nqA==}
+  sass-embedded-android-arm64@1.89.1:
+    resolution: {integrity: sha512-Je6x7uuJRGQdr5ziSJdaPA4NhBSO26BU/E55qiuMUZpjq2EWBEJPbNeugu/cWlCEmfqoVuxj37r8aEU+KG0H1g==}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [android]
 
-  sass-embedded-android-arm@1.89.0:
-    resolution: {integrity: sha512-s6jxkEZQQrtyIGZX6Sbcu7tEixFG2VkqFgrX11flm/jZex7KaxnZtFace+wnYAgHqzzYpx0kNzJUpT+GXxm8CA==}
+  sass-embedded-android-arm@1.89.1:
+    resolution: {integrity: sha512-wVchZSz8zbJBwwOs9/iwco/M5G3L5BaeqwUF1EC3Gtzn1BsXYUEkJfftW2HxGl4hQz2YlpR7BY1GRN817uxADA==}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [android]
 
-  sass-embedded-android-ia32@1.89.0:
-    resolution: {integrity: sha512-GoNnNGYmp1F0ZMHqQbAurlQsjBMZKtDd5H60Ruq86uQFdnuNqQ9wHKJsJABxMnjfAn60IjefytM5PYTMcAmbfA==}
-    engines: {node: '>=14.0.0'}
-    cpu: [ia32]
-    os: [android]
-
-  sass-embedded-android-riscv64@1.89.0:
-    resolution: {integrity: sha512-di+i4KkKAWTNksaQYTqBEERv46qV/tvv14TPswEfak7vcTQ2pj2mvV4KGjLYfU2LqRkX/NTXix9KFthrzFN51Q==}
+  sass-embedded-android-riscv64@1.89.1:
+    resolution: {integrity: sha512-DhWe+A4RVtpHMVaQgdzRpiczAXKPl7XhyY9USkY9Xkhv94+csTfjyuFmsUuCpKSiQDQkD+rGByfg+9yQIk/RgQ==}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [android]
 
-  sass-embedded-android-x64@1.89.0:
-    resolution: {integrity: sha512-1cRRDAnmAS1wLaxfFf6PCHu9sKW8FNxdM7ZkanwxO9mztrCu/uvfqTmaurY9+RaKvPus7sGYFp46/TNtl/wRjg==}
+  sass-embedded-android-x64@1.89.1:
+    resolution: {integrity: sha512-LTEzxTXrv3evPiHBmDMtJtO5tEprg7bvNOwYTjDEhE9ZCYdb70l+haIY0dVyhGxyeaBJlyvatjWOKEduPP3Lyw==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [android]
 
-  sass-embedded-darwin-arm64@1.89.0:
-    resolution: {integrity: sha512-EUNUzI0UkbQ6dASPyf09S3x7fNT54PjyD594ZGTY14Yh4qTuacIj27ckLmreAJNNu5QxlbhyYuOtz+XN5bMMxA==}
+  sass-embedded-darwin-arm64@1.89.1:
+    resolution: {integrity: sha512-7qMO4BLdIOFMMc1M+hg5iWEjPxbPlH1XTPUCwyuXYqubz6kXkdrrtJXolNAAey/0ZOE6uXk0APugm93a/veQdQ==}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [darwin]
 
-  sass-embedded-darwin-x64@1.89.0:
-    resolution: {integrity: sha512-23R8zSuB31Fq/MYpmQ38UR2C26BsYb66VVpJgWmWl/N+sgv/+l9ECuSPMbYNgM3vb9TP9wk9dgL6KkiCS5tAyg==}
+  sass-embedded-darwin-x64@1.89.1:
+    resolution: {integrity: sha512-Jzuws3NNx4YtDdL2/skP8BvGqMBKn26XINehwLnD2kgbh0+k+vKNWt5JDomvIuZVLsK8zWrMoRkXpk4wuHdqrw==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [darwin]
 
-  sass-embedded-linux-arm64@1.89.0:
-    resolution: {integrity: sha512-g9Lp57qyx51ttKj0AN/edV43Hu1fBObvD7LpYwVfs6u3I95r0Adi90KujzNrUqXxJVmsfUwseY8kA8zvcRjhYA==}
+  sass-embedded-linux-arm64@1.89.1:
+    resolution: {integrity: sha512-h967EV2armjV+Re+hHv7LaIzCOvV6DoFod9GJhXTdnPvilqs7DAPTUfN07wOqbzjlaGEnITZXzLsWAoZ1Z7tWQ==}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [linux]
 
-  sass-embedded-linux-arm@1.89.0:
-    resolution: {integrity: sha512-KAzA1XD74d8/fiJXxVnLfFwfpmD2XqUJZz+DL6ZAPNLH1sb+yCP7brktaOyClDc/MBu61JERdHaJjIZhfX0Yqw==}
+  sass-embedded-linux-arm@1.89.1:
+    resolution: {integrity: sha512-8TvFr/lh7FARtNr9mM57m7NNvtSZwnlkXtfY1D48B81Ve6GgtLqQhELNzvTcfQ0WZa0aNnVjq9XUuWLlrMDaZQ==}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [linux]
 
-  sass-embedded-linux-ia32@1.89.0:
-    resolution: {integrity: sha512-5fxBeXyvBr3pb+vyrx9V6yd7QDRXkAPbwmFVVhjqshBABOXelLysEFea7xokh/tM8JAAQ4O8Ls3eW3Eojb477g==}
-    engines: {node: '>=14.0.0'}
-    cpu: [ia32]
-    os: [linux]
-
-  sass-embedded-linux-musl-arm64@1.89.0:
-    resolution: {integrity: sha512-50oelrOtN64u15vJN9uJryIuT0+UPjyeoq0zdWbY8F7LM9294Wf+Idea+nqDUWDCj1MHndyPFmR1mjeuRouJhw==}
+  sass-embedded-linux-musl-arm64@1.89.1:
+    resolution: {integrity: sha512-l4TrsUmE3AEPy2gDThb+OQV5xSyrb807DJbkQiFtTwvtOZAAkoVl1v2QeocW0npgKjc/W7nHMiSempJe0UcV7w==}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [linux]
 
-  sass-embedded-linux-musl-arm@1.89.0:
-    resolution: {integrity: sha512-0Q1JeEU4/tzH7fwAwarfIh+Swn3aXG/jPhVsZpbR1c1VzkeaPngmXdmLJcVXsdb35tjk84DuYcFtJlE1HYGw4Q==}
+  sass-embedded-linux-musl-arm@1.89.1:
+    resolution: {integrity: sha512-Tl8wDL+3qFa/AhvZZBb1OvhN1SvIsRSLaPdGP8cv3VmKKVBdlLp2zedPTlcLJpR9dG/bjtGJYGX15kWHAvZ6mQ==}
     engines: {node: '>=14.0.0'}
     cpu: [arm]
     os: [linux]
 
-  sass-embedded-linux-musl-ia32@1.89.0:
-    resolution: {integrity: sha512-ILWqpTd+0RdsSw977iVAJf4CLetIbcQgLQf17ycS1N4StZKVRZs1bBfZhg/f/HU/4p5HondPAwepgJepZZdnFA==}
-    engines: {node: '>=14.0.0'}
-    cpu: [ia32]
-    os: [linux]
-
-  sass-embedded-linux-musl-riscv64@1.89.0:
-    resolution: {integrity: sha512-n2V+Tdjj7SAuiuElJYhWiHjjB1YU0cuFvL1/m5K+ecdNStfHFWIzvBT6/vzQnBOWjI4eZECNVuQ8GwGWCufZew==}
+  sass-embedded-linux-musl-riscv64@1.89.1:
+    resolution: {integrity: sha512-YJVZmz032U7dv4RW3u+SJGp+DQWmYWc5fX/aXzLuoL6PPUPon1/Sseaf/5YGtcuQf8RnxZBbM2nFHFVHDJfsQw==}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [linux]
 
-  sass-embedded-linux-musl-x64@1.89.0:
-    resolution: {integrity: sha512-KOHJdouBK3SLJKZLnFYzuxs3dn+6jaeO3p4p1JUYAcVfndcvh13Sg2sLGfOfpg7Og6ws2Nnqnx0CyL26jPJ7ag==}
+  sass-embedded-linux-musl-x64@1.89.1:
+    resolution: {integrity: sha512-67ijpk87V0VlpdVTtgnfIzRkVUMtEH79nvGctvNpk0XT6v+oxoFRljFRiYItZOxb5gRZMnvtkgaz1VHVcMrhtg==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [linux]
 
-  sass-embedded-linux-riscv64@1.89.0:
-    resolution: {integrity: sha512-0A/UWeKX6MYhVLWLkdX3NPKHO+mvIwzaf6TxGCy3vS3TODWaeDUeBhHShAr7YlOKv5xRGxf7Gx7FXCPV0mUyMA==}
+  sass-embedded-linux-riscv64@1.89.1:
+    resolution: {integrity: sha512-SQNWy5kUvlQJUKRXFy8jS05DBik+2ERIWDxOBk+QuJYEIktlA9fKKBU8c7RkgpZFNXSXZa0W1Gy27oOFCzhhuA==}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [linux]
 
-  sass-embedded-linux-x64@1.89.0:
-    resolution: {integrity: sha512-dRBoOFPDWctHPYK3hTk3YzyX/icVrXiw7oOjbtpaDr6JooqIWBe16FslkWyvQzdmfOFy80raKVjgoqT7DsznkQ==}
+  sass-embedded-linux-x64@1.89.1:
+    resolution: {integrity: sha512-KUqGzBvTDZG6D3Pq41sCzqO1wkxM0WmxxlI7PTuVkvgciTywHf8F7mkg2alMLVZQ6APJEYtlnCGQgn4cCgYsqw==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [linux]
 
-  sass-embedded-win32-arm64@1.89.0:
-    resolution: {integrity: sha512-RnlVZ14hC/W7ubzvhqnbGfjU5PFNoFP/y5qycgCy+Mezb0IKbWvZ2Lyzux8TbL3OIjOikkNpfXoNQrX706WLAA==}
+  sass-embedded-win32-arm64@1.89.1:
+    resolution: {integrity: sha512-Lk6dYA18RasZxQhShT91G7Z2o7+F9necTNJ951a5AICsSJpTbg3tTnAGB7Rvd6xB5reQSZoXfB/zXKEKwtzaow==}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [win32]
 
-  sass-embedded-win32-ia32@1.89.0:
-    resolution: {integrity: sha512-eFe9VMNG+90nuoE3eXDy+38+uEHGf7xcqalq5+0PVZfR+H9RlaEbvIUNflZV94+LOH8Jb4lrfuekhHgWDJLfSg==}
-    engines: {node: '>=14.0.0'}
-    cpu: [ia32]
-    os: [win32]
-
-  sass-embedded-win32-x64@1.89.0:
-    resolution: {integrity: sha512-AaGpr5R6MLCuSvkvDdRq49ebifwLcuGPk0/10hbYw9nh3jpy2/CylYubQpIpR4yPcuD1wFwFqufTXC3HJYGb0g==}
+  sass-embedded-win32-x64@1.89.1:
+    resolution: {integrity: sha512-YlvzrzFPHd4GKa04jMfP0t2DGJHPTm7zN4GEYtaOFqeS6BoEAUY5kBNYFy7zhwKesN3kGyU/D9rz1MfLRgGv0g==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [win32]
 
-  sass-embedded@1.89.0:
-    resolution: {integrity: sha512-EDrK1el9zdgJFpocCGlxatDWaP18tJBWoM1hxzo2KJBvjdmBichXI6O6KlQrigvQPO3uJ8DfmFmAAx7s7CG6uw==}
+  sass-embedded@1.89.1:
+    resolution: {integrity: sha512-alvGGlyYdkSXYKOfS/TTxUD0993EYOe3adIPtwCWEg037qe183p2dkYnbaRsCLJFKt+QoyRzhsrbCsK7sbR6MA==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -850,8 +826,8 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
-  svelte@5.33.6:
-    resolution: {integrity: sha512-bxg2QY03JlrilCZmDlshY95Argj0rnX43UQFWZN4fct8PZTNBBmvfow2A6yOW1+YweDjhC2qdZF66ASI0Y21Tw==}
+  svelte@5.33.14:
+    resolution: {integrity: sha512-kRlbhIlMTijbFmVDQFDeKXPLlX1/ovXwV0I162wRqQhRcygaqDIcu1d/Ese3H2uI+yt3uT8E7ndgDthQv5v5BA==}
     engines: {node: '>=18'}
 
   sync-child-process@1.0.2:
@@ -1198,22 +1174,22 @@ snapshots:
     dependencies:
       acorn: 8.14.1
 
-  '@sveltejs/adapter-auto@6.0.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))':
+  '@sveltejs/adapter-auto@6.0.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))':
     dependencies:
-      '@sveltejs/kit': 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+      '@sveltejs/kit': 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
 
-  '@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))':
+  '@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))':
     dependencies:
       '@rollup/plugin-commonjs': 28.0.3(rollup@4.41.1)
       '@rollup/plugin-json': 6.1.0(rollup@4.41.1)
       '@rollup/plugin-node-resolve': 16.0.1(rollup@4.41.1)
-      '@sveltejs/kit': 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+      '@sveltejs/kit': 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
       rollup: 4.41.1
 
-  '@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))':
+  '@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))':
     dependencies:
       '@sveltejs/acorn-typescript': 1.0.5(acorn@8.14.1)
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
       '@types/cookie': 0.6.0
       acorn: 8.14.1
       cookie: 0.6.0
@@ -1225,28 +1201,28 @@ snapshots:
       sade: 1.8.1
       set-cookie-parser: 2.7.1
       sirv: 3.0.1
-      svelte: 5.33.6
-      vite: 6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)
+      svelte: 5.33.14
+      vite: 6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
       debug: 4.4.1
-      svelte: 5.33.6
-      vite: 6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)
+      svelte: 5.33.14
+      vite: 6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)))(svelte@5.33.6)(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)))(svelte@5.33.14)(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
       debug: 4.4.1
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
-      svelte: 5.33.6
-      vite: 6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)
-      vitefu: 1.0.6(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0))
+      svelte: 5.33.14
+      vite: 6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)
+      vitefu: 1.0.6(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -1262,7 +1238,7 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
-  '@types/node@22.15.24':
+  '@types/node@22.15.29':
     dependencies:
       undici-types: 6.21.0
 
@@ -1460,16 +1436,16 @@ snapshots:
 
   picomatch@4.0.2: {}
 
-  postcss@8.5.3:
+  postcss@8.5.4:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier-plugin-svelte@3.4.0(prettier@3.5.3)(svelte@5.33.6):
+  prettier-plugin-svelte@3.4.0(prettier@3.5.3)(svelte@5.33.14):
     dependencies:
       prettier: 3.5.3
-      svelte: 5.33.6
+      svelte: 5.33.14
 
   prettier@3.5.3: {}
 
@@ -1527,67 +1503,55 @@ snapshots:
     dependencies:
       mri: 1.2.0
 
-  sass-embedded-android-arm64@1.89.0:
+  sass-embedded-android-arm64@1.89.1:
     optional: true
 
-  sass-embedded-android-arm@1.89.0:
+  sass-embedded-android-arm@1.89.1:
     optional: true
 
-  sass-embedded-android-ia32@1.89.0:
+  sass-embedded-android-riscv64@1.89.1:
     optional: true
 
-  sass-embedded-android-riscv64@1.89.0:
+  sass-embedded-android-x64@1.89.1:
     optional: true
 
-  sass-embedded-android-x64@1.89.0:
+  sass-embedded-darwin-arm64@1.89.1:
     optional: true
 
-  sass-embedded-darwin-arm64@1.89.0:
+  sass-embedded-darwin-x64@1.89.1:
     optional: true
 
-  sass-embedded-darwin-x64@1.89.0:
+  sass-embedded-linux-arm64@1.89.1:
     optional: true
 
-  sass-embedded-linux-arm64@1.89.0:
+  sass-embedded-linux-arm@1.89.1:
     optional: true
 
-  sass-embedded-linux-arm@1.89.0:
+  sass-embedded-linux-musl-arm64@1.89.1:
     optional: true
 
-  sass-embedded-linux-ia32@1.89.0:
+  sass-embedded-linux-musl-arm@1.89.1:
     optional: true
 
-  sass-embedded-linux-musl-arm64@1.89.0:
+  sass-embedded-linux-musl-riscv64@1.89.1:
     optional: true
 
-  sass-embedded-linux-musl-arm@1.89.0:
+  sass-embedded-linux-musl-x64@1.89.1:
     optional: true
 
-  sass-embedded-linux-musl-ia32@1.89.0:
+  sass-embedded-linux-riscv64@1.89.1:
     optional: true
 
-  sass-embedded-linux-musl-riscv64@1.89.0:
+  sass-embedded-linux-x64@1.89.1:
     optional: true
 
-  sass-embedded-linux-musl-x64@1.89.0:
+  sass-embedded-win32-arm64@1.89.1:
     optional: true
 
-  sass-embedded-linux-riscv64@1.89.0:
+  sass-embedded-win32-x64@1.89.1:
     optional: true
 
-  sass-embedded-linux-x64@1.89.0:
-    optional: true
-
-  sass-embedded-win32-arm64@1.89.0:
-    optional: true
-
-  sass-embedded-win32-ia32@1.89.0:
-    optional: true
-
-  sass-embedded-win32-x64@1.89.0:
-    optional: true
-
-  sass-embedded@1.89.0:
+  sass-embedded@1.89.1:
     dependencies:
       '@bufbuild/protobuf': 2.5.1
       buffer-builder: 0.2.0
@@ -1598,26 +1562,22 @@ snapshots:
       sync-child-process: 1.0.2
       varint: 6.0.0
     optionalDependencies:
-      sass-embedded-android-arm: 1.89.0
-      sass-embedded-android-arm64: 1.89.0
-      sass-embedded-android-ia32: 1.89.0
-      sass-embedded-android-riscv64: 1.89.0
-      sass-embedded-android-x64: 1.89.0
-      sass-embedded-darwin-arm64: 1.89.0
-      sass-embedded-darwin-x64: 1.89.0
-      sass-embedded-linux-arm: 1.89.0
-      sass-embedded-linux-arm64: 1.89.0
-      sass-embedded-linux-ia32: 1.89.0
-      sass-embedded-linux-musl-arm: 1.89.0
-      sass-embedded-linux-musl-arm64: 1.89.0
-      sass-embedded-linux-musl-ia32: 1.89.0
-      sass-embedded-linux-musl-riscv64: 1.89.0
-      sass-embedded-linux-musl-x64: 1.89.0
-      sass-embedded-linux-riscv64: 1.89.0
-      sass-embedded-linux-x64: 1.89.0
-      sass-embedded-win32-arm64: 1.89.0
-      sass-embedded-win32-ia32: 1.89.0
-      sass-embedded-win32-x64: 1.89.0
+      sass-embedded-android-arm: 1.89.1
+      sass-embedded-android-arm64: 1.89.1
+      sass-embedded-android-riscv64: 1.89.1
+      sass-embedded-android-x64: 1.89.1
+      sass-embedded-darwin-arm64: 1.89.1
+      sass-embedded-darwin-x64: 1.89.1
+      sass-embedded-linux-arm: 1.89.1
+      sass-embedded-linux-arm64: 1.89.1
+      sass-embedded-linux-musl-arm: 1.89.1
+      sass-embedded-linux-musl-arm64: 1.89.1
+      sass-embedded-linux-musl-riscv64: 1.89.1
+      sass-embedded-linux-musl-x64: 1.89.1
+      sass-embedded-linux-riscv64: 1.89.1
+      sass-embedded-linux-x64: 1.89.1
+      sass-embedded-win32-arm64: 1.89.1
+      sass-embedded-win32-x64: 1.89.1
 
   set-cookie-parser@2.7.1: {}
 
@@ -1653,19 +1613,19 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.2.1(picomatch@4.0.2)(svelte@5.33.6)(typescript@5.8.3):
+  svelte-check@4.2.1(picomatch@4.0.2)(svelte@5.33.14)(typescript@5.8.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.3
       fdir: 6.4.5(picomatch@4.0.2)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.33.6
+      svelte: 5.33.14
       typescript: 5.8.3
     transitivePeerDependencies:
       - picomatch
 
-  svelte@5.33.6:
+  svelte@5.33.14:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -1738,22 +1698,22 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0):
+  vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1):
     dependencies:
       esbuild: 0.25.5
       fdir: 6.4.5(picomatch@4.0.2)
       picomatch: 4.0.2
-      postcss: 8.5.3
+      postcss: 8.5.4
       rollup: 4.41.1
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 22.15.24
+      '@types/node': 22.15.29
       fsevents: 2.3.3
-      sass-embedded: 1.89.0
+      sass-embedded: 1.89.1
 
-  vitefu@1.0.6(vite@6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)):
+  vitefu@1.0.6(vite@6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)):
     optionalDependencies:
-      vite: 6.3.5(@types/node@22.15.24)(sass-embedded@1.89.0)
+      vite: 6.3.5(@types/node@22.15.29)(sass-embedded@1.89.1)
 
   zimmerframe@1.1.2: {}
 

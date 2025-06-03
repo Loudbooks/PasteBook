@@ -46,14 +46,18 @@
 						{#if burn == true}
 							{#if window.innerWidth < 650}
 								<p>
-									Created {createdAt} • Expires in {expiresAt}{language
+									Created {createdAt} • {expiresAt != "0 seconds"
+										? `Expires in ${expiresAt}`
+										: "Never Expires"}{language
 										? " • " + language
 										: ""}
 								</p>
 								<p><strong>Burn Enabled</strong></p>
 							{:else}
 								<p>
-									Created {createdAt} • Expires in {expiresAt}
+									Created {createdAt} • {expiresAt != "0 seconds"
+										? `Expires in ${expiresAt}`
+										: "Never Expires"}
 									•
 									<strong>Burn Enabled</strong>{language
 										? " • " + language
@@ -62,7 +66,10 @@
 							{/if}
 						{:else}
 							<p>
-								Created {createdAt} • Expires in {expiresAt}{language
+								Created {createdAt} • {expiresAt !=
+								"0 seconds"
+									? `Expires in ${expiresAt}`
+									: "Never Expires"}{language
 									? " • " + language
 									: ""}
 							</p>

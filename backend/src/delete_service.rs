@@ -3,7 +3,7 @@ use std::time::Duration;
 use chrono::Utc;
 use tokio::spawn;
 use tokio::time::interval;
-use log::{error, warn, trace};
+use log::{error, trace, debug};
 use crate::database::postgres_service::PostgresService;
 
 pub struct DeleteHandler {
@@ -42,14 +42,19 @@ impl DeleteHandler {
         let mut deletable_pastes = Vec::new();
         let mut all_pastes = Vec::new();
 
-        if let Ok(pastes) = postgres_service.get_all_pastes_metadata().await {
-            for paste in pastes {
-                if paste.expires_at > 0 && paste.expires_at < now {
-                    trace!("Deleting expired paste: {}", paste.id);
-                    deletable_pastes.push(paste.clone());
-                }
+        match postgres_service.get_all_pastes_metadata().await {
+            Ok(pastes) => {
+                for paste in pastes {
+                    if paste.expires_at > 0 && paste.expires_at < now {
+                        trace!("Deleting expired paste: {}", paste.id);
+                        deletable_pastes.push(paste.clone());
+                    }
 
-                all_pastes.push(paste);  
+                    all_pastes.push(paste);
+                }
+            }
+            Err(err) => {
+                return Err(format!("Failed to retrieve pastes from database: {}", err));
             }
         }
 
@@ -59,7 +64,7 @@ impl DeleteHandler {
             match postgres_service.delete_paste(id).await { Err(err) => {
                 error!("Failed to delete paste file: {}", err);
             } _ => {
-                warn!("Deleted paste file: {}", id);
+                debug!("Deleted paste file: {}", id);
             }}
         }
         

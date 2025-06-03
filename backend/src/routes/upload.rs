@@ -3,6 +3,7 @@ use crate::utils::string::StringUtils;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
+use log::info;
 use sea_orm::IntoActiveModel;
 use entity::{paste_content, paste_metadata};
 use crate::database::postgres_service::PostgresService;
@@ -86,7 +87,7 @@ async fn upload(
     let active_content: paste_content::ActiveModel = paste_content.into_active_model();
     
     if let Err(e) = postgres_service.put_paste(active_metadata, active_content).await {
-        println!("Failed to save to database: {:?}", e);
+        info!("Failed to save to database: {:?}", e);
         return HttpResponse::InternalServerError().body(format!("Failed to save to database: {:?}", e));
     }
 

@@ -11,6 +11,7 @@ use actix_cors::Cors;
 use actix_web::{web, App, HttpServer};
 use std::env;
 use std::sync::Arc;
+use log::info;
 
 #[cfg(feature="local-dev")]
 fn load_env() {
@@ -19,7 +20,7 @@ fn load_env() {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("PasteBook backend service starting...");
+    info!("PasteBook backend service starting...");
 
     env_logger::init();
     
@@ -39,7 +40,7 @@ async fn main() -> std::io::Result<()> {
 
     DeleteHandler::new(Arc::clone(&postgres_service));
     
-    println!("Pre-bind complete. Starting server.");
+    info!("Pre-bind complete. Starting server.");
     
     HttpServer::new(move || {
         let cors = Cors::permissive();

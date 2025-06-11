@@ -71,7 +71,7 @@ export const load: PageServerLoad = async ({ request, params }) => {
 
     const tokenLines = await codeToTokens(content, {
       lang: metadata.language.toLowerCase(),
-      theme: "ayu-dark",
+      theme: "dark-plus",
     });
 
     return tokenLines.tokens;

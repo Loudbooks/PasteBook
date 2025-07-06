@@ -80,7 +80,7 @@
 		top: 0;
 		left: 0;
 		background-color: var(--color-primary);
-		border-radius: 7px;
+		border-radius: 8px;
 		z-index: 1;
 		transition: transform 0.2s ease-in-out;
         margin: 0.4rem;

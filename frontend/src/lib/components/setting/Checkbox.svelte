@@ -56,7 +56,7 @@
 		display: inline-block;
 		width: 20px;
 		height: 20px;
-		border-radius: 7px;
+		border-radius: 8px;
 		background-color: var(--color-background);
 		border: 1px solid var(--color-border);
 		position: relative;

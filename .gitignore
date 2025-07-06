@@ -7,3 +7,4 @@ docker-compose.yml
 /backend/entity/target
 /backend/migration/target
 */node_modules/*
+node_modules/
